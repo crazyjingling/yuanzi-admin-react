@@ -1,0 +1,6 @@
+{
+  "name": "FormItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormItem.js"
+}

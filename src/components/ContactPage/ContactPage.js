@@ -8,6 +8,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import NavTop from '../../components/NavTop';
 import s from './ContactPage.scss';
 import withStyles from '../../decorators/withStyles';
 
@@ -26,11 +27,9 @@ class ContactPage extends Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h1>{title}</h1>
-          <p>...</p>
-        </div>
+      <div id="page-wrapper" className="gray-bg dashbard-1">
+        <NavTop />
+        {this.props.children}
       </div>
     );
   }

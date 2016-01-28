@@ -8,12 +8,19 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import s from './Navigation.scss';
-import withStyles from '../../decorators/withStyles';
-import Link from '../Link';
-
-@withStyles(s)
+//import NavHeader from '../../components/NavHeader';
+import ActivityMenus from '../../components/Menus/ActivityMenus';
+import BannerMenus from '../../components/Menus/BannerMenus';
+import CardMenus from '../../components/Menus/CardMenus';
+import FeedbackMenus from '../../components/Menus/FeedbackMenus';
+import LabelMenus from '../../components/Menus/LabelMenus';
+import ProfileMenus from '../../components/Menus/ProfileMenus';
+import PushMenus from '../../components/Menus/PushMenus';
+import StrategyMenus from '../../components/Menus/StrategyMenus';
+import SystemMenus from '../../components/Menus/SystemMenus';
+import TopicMenus from '../../components/Menus/TopicMenus';
+import UploadMenus from '../../components/Menus/UploadMenus';
+import UserMenus from '../../components/Menus/UserMenus';
 class Navigation extends Component {
 
   static propTypes = {
@@ -22,14 +29,26 @@ class Navigation extends Component {
 
   render() {
     return (
-      <div className={cx(s.root, this.props.className)} role="navigation">
-        <Link className={s.link} to="/about">About</Link>
-        <Link className={s.link} to="/contact">Contact</Link>
-        <span className={s.spacer}> | </span>
-        <Link className={s.link} to="/login">Log in</Link>
-        <span className={s.spacer}>or</span>
-        <Link className={cx(s.link, s.highlight)} to="/register">Sign up</Link>
-      </div>
+      <nav className="navbar-default navbar-static-side" role="navigation">
+        <div className="sidebar-collapse">
+          <ul className="nav metismenu" id="side-menu">
+
+            <UserMenus />
+            <BannerMenus />
+            <CardMenus />
+            <TopicMenus />
+            <StrategyMenus />
+            <LabelMenus />
+            <ActivityMenus />
+            <FeedbackMenus />
+            <PushMenus />
+            <ProfileMenus />
+            <UploadMenus />
+            <SystemMenus />
+          </ul>
+
+        </div>
+      </nav>
     );
   }
 

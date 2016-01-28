@@ -1,0 +1,6 @@
+{
+  "name": "TableItem",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableItem.js"
+}

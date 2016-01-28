@@ -9,7 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import parsePath from 'history/lib/parsePath';
-import Location from '../../core/Location';
+//import Location from '../../core/Location';
 
 function isLeftClickEvent(event) {
   return event.button === 0;

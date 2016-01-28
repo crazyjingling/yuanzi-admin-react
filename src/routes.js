@@ -1,45 +1,58 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
-import Router from 'react-routing/src/Router';
-import fetch from './core/fetch';
-import App from './components/App';
-import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
-import NotFoundPage from './components/NotFoundPage';
-import ErrorPage from './components/ErrorPage';
+import { IndexRoute, Route, Router, Redirect, browserHistory } from 'react-router';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
+import {
+  App,
+  Chat,
+  Navigation,
+  Widgets,
+  About,
+  Login,
+  LoginSuccess,
+  Survey,
+  NotFound,
+} from 'containers';
+import {
+  List,
+  Test,
+  Welcome
+} from 'components';
 
-const router = new Router(on => {
-  on('*', async (state, next) => {
-    const component = await next();
-    return component && <App context={state.context}>{component}</App>;
-  });
+export default (store) => {
+  const requireLogin = (nextState, replaceState, cb) => {
+    function checkAuth() {
+      const { auth: { user }} = store.getState();
+      if (!user) {
+        // oops, not logged in, so can't be here!
+        replaceState(null, '/');
+      }
+      cb();
+    }
 
-  on('/contact', async () => <ContactPage />);
+    if (!isAuthLoaded(store.getState())) {
+      store.dispatch(loadAuth()).then(checkAuth);
+    } else {
+      checkAuth();
+    }
+  };
 
-  on('/login', async () => <LoginPage />);
 
-  on('/register', async () => <RegisterPage />);
+  /**
+   * Please keep routes in alphabetical order
+   */
+  return (
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Login} />
+        <Route onEnter={requireLogin}>
+          <Route path="/welcome" component={ Welcome }/>
+          <Route path="/view/:name" component={List}/>
+          <Route path="/activity" component={ Login }/>
+          <Route path="*" component={NotFound} status={404}/>
+        </Route>
+        <Route path="/login" component={ Login }/>
+      </Route>
+    </Router>
 
-  on('*', async (state) => {
-    const response = await fetch(`/api/content?path=${state.path}`);
-    const content = await response.json();
-    return content && <ContentPage {...content} />;
-  });
-
-  on('error', (state, error) => state.statusCode === 404 ?
-    <App context={state.context} error={error}><NotFoundPage /></App> :
-    <App context={state.context} error={error}><ErrorPage /></App>
   );
-});
-
-export default router;
+};
