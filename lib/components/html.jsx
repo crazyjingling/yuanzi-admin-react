@@ -20,7 +20,7 @@ export default class Html extends React.Component {
           <link href="/css/style.css" rel="stylesheet"/>
         </head>
         <body className="pace-done fixed-sidebar">
-          <div id='app' dangerouslySetInnerHTML={{__html: this.props.body}} />
+          <div id='view' dangerouslySetInnerHTML={{__html: this.props.body}} />
           <script src="/js/jquery-2.1.1.js"></script>
           <script src="/js/bootstrap.min.js"></script>
           <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>

@@ -11,7 +11,6 @@ export default class Filter extends Component {
     sorts: React.PropTypes.array.isRequired,
     url: React.PropTypes.string.isRequired,
     search: React.PropTypes.string.isRequired,
-    searchFields: React.PropTypes.array.isRequired,
     query: React.PropTypes.object,
     history: React.PropTypes.object.isRequired
   }
@@ -30,6 +29,7 @@ export default class Filter extends Component {
 
   searchSubmit (event) {
     event.preventDefault();
+
     const query = Object.assign({}, this.props.query || {});
 
     if (this.state.search !== '') {
@@ -46,33 +46,16 @@ export default class Filter extends Component {
 
   render () {
     return (
-      <div >
-        <form onSubmit={this.searchSubmit.bind(this)}>
-          {this.props.searchFields && this.props.searchFields.map(this.renderFormItem, this)}
-        </form>
-      </div>
+        <div className='filter-right'>
+          <span className='label-filter'>Sort by:</span>
+          {this.props.sorts.map(this.renderSortButton, this)}
+          <form onSubmit={this.searchSubmit.bind(this)}>
+            <input type='text' placeholder='Search' value={this.state.search} onChange={this.searchChange.bind(this)} />
+          </form>
+        </div>
     );
   }
-  renderFormItem (searchField) {
-      const type = searchField.type;
-      let formItem = <input {...searchField} placeholder={searchField.name} className="form-control"/>;
 
-      if (type === 'select') {
-        const options = searchField.options.map(function (item) {
-          return <option value={item.value}>{item.name}</option>;
-        });
-        formItem = <select {...searchField} className="select2_demo_1 form-control">{options}</select>;
-      }
-
-      return (
-          <div>
-            <div className="form-group">
-              <label className="control-label">{searchField.label}</label>
-              {formItem}
-            </div>
-          </div>
-      );
-  }
   renderSortButton (button, key) {
     let active = false;
     let icon = 'arrow_drop_down';
@@ -91,14 +74,14 @@ export default class Filter extends Component {
     }
 
     return (
-      <A
-        className={cx('button-filter', active && 'active')}
-        href={Utils.parseQueryUrl(this.props.url, query)}
-        key={key}
-      >
-        <span>{button.label}</span>
-        {active && <i className='material-icons'>{icon}</i>}
-      </A>
+        <A
+            className={cx('button-filter', active && 'active')}
+            href={Utils.parseQueryUrl(this.props.url, query)}
+            key={key}
+        >
+          <span>{button.label}</span>
+          {active && <i className='material-icons'>{icon}</i>}
+        </A>
     );
   }
 }

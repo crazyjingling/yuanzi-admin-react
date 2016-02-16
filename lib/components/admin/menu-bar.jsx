@@ -17,12 +17,6 @@ export default class MenuBar extends Component {
         };
     }
 
-    toggleUser() {
-        this.setState({
-            userOpened: !this.state.userOpened
-        });
-    }
-
     render() {
         const links = [
             {
