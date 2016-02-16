@@ -52,7 +52,7 @@ export default class Entry extends Component {
   render () {
     const user = this.props.user;
     const profileLink = '/admin/users/' + user.username;
-    const date = 'Registered - ' + moment(user.date).format('MMMM Do YYYY');
+    const date = 'Registered - ' + moment(new Date(user.date)).format('MMMM Do YYYY');
     const url = Utils.getGravatarImage(user.email, 70);
 
     return (

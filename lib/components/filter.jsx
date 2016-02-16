@@ -48,7 +48,7 @@ export default class Filter extends Component {
     return (
       <div >
         <form onSubmit={this.searchSubmit.bind(this)}>
-          {this.props.searchFields.map(this.renderFormItem, this)}
+          {this.props.searchFields && this.props.searchFields.map(this.renderFormItem, this)}
         </form>
       </div>
     );
