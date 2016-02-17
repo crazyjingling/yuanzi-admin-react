@@ -7,7 +7,7 @@ import {Component, buildQueryAndVariables} from 'relax-framework';
 
 import queryProps from '../../decorators/query-props';
 import Strategies from '../../components/admin/panels/strategies';
-
+import {strategyConfig} from './containerInitConfig';
 @connect(
   (state) => ({
     strategies: state.strategies.data.items,
@@ -17,47 +17,14 @@ import Strategies from '../../components/admin/panels/strategies';
 )
 @queryProps({
   page: 1,
-  limit: 5,
+  limit: 1,
   sort: '_id',
   order: 'desc'
 })
 export default class StrategiesContainer extends Component {
-  static fragments = Strategies.fragments
+  static fragments = Strategies.fragments;
 
-  static panelSettings = {
-    activePanelType: 'strategies',
-    breadcrumbs: [
-      {
-        label: 'Strategies'
-      }
-    ],
-    showFields: [
-      { key: 'strategyname', name: '妙招标题', type: 'text' },
-      { key: 'name', name: '昵称', type: 'text' },
-      { key: 'password', name: '密码', type: 'text' },
-      { key: 'email', name: '邮箱', type: 'text' },
-      { key: 'date', name: '日期', type: 'text' },
-    ],
-    searchFields: [{
-      key: 'email',
-      name: 'email',
-      label: '邮箱',
-      type: 'text',
-      value: ''
-    }, {
-      key: 'name',
-      name: 'name',
-      options: [
-        { value: '0', name: '马慧' },
-        { value: '1', name: '马慧1' },
-        { value: '2', name: '马慧2', selected: 'selected' },
-        { value: '3', name: '马慧3' },
-        { value: '4', name: '马慧4' },
-      ],
-      label: '姓名',
-      type: 'select'
-    }]
-  }
+  static panelSettings = strategyConfig;
 
   static propTypes = {
     breadcrumbs: PropTypes.array.isRequired,
@@ -74,6 +41,7 @@ export default class StrategiesContainer extends Component {
 
   getInitState () {
     return {
+      searchValues: strategyConfig.searchValues || {},
       lightbox: false
     };
   }
@@ -95,20 +63,20 @@ export default class StrategiesContainer extends Component {
     }
   }
 
-  //onAddNew (newStrategy) {
-  //  this.props
-  //    .addStrategy({strategy: Strategies.fragments.strategies}, newStrategy)
-  //    .then(() => {
-  //      this.onCloseLightbox();
-  //    });
-  //}
-  //
-  //onAddNewClick (event) {
-  //  event.preventDefault();
-  //  this.setState({
-  //    lightbox: true
-  //  });
-  //}
+  onAddNew (newStrategy) {
+    this.props
+      .addStrategy({strategy: Strategies.fragments.strategies}, newStrategy)
+      .then(() => {
+        this.onCloseLightbox();
+      });
+  }
+
+  onAddNewClick (event) {
+    event.preventDefault();
+    this.setState({
+      lightbox: true
+    });
+  }
 
   onCloseLightbox () {
     this.setState({
@@ -122,6 +90,8 @@ export default class StrategiesContainer extends Component {
         {...this.props}
         {...this.state}
         onCloseLightbox={::this.onCloseLightbox}
+        onAddNew={::this.onAddNew}
+        onAddNewClick={::this.onAddNewClick}
       />
     );
   }

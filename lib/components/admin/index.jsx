@@ -45,7 +45,7 @@ export default class Admin extends Component {
             <div className="row">
               <div className="col-lg-12">
                 <div className="ibox">
-                  {this.props.loading ? <Loading /> : this.props.children}
+                  {this.props.children}
                 </div>
               </div>
             </div>

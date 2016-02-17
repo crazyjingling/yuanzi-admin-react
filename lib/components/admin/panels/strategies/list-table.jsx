@@ -32,7 +32,7 @@ export default class ListTable extends Component {
 
     renderTh (showField) {
         return (
-            <th>{showField.name}</th>
+            <th key={showField.key}>{showField.name}</th>
         );
     }
     renderEntry (strategy) {

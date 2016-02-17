@@ -20,6 +20,7 @@ export default class Strategies extends Component {
         strategies: PropTypes.array,
         showFields: PropTypes.array.isRequired,
         searchFields: PropTypes.array.isRequired,
+        searchValues: PropTypes.object.isRequired,
         query: PropTypes.object,
         count: PropTypes.number,
         lightbox: PropTypes.boolean,
@@ -35,6 +36,10 @@ export default class Strategies extends Component {
             <div className="ibox-content">
                 <div className='table-responsive'>
                     <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
+                        <a href='#' className='button-clean' onClick={this.props.onAddNewClick}>
+                            <i className='material-icons'>person_add</i>
+                            <span>Add new strategy</span>
+                        </a>
                         <Search
                             sorts={[
                               {label: 'Date', property: '_id'},
@@ -42,7 +47,7 @@ export default class Strategies extends Component {
                               {label: 'Email', property: 'email'}
                             ]}
                             url='/admin/strategies'
-                            search='strategyname'
+                            search={this.props.searchValues}
                             searchFields={this.props.searchFields}
                             query={this.props.query}
                             history={this.props.history}

@@ -20,7 +20,7 @@ export default class TableItem extends Component {
         strategy: PropTypes.object,
         removeStrategy: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
-        type: PropTypes.func.isRequired
+        type: PropTypes.string.isRequired
     }
 
     getInitState () {
@@ -36,22 +36,7 @@ export default class TableItem extends Component {
         });
     }
 
-    cancelRemove (event) {
-        event.preventDefault();
-        this.setState({
-            removing: false
-        });
-    }
-
-    confirmRemove (event) {
-        event.preventDefault();
-        this.props.removeStrategy(this.constructor.fragments, this.props.strategy._id).done();
-        this.setState({
-            removing: false
-        });
-    }
     render() {
-        const showFields = this.props.showFields;
         return (
             <tr>
                 {this.props.showFields.map(this.renderItem, this)}
@@ -59,34 +44,18 @@ export default class TableItem extends Component {
         );
     }
 
-    renderRemoving () {
-        if (this.state.removing) {
-            const label = 'Are you sure you want to remove the strategy ' + this.props.strategy.name + '?';
-            const label1 = 'This action cannot be reverted';
-            return (
-                <Lightbox className='small' header={false}>
-                    <div className='big centered'>{label}</div>
-                    <div className='medium centered'>{label1}</div>
-                    <div className='centered space-above'>
-                        <a className='button button-grey margined' href='#' onClick={this.cancelRemove.bind(this)}>No, abort!</a>
-                        <a className='button button-alert margined' href='#' onClick={this.confirmRemove.bind(this)}>Yes, delete it!</a>
-                    </div>
-                </Lightbox>
-            );
-        }
-    }
-    renderItem (item) {
+    renderItem (showField) {
         const data = this.props.strategy;
         let field = data;
-        const type = item.type;
+        const type = showField.type;
 
-        if (item.key.indexOf('.') !== -1) {
-            const keys = item.key.split('.');
+        if (showField.key.indexOf('.') !== -1) {
+            const keys = showField.key.split('.');
             for (let i of keys) {
                 field = field[i];
             }
         } else {
-            field = field[item.key];
+            field = field[showField.key];
         }
         let inner;
         switch (type) {
@@ -99,6 +68,6 @@ export default class TableItem extends Component {
             default:
                 inner = field;
         }
-        return <td>{inner}</td>;
+        return <td key={showField.key}>{inner}</td>;
     }
 }

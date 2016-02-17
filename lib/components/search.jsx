@@ -11,50 +11,44 @@ export default class Search extends Component {
   static propTypes = {
     sorts: React.PropTypes.array.isRequired,
     url: React.PropTypes.string.isRequired,
-    search: React.PropTypes.string.isRequired,
+    search: React.PropTypes.object.isRequired,
     searchFields: React.PropTypes.array.isRequired,
     query: React.PropTypes.object,
     history: React.PropTypes.object.isRequired
   }
 
   getInitState () {
-    const state = Object.assign({},this.props.searchFields.map((item) =>{
-      return {[item.key]: item.type === 'select' ? find(item.options, (option)=>option.selected).value: item.value}
-    }));
-
     return {
-      search: state
+      search: this.props.search || {},
     };
   }
 
   searchChange = (event) => {
-    console.log('=================================event.target', event.target);
-    console.log('=================================event.target.value', event.target.value);
-    this.setState({
-      search: event.target.value
-    });
+    const search = this.state.search;
+    search[event.target.name] = event.target.value;
+    this.setState({search: search});
   }
 
   searchSubmit = (event) => {
     event.preventDefault();
     const query = Object.assign({}, this.props.query || {});
-    console.log('=================================query', query);
-    if (this.state.search !== '') {
-      merge(query, {search: this.props.search, s: this.state.search});
+
+    if (this.state.search !== {}) {
+      merge(query, {search: JSON.stringify(this.state.search), s: this.state.search});
     } else {
       delete query.search;
       delete query.s;
     }
 
     const url = Utils.parseQueryUrl(this.props.url, query);
-
+    //todo: pushState操作如何触发 getAdmin action ???
     this.props.history.pushState({}, url);
   }
 
   render () {
     return (
         <div id="DataTables_Table_0_filter" className="dataTables_filter">
-          <form role="search" autocomplete='on'>
+          <form role="search" autoComplete='on'>
           <input type="text" style={{display:'none'}} />
           {this.props.searchFields && this.props.searchFields.map(this.renderFormItem, this)}
           <button className="btn btn-sm btn-primary pull-right" type="button" onClick={this.searchSubmit.bind(this)}>搜索</button>
@@ -64,13 +58,19 @@ export default class Search extends Component {
   }
   renderFormItem (searchField) {
       const type = searchField.type;
-      let formItem = <input {...searchField} placeholder={searchField.name} className="form-control" onChange={this.searchChange.bind(this)}/>;
+      let formItem = <input
+          {...searchField}
+          placeholder={searchField.name}
+          className="form-control"
+          onChange={this.searchChange.bind(this)}
+          value={this.state[searchField.key]}/>;
 
       if (type === 'select') {
+        const defaultValue = find(searchField.options, (option)=>option.selected).value;
         const options = searchField.options.map(function (item) {
-          return <option value={item.value} selected={item.selected}>{item.name}</option>;
+          return <option value={item.value}>{item.name}</option>;
         });
-        formItem = <select {...searchField}  onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
+        formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
       }
 
       return (

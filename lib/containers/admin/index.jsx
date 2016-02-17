@@ -72,7 +72,6 @@ export default class AdminContainer extends Component {
   componentWillReceiveProps (nextProps) {
     const panelSettings = nextProps.children.type.panelSettings;
     const params = nextProps.params;
-
     if (panelSettings.activePanelType !== this.state.activePanelType ||
         params.slug !== this.state.slug ||
         params.id !== this.state.id ||
@@ -100,16 +99,20 @@ export default class AdminContainer extends Component {
     const vars = {};
 
     const panelFragments = Object.assign({}, panel.fragments);
-
+    console.log('=================================vars', vars);
     // This probably could be encapsulated somehow
     switch (activePanelType) {
       case 'media':
       case 'menus':
       case 'pages':
+      case 'strategies':
       case 'schemas':
         vars[activePanelType] = {
           ...props.queryVariables || getQueryVariables(panel.defaultQuery)
         };
+        console.log('=================================queryVariables', {
+  ...props.queryVariables || getQueryVariables(panel.defaultQuery)
+  });
         break;
       case 'schemaList':
         vars.schemaList = {
@@ -219,7 +222,8 @@ export default class AdminContainer extends Component {
         break;
       default:
     }
-
+    console.log('=================================this.fragments,panelFragments', this.fragments,
+    panelFragments);
     return buildQueryAndVariables(
       mergeFragments(
         this.fragments,
@@ -250,7 +254,6 @@ export default class AdminContainer extends Component {
             ref: 'panel'
           })}
         </Admin>
-        <Overlays overlays={this.props.overlays} />
       </div>
     );
   }

@@ -85,7 +85,11 @@ export default function queryProps (defaultQuery = _defaultQuery) {
           props.location.query
         ));
         const queryVariables = getQueryVariables(query);
-
+        console.log('=================================}', {
+      queryVariables,
+      query,
+      hasQueryChanged: true
+    });
         return {
           queryVariables,
           query,
