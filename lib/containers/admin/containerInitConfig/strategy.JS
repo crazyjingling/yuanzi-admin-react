@@ -7,30 +7,31 @@ const stategyConfig = {
         }
     ],
     showFields: [
-        { key: 'strategyname', name: '妙招标题', type: 'text' },
-        { key: 'name', name: '昵称', type: 'text' },
-        { key: 'password', name: '密码', type: 'text' },
-        { key: 'email', name: '邮箱', type: 'text' },
-        { key: 'date', name: '日期', type: 'text' },
+        { key: 'title', name: '妙招标题', type: 'text' },
+        { key: 'cover', name: '封面', type: 'image' },
+        { key: 'owner.nickname', name: '作者', type: 'text' },
+        { key: 'labels', name: '标签', type: 'text' },
+        { key: 'isRecommended.stateType', name: '状态', type: 'text' },
+        { key: 'strategyNo', name: '编号', type: 'text' },
+        { key: 'artificialdata.artificialtrycount', name: '随机试过数', type: 'text' },
+        { key: 'isRecommended.recommendAt', name: '上线时间', type: 'text' },
+        { key: 'playCount', name: '播放数', type: 'text' },
+        { key: 'sharedCount', name: '分享', type: 'text' },
+        { key: 'collectCount', name: '收藏', type: 'text' },
+        { key: 'comments', name: '评论', type: 'text' },
+        { key: 'comments.isReported', name: '评论举报', type: 'text' },
+        { key: 'photoCount', name: '作品数', type: 'text' },
+        { key: 'photoReport', name: '作品举报', type: 'text' },
+        { key: 'words', name: '敏感词', type: 'text' },
+        { key: 'updatedAt', name: '更新时间', type: 'text' },
+        { key: 'createdAt', name: '创建时间', type: 'text' }
     ],
     searchFields: [{
-        key: 'email',
-        name: 'email',
-        label: '邮箱',
+        key: 'title',
+        name: 'title',
+        label: '标题',
         type: 'text',
         value: ''
-    }, {
-        key: 'name',
-        name: 'name',
-        options: [
-            { value: '0', name: '马慧' },
-            { value: '1', name: '马慧1' },
-            { value: '2', name: '马慧2', selected: 'selected' },
-            { value: '3', name: '马慧3' },
-            { value: '4', name: '马慧4' },
-        ],
-        label: '姓名',
-        type: 'select'
     }]
 
 };

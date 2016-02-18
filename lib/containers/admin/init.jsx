@@ -19,6 +19,7 @@ export default class Init extends Component {
   getInitState () {
     return {
       user: {
+        nickname: '',
         username: '',
         name: '',
         password: '',

@@ -41,7 +41,7 @@ export default class Admin extends Component {
 
       <div id="page-wrapper" className="gray-bg dashbard-1">
         <div className="wrapper wrapper-content animated fadeIn">
-          <div className="p-w-md m-t-sm">
+          <div>
             <div className="row">
               <div className="col-lg-12">
                 <div className="ibox">

@@ -4,17 +4,9 @@ import moment from 'moment';
 import A from '../../../a';
 import Lightbox from '../../../lightbox';
 import Utils from '../../../../helpers/utils';
-
+import strategyFragments from './fragments';
 export default class TableItem extends Component {
-    static fragments = {
-        strategy: {
-            _id: 1,
-            name: 1,
-            strategyname: 1,
-            email: 1,
-            date: -1
-        }
-    };
+    static fragments = strategyFragments;
 
     static propTypes = {
         strategy: PropTypes.object,
@@ -52,7 +44,7 @@ export default class TableItem extends Component {
         if (showField.key.indexOf('.') !== -1) {
             const keys = showField.key.split('.');
             for (let i of keys) {
-                field = field[i];
+                field = field && field[i] || '无';
             }
         } else {
             field = field[showField.key];
@@ -60,7 +52,7 @@ export default class TableItem extends Component {
         let inner;
         switch (type) {
             case 'avatar':
-                inner = <Avatar avatar={field} userId={data.owner.userId}/>;
+                inner = <Avatar avatar={field} userId={data.owner._id}/>;
                 break;
             case 'image':
                 inner = <img src={field} style={{ maxWidth: '40px' }} />;

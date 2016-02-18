@@ -42,7 +42,7 @@ function isBlurred (overlays) {
   })
 )
 export default class AdminContainer extends Component {
-  static fragments = Admin.fragments
+  static fragments = Admin.fragments;
 
   static propTypes = {
     activePanelType: PropTypes.string,
@@ -99,7 +99,6 @@ export default class AdminContainer extends Component {
     const vars = {};
 
     const panelFragments = Object.assign({}, panel.fragments);
-    console.log('=================================vars', vars);
     // This probably could be encapsulated somehow
     switch (activePanelType) {
       case 'media':
@@ -107,12 +106,15 @@ export default class AdminContainer extends Component {
       case 'pages':
       case 'strategies':
       case 'schemas':
+        console.log('=================================props.queryVariables', props.queryVariables);
+        console.log('================================= getQueryVariables(panel.defaultQuery)',  getQueryVariables(panel.defaultQuery));
+        console.log('=================================vars', vars);
+
         vars[activePanelType] = {
           ...props.queryVariables || getQueryVariables(panel.defaultQuery)
         };
-        console.log('=================================queryVariables', {
-  ...props.queryVariables || getQueryVariables(panel.defaultQuery)
-  });
+        console.log('=================================vars2', vars);
+
         break;
       case 'schemaList':
         vars.schemaList = {
@@ -222,8 +224,20 @@ export default class AdminContainer extends Component {
         break;
       default:
     }
-    console.log('=================================this.fragments,panelFragments', this.fragments,
-    panelFragments);
+    console.log('=================================mergeFragments', mergeFragments(
+    this.fragments,
+        panelFragments
+  ));
+    console.log('=================================panelFragments', panelFragments);
+    console.log('================================= this.fragments',  this.fragments);
+    console.log('=================================vars', vars);
+console.log(buildQueryAndVariables(
+    mergeFragments(
+        this.fragments,
+        panelFragments
+    ),
+    vars
+));
     return buildQueryAndVariables(
       mergeFragments(
         this.fragments,

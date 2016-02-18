@@ -20,6 +20,12 @@ export default class Init extends Component {
       default: ''
     },
     {
+      label: 'Nickname',
+      type: Types.String,
+      id: 'nickname',
+      default: ''
+    },
+    {
       label: 'Password',
       type: Types.String,
       id: 'password',
@@ -58,6 +64,10 @@ export default class Init extends Component {
           <label>
             <i className='material-icons'>person_outline</i>
             <input type='text' name='username' placeholder='Username' value={username} onChange={this.onChange.bind(this, 'username')} />
+          </label>
+          <label>
+            <i className='material-icons'>person_outline</i>
+            <input type='text' name='nickname' placeholder='Nickname' value={nickname} onChange={this.onChange.bind(this, 'nickname')} />
           </label>
           <label>
             <i className='material-icons'>lock_outline</i>
