@@ -25,6 +25,18 @@ export default class MenuBar extends Component {
                 label: 'General Settings'
             },
             {
+                type: 'labels',
+                link: '/admin/labels',
+                label: '标签列表',
+	            links:[
+		            {
+			            type: 'strategies',
+			            link: '/admin/strategies',
+			            label: '妙招列表'
+		            }
+	            ]
+            },
+            {
                 type: 'strategies',
                 link: '/admin/strategies',
                 label: '妙招列表'
@@ -77,15 +89,29 @@ export default class MenuBar extends Component {
         );
     }
 
+	renderSecondLinks(link) {
+		if(link.links) {
+			return (
+				<ul className="nav nav-second-level collapse">
+					{link.links.map(this.renderLink, this)}
+				</ul>
+			)
+		}else return null;
+
+	}
+
     renderLink(link) {
         const active = this.props.activePanelType === link.type || (this.props.breadcrumbs && this.props.breadcrumbs.length > 0 && this.props.breadcrumbs[0].type === link.type);
-        return (
+	    return (
             <li key={link.type} className={cx(active && 'active')}>
-                <A href={link.link}>{link.label}</A>
+                <A href={link.link}>
+	                {link.label}
+	                {link.links?<span data-toggle="collapse" className="fa arrow" />:null}
+                </A>
+	            {this.renderSecondLinks(link)}
             </li>
         );
     }
-
     renderNavHeader() {
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 
