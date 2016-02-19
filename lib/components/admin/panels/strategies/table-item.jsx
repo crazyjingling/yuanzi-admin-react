@@ -37,8 +37,8 @@ export default class TableItem extends Component {
     }
 
     renderItem (showField) {
-        let data = this.props.label;
-        var field = data;
+        const data = this.props.strategy;
+        let field = data;
         const type = showField.type;
 
         if (showField.key.indexOf('.') !== -1) {
@@ -47,22 +47,22 @@ export default class TableItem extends Component {
                 field = field && field[i] || '无';
             }
         } else {
-            field = typeof field[showField.key] === 'boolean' ? field[showField.key] : (field[showField.key] || '无');
+            field = field[showField.key];
         }
         if( showField.fieldsType &&  showField.fieldsType === 'array.object'){
             field = field.map((fieldItem)=>fieldItem[showField.showKey]).join(', ');
         }
+        if(showField.key === 'labels'){
+            console.log('=================================field', field);
 
+        }
         let inner;
         switch (type) {
             case 'avatar':
                 inner = <Avatar avatar={field} userId={data.owner._id}/>;
                 break;
             case 'image':
-                inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }} /> : <img style={{ maxWidth: '40px' }} />;
-                break;
-            case 'text':
-                inner = field.toString();
+                inner = <img src={field} style={{ maxWidth: '40px' }} />;
                 break;
             default:
                 inner = field;
