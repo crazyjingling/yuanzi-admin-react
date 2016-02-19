@@ -37,8 +37,8 @@ export default class TableItem extends Component {
     }
 
     renderItem (showField) {
-        const data = this.props.strategy;
-        let field = data;
+        let data = this.props.label;
+        var field = data;
         const type = showField.type;
 
         if (showField.key.indexOf('.') !== -1) {
@@ -47,7 +47,7 @@ export default class TableItem extends Component {
                 field = field && field[i] || '无';
             }
         } else {
-            field = field[showField.key] || '无';
+            field = typeof field[showField.key] === 'boolean' ? field[showField.key] : (field[showField.key] || '无');
         }
         if( showField.fieldsType &&  showField.fieldsType === 'array.object'){
             field = field.map((fieldItem)=>fieldItem[showField.showKey]).join(', ');
