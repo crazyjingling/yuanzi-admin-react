@@ -25,7 +25,7 @@ export default class Search extends Component {
 
   searchChange = (event) => {
     const search = this.state.search;
-    search[event.target.name] = event.target.value;
+    search[event.target.name].value = event.target.value;
     this.setState({search: search});
   }
 
@@ -39,7 +39,6 @@ export default class Search extends Component {
       delete query.search;
       delete query.s;
     }
-
     const url = Utils.parseQueryUrl(this.props.url, query);
     //todo: pushState操作如何触发 getAdmin action ???
     this.props.history.pushState({}, url);

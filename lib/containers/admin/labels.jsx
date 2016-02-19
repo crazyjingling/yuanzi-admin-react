@@ -17,7 +17,7 @@ import {labelConfig} from './containerInitConfig';
 )
 @queryProps({
   page: 1,
-  limit: 1,
+  limit: 10,
   sort: '_id',
   order: 'desc'
 })
