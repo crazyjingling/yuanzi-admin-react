@@ -25,6 +25,11 @@ export default class MenuBar extends Component {
                 label: 'General Settings'
             },
             {
+                type: 'labels',
+                link: '/admin/labels',
+                label: '标签列表'
+            },
+            {
                 type: 'strategies',
                 link: '/admin/strategies',
                 label: '妙招列表'

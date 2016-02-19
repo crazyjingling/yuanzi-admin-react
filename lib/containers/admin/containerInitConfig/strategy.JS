@@ -1,5 +1,5 @@
 import helps from './helps';
-const stategyConfig = {
+const strategyConfig = {
     activePanelType: 'strategies',
     breadcrumbs: [
         {
@@ -10,7 +10,7 @@ const stategyConfig = {
         { key: 'title', name: '妙招标题', type: 'text' },
         { key: 'cover', name: '封面', type: 'image' },
         { key: 'owner.nickname', name: '作者', type: 'text' },
-        { key: 'labels', name: '标签', type: 'text' },
+        { key: 'labels', name: '标签', type: 'text', fieldsType: 'array.object',showKey: 'title' },
         { key: 'isRecommended.stateType', name: '状态', type: 'text' },
         { key: 'strategyNo', name: '编号', type: 'text' },
         { key: 'artificialdata.artificialtrycount', name: '随机试过数', type: 'text' },
@@ -18,7 +18,7 @@ const stategyConfig = {
         { key: 'playCount', name: '播放数', type: 'text' },
         { key: 'sharedCount', name: '分享', type: 'text' },
         { key: 'collectCount', name: '收藏', type: 'text' },
-        { key: 'comments', name: '评论', type: 'text' },
+        { key: 'comments', name: '评论数', type: 'text' },
         { key: 'comments.isReported', name: '评论举报', type: 'text' },
         { key: 'photoCount', name: '作品数', type: 'text' },
         { key: 'photoReport', name: '作品举报', type: 'text' },
@@ -35,5 +35,5 @@ const stategyConfig = {
     }]
 
 };
-stategyConfig.searchValues = helps.generateSearchValues(stategyConfig.searchFields);
-export default stategyConfig;
+strategyConfig.searchValues = helps.generateSearchValues(strategyConfig.searchFields);
+export default strategyConfig;

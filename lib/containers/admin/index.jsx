@@ -105,15 +105,11 @@ export default class AdminContainer extends Component {
       case 'menus':
       case 'pages':
       case 'strategies':
+      case 'labels':
       case 'schemas':
-        console.log('=================================props.queryVariables', props.queryVariables);
-        console.log('================================= getQueryVariables(panel.defaultQuery)',  getQueryVariables(panel.defaultQuery));
-        console.log('=================================vars', vars);
-
         vars[activePanelType] = {
           ...props.queryVariables || getQueryVariables(panel.defaultQuery)
         };
-        console.log('=================================vars2', vars);
 
         break;
       case 'schemaList':
@@ -214,6 +210,14 @@ export default class AdminContainer extends Component {
           }
         };
         break;
+      case 'labelEdit':
+        vars.label = {
+          title: {
+            value: props.params && props.params.strategyname,
+            type: 'String!'
+          }
+        };
+        break;
       case 'userEdit':
         vars.user = {
           username: {
@@ -224,20 +228,6 @@ export default class AdminContainer extends Component {
         break;
       default:
     }
-    console.log('=================================mergeFragments', mergeFragments(
-    this.fragments,
-        panelFragments
-  ));
-    console.log('=================================panelFragments', panelFragments);
-    console.log('================================= this.fragments',  this.fragments);
-    console.log('=================================vars', vars);
-console.log(buildQueryAndVariables(
-    mergeFragments(
-        this.fragments,
-        panelFragments
-    ),
-    vars
-));
     return buildQueryAndVariables(
       mergeFragments(
         this.fragments,

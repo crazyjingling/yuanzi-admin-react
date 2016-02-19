@@ -4,12 +4,12 @@ import TableItem from './table-item';
 
 export default class ListTable extends Component {
     static fragments = {
-        strategies: TableItem.fragments.strategy
+        labels: TableItem.fragments.label
     }
 
     static propTypes = {
-        strategies: PropTypes.array,
-        removeStrategy: PropTypes.func.isRequired,
+        labels: PropTypes.array,
+        removeLabel: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
         type: PropTypes.string.isRequired,
     }
@@ -23,7 +23,7 @@ export default class ListTable extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {this.props.strategies.map(this.renderEntry, this)}
+                    {this.props.labels.map(this.renderEntry, this)}
                 </tbody>
             </table>
 
@@ -35,10 +35,10 @@ export default class ListTable extends Component {
             <th key={showField.key}>{showField.name}</th>
         );
     }
-    renderEntry (strategy) {
-        console.log('=================================strategy', strategy);
+    renderEntry (label) {
+        console.log('=================================label', label);
         return (
-            <TableItem type={this.props.type} key={strategy._id} strategy={strategy} showFields={this.props.showFields} removeStrategy={this.props.removeStrategy}/>
+            <TableItem type={this.props.type} key={label._id} label={label} showFields={this.props.showFields} removeLabel={this.props.removeLabel}/>
         );
     }
 }

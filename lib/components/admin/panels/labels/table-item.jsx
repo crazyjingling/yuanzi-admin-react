@@ -4,13 +4,13 @@ import moment from 'moment';
 import A from '../../../a';
 import Lightbox from '../../../lightbox';
 import Utils from '../../../../helpers/utils';
-import strategyFragments from './fragments';
+import labelFragments from './fragments';
 export default class TableItem extends Component {
-    static fragments = strategyFragments;
+    static fragments = labelFragments;
 
     static propTypes = {
-        strategy: PropTypes.object,
-        removeStrategy: PropTypes.func.isRequired,
+        label: PropTypes.object,
+        removeLabel: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
         type: PropTypes.string.isRequired
     }
@@ -37,8 +37,8 @@ export default class TableItem extends Component {
     }
 
     renderItem (showField) {
-        const data = this.props.strategy;
-        let field = data;
+        let data = this.props.label;
+        var field = data;
         const type = showField.type;
 
         if (showField.key.indexOf('.') !== -1) {
@@ -47,7 +47,7 @@ export default class TableItem extends Component {
                 field = field && field[i] || '无';
             }
         } else {
-            field = field[showField.key] || '无';
+            field = typeof field[showField.key] === 'boolean' ? field[showField.key] : (field[showField.key] || '无');
         }
         if( showField.fieldsType &&  showField.fieldsType === 'array.object'){
             field = field.map((fieldItem)=>fieldItem[showField.showKey]).join(', ');
