@@ -246,6 +246,7 @@ export default class MenuBar extends Component {
             </li>
         );
     }
+
     renderNavHeader() {
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 
