@@ -49,7 +49,7 @@ export default class Strategies extends Component {
                             history={this.props.history}
                         />
                         <ListTable
-                            type='strategy'
+							listSchema='strategy'
                             strategies={this.props.strategies}
                             removeStrategy={this.props.removeStrategy}
                             showFields={this.props.showFields}

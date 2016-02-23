@@ -1,17 +1,19 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
-import TableItem from './table-item';
+import TableItem from '../../elements/table-item';
+import { labelConfig } from '../../../../containers/admin/containerInitConfig';
+
 
 export default class ListTable extends Component {
     static fragments = {
-        labels: TableItem.fragments.label
+        labels: labelConfig.fragments.label
     }
 
     static propTypes = {
         labels: PropTypes.array,
         removeLabel: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
-        type: PropTypes.string.isRequired,
+		listSchema: PropTypes.string.isRequired
     }
 
     render() {
@@ -36,9 +38,14 @@ export default class ListTable extends Component {
         );
     }
     renderEntry (label) {
-        console.log('=================================label', label);
         return (
-            <TableItem type={this.props.type} key={label._id} label={label} showFields={this.props.showFields} removeLabel={this.props.removeLabel}/>
+            <TableItem listSchema={this.props.listSchema}
+					   fragment={labelConfig.fragments}
+					   key={label._id}
+					   itemData={label}
+					   showFields={this.props.showFields}
+					   removeLabel={this.props.removeLabel}
+			/>
         );
     }
 }

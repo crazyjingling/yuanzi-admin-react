@@ -34,7 +34,6 @@ export default class Entry extends Component {
       removing: true
     });
   }
-
   cancelRemove (event) {
     event.preventDefault();
     this.setState({

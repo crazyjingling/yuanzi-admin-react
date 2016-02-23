@@ -49,7 +49,7 @@ export default class Labels extends Component {
                             history={this.props.history}
                         />
                         <ListTable
-                            type='label'
+							listSchema='label'
                             labels={this.props.labels}
                             removeLabel={this.props.removeLabel}
                             showFields={this.props.showFields}

@@ -71,9 +71,9 @@ export default class Search extends Component {
         });
         formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
       }
-
+	  console.log('=================================searchField.key', searchField.key);
       return (
-          <div className="form-group">
+          <div className="form-group" key={searchField.key}>
             <label className="control-label">{searchField.label}</label>
             {formItem}
           </div>
