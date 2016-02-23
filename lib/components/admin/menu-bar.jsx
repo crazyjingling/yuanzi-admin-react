@@ -25,27 +25,161 @@ export default class MenuBar extends Component {
                 label: 'General Settings'
             },
             {
-                type: 'labels',
-                link: '/admin/labels',
-                label: '标签列表',
-	            links:[
-		            {
-			            type: 'strategies',
-			            link: '/admin/strategies',
-			            label: '妙招列表'
-		            }
-	            ]
-            },
-            {
                 type: 'strategies',
-                link: '/admin/strategies',
-                label: '妙招列表'
+                link: '#',
+                label: '妙招管理',
+				links: [
+					{
+						type: 'strategylist',
+						link: '/admin/strategies',
+						label: '妙招列表'
+					},
+					{
+						type: 'strategyedit',
+						link: '/admin/strategyedit',
+						label: '添加妙招'
+					}
+				]
             },
-            {
-                type: 'pages',
-                link: '/admin/pages',
-                label: 'Pages'
-            },
+			{
+				type: 'topics',
+				link: '#',
+				label: '攻略管理',
+				links: [
+					{
+						type: 'topiclist',
+						link: '/admin/topics',
+						label: '攻略列表'
+					},
+					{
+						type: 'topicedit',
+						link: '/admin/topicedit',
+						label: '添加攻略'
+					}
+				]
+			},
+			{
+				type: 'activities',
+				link: '#',
+				label: '活动管理',
+				links: [
+					{
+						type: 'strategylist',
+						link: '/admin/activities',
+						label: '活动列表'
+					},
+					{
+						type: 'strategyedit',
+						link: '/admin/activityedit',
+						label: '添加活动'
+					}
+				]
+			},
+			{
+				type: 'labels',
+				link: '#',
+				label: '标签管理',
+				links:[
+					{
+						type: 'labellist',
+						link: '/admin/labels/strategy',
+						label: '妙招标签'
+					},
+					{
+						type: 'labeledit',
+						link: '/admin/labels/talant',
+						label: '达人标签'
+					}
+				]
+			},
+			{
+				type: 'banners',
+				link: '#',
+				label: 'Banner 管理',
+				links:[
+					{
+						type: 'bannerlist',
+						link: '/admin/banners/index',
+						label: '首页 Banner'
+					},
+					{
+						type: 'banneredit',
+						link: '/admin/banners/activity',
+						label: '活动Banner'
+					}
+				]
+			},
+			{
+				type: 'uploads',
+				link: '#',
+				label: '上传管理',
+				links:[
+					{
+						type: 'uploadlist',
+						link: '/admin/uploads',
+						label: '上传列表'
+					},
+					{
+						type: 'uploadedit',
+						link: '/admin/uploads/upload',
+						label: '上传页面'
+					}
+				]
+			},
+			{
+				type: 'orders',
+				link: '/admin/orders',
+				label: '订单管理'
+			},
+			{
+				type: 'feedbacks',
+				link: '/admin/feedbacks',
+				label: '意见反馈'
+			},
+			{
+				type: 'systems',
+				link: '#',
+				label: '系统管理',
+				links:[
+					{
+						type: 'userlist',
+						link: '/admin/users',
+						label: '用户列表'
+					},
+					{
+						type: 'useredit',
+						link: '/admin/useredit',
+						label: '添加成员'
+					}
+				]
+			},
+			{
+				type: 'pushs',
+				link: '#',
+				label: '推送管理',
+				links:[
+					{
+						type: 'pushlist',
+						link: '/admin/pushs',
+						label: '推送列表'
+					},
+					{
+						type: 'pushedit',
+						link: '/admin/pushedit',
+						label: '新建推送'
+					}
+				]
+			},
+			{
+				type: 'profile',
+				link: '/admin/profile',
+				label: '个人设置'
+			},
+			{
+				type: 'pages',
+				link: '/admin/pages',
+				label: 'Pages'
+			},
             {
                 type: 'schemas',
                 link: '/admin/schemas',
@@ -89,29 +223,30 @@ export default class MenuBar extends Component {
         );
     }
 
-	renderSecondLinks(link) {
-		if(link.links) {
-			return (
-				<ul className="nav nav-second-level collapse">
-					{link.links.map(this.renderLink, this)}
-				</ul>
-			)
-		}else return null;
+    renderSecondLinks(link) {
+        if(link.links && link.links.length) {
+            return (
+                <ul className="nav nav-second-level collapse">
+                    {link.links.map(this.renderLink, this)}
+                </ul>
+            )
+        }else return null;
 
-	}
+    }
 
     renderLink(link) {
         const active = this.props.activePanelType === link.type || (this.props.breadcrumbs && this.props.breadcrumbs.length > 0 && this.props.breadcrumbs[0].type === link.type);
-	    return (
+        return (
             <li key={link.type} className={cx(active && 'active')}>
                 <A href={link.link}>
-	                {link.label}
-	                {link.links?<span data-toggle="collapse" className="fa arrow" />:null}
+                    {link.label}
+                    {link.links && link.links.length ?<span data-toggle="collapse" className="fa arrow" />:null}
                 </A>
-	            {this.renderSecondLinks(link)}
+                {(link.links && link.links.length) && this.renderSecondLinks(link)}
             </li>
         );
     }
+
     renderNavHeader() {
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 

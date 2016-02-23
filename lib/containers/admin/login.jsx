@@ -28,7 +28,7 @@ export default class LoginContainer extends Component {
       .end((error, res) => {
         if (error) {
           this.setState({
-            error: res.body.message
+            error: '用户名或密码错误'
           });
         } else {
           window.location.href = '/admin';

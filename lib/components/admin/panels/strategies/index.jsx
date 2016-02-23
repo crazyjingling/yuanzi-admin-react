@@ -36,10 +36,6 @@ export default class Strategies extends Component {
             <div className="ibox-content">
                 <div className='table-responsive'>
                     <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-                        <a href='#' className='button-clean' onClick={this.props.onAddNewClick}>
-                            <i className='material-icons'>person_add</i>
-                            <span>Add new strategy</span>
-                        </a>
                         <Search
                             sorts={[
                               {label: 'Date', property: '_id'},
@@ -53,7 +49,7 @@ export default class Strategies extends Component {
                             history={this.props.history}
                         />
                         <ListTable
-                            type='strategy'
+							listSchema='strategy'
                             strategies={this.props.strategies}
                             removeStrategy={this.props.removeStrategy}
                             showFields={this.props.showFields}

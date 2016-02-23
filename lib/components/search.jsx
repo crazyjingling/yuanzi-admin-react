@@ -25,7 +25,7 @@ export default class Search extends Component {
 
   searchChange = (event) => {
     const search = this.state.search;
-    search[event.target.name] = event.target.value;
+    search[event.target.name].value = event.target.value;
     this.setState({search: search});
   }
 
@@ -39,7 +39,6 @@ export default class Search extends Component {
       delete query.search;
       delete query.s;
     }
-
     const url = Utils.parseQueryUrl(this.props.url, query);
     //todo: pushState操作如何触发 getAdmin action ???
     this.props.history.pushState({}, url);
@@ -72,9 +71,9 @@ export default class Search extends Component {
         });
         formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
       }
-
+	  console.log('=================================searchField.key', searchField.key);
       return (
-          <div className="form-group">
+          <div className="form-group" key={searchField.key}>
             <label className="control-label">{searchField.label}</label>
             {formItem}
           </div>

@@ -11,6 +11,7 @@ export default class UserEdit extends Component {
       email: 1,
       name: 1,
       username: 1,
+      nickname: 1,
       date: 1
     }
   }
@@ -55,6 +56,11 @@ export default class UserEdit extends Component {
                 <i className='material-icons'>person</i>
                 <span>Username</span>
                 <div>{user.username}</div>
+              </div>
+              <div className='info'>
+                <i className='material-icons'>person</i>
+                <span>Nickname</span>
+                <div>{user.nickname}</div>
               </div>
               <div className='info'>
                 <i className='material-icons'>mail</i>

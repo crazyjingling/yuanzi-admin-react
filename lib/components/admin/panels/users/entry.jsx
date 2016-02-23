@@ -11,6 +11,7 @@ export default class Entry extends Component {
       _id: 1,
       name: 1,
       username: 1,
+      nickname: 1,
       email: 1,
       date: 1
     }
@@ -33,7 +34,6 @@ export default class Entry extends Component {
       removing: true
     });
   }
-
   cancelRemove (event) {
     event.preventDefault();
     this.setState({

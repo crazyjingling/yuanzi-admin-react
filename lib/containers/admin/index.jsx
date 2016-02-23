@@ -42,7 +42,7 @@ function isBlurred (overlays) {
   })
 )
 export default class AdminContainer extends Component {
-  static fragments = Admin.fragments
+  static fragments = Admin.fragments;
 
   static propTypes = {
     activePanelType: PropTypes.string,
@@ -99,20 +99,18 @@ export default class AdminContainer extends Component {
     const vars = {};
 
     const panelFragments = Object.assign({}, panel.fragments);
-    console.log('=================================vars', vars);
     // This probably could be encapsulated somehow
     switch (activePanelType) {
       case 'media':
       case 'menus':
       case 'pages':
       case 'strategies':
+      case 'labels':
       case 'schemas':
         vars[activePanelType] = {
           ...props.queryVariables || getQueryVariables(panel.defaultQuery)
         };
-        console.log('=================================queryVariables', {
-  ...props.queryVariables || getQueryVariables(panel.defaultQuery)
-  });
+
         break;
       case 'schemaList':
         vars.schemaList = {
@@ -212,6 +210,14 @@ export default class AdminContainer extends Component {
           }
         };
         break;
+      case 'labelEdit':
+        vars.label = {
+          title: {
+            value: props.params && props.params.strategyname,
+            type: 'String!'
+          }
+        };
+        break;
       case 'userEdit':
         vars.user = {
           username: {
@@ -222,8 +228,6 @@ export default class AdminContainer extends Component {
         break;
       default:
     }
-    console.log('=================================this.fragments,panelFragments', this.fragments,
-    panelFragments);
     return buildQueryAndVariables(
       mergeFragments(
         this.fragments,

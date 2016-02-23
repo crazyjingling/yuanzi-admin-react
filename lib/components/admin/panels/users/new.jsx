@@ -11,6 +11,12 @@ const options = [
     default: ''
   },
   {
+    label: 'Nickname',
+    type: Types.String,
+    id: 'nickname',
+    default: ''
+  },
+  {
     label: 'Password',
     type: Types.String,
     id: 'password',
@@ -41,6 +47,7 @@ export default class New extends Component {
   getInitState () {
     return {
       username: '',
+      nickname: '',
       password: '',
       name: '',
       email: ''

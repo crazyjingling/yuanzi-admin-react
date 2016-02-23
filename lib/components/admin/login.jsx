@@ -2,41 +2,41 @@ import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
 
 export default class Login extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    fieldChange: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    error: PropTypes.string
-  }
+	static propTypes = {
+		onSubmit: PropTypes.func.isRequired,
+		fieldChange: PropTypes.func.isRequired,
+		username: PropTypes.string.isRequired,
+		password: PropTypes.string.isRequired,
+		error: PropTypes.string
+	}
 
-  onChange (id, event) {
-    this.props.fieldChange(id, event.target.value);
-  }
+	onChange (id, event) {
+		this.props.fieldChange(id, event.target.value);
+	}
 
-  render () {
-    return (
-      <div className='page-init white-options'>
-        <div className='logo'>
-          <img src='/images/admin/logo_big.png' width='150' />
-          <div className='version'>beta</div>
-        </div>
-        <h1>Welcome back!</h1>
-        <h3>Login with your account below to get started</h3>
-        <form onSubmit={this.props.onSubmit}>
-          <label>
-            <i className='material-icons'>person_outline</i>
-            <input type='text' name='username' placeholder='Username' value={this.props.username} onChange={this.onChange.bind(this, 'username')} />
-          </label>
-          <label>
-            <i className='material-icons'>lock_outline</i>
-            <input type='password' name='password' placeholder='Password' value={this.props.password} onChange={this.onChange.bind(this, 'password')} />
-          </label>
-          <a className='button button-primary full' href='#' onClick={this.props.onSubmit}>Let's get started</a>
-          {<div className='error'>{this.props.error && this.props.error || ' '}</div>}
-          <input type='submit' hidden />
-        </form>
-      </div>
-    );
-  }
+	render () {
+		return (
+			<div className="middle-box text-center loginscreen animated fadeInDown">
+				<div>
+					<div>
+						<img src='/img/logo-100.png' width='150' style={{borderRadius:'10px'}}/>
+					</div>
+					<h3>Welcome to 元子育儿</h3>
+					<p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.</p>
+					<p>Login in. To see it in action.</p>
+					<form className="m-t" role="form" onSubmit={this.props.onSubmit}>
+						<div className="form-group">
+							<input type='text' name='username' className="form-control" required="" placeholder='Username' value={this.props.username} onChange={this.onChange.bind(this, 'username')} />
+						</div>
+						<div className="form-group">
+							<input type='password' name='password' className="form-control" placeholder='Password' required="" value={this.props.password} onChange={this.onChange.bind(this, 'password')} />
+						</div>
+						<button type="submit" className="btn btn-primary block full-width m-b" onClick={this.props.onSubmit}>Login</button>
+						{<div className='error'>{this.props.error && this.props.error || ' '}</div>}
+						<input type='submit' hidden />
+					</form>
+				</div>
+			</div>
+	);
+	}
 }

@@ -1,0 +1,1 @@
+db.getCollection('labels').update({ display: { '$exists': false } }, { '$set': { display: false }}, false, true)
