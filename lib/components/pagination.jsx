@@ -22,8 +22,11 @@ export default class Pagination extends Component {
 
   render () {
     return (
-      <div className='pagination'>
-        {this.props.query && this.renderButtons()}
+      <div className='centered pagination'>
+		  <div>
+		  {this.props.query && this.renderButtons()}
+		  <span>总 {Math.ceil(this.props.count / this.props.query.limit)} 页</span>
+      </div>
       </div>
     );
   }
@@ -33,9 +36,13 @@ export default class Pagination extends Component {
     const buttons = [];
 
     buttons.push(this.renderPreviousButton());
-    for (let i = 0; i < numPages; i++) {
-      buttons.push(this.renderButton(i + 1));
-    }
+  for (var i = ((this.props.query.page - 5 > 0) ? this.props.query.page - 5 : 1); i <= this.props.query.page + 5; i++) {
+	  if (i > numPages) {
+		  break;
+	  }
+		  buttons.push(this.renderButton(i));
+
+  }
     buttons.push(this.renderNextButton(numPages));
 
     return buttons;

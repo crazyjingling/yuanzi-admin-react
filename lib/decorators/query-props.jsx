@@ -47,17 +47,19 @@ export function getQueryVariables (query) {
       type: 'Int'
     };
   }
-  if (query.search && query.s) {
+  if (query.search) {
     queryVariables.search = {
       value: query.search,
       type: 'String'
     };
-    queryVariables.s = {
-      value: query.s,
-      type: 'String'
-    };
-  }
 
+  }
+	if(query.s){
+		queryVariables.s = {
+			value: query.s,
+			type: 'String'
+		};
+	}
   return queryVariables;
 }
 

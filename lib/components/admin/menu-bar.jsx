@@ -81,14 +81,9 @@ export default class MenuBar extends Component {
 				label: '标签管理',
 				links:[
 					{
-						type: 'labellist',
-						link: '/admin/labels/strategy',
-						label: '妙招标签'
-					},
-					{
-						type: 'labeledit',
-						link: '/admin/labels/talant',
-						label: '达人标签'
+						type: 'labels',
+						link: '/admin/labels',
+						label: '标签列表'
 					}
 				]
 			},

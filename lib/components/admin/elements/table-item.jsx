@@ -9,56 +9,13 @@ export default class TableItem extends Component {
 
     static propTypes = {
 		itemData: PropTypes.object,
-        removeLabel: PropTypes.func.isRequired,
+		onRemove: PropTypes.func,
+		onEdit: PropTypes.func,
         showFields: PropTypes.array.isRequired,
 		fragment: PropTypes.object.isRequired,
 		listSchema: PropTypes.string.isRequired
     }
-    getInitState () {
-        return {
-            removing: false
-        };
-    }
 
-    onRemove (event) {
-        event.preventDefault();
-        this.setState({
-            removing: true
-        });
-    }
-    cancelRemove (event) {
-        event.preventDefault();
-        this.setState({
-            removing: false
-        });
-    }
-
-    confirmRemove (event) {
-        event.preventDefault();
-        this.props.removeUser(this.constructor.fragments, this.props.user._id).done();
-        this.setState({
-            removing: false
-        });
-    }
-
-    onEdit (event) {
-        event.preventDefault();
-        this.setState({
-            removing: true
-        });
-    }
-    onRecommend (event) {
-        event.preventDefault();
-        this.setState({
-            removing: true
-        });
-    }
-    onPreview (event) {
-        event.preventDefault();
-        this.setState({
-            removing: true
-        });
-    }
     render() {
         return (
             <tr>
@@ -100,7 +57,7 @@ export default class TableItem extends Component {
 			case 'array.button':
 				inner = showField.options.map((option) => {
 					return (
-						<a href='#' onClick={this[option.action].bind(this)}>
+						<a href='#' onClick={this.props[option.action].bind(this, data._id)}>
 							<span>{option.name}</span>
 						</a>
 					)
@@ -112,4 +69,5 @@ export default class TableItem extends Component {
 		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;
 
     }
+
 }

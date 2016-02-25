@@ -12,12 +12,16 @@ export default class ListTable extends Component {
         strategies: PropTypes.array,
         removeStrategy: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
-		listSchema: PropTypes.string.isRequired
+		listSchema: PropTypes.string.isRequired,
+		onPreview: PropTypes.func.isRequired,
+		onRemove: PropTypes.func.isRequired,
+		onEdit: PropTypes.func.isRequired,
+		onRecommend: PropTypes.func.isRequired,
     }
 
     render() {
         return (
-            <table className="table table-striped table-bordered table-hover dataTables-example dataTable" id="editable" role="grid">
+            <table className="table table-bordered table-hover dataTables-example dataTable" id="editable" role="grid">
                 <thead>
                 <tr>
                     {this.props.showFields.map(this.renderTh, this)}
@@ -43,7 +47,10 @@ export default class ListTable extends Component {
 					   key={strategy._id}
 					   itemData={strategy}
 					   showFields={this.props.showFields}
-					   removeStrategy={this.props.removeStrategy}
+					   onPreview={this.props.onPreview}
+					   onRemove={this.props.onRemove}
+					   onEdit={this.props.onEdit}
+					   onRecommend={this.props.onRecommend}
 			/>
         );
     }

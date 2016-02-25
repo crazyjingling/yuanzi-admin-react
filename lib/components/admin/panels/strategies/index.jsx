@@ -28,6 +28,10 @@ export default class Strategies extends Component {
         onAddNew: PropTypes.func.isRequired,
         onAddNewClick: PropTypes.func.isRequired,
         onCloseLightbox: PropTypes.func.isRequired,
+		onPreview: PropTypes.func.isRequired,
+		onRemove: PropTypes.func.isRequired,
+		onEdit: PropTypes.func.isRequired,
+		onRecommend: PropTypes.func.isRequired,
         history: PropTypes.object.isRequired
     }
 
@@ -53,6 +57,10 @@ export default class Strategies extends Component {
                             strategies={this.props.strategies}
                             removeStrategy={this.props.removeStrategy}
                             showFields={this.props.showFields}
+							onPreview={this.props.onPreview}
+							onRemove={this.props.onRemove}
+							onEdit={this.props.onEdit}
+							onRecommend={this.props.onRecommend}
                         />
                         <Pagination
                             url='/admin/strategies'

@@ -41,7 +41,49 @@
       .transform(translate(-50%, -50%));
     }
   }
+  &.xs {
+	overflow: hidden;
+	.animation-holder {
+	  position: absolute;
+	  top: 0; left: 0; right: 0; bottom: 0;
+	}
+	.lightbox-wrapper {
+	  position: absolute;
+	  width: 260px;
+	  max-width:100%;
+	  top: 40%;
+	  left: 50%;
+	  .transform(translate(-50%, -50%));
+	}
+  }
+  .lightbox-header-without-border {
+	@height: 22px;
+	height: @height;
 
+	.lightbox-title{
+	  float: left;
+	  margin: 0;
+	  line-height: @height;
+	  padding-left: 20px;
+	  color: #333;
+	}
+
+	.lightbox-close {
+	  display: inline-block;
+	  height: @height;
+	  width: @height;
+
+	  float: right;
+	  color: #333333;
+
+	  text-align: center;
+	  line-height: 50px;
+
+	  &:hover{
+		color: @adminPrimary;
+	  }
+	}
+  }
   .lightbox-header {
     @height: 55px;
     height: @height;

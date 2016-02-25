@@ -22,7 +22,7 @@ export default class Search extends Component {
       search: this.props.search || {},
     };
   }
-
+// {search: {type: {value: 'xxxxx'}}}
   searchChange = (event) => {
     const search = this.state.search;
     search[event.target.name].value = event.target.value;
@@ -71,7 +71,6 @@ export default class Search extends Component {
         });
         formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
       }
-	  console.log('=================================searchField.key', searchField.key);
       return (
           <div className="form-group" key={searchField.key}>
             <label className="control-label">{searchField.label}</label>
