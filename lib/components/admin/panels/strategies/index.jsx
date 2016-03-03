@@ -28,6 +28,7 @@ export default class Strategies extends Component {
         onAddNew: PropTypes.func.isRequired,
         onAddNewClick: PropTypes.func.isRequired,
         onCloseLightbox: PropTypes.func.isRequired,
+		onViewPhotoReport: PropTypes.func.isRequired,
 		onPreview: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
 		onEdit: PropTypes.func.isRequired,
@@ -57,6 +58,7 @@ export default class Strategies extends Component {
                             strategies={this.props.strategies}
                             removeStrategy={this.props.removeStrategy}
                             showFields={this.props.showFields}
+							onViewPhotoReport={this.props.onViewPhotoReport}
 							onPreview={this.props.onPreview}
 							onRemove={this.props.onRemove}
 							onEdit={this.props.onEdit}

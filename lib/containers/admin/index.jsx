@@ -231,7 +231,6 @@ export default class AdminContainer extends Component {
 				break;
 			default:
 		}
-		console.log('=================================vars', vars);
 		return buildQueryAndVariables(
 			mergeFragments(
 				this.fragments,

@@ -7,7 +7,11 @@ import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from './list-table';
+import Edit from './edit';
+import options from './options';
+
+import {labelConfig} from '../../../../containers/admin/containerInitConfig'
 export default class Labels extends Component {
 	static fragments = mergeFragments({
 		labelsCount: {
@@ -23,16 +27,18 @@ export default class Labels extends Component {
 		searchValues: PropTypes.object.isRequired,
 		query: PropTypes.object,
 		count: PropTypes.number,
-		lightbox: PropTypes.boolean,
 		removeLabel: PropTypes.func.isRequired,
+		addLabel: PropTypes.func.isRequired,
+		updateLabel: PropTypes.func.isRequired,
 		onAddNew: PropTypes.func.isRequired,
-		onAddNewClick: PropTypes.func.isRequired,
-		onCloseLightbox: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
+		editingLabel: PropTypes.object.isRequired,
 		onEdit: PropTypes.func.isRequired,
+		onEditClose: PropTypes.func.isRequired,
+		edit: PropTypes.boolean,
+		editingColor: PropTypes.boolean,
 		history: PropTypes.object.isRequired
 	}
-
 
 
 	render() {
@@ -52,6 +58,12 @@ export default class Labels extends Component {
 							query={this.props.query}
 							history={this.props.history}
 						/>
+						<div>
+							<a href='#' className='button-clean' onClick={this.props.onAddNew}>
+								<i className='material-icons'>invert_colors</i>
+								<span>添加标签</span>
+							</a>
+						</div>
 						<ListTable
 							listSchema='label'
 							labels={this.props.labels}
@@ -67,17 +79,21 @@ export default class Labels extends Component {
 						/>
 					</div>
 				</div>
-				{this.renderLightbox()}
+				{this.renderEdit()}
 			</div>
 		);
 	}
 
-	renderLightbox() {
-		if (this.props.lightbox) {
+	renderEdit () {
+		if (this.props.edit) {
 			return (
-				<Lightbox className='small' title='Add label' onClose={this.props.onCloseLightbox}>
-					<New onSubmit={this.props.onAddNew}/>
-				</Lightbox>
+				<Edit editingLabel={this.props.editingLabel}
+					  options={options}
+					  onEditClose={this.props.onEditClose}
+					  addLabel={this.props.addLabel}
+					  updateLabel={this.props.updateLabel}
+					  fragment={labelConfig.fragments} />
+
 			);
 		}
 	}

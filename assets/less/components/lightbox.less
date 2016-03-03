@@ -41,6 +41,22 @@
       .transform(translate(-50%, -50%));
     }
   }
+  &.calendar {
+	@width: 280px;
+    overflow: hidden;
+    .animation-holder {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    .lightbox-wrapper {
+      position: absolute;
+      width: @width + 60px;
+      max-width:100%;
+      top: 40%;
+      left: 50%;
+      .transform(translate(-50%, -50%));
+    }
+  }
   &.xs {
 	overflow: hidden;
 	.animation-holder {

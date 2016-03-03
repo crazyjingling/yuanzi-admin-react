@@ -20,18 +20,13 @@ export default class MenuBar extends Component {
     render() {
         const links = [
             {
-                type: 'settings',
-                link: '/admin',
-                label: 'General Settings'
-            },
-            {
                 type: 'strategies',
                 link: '#',
                 label: '妙招管理',
 				links: [
 					{
 						type: 'strategylist',
-						link: '/admin/strategies',
+						link: '/admin',
 						label: '妙招列表'
 					},
 					{

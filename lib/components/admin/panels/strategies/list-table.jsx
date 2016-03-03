@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
-import TableItem from '../../elements/table-item';
+import TableItem from './table-item';
 import { strategyConfig } from '../../../../containers/admin/containerInitConfig';
 
 export default class ListTable extends Component {
@@ -13,6 +13,7 @@ export default class ListTable extends Component {
         removeStrategy: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
 		listSchema: PropTypes.string.isRequired,
+		onViewPhotoReport: PropTypes.func.isRequired,
 		onPreview: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
 		onEdit: PropTypes.func.isRequired,
@@ -21,7 +22,7 @@ export default class ListTable extends Component {
 
     render() {
         return (
-            <table className="table table-bordered table-hover dataTables-example dataTable" id="editable" role="grid">
+            <table className="table table-bordered table-hover dataTables-example dataTable" role="grid">
                 <thead>
                 <tr>
                     {this.props.showFields.map(this.renderTh, this)}
@@ -47,6 +48,7 @@ export default class ListTable extends Component {
 					   key={strategy._id}
 					   itemData={strategy}
 					   showFields={this.props.showFields}
+					   onViewPhotoReport={this.props.onViewPhotoReport}
 					   onPreview={this.props.onPreview}
 					   onRemove={this.props.onRemove}
 					   onEdit={this.props.onEdit}

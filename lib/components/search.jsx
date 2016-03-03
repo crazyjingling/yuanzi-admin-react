@@ -6,7 +6,7 @@ import {Component} from 'relax-framework';
 
 import A from './a';
 import Utils from '../helpers/utils';
-
+import LabelPicker from '../containers/data-types/label-picker';
 export default class Search extends Component {
   static propTypes = {
     sorts: React.PropTypes.array.isRequired,
@@ -23,9 +23,18 @@ export default class Search extends Component {
     };
   }
 // {search: {type: {value: 'xxxxx'}}}
-  searchChange = (event) => {
-    const search = this.state.search;
-    search[event.target.name].value = event.target.value;
+  searchChange = (id, event) => {
+	  event && event.preventDefault();
+	  const search = this.state.search;
+	  search[id.id || id] = {};
+
+	  if (id.label) {
+		  search[id.id || id]._id = {value: id.value, type: 'select'};
+	  } else {
+		  search[id.id || id].value = event.target.value;
+
+	  }
+
     this.setState({search: search});
   }
 
@@ -57,26 +66,44 @@ export default class Search extends Component {
   }
   renderFormItem (searchField) {
       const type = searchField.type;
-      let formItem = <input
-          {...searchField}
-          placeholder={searchField.name}
-          className="form-control"
-          onChange={this.searchChange.bind(this)}
-          value={this.state[searchField.key]}/>;
+      let formItem;
 
       if (type === 'select') {
         const defaultValue = find(searchField.options, (option)=>option.selected).value;
         const options = searchField.options.map(function (item) {
           return <option value={item.value}>{item.name}</option>;
         });
-        formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this)} className="select2_demo_1 form-control">{options}</select>;
-      }
-      return (
-          <div className="form-group" key={searchField.key}>
-            <label className="control-label">{searchField.label}</label>
-            {formItem}
-          </div>
-      );
+        formItem = <select {...searchField} defaultValue={defaultValue} onChange={this.searchChange.bind(this, searchField.key)} className="select2_demo_1 form-control">{options}</select>;
+      }else{
+		  formItem= <input
+			  {...searchField}
+			  placeholder={searchField.name}
+			  className="form-control"
+			  onChange={this.searchChange.bind(this)}
+			  value={this.state[searchField.key]}/>
+	  }
+
+	  
+	  if(type === 'labelPicker'){
+		  return (
+			  <LabelPicker onChange={::this.searchChange}
+						   value={this.state.search.ownedType ? this.state.search.ownedType._id : 'all'}
+						   option={{
+										id: 'ownedType',
+										label: '所属标签分类',
+										isAllShow: true
+									}}
+			  />
+		  )
+	  }else{
+		  return (
+			  <div className="form-group" key={searchField.key}>
+				  <label className="control-label">{searchField.label}</label>
+				  {formItem}
+			  </div>
+		  );
+	  }
+
   }
   renderSortButton (button, key) {
     let active = false;

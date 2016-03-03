@@ -23,7 +23,7 @@ import QRCode from 'qrcode.react';
 @queryProps({
 	page: 1,
 	limit: 10,
-	sort: '_id',
+	sort: 'createdAt',
 	order: 'desc'
 })
 export default class LabelsContainer extends Component {
@@ -40,6 +40,7 @@ export default class LabelsContainer extends Component {
 		count: PropTypes.number,
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
+		updateLabel: PropTypes.func.isRequired,
 		removeLabel: PropTypes.func.isRequired,
 		addLabel: PropTypes.func.isRequired,
 	}
@@ -49,10 +50,12 @@ export default class LabelsContainer extends Component {
 			lightbox: false,
 			removing: false,
 			recommending: false,
-			previewing: false
+			previewing: false,
+			edit: false,
+			editingLabel: false
 		};
 	}
-
+	// 删除
 	onRemove(id, event) {
 		event.preventDefault();
 		this.setState({
@@ -60,14 +63,12 @@ export default class LabelsContainer extends Component {
 			removeId: id
 		});
 	}
-
 	cancelRemove(event) {
 		event.preventDefault();
 		this.setState({
 			removing: false
 		});
 	}
-
 	confirmRemove(event) {
 		event.preventDefault();
 		this.props.removeLabel(labelConfig.fragments, this.state.removeId)
@@ -90,27 +91,30 @@ export default class LabelsContainer extends Component {
 		});
 
 	}
-
-	onEdit(id, event) {
+	//新建
+	onAddNew (event) {
 		event.preventDefault();
 		this.setState({
-			removing: true,
-			removeId: id
+			edit: true,
+			editingLabel: false
 		});
 	}
-
-	onRecommend(id, event) {
-		event.preventDefault();
+	//编辑
+	onEdit (label) {
 		this.setState({
-			removing: true,
-			removeId: id
+			edit: true,
+			editingLabel: label
 		});
 	}
-
+	onEditClose () {
+		this.setState({
+			edit: false,
+			editingLabel: false
+		});
+	}
 
 
 	componentWillReceiveProps(nextProps) {
-		console.log('=================================type', this.constructor.type);
 		if (nextProps.hasQueryChanged) {
 			const vars = {
 				labels: {
@@ -126,40 +130,16 @@ export default class LabelsContainer extends Component {
 				.done();
 		}
 	}
-
-	onAddNew(newLabel) {
-		this.props
-			.addLabel({label: Labels.fragments.labels}, newLabel)
-			.then(() => {
-				this.onCloseLightbox();
-			});
-	}
-
-	onAddNewClick(event) {
-		event.preventDefault();
-		this.setState({
-			lightbox: true
-		});
-	}
-
-	onCloseLightbox() {
-		this.setState({
-			lightbox: false
-		});
-	}
-
 	render() {
 		return (
 			<div>
 				<Labels
 					{...this.props}
 					{...this.state}
-					onCloseLightbox={::this.onCloseLightbox}
 					onAddNew={::this.onAddNew}
-					onAddNewClick={::this.onAddNewClick}
 					onRemove={::this.onRemove}
 					onEdit={::this.onEdit}
-					onRecommend={::this.onRecommend}
+					onEditClose={::this.onEditClose}
 				/>
 				{this.renderRemoving()}
 			</div>
