@@ -149,11 +149,11 @@ export default class StrategiesContainer extends Component {
 		});
 	}
 
-	onRecommend(id, event) {
+	onRecommend(strategy, event) {
 		event.preventDefault();
 		this.setState({
 			recommending: true,
-			recommendId: id
+			recommendStrategy: strategy
 		});
 	}
 
@@ -165,9 +165,17 @@ export default class StrategiesContainer extends Component {
 	}
 
 	confirmRecommend(event) {
-		event.preventDefault();
+		event && event.preventDefault();
 		const recommendAt = this.state.recommendAt;
-		this.props.recommendStrategy(strategyConfig.fragments, this.state.recommendId, recommendAt)
+		this.props.recommendStrategy({
+				strategy: {
+					_id: 1,
+					isRecommended: {
+						stateType: 1,
+						recommendAt: 1
+					}
+				}
+			}, this.state.recommendStrategy, recommendAt)
 			.done();
 		this.setState({
 			recommending: false
@@ -318,20 +326,25 @@ export default class StrategiesContainer extends Component {
 
 	renderRecommending() {
 		if (this.state.recommending) {
-			return (
-				<Lightbox className='calendar' header={false} headerWithoutBorder={true}
-						  onClose={this.cancelRecommend.bind(this)}>
-					<div className='centered'>
-						<Calendar
-							onInit={this.handleDateSelect.bind(this)}
-							onChange={this.handleDateSelect.bind(this)}
-						/>
-						<a className='button button-primary margined' href='#'
-						   onClick={this.confirmRecommend.bind(this)}>确定</a>
-					</div>
-				</Lightbox>
+			if(this.state.recommendStrategy.isRecommended.stateType !== '未上线'){
+				this.confirmRecommend();
+			}else{
+				return (
+					<Lightbox className='calendar' header={false} headerWithoutBorder={true}
+							  onClose={this.cancelRecommend.bind(this)}>
+						<div className='centered'>
+							<Calendar
+								onInit={this.handleDateSelect.bind(this)}
+								onChange={this.handleDateSelect.bind(this)}
+							/>
+							<a className='button button-primary margined' href='#'
+							   onClick={this.confirmRecommend.bind(this)}>确定</a>
+						</div>
+					</Lightbox>
 
-			);
+				);
+			}
+
 		}
 	}
 }

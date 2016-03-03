@@ -61,7 +61,7 @@ export default class TableItem extends Component {
 			case 'array.button':
 				inner = showField.options.map((option) => {
 					if(option.value === 'recommend'){
-						option.name = data.isRecommended.stateType === '未推荐' ? '上线' : '下线';
+						option.name = data.isRecommended.stateType === '未上线' ? '上线' : '下线';
 					}
 					return (
 						<a href='#' onClick={this.props[option.action].bind(this, data)}>

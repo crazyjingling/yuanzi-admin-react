@@ -7,7 +7,6 @@ import {TypesOptionsMap, TypesOptionsDefaultProps} from '../data-types/options-m
 export default class OptionsList extends Component {
 
   static propTypes = {
-	  handleValidation: React.PropTypes.func.isRequired,
 	  options: React.PropTypes.array.isRequired,
     values: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
@@ -101,7 +100,6 @@ export default class OptionsList extends Component {
             {this.renderLabel(option.type !== 'Optional' && option.label)}
             <Option onChange={this.onChange.bind(this, option.id)}
 					option={option}
-					handleValidation={this.props.handleValidation.bind(this)}
 			  		value={value}
 					isAllShow={option.isAllShow}
 					{...extraProps}

@@ -24,6 +24,7 @@ export default class LabelPickerContainer extends Component {
 	}
 
 	static propTypes = {
+		option: PropTypes.object.isRequired,
 		value: PropTypes.string.isRequired,
 		onChange: PropTypes.func.isRequired,
 		labelsPicker: PropTypes.array.isRequired,
