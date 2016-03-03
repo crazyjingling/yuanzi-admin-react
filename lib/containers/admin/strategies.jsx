@@ -10,6 +10,7 @@ import Strategies from '../../components/admin/panels/strategies';
 import {strategyConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
 import QRCode from 'qrcode.react';
+import { Calendar } from 'react-date-range';
 
 @connect(
 	(state) => ({
@@ -21,7 +22,7 @@ import QRCode from 'qrcode.react';
 @queryProps({
 	page: 1,
 	limit: 10,
-	sort: '_id',
+	sort: 'createdAt',
 	order: 'desc'
 })
 export default class StrategiesContainer extends Component {
@@ -39,7 +40,9 @@ export default class StrategiesContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeStrategy: PropTypes.func.isRequired,
-		addStrategy: PropTypes.func.isRequired
+		addStrategy: PropTypes.func.isRequired,
+		updateStrategy: PropTypes.func.isRequired,
+		recommendStrategy: PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -48,7 +51,9 @@ export default class StrategiesContainer extends Component {
 			lightbox: false,
 			removing: false,
 			recommending: false,
-			previewing: false
+			previewing: false,
+			photoReportViewing: false,
+			strategies: this.props.strategies
 
 		};
 	}
@@ -69,6 +74,7 @@ export default class StrategiesContainer extends Component {
 				.done();
 		}
 	}
+
 	onRemove(id, event) {
 		event.preventDefault();
 		this.setState({
@@ -87,7 +93,7 @@ export default class StrategiesContainer extends Component {
 	confirmRemove(event) {
 		event.preventDefault();
 		this.props.removeLabel(strategyConfig.fragments, this.state.removeId)
-			.done(()=>{
+			.done(()=> {
 				const vars = {
 					labels: {
 						...this.props.queryVariables
@@ -106,6 +112,21 @@ export default class StrategiesContainer extends Component {
 		});
 
 	}
+
+	onViewPhotoReport(photoReportRelated) {
+		event.preventDefault();
+		this.setState({
+			photoReportViewing: true,
+			photoReportRelated: photoReportRelated
+		});
+	}
+
+	cancelViewPhotoReport() {
+		this.setState({
+			photoReportViewing: false,
+		});
+	}
+
 	onPreview(id) {
 		event.preventDefault();
 		this.setState({
@@ -119,6 +140,7 @@ export default class StrategiesContainer extends Component {
 			previewing: false
 		});
 	}
+
 	onEdit(id, event) {
 		event.preventDefault();
 		this.setState({
@@ -126,6 +148,7 @@ export default class StrategiesContainer extends Component {
 			editId: id
 		});
 	}
+
 	onRecommend(id, event) {
 		event.preventDefault();
 		this.setState({
@@ -133,21 +156,25 @@ export default class StrategiesContainer extends Component {
 			recommendId: id
 		});
 	}
+
 	cancelRecommend() {
 		event.preventDefault();
 		this.setState({
 			recommending: false
 		});
 	}
-	confirmRemove(event) {
+
+	confirmRecommend(event) {
 		event.preventDefault();
-		this.props.removeStrategy(strategyConfig.fragments, this.state.removeId)
+		const recommendAt = this.state.recommendAt;
+		this.props.recommendStrategy(strategyConfig.fragments, this.state.recommendId, recommendAt)
 			.done();
 		this.setState({
-			removing: false
+			recommending: false
 		});
 
 	}
+
 	onAddNew(newStrategy) {
 		this.props
 			.addStrategy({strategy: Strategies.fragments.strategies}, newStrategy)
@@ -169,6 +196,12 @@ export default class StrategiesContainer extends Component {
 		});
 	}
 
+	handleDateSelect(date) {
+		this.setState({
+			recommendAt: date
+		});
+	}
+
 	render() {
 		return (
 			<div>
@@ -178,11 +211,13 @@ export default class StrategiesContainer extends Component {
 					onCloseLightbox={::this.onCloseLightbox}
 					onAddNew={::this.onAddNew}
 					onAddNewClick={::this.onAddNewClick}
+					onViewPhotoReport={::this.onViewPhotoReport}
 					onPreview={::this.onPreview}
 					onRemove={::this.onRemove}
 					onEdit={::this.onEdit}
 					onRecommend={::this.onRecommend}
 				/>
+				{this.renderViewPhotoReport()}
 				{this.renderPreviewing()}
 				{this.renderRemoving()}
 				{this.renderEditing()}
@@ -192,11 +227,48 @@ export default class StrategiesContainer extends Component {
 		);
 	}
 
+	renderViewPhotoReport() {
+		if (this.state.photoReportViewing) {
+			let count = this.state.photoReportRelated.photoReportCount;
+			let info = this.state.photoReportRelated.photoReportInfo;
+			let resons = [];
+			for (let reason in info) {
+				let showName = reason === 'reason1' ? '广告' : (
+					reason === 'reason2' ? '侵权' : (
+						reason === 'reason3' ? '欺诈' : (
+							reason === 'reason4' ? '色情' : '侮辱诋毁' )));
+				resons.push(<tr>
+					<td>{showName}</td>
+					<td>{info[reason]}</td>
+				</tr>);
+			}
+			return (
+				<Lightbox className='xs' header={false} headerWithoutBorder={true}
+						  onClose={this.cancelViewPhotoReport.bind(this)}>
+					<div className='centered space-above'>
+						<div>卡片被举报{count}次</div>
+						<table className="table table-bordered table-hover dataTables-example dataTable" role="grid">
+							<thead>
+							<tr>
+								<th>举报原因</th>
+								<th>举报次数</th>
+							</tr>
+							</thead>
+							<tbody>{resons}</tbody>
+						</table>
+					</div>
+				</Lightbox>
+
+			);
+		}
+	}
+
 	renderPreviewing() {
 		if (this.state.previewing) {
 			return (
-				<Lightbox className='xs' header={false} headerWithoutBorder={true} onClose={this.cancelPreview.bind(this)}>
-					<div className='centered space-above'>
+				<Lightbox className='xs' header={false} headerWithoutBorder={true}
+						  onClose={this.cancelPreview.bind(this)}>
+					<div className='centered'>
 						<QRCode
 							value={ 'http://share.iyuanzi.net/strategies/' + this.state.previewId +'/view?version=v2'}/>
 					</div>
@@ -205,6 +277,7 @@ export default class StrategiesContainer extends Component {
 			);
 		}
 	}
+
 	renderRemoving() {
 		if (this.state.removing) {
 			const label = `您是否确定删除当前数据?`;
@@ -223,6 +296,7 @@ export default class StrategiesContainer extends Component {
 			);
 		}
 	}
+
 	renderEditing() {
 		if (this.state.removing) {
 			const label = `您是否确定删除当前数据?`;
@@ -234,20 +308,26 @@ export default class StrategiesContainer extends Component {
 					<div className='centered space-above'>
 						<a className='button button-grey margined' href='#'
 						   onClick={this.cancelRemove.bind(this)}>取消</a>
-						<a className='button button-alert margined' href='#'
+						<a className='button button-primary margined' href='#'
 						   onClick={this.confirmRemove.bind(this)}>确定</a>
 					</div>
 				</Lightbox>
 			);
 		}
 	}
+
 	renderRecommending() {
-		if (this.state.previewing) {
+		if (this.state.recommending) {
 			return (
-				<Lightbox className='xs' header={false} headerWithoutBorder={true} onClose={this.cancelPreview.bind(this)}>
-					<div className='centered space-above'>
-						<QRCode
-							value={ 'http://share.iyuanzi.net/strategies/' + this.state.previewId +'/view?version=v2'}/>
+				<Lightbox className='calendar' header={false} headerWithoutBorder={true}
+						  onClose={this.cancelRecommend.bind(this)}>
+					<div className='centered'>
+						<Calendar
+							onInit={this.handleDateSelect.bind(this)}
+							onChange={this.handleDateSelect.bind(this)}
+						/>
+						<a className='button button-primary margined' href='#'
+						   onClick={this.confirmRecommend.bind(this)}>确定</a>
 					</div>
 				</Lightbox>
 

@@ -7,7 +7,8 @@ import {TypesOptionsMap, TypesOptionsDefaultProps} from '../data-types/options-m
 export default class OptionsList extends Component {
 
   static propTypes = {
-    options: React.PropTypes.array.isRequired,
+	  handleValidation: React.PropTypes.func.isRequired,
+	  options: React.PropTypes.array.isRequired,
     values: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
     passToOptions: React.PropTypes.object
@@ -86,7 +87,11 @@ export default class OptionsList extends Component {
       if (option.type === 'Section') {
         result = (
           <div key={option.id}>
-            <Option onChange={this.onChange.bind(this, option.id)} value={value} {...extraProps} OptionsList={OptionsList} />
+            <Option onChange={this.onChange.bind(this, option.id)}
+					value={value}
+					{...extraProps}
+					OptionsList={OptionsList}
+			/>
             {unlockedContent}
           </div>
         );
@@ -94,7 +99,15 @@ export default class OptionsList extends Component {
         result = (
           <div className='option' key={option.id}>
             {this.renderLabel(option.type !== 'Optional' && option.label)}
-            <Option onChange={this.onChange.bind(this, option.id)} value={value} {...extraProps} OptionsList={OptionsList} {...this.props.passToOptions} />
+            <Option onChange={this.onChange.bind(this, option.id)}
+					option={option}
+					handleValidation={this.props.handleValidation.bind(this)}
+			  		value={value}
+					isAllShow={option.isAllShow}
+					{...extraProps}
+					OptionsList={OptionsList}
+					{...this.props.passToOptions}
+			/>
             {unlockedContent}
           </div>
         );

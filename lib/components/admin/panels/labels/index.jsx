@@ -32,6 +32,7 @@ export default class Labels extends Component {
 		updateLabel: PropTypes.func.isRequired,
 		onAddNew: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
+		editingLabel: PropTypes.object.isRequired,
 		onEdit: PropTypes.func.isRequired,
 		onEditClose: PropTypes.func.isRequired,
 		edit: PropTypes.boolean,

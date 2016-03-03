@@ -23,7 +23,7 @@ import QRCode from 'qrcode.react';
 @queryProps({
 	page: 1,
 	limit: 10,
-	sort: '_id',
+	sort: 'createdAt',
 	order: 'desc'
 })
 export default class LabelsContainer extends Component {
@@ -115,7 +115,6 @@ export default class LabelsContainer extends Component {
 
 
 	componentWillReceiveProps(nextProps) {
-		console.log('=================================type', this.constructor.type);
 		if (nextProps.hasQueryChanged) {
 			const vars = {
 				labels: {

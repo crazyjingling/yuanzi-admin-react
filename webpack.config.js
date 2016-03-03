@@ -6,6 +6,11 @@ var NoErrorsPlugin = webpack.NoErrorsPlugin;
 var optimize = webpack.optimize;
 
 var webpackConfig = module.exports = {
+	node: {
+		net: "empty",
+		tls: "empty",
+		dns: "empty"
+	},
   entry: {
     admin: ['./lib/client/admin.js'],
     auth: ['./lib/client/auth.js'],
