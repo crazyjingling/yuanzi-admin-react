@@ -13,7 +13,9 @@ export default class ListTable extends Component {
         removeStrategy: PropTypes.func.isRequired,
         showFields: PropTypes.array.isRequired,
 		listSchema: PropTypes.string.isRequired,
+		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
+		onViewReport: PropTypes.func.isRequired,
 		onPreview: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
 		onEdit: PropTypes.func.isRequired,
@@ -48,7 +50,9 @@ export default class ListTable extends Component {
 					   key={strategy._id}
 					   itemData={strategy}
 					   showFields={this.props.showFields}
+					   onViewCommentReport={this.props.onViewCommentReport}
 					   onViewPhotoReport={this.props.onViewPhotoReport}
+					   onViewReport={this.props.onViewReport}
 					   onPreview={this.props.onPreview}
 					   onRemove={this.props.onRemove}
 					   onEdit={this.props.onEdit}

@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component, buildQueryAndVariables} from 'relax-framework';
+import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
 import Strategies from '../../components/admin/panels/strategies';
@@ -11,7 +12,7 @@ import {strategyConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
 import QRCode from 'qrcode.react';
 import { Calendar } from 'react-date-range';
-
+import countBy from 'lodash.countby';
 @connect(
 	(state) => ({
 		strategies: state.strategies.data.items,
@@ -52,7 +53,9 @@ export default class StrategiesContainer extends Component {
 			removing: false,
 			recommending: false,
 			previewing: false,
+			commentReportViewing: false,
 			photoReportViewing: false,
+			reportViewing: false,
 			strategies: this.props.strategies
 
 		};
@@ -112,6 +115,19 @@ export default class StrategiesContainer extends Component {
 		});
 
 	}
+	onViewCommentReport(commentReportRelated) {
+		event.preventDefault();
+		this.setState({
+			commentReportViewing: true,
+			commentReportRelated: commentReportRelated
+		});
+	}
+
+	cancelViewCommentReport() {
+		this.setState({
+			commentReportViewing: false
+		});
+	}
 
 	onViewPhotoReport(photoReportRelated) {
 		event.preventDefault();
@@ -123,7 +139,21 @@ export default class StrategiesContainer extends Component {
 
 	cancelViewPhotoReport() {
 		this.setState({
-			photoReportViewing: false,
+			photoReportViewing: false
+		});
+	}
+
+	onViewReport(reportRelated) {
+		event.preventDefault();
+		this.setState({
+			reportViewing: true,
+			reportRelated: reportRelated
+		});
+	}
+
+	cancelViewReport() {
+		this.setState({
+			reportViewing: false
 		});
 	}
 
@@ -219,13 +249,17 @@ export default class StrategiesContainer extends Component {
 					onCloseLightbox={::this.onCloseLightbox}
 					onAddNew={::this.onAddNew}
 					onAddNewClick={::this.onAddNewClick}
+					onViewCommentReport={::this.onViewCommentReport}
 					onViewPhotoReport={::this.onViewPhotoReport}
+					onViewReport={::this.onViewReport}
 					onPreview={::this.onPreview}
 					onRemove={::this.onRemove}
 					onEdit={::this.onEdit}
 					onRecommend={::this.onRecommend}
 				/>
+				{this.renderViewCommentReport()}
 				{this.renderViewPhotoReport()}
+				{this.renderViewReport()}
 				{this.renderPreviewing()}
 				{this.renderRemoving()}
 				{this.renderEditing()}
@@ -235,26 +269,102 @@ export default class StrategiesContainer extends Component {
 		);
 	}
 
+	renderViewCommentReport() {
+		if (this.state.commentReportViewing) {
+			let count = this.state.commentReportRelated.commentReportCount;
+			let comments = JSON.parse(this.state.commentReportRelated.commentReportInfo).comments;
+			return (
+				<Lightbox className="small" header={false} headerWithoutBorder={true}
+						  onClose={this.cancelViewCommentReport.bind(this)}>
+					<div>评论被举报 {count} 次</div>
+					<div className='centered'>
+						<table className="table table-bordered table-hover dataTables-example dataTable" role="grid">
+							<thead>
+							<tr>
+								<th>被举报评论</th>
+								<th>举报次数</th>
+								<th>操作</th>
+							</tr>
+							</thead>
+							<tbody>
+							{comments.map((comment) => <tr><td>{comment.content}</td><td>{comment.reportUsers.length}</td><td><a href='#'><span>删除(未做)</span></a></td></tr>)}
+							</tbody>
+						</table>
+					</div>
+				</Lightbox>
+
+			);
+		}
+	}
 	renderViewPhotoReport() {
 		if (this.state.photoReportViewing) {
-			let count = this.state.photoReportRelated.photoReportCount;
-			let info = this.state.photoReportRelated.photoReportInfo;
-			let resons = [];
-			for (let reason in info) {
-				let showName = reason === 'reason1' ? '广告' : (
-					reason === 'reason2' ? '侵权' : (
-						reason === 'reason3' ? '欺诈' : (
-							reason === 'reason4' ? '色情' : '侮辱诋毁' )));
-				resons.push(<tr>
-					<td>{showName}</td>
-					<td>{info[reason]}</td>
-				</tr>);
-			}
+			let photos = JSON.parse(this.state.photoReportRelated.photoReportInfo).photos;
+			return (
+				<Lightbox  header={false} headerWithoutBorder={true}
+						  onClose={this.cancelViewPhotoReport.bind(this)}>
+					<div className='centered'>
+						<table className="table table-bordered dataTables-example dataTable" role="grid">
+							<tbody>
+							{photos.map(this.renderViewPhotoReportItem, this)}
+							</tbody>
+						</table>
+					</div>
+				</Lightbox>
+
+			);
+		}
+	}
+
+	renderViewPhotoReportItem(photo) {
+
+			let reportReasonCount = Utils.resolveReportReason(photo.reportUsers);
+			return (
+				<tr>
+					<td style={{ maxHeight: '200px' }}>
+						<div className="feed-element">
+							<a href="#" className="pull-left">
+								<img alt="image" className="img-circle" src={photo.owner.avatar} />
+							</a>
+							<div className="media-body">
+								{photo.owner.nickname}
+								<br/>
+								{photo.createdAt}
+							</div>
+						</div>
+					</td>
+					<td style={{ maxHeight: '200px' }}><img src={photo.content[0].img} style={{ maxWidth: '200px' }}/></td>
+					<td style={{ maxHeight: '200px' }}>
+						<table className="table table-bordered" role="grid">
+							<thead>
+							<tr>
+								<th>举报原因</th>
+								<th>举报次数</th>
+							</tr>
+							</thead>
+							<tbody>
+							{reportReasonCount.map((item) => <tr><td>{item.label}</td><td>{item.count}</td></tr>)}
+							</tbody>
+						</table>
+					</td>
+					<td>
+						<a href='#'>
+							<span>删除(未做)</span>
+						</a>
+					</td>
+				</tr>
+
+			);
+	}
+
+	renderViewReport() {
+		if (this.state.reportViewing) {
+			let count = this.state.reportRelated.reportCount;
+			let reportReasonCount = JSON.parse(this.state.reportRelated.reportInfo).reportReasonCount;
 			return (
 				<Lightbox className='xs' header={false} headerWithoutBorder={true}
-						  onClose={this.cancelViewPhotoReport.bind(this)}>
-					<div className='centered space-above'>
-						<div>卡片被举报{count}次</div>
+						  onClose={this.cancelViewReport.bind(this)}>
+					<div className='centered'>
+						<div>妙招被举报{count}次</div>
 						<table className="table table-bordered table-hover dataTables-example dataTable" role="grid">
 							<thead>
 							<tr>
@@ -262,7 +372,9 @@ export default class StrategiesContainer extends Component {
 								<th>举报次数</th>
 							</tr>
 							</thead>
-							<tbody>{resons}</tbody>
+							<tbody>
+								{reportReasonCount.map((item) => <tr><td>{item.label}</td><td>{item.count}</td></tr>)}
+							</tbody>
 						</table>
 					</div>
 				</Lightbox>
@@ -326,9 +438,9 @@ export default class StrategiesContainer extends Component {
 
 	renderRecommending() {
 		if (this.state.recommending) {
-			if(this.state.recommendStrategy.isRecommended.stateType !== '未上线'){
+			if (this.state.recommendStrategy.isRecommended.stateType !== '未上线') {
 				this.confirmRecommend();
-			}else{
+			} else {
 				return (
 					<Lightbox className='calendar' header={false} headerWithoutBorder={true}
 							  onClose={this.cancelRecommend.bind(this)}>
