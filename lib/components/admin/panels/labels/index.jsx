@@ -5,7 +5,6 @@ import Breadcrumbs from '../../../breadcrumbs';
 import Filter from '../../../filter';
 import Search from '../../../search';
 import Lightbox from '../../../lightbox';
-import New from './new';
 import Pagination from '../../../pagination';
 import ListTable from './list-table';
 import Edit from './edit';
@@ -47,11 +46,6 @@ export default class Labels extends Component {
 				<div className='table-responsive'>
 					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
 						<Search
-							sorts={[
-                              {label: 'Date', property: '_id'},
-                              {label: 'Labelname', property: 'labelname'},
-                              {label: 'Email', property: 'email'}
-                            ]}
 							url='/admin/labels'
 							search={this.props.searchValues}
 							searchFields={this.props.searchFields}

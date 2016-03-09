@@ -8,6 +8,7 @@ import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
 import ListTable from './list-table.jsx';
+
 export default class Strategies extends Component {
     static fragments = mergeFragments({
         strategiesCount: {
@@ -28,7 +29,9 @@ export default class Strategies extends Component {
         onAddNew: PropTypes.func.isRequired,
         onAddNewClick: PropTypes.func.isRequired,
         onCloseLightbox: PropTypes.func.isRequired,
+		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
+		onViewReport: PropTypes.func.isRequired,
 		onPreview: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
 		onEdit: PropTypes.func.isRequired,
@@ -58,7 +61,9 @@ export default class Strategies extends Component {
                             strategies={this.props.strategies}
                             removeStrategy={this.props.removeStrategy}
                             showFields={this.props.showFields}
+							onViewCommentReport={this.props.onViewCommentReport}
 							onViewPhotoReport={this.props.onViewPhotoReport}
+							onViewReport={this.props.onViewReport}
 							onPreview={this.props.onPreview}
 							onRemove={this.props.onRemove}
 							onEdit={this.props.onEdit}

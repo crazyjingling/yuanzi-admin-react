@@ -10,9 +10,10 @@ export default class Admin extends Component {
   static fragments = mergeFragments({
     session: {
       _id: 1,
-      username: 1,
-      name: 1,
-      email: 1
+      account: {
+		  username: 1
+	  },
+      nickname: 1
     }
   }, TopMenu.fragments)
 
@@ -36,7 +37,6 @@ export default class Admin extends Component {
   render () {
     return (
     <div id="wrapper" className={cx('blurr', this.props.blurred && 'blurred', !this.props.editing && 'previewing', this.props.linkingData && 'pb-linking-data')}>
-
       {this.props.activePanelType !== 'pageBuild' && <MenuBar user={this.props.user} activePanelType={this.props.activePanelType} breadcrumbs={this.props.breadcrumbs} />}
 
       <div id="page-wrapper" className="gray-bg dashbard-1">

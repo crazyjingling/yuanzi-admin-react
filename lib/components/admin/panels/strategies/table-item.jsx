@@ -9,7 +9,9 @@ export default class TableItem extends Component {
 
 	static propTypes = {
 		itemData: PropTypes.object,
+		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
+		onViewReport: PropTypes.func.isRequired,
 		onPreview: PropTypes.func,
 		onRemove: PropTypes.func,
 		onEdit: PropTypes.func,
@@ -52,6 +54,10 @@ export default class TableItem extends Component {
 				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
 					<img style={{ maxWidth: '40px' }}/>;
 				break;
+			case 'image.circle':
+				inner = field !== '无' ? <img className="img-circle" src={field} style={{ maxWidth: '40px' }}/> :
+					<img className="img-circle" style={{ maxWidth: '40px' }}/>;
+				break;
 			case 'text':
 				inner = field || '无';
 				break;
@@ -77,6 +83,18 @@ export default class TableItem extends Component {
 			inner =
 				<a href='#' onClick={this.props.onViewPhotoReport.bind(this, data.photoReportRelated)}>
 					<span>{data.photoReportRelated.photoReportCount}</span>
+				</a>
+		}
+		if (showField.key.indexOf('reportCount') !== -1 && data.reportRelated.reportCount) {
+			inner =
+				<a href='#' onClick={this.props.onViewReport.bind(this, data.reportRelated)}>
+					<span>{data.reportRelated.reportCount}</span>
+				</a>
+		}
+		if (showField.key.indexOf('commentReportCount') !== -1 && data.commentReportRelated.commentReportCount) {
+			inner =
+				<a href='#' onClick={this.props.onViewCommentReport.bind(this, data.commentReportRelated)}>
+					<span>{data.commentReportRelated.commentReportCount}</span>
 				</a>
 		}
 		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;

@@ -27,7 +27,7 @@ export default class Modal extends Component {
               <span>Close</span>
             </div>
             <div className='modal-content-wrapper'>
-              {this.props.children}
+              假发就离开的房间阿里山附近啊速度快房间打扫房间爱水立方敬爱的看打扫房间啊附件撒的积分拉伸的防静电
             </div>
           </div>
         </Animate>

@@ -55,7 +55,7 @@ export default class Page extends Component {
   }
 
   render () {
-    const {isNew} = this.props;
+    const {isNew} = true || this.props;
     let result;
 
     if (!isNew && this.props.errors) {

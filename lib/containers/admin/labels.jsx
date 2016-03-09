@@ -56,11 +56,11 @@ export default class LabelsContainer extends Component {
 		};
 	}
 	// 删除
-	onRemove(id, event) {
+	onRemove(data, event) {
 		event.preventDefault();
 		this.setState({
 			removing: true,
-			removeId: id
+			removeData: data
 		});
 	}
 	cancelRemove(event) {
@@ -71,21 +71,10 @@ export default class LabelsContainer extends Component {
 	}
 	confirmRemove(event) {
 		event.preventDefault();
-		this.props.removeLabel(labelConfig.fragments, this.state.removeId)
-			.done(()=>{
-				const vars = {
-					labels: {
-						...this.props.queryVariables
-					}
-				};
-
-				this.props
-					.getAdmin(buildQueryAndVariables(
-						this.constructor.fragments,
-						vars
-					))
-					.done();
-			});
+		this.props.removeLabel({
+			label: {_id: 1}
+		}, this.state.removeData._id)
+			.done();
 		this.setState({
 			removing: false
 		});

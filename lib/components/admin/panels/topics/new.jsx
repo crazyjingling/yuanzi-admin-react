@@ -5,9 +5,9 @@ import {Types} from '../../../../data-types';
 
 const options = [
   {
-    label: 'title',
+    label: 'Topicname',
     type: Types.String,
-    id: 'title',
+    id: 'topicname',
     default: ''
   },
   {
@@ -40,7 +40,7 @@ export default class New extends Component {
 
   getInitState () {
     return {
-      strategyname: '',
+      topicname: '',
       password: '',
       name: '',
       email: ''
@@ -63,7 +63,7 @@ export default class New extends Component {
       <form onSubmit={this.onSubmit.bind(this)}>
         <OptionsList options={options} values={this.state} onChange={this.onChange.bind(this)} />
         <input type='submit' hidden />
-        <a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>Add strategy</a>
+        <a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>Add topic</a>
       </form>
     );
   }
