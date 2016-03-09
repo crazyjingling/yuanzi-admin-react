@@ -99,7 +99,7 @@ export default class LabelPickerByType extends Component {
 							<div className="col-lg-9">
 								<LabelPicker ref="labelType" onChange={::this.onChange}
 											 className="labelType"
-											 labelsType={this.props.labelsType}
+											 labelsType={[this.props.labelsType]}
 											 value={this.state.currentSelectLabelId}
 											 option={{
 												id: 'labelType'

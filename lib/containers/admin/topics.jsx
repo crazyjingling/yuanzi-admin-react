@@ -1,4 +1,4 @@
-import * as strategiesActions from '../../client/actions/strategies';
+import * as topicsActions from '../../client/actions/topics';
 
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
@@ -7,18 +7,18 @@ import {Component, buildQueryAndVariables} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
-import Strategies from '../../components/admin/panels/strategies';
-import {strategyConfig} from './containerInitConfig';
+import Topics from '../../components/admin/panels/topics';
+import {topicConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
 import QRCode from 'qrcode.react';
 import { Calendar } from 'react-date-range';
 import countBy from 'lodash.countby';
 @connect(
 	(state) => ({
-		strategies: state.strategies.data.items,
-		count: state.strategies.data.count
+		topics: state.topics.data.items,
+		count: state.topics.data.count
 	}),
-	(dispatch) => bindActionCreators(strategiesActions, dispatch)
+	(dispatch) => bindActionCreators(topicsActions, dispatch)
 )
 @queryProps({
 	page: 1,
@@ -26,29 +26,29 @@ import countBy from 'lodash.countby';
 	sort: 'createdAt',
 	order: 'desc'
 })
-export default class StrategiesContainer extends Component {
-	static fragments = Strategies.fragments;
+export default class TopicsContainer extends Component {
+	static fragments = Topics.fragments;
 
-	static panelSettings = strategyConfig;
+	static panelSettings = topicConfig;
 
 	static propTypes = {
 		breadcrumbs: PropTypes.array.isRequired,
-		strategies: PropTypes.array,
+		topics: PropTypes.array,
 		showFields: PropTypes.array,
 		searchFields: PropTypes.array,
 		query: PropTypes.object,
 		count: PropTypes.number,
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
-		removeStrategy: PropTypes.func.isRequired,
-		addStrategy: PropTypes.func.isRequired,
-		updateStrategy: PropTypes.func.isRequired,
-		recommendStrategy: PropTypes.func.isRequired
+		removeTopic: PropTypes.func.isRequired,
+		addTopic: PropTypes.func.isRequired,
+		updateTopic: PropTypes.func.isRequired,
+		recommendTopic: PropTypes.func.isRequired
 	}
 
 	getInitState() {
 		return {
-			searchValues: strategyConfig.searchValues || {},
+			searchValues: topicConfig.searchValues || {},
 			lightbox: false,
 			removing: false,
 			recommending: false,
@@ -63,7 +63,7 @@ export default class StrategiesContainer extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
-				strategies: {
+				topics: {
 					...nextProps.queryVariables
 				}
 			};
@@ -94,8 +94,8 @@ export default class StrategiesContainer extends Component {
 
 	confirmRemove(event) {
 		event.preventDefault();
-		this.props.removeStrategy({
-			strategy: {_id: 1}
+		this.props.removeTopic({
+			topic: {_id: 1}
 		}, this.state.removeData._id)
 			.done();
 		this.setState({
@@ -167,11 +167,11 @@ export default class StrategiesContainer extends Component {
 		});
 	}
 
-	onRecommend(strategy, event) {
+	onRecommend(topic, event) {
 		event.preventDefault();
 		this.setState({
 			recommending: true,
-			recommendStrategy: strategy
+			recommendTopic: topic
 		});
 	}
 
@@ -185,15 +185,15 @@ export default class StrategiesContainer extends Component {
 	confirmRecommend(event) {
 		event && event.preventDefault();
 		const recommendAt = this.state.recommendAt;
-		this.props.recommendStrategy({
-				strategy: {
+		this.props.recommendTopic({
+				topic: {
 					_id: 1,
 					isRecommended: {
 						stateType: 1,
 						recommendAt: 1
 					}
 				}
-			}, this.state.recommendStrategy, recommendAt)
+			}, this.state.recommendTopic, recommendAt)
 			.done();
 		this.setState({
 			recommending: false
@@ -201,9 +201,9 @@ export default class StrategiesContainer extends Component {
 
 	}
 
-	onAddNew(newStrategy) {
+	onAddNew(newTopic) {
 		this.props
-			.addStrategy({strategy: Strategies.fragments.strategies}, newStrategy)
+			.addTopic({topic: Topics.fragments.topics}, newTopic)
 			.then(() => {
 				this.onCloseLightbox();
 			});
@@ -231,7 +231,7 @@ export default class StrategiesContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Strategies
+				<Topics
 					{...this.props}
 					{...this.state}
 					onCloseLightbox={::this.onCloseLightbox}
@@ -378,7 +378,7 @@ export default class StrategiesContainer extends Component {
 						  onClose={this.cancelPreview.bind(this)}>
 					<div className='centered'>
 						<QRCode
-							value={ 'http://share.iyuanzi.net/strategies/' + this.state.previewData._id +'/view?version=v2'}/>
+							value={ 'http://share.iyuanzi.net/topics/' + this.state.previewData._id +'/view?version=v2'}/>
 					</div>
 				</Lightbox>
 
@@ -426,7 +426,7 @@ export default class StrategiesContainer extends Component {
 
 	renderRecommending() {
 		if (this.state.recommending) {
-			if (this.state.recommendStrategy.isRecommended.stateType !== '未上线') {
+			if (this.state.recommendTopic.isRecommended.stateType !== '未上线') {
 				this.confirmRecommend();
 			} else {
 				return (

@@ -17,9 +17,9 @@ import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
 
 
-export default class Strategy extends Component {
+export default class Topic extends Component {
 	static fragments = {
-		strategy: {
+		topic: {
 			_id: 1,
 			title: 1,
 			isRecommended: {
@@ -41,7 +41,7 @@ export default class Strategy extends Component {
 				nickname: 1
 			},
 			cover: 1,
-			strategyNo: 1
+			topicNo: 1
 		}
 	};
 	//static validatorSchema = {
@@ -60,7 +60,7 @@ export default class Strategy extends Component {
 	//	};
 	//}
 	static propTypes = {
-		strategy: React.PropTypes.object,
+		topic: React.PropTypes.object,
 		user: React.PropTypes.object,
 		breadcrumbs: React.PropTypes.array,
 		isNew: React.PropTypes.bool,
@@ -117,10 +117,10 @@ export default class Strategy extends Component {
 		if (!isNew && this.props.errors) {
 			result = <NotFound />;
 		} else {
-			const createdUser = isNew ? this.props.user : this.props.strategy.owner;
+			const createdUser = isNew ? this.props.user : this.props.topic.owner;
 			const breadcrumbs = this.props.breadcrumbs.slice();
 			breadcrumbs.push({
-				label: this.props.strategy.title
+				label: this.props.topic.title
 			});
 
 			result = (
@@ -155,8 +155,8 @@ export default class Strategy extends Component {
 									<div className="col-lg-10">
 										<OwnerPick user={this.props.user}
 												   option={{id: 'owner'}}
-												   value={this.props.strategy.owner._id}
-												   otherValues={{label: this.props.strategy.owner.nickname, value: this.props.strategy.owner._id}}
+												   value={this.props.topic.owner._id}
+												   otherValues={{label: this.props.topic.owner.nickname, value: this.props.topic.owner._id}}
 												   onChange={::this.onChange}
 										/>
 									</div>
@@ -166,7 +166,7 @@ export default class Strategy extends Component {
 									<div className="col-lg-10">
 										<input ref='title' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'title')}
-											   value={this.props.strategy.title}/>
+											   value={this.props.topic.title}/>
 									</div>
 								</div>
 								<div className="form-group">
@@ -174,7 +174,7 @@ export default class Strategy extends Component {
 									<div className="col-lg-10">
 										<input ref='subTitle' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'subTitle')}
-											   value={this.props.strategy.subTitle}/>
+											   value={this.props.topic.subTitle}/>
 									</div>
 								</div>
 								<div className="form-group">
@@ -195,7 +195,7 @@ export default class Strategy extends Component {
 									<div className="col-lg-10">
 										<div className="col-lg-11">
 											<input ref='labels' type='text' className='form-control'
-												   value={pluck(this.props.strategy.labels, 'title')}/>
+												   value={pluck(this.props.topic.labels, 'title')}/>
 										</div>
 										<div className="col-lg-1">
 
@@ -307,8 +307,7 @@ export default class Strategy extends Component {
 						  onClose={this.cancelSelectLabels.bind(this)}>
 					<div className='centered'>
 						<LabelPickerByType
-							labelsType='classify'
-							selectedLabels={this.props.strategy.labels}
+							selectedLabels={this.props.topic.labels}
 							onConfirm={::this.confirmSelectLabels}
 						/>
 

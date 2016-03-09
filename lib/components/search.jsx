@@ -87,7 +87,7 @@ export default class Search extends Component {
 			return (
 				<LabelPicker onChange={::this.searchChange}
 							 key={searchField.key}
-							 value={this.state.search.labels.value || 'all'}
+							 value={this.state.search[searchField.key].value || 'all'}
 							 labelsType={searchField.labelsType}
 							 option={{
 										id: 'labels',

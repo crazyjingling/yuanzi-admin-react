@@ -59,13 +59,13 @@ export default class MenuBar extends Component {
 				label: '攻略管理',
 				links: [
 					{
-						type: 'topiclist',
+						type: 'topics',
 						link: '/admin/topics',
 						label: '攻略列表'
 					},
 					{
-						type: 'topicedit',
-						link: '/admin/topicedit',
+						type: 'topic',
+						link: '/admin/topic/new',
 						label: '添加攻略'
 					}
 				]

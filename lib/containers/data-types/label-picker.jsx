@@ -28,20 +28,20 @@ export default class LabelPickerContainer extends Component {
 		option: PropTypes.object.isRequired,
 		value: PropTypes.string.isRequired,
 		className: PropTypes.string.isRequired,
-		labelsType: PropTypes.string.isRequired,
+		labelsType: PropTypes.array.isRequired,
 		onChange: PropTypes.func.isRequired,
 		labelsPicker: PropTypes.array.isRequired,
 		getAdmin: PropTypes.func.isRequired
 	};
 
 	componentDidMount() {
-		if(this.props.labelsType !== 'userAssortment'){
+		if(this.props.labelsType.length > 0){
 			const search = JSON.stringify({
-				title: {
+				type: {
 					value: {
-						'$in': ['全部', '故事', '英文', '游戏', '手工', '自然', '艺术', '乐途', '美食', '其它']
+						'$in': this.props.labelsType
 					},
-					type: 'select'
+					type: 'select' // 这里的type是在query-pagination.js中解析时用的,当type为text时该字段要做模糊查询
 				}
 			});
 			this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
@@ -54,6 +54,7 @@ export default class LabelPickerContainer extends Component {
 			})).done();
 
 		}
+
 	}
 
 	render() {
