@@ -85,6 +85,9 @@ export default class UsersContainer extends Component {
 		this.props.onChange('labels', selectedLabels);
 	}
 
+	onDel(){
+		
+	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
