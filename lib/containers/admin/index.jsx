@@ -105,6 +105,7 @@ export default class AdminContainer extends Component {
 			case 'pages':
 			case 'labels':
 			case 'strategies':
+			case 'users':
 				vars[activePanelType] = {
 					...props.queryVariables || getQueryVariables(panel.defaultQuery)
 				};
@@ -172,6 +173,7 @@ export default class AdminContainer extends Component {
 			case 'schema':
 			case 'page':
 			case 'menu':
+			case 'strategy':
 				if (props.params && props.params.id !== 'new') {
 					vars[activePanelType] = {
 						_id: {
@@ -261,6 +263,7 @@ export default class AdminContainer extends Component {
 						ref: 'panel'
 					})}
 				</Admin>
+				<Overlays overlays={this.props.overlays} />
 			</div>
 		);
 	}

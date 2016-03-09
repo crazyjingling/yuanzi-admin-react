@@ -20,18 +20,35 @@ export default class MenuBar extends Component {
     render() {
         const links = [
             {
+                type: 'users',
+                link: '#',
+                label: '用户管理',
+				links: [
+					{
+						type: 'users',
+						link: '/admin/users',
+						label: '用户列表'
+					},
+					{
+						type: 'user',
+						link: '/admin/users/new',
+						label: '添加用户'
+					}
+				]
+            },
+            {
                 type: 'strategies',
                 link: '#',
                 label: '妙招管理',
 				links: [
 					{
-						type: 'strategylist',
-						link: '/admin',
+						type: 'strategies',
+						link: '/admin/strategies',
 						label: '妙招列表'
 					},
 					{
-						type: 'strategyedit',
-						link: '/admin/strategyedit',
+						type: 'strategy',
+						link: '/admin/strategies/54f5568fde28abe97682b06c',
 						label: '添加妙招'
 					}
 				]
@@ -59,7 +76,7 @@ export default class MenuBar extends Component {
 				label: '活动管理',
 				links: [
 					{
-						type: 'strategylist',
+						type: 'activities',
 						link: '/admin/activities',
 						label: '活动列表'
 					},
@@ -167,7 +184,7 @@ export default class MenuBar extends Component {
 			},
 			{
 				type: 'pages',
-				link: '/admin/pages',
+				link: '/admin',
 				label: 'Pages'
 			},
             {
@@ -194,11 +211,6 @@ export default class MenuBar extends Component {
                 type: 'colors',
                 link: '/admin/colors',
                 label: 'Colors'
-            },
-            {
-                type: 'users',
-                link: '/admin/users',
-                label: 'Users'
             }
         ];
         return (

@@ -8,6 +8,7 @@ import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
 import ListTable from './list-table.jsx';
+
 export default class Strategies extends Component {
     static fragments = mergeFragments({
         strategiesCount: {

@@ -54,6 +54,10 @@ export default class TableItem extends Component {
 				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
 					<img style={{ maxWidth: '40px' }}/>;
 				break;
+			case 'image.circle':
+				inner = field !== '无' ? <img className="img-circle" src={field} style={{ maxWidth: '40px' }}/> :
+					<img className="img-circle" style={{ maxWidth: '40px' }}/>;
+				break;
 			case 'text':
 				inner = field || '无';
 				break;

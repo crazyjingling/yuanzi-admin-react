@@ -11,80 +11,86 @@ import MediaSelectorContainer from './media-selector';
 import Modal from '../../components/modal';
 
 @connect(
-  (state) => ({
-    mediaItems: state.media.singles
-  }),
-  (dispatch) => ({
-    ...bindActionCreators(mediaActions, dispatch),
-    ...bindActionCreators(overlayActions, dispatch)
-  })
+	(state) => ({
+		mediaItems: state.media.singles
+	}),
+	(dispatch) => ({
+		...bindActionCreators(mediaActions, dispatch),
+		...bindActionCreators(overlayActions, dispatch)
+	})
 )
 export default class ImagePickerContainer extends Component {
-  static fragments = ImagePicker.fragments
+	static fragments = ImagePicker.fragments
 
-  static propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    mediaItems: PropTypes.object.isRequired,
-    getMediaItem: PropTypes.func.isRequired,
-    addOverlay: PropTypes.func.isRequired,
-    closeOverlay: PropTypes.func.isRequired,
-    type: React.PropTypes.string
-  }
+	static propTypes = {
+		value: PropTypes.string.isRequired,
+		id: PropTypes.string,
+		widthAndHeightStyle: PropTypes.object,
+		borderRadiusStyle: PropTypes.object,
+		onChange: PropTypes.func.isRequired,
+		mediaItems: PropTypes.object.isRequired,
+		getMediaItem: PropTypes.func.isRequired,
+		addOverlay: PropTypes.func.isRequired,
+		closeOverlay: PropTypes.func.isRequired,
+		type: React.PropTypes.string
+	}
 
-  getInitState () {
-    return {
-      mounted: false,
-      calcWidth: 200
-    };
-  }
+	getInitState() {
+		return {
+			mounted: false,
+			calcWidth: 200
+		};
+	}
 
-  componentDidMount () {
-    this.updateMediaItem(this.props.value);
-  }
+	componentDidMount() {
+		this.updateMediaItem(this.props.value);
+	}
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.updateMediaItem(nextProps.value);
-    }
-  }
+	componentWillReceiveProps(nextProps) {
+		if (this.props.value !== nextProps.value) {
+			this.updateMediaItem(nextProps.value);
+		}
+	}
 
-  updateMediaItem (value) {
-    if (value && value !== '') {
-      this.props.getMediaItem(this.constructor.fragments, value);
-    }
-  }
+	updateMediaItem(value) {
+		if (value && value !== '') {
+			this.props.getMediaItem(this.constructor.fragments, value);
+		}
+	}
 
-  openSelector () {
-    this.props.addOverlay('media-selector', (
-      <Modal onClose={::this.closeSelector}>
-        <MediaSelectorContainer onChange={this.props.onChange} selected={this.props.value} onClose={::this.closeSelector} type={this.props.type} />
-      </Modal>
-    ));
-  }
+	openSelector() {
+		this.props.addOverlay('media-selector', (
+			<Modal onClose={::this.closeSelector}>
+				<MediaSelectorContainer onChange={this.props.onChange} selected={this.props.value}
+										onClose={::this.closeSelector} type={this.props.type}/>
+			</Modal>
+		));
+	}
 
-  closeSelector () {
-    this.props.closeOverlay('media-selector');
-  }
+	closeSelector() {
+		this.props.closeOverlay('media-selector');
+	}
 
-  onMount (width) {
-    this.setState({
-      mounted: true,
-      calcWidth: width
-    });
-  }
+	onMount(width) {
+		this.setState({
+			mounted: true,
+			calcWidth: width
+		});
+	}
 
-  render () {
-    const mediaItem = this.props.mediaItems[this.props.value];
+	render() {
+		const mediaItem = this.props.mediaItems[this.props.value];
 
-    return (
-      <ImagePicker
-        {...this.props}
-        {...this.state}
-        openSelector={::this.openSelector}
-        onMount={::this.onMount}
-        mediaItem={mediaItem}
-      />
-    );
-  }
+		return (
+			<ImagePicker
+				{...this.props}
+				{...this.state}
+				borderRadiusStyle={this.props.borderRadiusStyle}
+				widthAndHeightStyle={this.props.widthAndHeightStyle}
+				openSelector={::this.openSelector}
+				onMount={::this.onMount}
+				mediaItem={mediaItem}
+			/>
+		);
+	}
 }

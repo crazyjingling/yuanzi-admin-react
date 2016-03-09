@@ -3,75 +3,60 @@ import {Component, mergeFragments} from 'relax-framework';
 
 import Breadcrumbs from '../../../breadcrumbs';
 import Filter from '../../../filter';
+import Search from '../../../search';
 import Lightbox from '../../../lightbox';
-import List from './list';
-import New from './new';
 import Pagination from '../../../pagination';
+import ListTable from './list-table.jsx';
 
 export default class Users extends Component {
-  static fragments = mergeFragments({
-    usersCount: {
-      count: 1
-    }
-  }, List.fragments)
+	static fragments = mergeFragments({
+		usersCount: {
+			count: 1
+		}
+	}, ListTable.fragments)
 
-  static propTypes = {
-    breadcrumbs: PropTypes.array.isRequired,
-    users: PropTypes.array,
-    query: PropTypes.object,
-    count: PropTypes.number,
-    lightbox: PropTypes.boolean,
-    removeUser: PropTypes.func.isRequired,
-    onAddNew: PropTypes.func.isRequired,
-    onAddNewClick: PropTypes.func.isRequired,
-    onCloseLightbox: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
-  }
+	static propTypes = {
+		breadcrumbs: PropTypes.array.isRequired,
+		users: PropTypes.array,
+		showFields: PropTypes.array.isRequired,
+		searchFields: PropTypes.array.isRequired,
+		searchValues: PropTypes.object.isRequired,
+		query: PropTypes.object,
+		count: PropTypes.number,
+		onCheck: PropTypes.func.isRequired,
+		onEditLabels: PropTypes.func.isRequired,
+		onDel: PropTypes.func.isRequired,
+		history: PropTypes.object.isRequired
+	}
 
-  render () {
-    return (
-      <div className='admin-users'>
-        <div className='filter-menu'>
-          <Breadcrumbs data={this.props.breadcrumbs} />
-          <a href='#' className='button-clean' onClick={this.props.onAddNewClick}>
-            <i className='material-icons'>person_add</i>
-            <span>Add new user</span>
-          </a>
-          <Filter
-            sorts={[
-              {label: 'Date', property: '_id'},
-              {label: 'Username', property: 'username'},
-              {label: 'Email', property: 'email'}
-            ]}
-            url='/admin/users'
-            search='username'
-            query={this.props.query}
-            history={this.props.history}
-          />
-        </div>
-        <div className='admin-scrollable'>
-          <List
-            users={this.props.users}
-            removeUser={this.props.removeUser}
-          />
-          <Pagination
-            url='/admin/users'
-            query={this.props.query}
-            count={this.props.count}
-          />
-        </div>
-        {this.renderLightbox()}
-      </div>
-    );
-  }
-
-  renderLightbox () {
-    if (this.props.lightbox) {
-      return (
-        <Lightbox className='small' title='Add user' onClose={this.props.onCloseLightbox}>
-          <New onSubmit={this.props.onAddNew} />
-        </Lightbox>
-      );
-    }
-  }
+	render() {
+		return (
+			<div className="ibox-content">
+				<div className='table-responsive'>
+					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
+						<Search
+							url='/admin/users'
+							search={this.props.searchValues}
+							searchFields={this.props.searchFields}
+							query={this.props.query}
+							history={this.props.history}
+						/>
+						<ListTable
+							listSchema='user'
+							users={this.props.users}
+							showFields={this.props.showFields}
+							onCheck={this.props.onCheck}
+							onEditLabels={this.props.onEditLabels}
+							onDel={this.props.onDel}
+						/>
+						<Pagination
+							url='/admin/users'
+							query={this.props.query}
+							count={this.props.count}
+						/>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }

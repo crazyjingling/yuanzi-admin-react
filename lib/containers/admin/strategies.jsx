@@ -55,8 +55,7 @@ export default class StrategiesContainer extends Component {
 			previewing: false,
 			commentReportViewing: false,
 			photoReportViewing: false,
-			reportViewing: false,
-			strategies: this.props.strategies
+			reportViewing: false
 
 		};
 	}
