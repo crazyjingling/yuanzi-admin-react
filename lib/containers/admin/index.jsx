@@ -106,6 +106,7 @@ export default class AdminContainer extends Component {
 			case 'labels':
 			case 'topics':
 			case 'activities':
+			case 'materials':
 			case 'strategies':
 			case 'users':
 				vars[activePanelType] = {
@@ -177,6 +178,7 @@ export default class AdminContainer extends Component {
 			case 'menu':
 			case 'topic':
 			case 'activity':
+			case 'material':
 			case 'strategy':
 				if (props.params && props.params.id !== 'new') {
 					vars[activePanelType] = {

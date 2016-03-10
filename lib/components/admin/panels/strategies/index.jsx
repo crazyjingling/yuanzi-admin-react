@@ -44,18 +44,7 @@ export default class Strategies extends Component {
             <div className="ibox-content">
                 <div className='table-responsive'>
                     <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-                        <Search
-                            sorts={[
-                              {label: 'Date', property: '_id'},
-                              {label: 'Strategyname', property: 'strategyname'},
-                              {label: 'Email', property: 'email'}
-                            ]}
-                            url='/admin/strategies'
-                            search={this.props.searchValues}
-                            searchFields={this.props.searchFields}
-                            query={this.props.query}
-                            history={this.props.history}
-                        />
+						{this.renderSearch()}
                         <ListTable
 							listSchema='strategy'
                             strategies={this.props.strategies}
@@ -91,4 +80,17 @@ export default class Strategies extends Component {
             );
         }
     }
+	renderSearch() {
+		if (this.props.searchFields.length) {
+			return (
+				<Search
+					url='/admin/strategies'
+					search={this.props.searchValues}
+					searchFields={this.props.searchFields}
+					query={this.props.query}
+					history={this.props.history}
+				/>
+			)
+		}
+	}
 }

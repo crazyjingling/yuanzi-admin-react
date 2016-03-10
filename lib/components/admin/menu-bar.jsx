@@ -117,18 +117,18 @@ export default class MenuBar extends Component {
 				]
 			},
 			{
-				type: 'uploads',
+				type: 'materials',
 				link: '#',
 				label: '上传管理',
 				links:[
 					{
-						type: 'uploadlist',
-						link: '/admin/uploads',
+						type: 'materials',
+						link: '/admin/materials',
 						label: '上传列表'
 					},
 					{
-						type: 'uploadedit',
-						link: '/admin/uploads/upload',
+						type: 'material',
+						link: '/admin/materials/new',
 						label: '上传页面'
 					}
 				]
