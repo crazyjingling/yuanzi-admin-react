@@ -105,6 +105,7 @@ export default class AdminContainer extends Component {
 			case 'pages':
 			case 'labels':
 			case 'topics':
+			case 'activities':
 			case 'strategies':
 			case 'users':
 				vars[activePanelType] = {
@@ -175,6 +176,7 @@ export default class AdminContainer extends Component {
 			case 'page':
 			case 'menu':
 			case 'topic':
+			case 'activity':
 			case 'strategy':
 				if (props.params && props.params.id !== 'new') {
 					vars[activePanelType] = {
@@ -213,6 +215,14 @@ export default class AdminContainer extends Component {
 				vars.strategy = {
 					strategyname: {
 						value: props.params && props.params.strategyname,
+						type: 'String!'
+					}
+				};
+				break;
+			case 'activityEdit':
+				vars.activity = {
+					activityname: {
+						value: props.params && props.params.activityname,
 						type: 'String!'
 					}
 				};

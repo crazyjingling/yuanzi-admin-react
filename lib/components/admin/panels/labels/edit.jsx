@@ -130,6 +130,7 @@ export class EditLabel extends Component {
 					<div>
 						<LabelPicker onChange={::this.onChange}
 									 value={this.state.editingLabel.ownedType ? this.state.editingLabel.ownedType._id : 'all'}
+									 labelsType={['classify']}
 									 option={{
 										id: 'ownedType',
 										label: '所属标签分类',
