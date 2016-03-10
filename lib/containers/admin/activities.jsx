@@ -378,7 +378,7 @@ export default class ActivitiesContainer extends Component {
 						  onClose={this.cancelPreview.bind(this)}>
 					<div className='centered'>
 						<QRCode
-							value={ 'http://share.iyuanzi.net/activities/' + this.state.previewData._id +'/view?version=v2'}/>
+							value={ 'http://share.iyuanzi.net/events/' + this.state.previewData._id +'/view?version=v2'}/>
 					</div>
 				</Lightbox>
 
