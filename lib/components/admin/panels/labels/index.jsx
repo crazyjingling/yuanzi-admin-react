@@ -45,13 +45,7 @@ export default class Labels extends Component {
 			<div className="ibox-content">
 				<div className='table-responsive'>
 					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-						<Search
-							url='/admin/labels'
-							search={this.props.searchValues}
-							searchFields={this.props.searchFields}
-							query={this.props.query}
-							history={this.props.history}
-						/>
+						{this.renderSearch()}
 						<div>
 							<a href='#' className='button-clean' onClick={this.props.onAddNew}>
 								<i className='material-icons'>invert_colors</i>
@@ -91,5 +85,17 @@ export default class Labels extends Component {
 			);
 		}
 	}
-
+	renderSearch() {
+		if (this.props.searchFields.length) {
+			return (
+				<Search
+					url='/admin/labels'
+					search={this.props.searchValues}
+					searchFields={this.props.searchFields}
+					query={this.props.query}
+					history={this.props.history}
+				/>
+			)
+		}
+	}
 }
