@@ -1,5 +1,7 @@
 import A from '../a';
 import React from 'react';
+import {indexOf,concat} from 'lodash';
+import pluck from 'lodash.pluck';
 import {Component} from 'relax-framework';
 import cx from 'classnames';
 import Utils from '../../helpers/utils';
@@ -144,18 +146,18 @@ export default class MenuBar extends Component {
 				label: '意见反馈'
 			},
 			{
-				type: 'systems',
+				type: 'systemUsers',
 				link: '#',
 				label: '系统管理',
 				links:[
 					{
-						type: 'userlist',
-						link: '/admin/users',
+						type: 'systemUsers',
+						link: '/admin/systemusers',
 						label: '用户列表'
 					},
 					{
-						type: 'useredit',
-						link: '/admin/useredit',
+						type: 'systemUser',
+						link: '/admin/systemuser',
 						label: '添加成员'
 					}
 				]
@@ -237,7 +239,14 @@ export default class MenuBar extends Component {
     }
 
     renderLink(link) {
-        const active = this.props.activePanelType === link.type || (this.props.breadcrumbs && this.props.breadcrumbs.length > 0 && this.props.breadcrumbs[0].type === link.type);
+		// todo
+		let linkTypes = [link.type];
+		if(link.links){
+			linkTypes = concat(linkTypes,pluck(link.links, 'type'));
+		}
+
+        const active = indexOf(linkTypes,this.props.activePanelType) !==-1
+			|| (this.props.breadcrumbs && this.props.breadcrumbs.length > 0 && indexOf(linkTypes,this.props.breadcrumbs[0].type) !==-1);
         return (
             <li key={link.type} className={cx(active && 'active')}>
                 <A href={link.link}>
@@ -250,6 +259,7 @@ export default class MenuBar extends Component {
     }
 
     renderNavHeader() {
+		//todo: getGravatarImage
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 
         return (

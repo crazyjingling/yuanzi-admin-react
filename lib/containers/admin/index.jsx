@@ -105,13 +105,26 @@ export default class AdminContainer extends Component {
 			case 'pages':
 			case 'labels':
 			case 'topics':
+			case 'feedbacks':
 			case 'activities':
 			case 'materials':
 			case 'strategies':
+			case 'systemUsers':
 			case 'users':
-				vars[activePanelType] = {
+				vars[activePanelType === 'systemUsers' ? 'users' : activePanelType] = {
 					...props.queryVariables || getQueryVariables(panel.defaultQuery)
 				};
+				if(panel.defaultRequiredSearch && panel.defaultRequiredSearch != {}){
+					if(vars.users.search){
+						vars.users.search.value = JSON.stringify(Object.assign(
+							JSON.parse(vars.users.search.value),
+							panel.defaultRequiredSearch
+						));
+					}else{
+						vars.users.search = {value: JSON.stringify(panel.defaultRequiredSearch),type: 'String!'};
+					}
+
+				}
 				break;
 			case 'schemas':
 				vars[activePanelType] = {

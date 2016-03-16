@@ -22,10 +22,12 @@ import countBy from 'lodash.countby';
 	page: 1,
 	limit: 10,
 	sort: 'createdAt',
-	order: 'desc'
+	order: 'desc',
+	search: JSON.stringify(userConfig.searchValues || {})
 })
 export default class UsersContainer extends Component {
 	static fragments = Users.fragments
+	static defaultRequiredSearch = userConfig.defaultRequiredSearch;
 
 	static panelSettings = userConfig;
 
@@ -86,7 +88,7 @@ export default class UsersContainer extends Component {
 	}
 
 	onDel(){
-		
+
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {

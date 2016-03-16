@@ -29,7 +29,7 @@ export default class ImagePicker extends Component {
 		const dom = this.refs.imageHolder;
 		const rect = dom.getBoundingClientRect();
 
-		const width = Math.round(rect.right - rect.left);
+		const width = rect.width || Math.round(rect.right - rect.left);
 
 		this.props.onMount(width);
 	}
@@ -77,7 +77,7 @@ export default class ImagePicker extends Component {
 					className='button button-faded-grey full vmargined'
 					style={{width: this.props.width}}
 					onClick={this.props.onChange.bind(this, '')}>
-					Unselect Image
+					移除图片
 				</div>
 			);
 		}

@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var config = require('./config');
+var config = require('./useConfig');
 
 var NoErrorsPlugin = webpack.NoErrorsPlugin;
 var optimize = webpack.optimize;

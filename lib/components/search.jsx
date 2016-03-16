@@ -7,6 +7,7 @@ import {Component} from 'relax-framework';
 import A from './a';
 import Utils from '../helpers/utils';
 import LabelPicker from '../containers/data-types/label-picker';
+import DateRangePicker from '../components/data-types/date-range-picker';
 export default class Search extends Component {
 	static propTypes = {
 		url: React.PropTypes.string.isRequired,
@@ -30,6 +31,12 @@ export default class Search extends Component {
 		this.setState({search: search});
 	}
 
+	onDateRangeChange(id, value) {
+		const search = this.state.search;
+		search[id].value = value;
+		this.setState({search: search});
+	}
+
 	searchSubmit = (event) => {
 		event.preventDefault();
 		const query = Object.assign({}, this.props.query || {});
@@ -41,7 +48,6 @@ export default class Search extends Component {
 			delete query.s;
 		}
 		const url = Utils.parseQueryUrl(this.props.url, query);
-		//todo: pushState操作如何触发 getAdmin action ???
 		this.props.history.pushState({}, url);
 	}
 
@@ -61,7 +67,7 @@ export default class Search extends Component {
 
 	renderFormItem(searchField) {
 		const type = searchField.type;
-		let formItem;
+		var formItem;
 
 		if (type === 'select') {
 			const defaultValue = find(searchField.options, (option)=>option.selected).value;
@@ -96,6 +102,19 @@ export default class Search extends Component {
 									}}
 				/>
 			)
+		} else if (type === 'dateRangePicker') {
+			return (
+				<div className="form-group" key={searchField.key}>
+					<label className="control-label">{searchField.label}</label>
+					<DateRangePicker onChange={::this.onDateRangeChange}
+									 id={searchField.key}
+									 key={searchField.key}
+									 selected={this.state.search[searchField.key].value || {}}
+									 dateFormat={searchField.options.dateFormat}
+									 maxDate={searchField.options.maxDate}
+					/>
+				</div>
+			);
 		} else {
 			return (
 				<div className="form-group" key={searchField.key}>

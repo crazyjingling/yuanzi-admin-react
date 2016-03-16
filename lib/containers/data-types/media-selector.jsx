@@ -34,6 +34,7 @@ export default class MediaSelectorContainer extends Component {
     getAdmin: PropTypes.func.isRequired,
     addMedia: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+	  onCrop: PropTypes.func.isRequired,
     getMediaItem: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
     uploadedData: PropTypes.array.isRequired,
@@ -158,12 +159,12 @@ export default class MediaSelectorContainer extends Component {
     });
   }
 
-  onItemClick (id) {
-    this.props.onChange(id);
+  onItemClick (mediaItem) {
+    this.props.onChange(mediaItem);
     this.setState({
-      selected: id
+      selected: mediaItem._id
     });
-    this.props.getMediaItem({media: this.constructor.fragments.mediaItem}, id);
+    this.props.getMediaItem({media: this.constructor.fragments.mediaItem}, mediaItem._id);
   }
 
   async onAddMedia (file, fileInfo) {
@@ -218,13 +219,12 @@ export default class MediaSelectorContainer extends Component {
         onAddMedia={::this.onAddMedia}
         onItemClick={::this.onItemClick}
         onClose={this.props.onClose}
+		onCrop={this.props.onCrop}
         removeMediaItem={this.props.removeMediaItem}
         uploadedData={this.props.uploadedData}
         closeUploads={::this.closeUploads}
         changeView={::this.changeView}
-        changeSort={::this.changeSort}
         changeMime={::this.changeMime}
-        changeSearch={::this.changeSearch}
         mimeTypes={this.mimeTypes}
       />
     );
