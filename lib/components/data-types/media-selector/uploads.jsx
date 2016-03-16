@@ -14,9 +14,9 @@ export default class Uploads extends Component {
     selected: PropTypes.string
   }
 
-  imageClicked (id, event) {
+  imageClicked (mediaItem, event) {
     event.preventDefault();
-    this.props.onItemClick(id);
+    this.props.onItemClick(mediaItem);
   }
 
   render () {
@@ -52,7 +52,7 @@ export default class Uploads extends Component {
     } else {
       // Uploaded
       result = (
-        <div className={cx('item uploaded', item._id === this.props.selected && 'selected')} key={item.name} onClick={this.imageClicked.bind(this, item._id)}>
+        <div className={cx('item uploaded', item._id === this.props.selected && 'selected')} key={item.name} onClick={this.imageClicked.bind(this, item)}>
           {this.renderItemContent(item)}
           <span className='status'>
             <Animate key='uploaded'>

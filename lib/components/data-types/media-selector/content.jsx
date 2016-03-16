@@ -23,10 +23,10 @@ export default class Content extends Component {
     closeUploads: PropTypes.func.isRequired
   }
 
-  imageClicked (id, event) {
+  imageClicked (mediaItem, event) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.onItemClick(id);
+    this.props.onItemClick(mediaItem);
   }
 
   render () {
@@ -83,7 +83,7 @@ export default class Content extends Component {
     const width = this.props.view === 'small' ? 100 : 200;
     const height = this.props.view === 'small' ? 100 : 112;
     return (
-      <a href='#' className={cx('ms-item', item._id === this.props.selected && 'selected')} key={item._id} onClick={this.imageClicked.bind(this, item._id)}>
+      <a href='#' className={cx('ms-item', item._id === this.props.selected && 'selected')} key={item._id} onClick={this.imageClicked.bind(this, item)}>
         <MediaItem item={item} width={width} height={height} useThumbnail={this.props.view === 'small'} />
       </a>
     );

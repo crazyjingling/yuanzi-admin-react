@@ -24,7 +24,8 @@ export default class ImagePickerContainer extends Component {
 
 	static propTypes = {
 		value: PropTypes.string.isRequired,
-		id: PropTypes.string,
+		width: PropTypes.number,
+		height: PropTypes.number,
 		widthAndHeightStyle: PropTypes.object,
 		borderRadiusStyle: PropTypes.object,
 		onChange: PropTypes.func.isRequired,
@@ -38,7 +39,7 @@ export default class ImagePickerContainer extends Component {
 	getInitState() {
 		return {
 			mounted: false,
-			calcWidth: 200
+			calcWidth: this.props.width || 200
 		};
 	}
 

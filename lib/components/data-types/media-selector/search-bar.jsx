@@ -7,19 +7,15 @@ import Upload from '../../upload';
 export default class SearchBar extends Component {
   static propTypes = {
     view: PropTypes.string.isRequired,
-    search: PropTypes.string.isRequired,
+	  onClose: PropTypes.func.isRequired,
+	  onCrop: PropTypes.func.isRequired,
     changeView: PropTypes.func.isRequired,
-    changeSearch: PropTypes.func.isRequired,
     onAddMedia: PropTypes.func.isRequired,
     mimeTypes: PropTypes.array.isRequired
   }
 
   onChangeView (view) {
     this.props.changeView(view);
-  }
-
-  onSearchChange (event) {
-    this.props.changeSearch(event.target.value);
   }
 
   render () {
@@ -35,12 +31,9 @@ export default class SearchBar extends Component {
           <i className='material-icons'>file_upload</i>
           <span>UPLOAD</span>
         </Upload>
-        <div className='search-part'>
-          <div className='search-input'>
-            <i className='material-icons'>search</i>
-            <input type='text' value={this.props.search} onChange={::this.onSearchChange} />
-          </div>
-        </div>
+		  <span className='view-center pull-right'>
+			  <button className='btn btn-primary btn-xs' onClick={this.props.onClose}>确定</button>
+		  </span>
       </div>
     );
   }

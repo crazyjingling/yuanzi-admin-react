@@ -43,7 +43,7 @@ export default class Filters extends Component {
               onChange={this.sortChange.bind(this, 'property')}
             />
             <Combobox
-              labels={['Asc', 'Desc']}
+				labels={['Asc', 'Desc']}
               values={['asc', 'desc']}
               value={this.props.sort.order}
               className='small-combobox'
@@ -53,7 +53,7 @@ export default class Filters extends Component {
           <div className='option'>
             <div className='label'>Filter by type</div>
             <Combobox
-              {...mimeFilterOptions}
+				{...mimeFilterOptions}
               value={this.props.filterMime}
               onChange={this.props.changeMime}
             />

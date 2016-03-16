@@ -10,8 +10,14 @@ export default class MediaItem extends Component {
       _id: 1,
       thumbnail: 1,
       url: 1,
+      ossUrl: 1,
       name: 1,
-      type: 1
+      type: 1,
+		size: 1,
+		dimension: {
+			width: 1,
+			height: 1
+		}
     }
   }
 
@@ -34,20 +40,20 @@ export default class MediaItem extends Component {
     if (type === 'image') {
       if (item.preview) {
         result = (
-          <img src={`${item.preview}`} style={{minWidth: width, minHeight: height}} />
+          <img src={`${item.preview}`} style={{minWidth: width, minHeight: height}} title={`${item.dimension.width}*${item.dimension.height} ${item.size}`}/>
         );
       } else if (useThumbnail) {
         result = (
-          <img src={`/${item.thumbnail}`} width={width} height={height} />
+          <img src={`${item.ossUrl}`} width={width} height={height} title={`${item.dimension.width}*${item.dimension.height} ${item.size}`}/>
         );
       } else {
         result = (
-          <Image id={item._id} width={width} height={height} />
+          <Image media={item} id={item._id} width={width} height={height} />
         );
       }
     } else if (type === 'favicon') {
       result = (
-        <img src={`/${item.url || item.preview}`} style={{top: '50%', left: '50%', position: 'absolute', transform: 'translate(-50%, -50%)'}} />
+        <img src={`${item.ossUrl || item.preview}`} style={{top: '50%', left: '50%', position: 'absolute', transform: 'translate(-50%, -50%)'}} title={`${item.dimension.width}*${item.dimension.height} ${item.size}`}/>
       );
     } else if (type === 'video') {
       result = (

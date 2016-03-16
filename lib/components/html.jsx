@@ -18,6 +18,7 @@ export default class Html extends React.Component {
 				<link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
 				<link href="/css/animate.css" rel="stylesheet"/>
 				<link href="/css/style.css" rel="stylesheet"/>
+				<link href="/css/react-datepicker.min.css" rel="stylesheet"/>
 			</head>
 			<body className="pace-done fixed-sidebar">
 			<div id='view' dangerouslySetInnerHTML={{__html: this.props.body}}/>

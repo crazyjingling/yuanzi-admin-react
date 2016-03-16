@@ -18,8 +18,11 @@ import Lightbox from '../../../lightbox';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
-import DatePicker from 'react-datepicker';
+import DatePicker from '../../../data-types/date-picker';
 import ImagePicker from '../../../../containers/data-types/image-picker'
+import Modal from '../../../../components/modal';
+import MediaSelectorContainer from '../../../../containers/data-types/media-selector';
+
 
 class User extends Component {
 	validatorTypes() {
@@ -54,25 +57,34 @@ class User extends Component {
 		session: React.PropTypes.object.isRequired,
 		breadcrumbs: React.PropTypes.array,
 		userEntry: React.PropTypes.object.isRequired,
-		errors: React.PropTypes.any,
 		changeUserEntryValue: React.PropTypes.func.isRequired,
 		saving: React.PropTypes.bool,
 		onCreate: React.PropTypes.func,
 		onRevisions: React.PropTypes.func,
-		error: React.PropTypes.bool,
 		success: React.PropTypes.bool
 	}
 
 	getInitState() {
 		return {
 			labelsSelectting: false,
-			errorShowing: false,
+			avatarEmptyErrorMessage: [],
 			newUser: this.props.userEntry
 		};
 	}
 
 	onChange(id, event) {
 		this.props.changeUserEntryValue(id, event.target.value);
+	}
+	// avatar
+	onImageChange(mediaItem) {
+		this.props.changeUserEntryValue('avatar', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
+	}
+	// baby.birth
+	onDateChange(id, value) {
+		this.props.changeUserEntryValue(id, value);
 	}
 
 	onSelectLabels() {
@@ -88,28 +100,39 @@ class User extends Component {
 
 	closeLightbox() {
 		this.setState({
-			errorShowing: false,
 			labelsSelectting: false
 		});
 	}
 
 	onSave() {
 		event.preventDefault();
+
 		const onValidate = (error) => {
 			if (!error) {
-				this.props.onCreate(this.props.userEntry);
+				var newUser = this.props.userEntry;
+				if(!newUser.avatar._id){
+					this.setState({avatarEmptyErrorMessage: ['头像不能为空']});
+				}else{
+					this.setState({avatarEmptyErrorMessage: []});
+					this.props.onCreate(newUser);
+				}
 			}
 		};
 		this.props.validate(onValidate);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.errors) {
-			this.setState({errorShowing: true});
-		}
-	}
 	componentDidMount(){
 
+	}
+	onCrop(){
+		return this.props.addOverlay('image-crop', (
+			<Modal onClose={::this.closeCrop}>
+				<MediaSelectorContainer />
+			</Modal>
+		));
+	}
+	closeCrop(){
+		this.props.closeOverlay('image-crop');
 	}
 	render() {
 
@@ -117,7 +140,6 @@ class User extends Component {
 			<div className='content'>
 				{this.renderBasic()}
 				{this.renderLabelPickerByType()}
-				{this.renderError()}
 			</div>
 		);
 	}
@@ -141,12 +163,13 @@ class User extends Component {
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='avatar'>头像</label>
 										<div className="col-lg-10">
-											<ImagePicker ref="avatar" value={this.props.userEntry.avatar}
+											<ImagePicker ref="avatar" value={this.props.userEntry.avatar._id}
+														 width={140} height={140}
 														 widthAndHeightStyle={{width: '140px', height: '140px'}}
 														 borderRadiusStyle={{borderRadius: '50%'}}
-														 id="avatar"
-														 onChange={::this.onChange}
+														 onChange={::this.onImageChange}
 											/>
+											{this.renderHelpText(this.state.avatarEmptyErrorMessage)}
 										</div>
 									</div>
 									<div className="form-group">
@@ -194,11 +217,11 @@ class User extends Component {
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='baby.birth'>宝宝生日</label>
 										<div className="col-lg-10">
-											<DatePicker ref='baby.birth'
+											<DatePicker id='baby.birth'
 														dateFormat="YYYY-MM-DD"
 														selected={this.props.userEntry.baby.birth}
 														maxDate={moment()}
-														onChange={this.onChange.bind(this, 'baby.birth')}
+														onChange={::this.onDateChange}
 											/>
 										</div>
 									</div>
@@ -225,6 +248,14 @@ class User extends Component {
 												   value={this.props.userEntry.description}
 												   onChange={this.onChange.bind(this,'description')}
 											/>
+										</div>
+									</div>
+									<div className="form-group">
+										<label className="col-lg-2 control-label" htmlFor='account.password'>设置密码</label>
+										<div className="col-lg-10">
+											<input ref='account.password' type='text' className='form-control'
+												   onChange={this.onChange.bind(this,'account.password')}
+												   value={this.props.userEntry.account.password}/>
 										</div>
 									</div>
 									<div>
@@ -276,17 +307,5 @@ class User extends Component {
 
 	}
 
-	renderError() {
-		if (this.state.errorShowing) {
-			return (
-				<Lightbox className='xs' header={false} headerWithoutBorder={true}
-						  onClose={this.closeLightbox.bind(this)}>
-					<div className='centered'>
-						{this.props.errors[0].message}
-					</div>
-				</Lightbox>
-			);
-		}
-	}
 }
 export default validation(strategy)(User);

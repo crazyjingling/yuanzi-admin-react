@@ -52,7 +52,6 @@ export default class PageContainer extends Component {
   }
 
   getInitState () {
-	  console.log('=================================this.props.id ', this.props.id );
     if (this.props.id === 'new') {
       this.props.changePageToDefault();
     }
