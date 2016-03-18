@@ -10,6 +10,8 @@ import queryProps from '../../decorators/query-props';
 import Users from '../../components/admin/panels/users';
 import {userConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
+import LabelPickerByType from '../data-types/labelPickerByType';
+
 import countBy from 'lodash.countby';
 @connect(
 	(state) => ({
@@ -42,13 +44,13 @@ export default class UsersContainer extends Component {
 		queryVariables: PropTypes.object.isRequired,
 		removeUser: PropTypes.func.isRequired,
 		updateUser: PropTypes.func.isRequired,
-		addUser: PropTypes.func.isRequired
 	}
 
 	getInitState() {
 		return {
 			searchValues: userConfig.searchValues || {},
-			checking: false
+			checking: false,
+			labelsSelectting: false
 		};
 	}
 	onCheck(data){
@@ -74,21 +76,27 @@ export default class UsersContainer extends Component {
 
 	}
 	onEditLabels(data){
-		this.setState({labelsSelectting: true});
-	}
-	onSelectLabels(){
-		this.setState({labelsSelectting: true});
-	}
-	cancelSelectLabels(){
-		this.setState({labelsSelectting: false});
-	}
-	confirmSelectLabels(selectedLabels){
-		this.setState({labelsSelectting: false});
-		this.props.onChange('labels', selectedLabels);
+		this.setState({
+			labelsSelectting: true,
+			edittingUser: data
+		});
 	}
 
-	onDel(){
+	cancelEditLabels(){
+		this.setState({labelsSelectting: false});
+	}
+	confirmEditLabels(selectedLabels){
+		this.setState({labelsSelectting: false});
+		this.props.updateUser({user: {_id: 1,labels:{_id: 1,title: 1}}}, {_id:this.state.edittingUser._id,labels: selectedLabels})
+			.done();
+	}
 
+	onDel(data){
+		this.props.updateUser({user: {_id: 1,isDel: 1}}, {
+			_id: data._id,
+			isDel: data.isDel === '封号' ? false: true,
+			labels: data.labels //这里加labels是因为graphql的updateUser中的labels的type是GraphQLList,默认是空数组,会覆盖labels数据
+		}).done();
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
@@ -118,6 +126,7 @@ export default class UsersContainer extends Component {
 					onDel={::this.onDel}
 				/>
 				{this.renderCheck()}
+				{this.renderLabelPickerByType()}
 			</div>
 		);
 	}
@@ -138,15 +147,18 @@ export default class UsersContainer extends Component {
 			);
 		}
 	}
-	renderLabelPickerByType(){
-		if(this.state.labelsSelectting){
+
+	renderLabelPickerByType() {
+		if (this.state.labelsSelectting) {
 			return (
 				<Lightbox className='small' header={false} headerWithoutBorder={true}
-						  onClose={this.cancelSelectLabels.bind(this)}>
+						  onClose={this.cancelEditLabels.bind(this)}>
 					<div className='centered'>
 						<LabelPickerByType
-							selectedLabels={this.props.strategy.labels}
-							onConfirm={::this.confirmSelectLabels}
+							selectedLabelsMaxLength={3}
+							labelsType='userAssortment'
+							selectedLabels={this.state.edittingUser.labels}
+							onConfirm={::this.confirmEditLabels}
 						/>
 
 					</div>

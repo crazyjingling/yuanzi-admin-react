@@ -87,7 +87,10 @@ export default class SystemUsersContainer extends Component {
 			editting: false
 		});
 	}
-
+	onPasswordReset(data){
+		data.password = '123456';
+		this.props.updateUser(systemUserConfig.fragments, data);
+	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
@@ -111,6 +114,7 @@ export default class SystemUsersContainer extends Component {
 					{...this.props}
 					{...this.state}
 					onRemove={::this.onRemove}
+					onPasswordReset={::this.onPasswordReset}
 					onEdit={::this.onEdit}
 					onEditClose={::this.onEditClose}
 				/>

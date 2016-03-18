@@ -23,6 +23,7 @@ export default class Combobox extends Component {
 				<select name={this.props.option.id} ref={this.props.option.id} className={cx(this.props.className,"select2_demo_1 form-control")}
 						onChange={this.props.onChange.bind(this, this.props.option.id)} value={this.props.value}>
 					{this.props.option.isAllShow && <option value="all">全部</option>}
+					{this.props.option.isNullShow && <option value="">请选择</option>}
 					{(this.props.labels || this.props.values).map(this.renderOption, this)}
 				</select>
 			</div>

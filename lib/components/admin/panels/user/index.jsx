@@ -7,7 +7,6 @@ import pluck from 'lodash.pluck';
 
 import A from '../../../a';
 import Animate from '../../../animate';
-import Breadcrumbs from '../../../breadcrumbs';
 import NotFound from '../not-found';
 import Spinner from '../../../spinner';
 import TitleSlug from '../../../title-slug';
@@ -17,11 +16,9 @@ import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
-import strategy from 'joi-validation-strategy'; //choose a validation strategy
+import validateStrategy from 'joi-validation-strategy'; //choose a validation strategy
 import DatePicker from '../../../data-types/date-picker';
 import ImagePicker from '../../../../containers/data-types/image-picker'
-import Modal from '../../../../components/modal';
-import MediaSelectorContainer from '../../../../containers/data-types/media-selector';
 
 
 class User extends Component {
@@ -54,20 +51,15 @@ class User extends Component {
 	}
 
 	static propTypes = {
-		session: React.PropTypes.object.isRequired,
-		breadcrumbs: React.PropTypes.array,
 		userEntry: React.PropTypes.object.isRequired,
 		changeUserEntryValue: React.PropTypes.func.isRequired,
-		saving: React.PropTypes.bool,
 		onCreate: React.PropTypes.func,
-		onRevisions: React.PropTypes.func,
-		success: React.PropTypes.bool
 	}
 
 	getInitState() {
 		return {
 			labelsSelectting: false,
-			avatarEmptyErrorMessage: [],
+			imageEmptyMessage: [],
 			newUser: this.props.userEntry
 		};
 	}
@@ -93,9 +85,7 @@ class User extends Component {
 
 	confirmSelectLabels(selectedLabels) {
 		this.setState({labelsSelectting: false});
-		let newUser = this.props.userEntry;
-		newUser.labels = selectedLabels;
-		this.setState({newUser: newUser});
+		this.props.changeUserEntryValue('labels', selectedLabels);
 	}
 
 	closeLightbox() {
@@ -104,36 +94,23 @@ class User extends Component {
 		});
 	}
 
-	onSave() {
+	onSave(event) {
 		event.preventDefault();
 
 		const onValidate = (error) => {
 			if (!error) {
-				var newUser = this.props.userEntry;
-				if(!newUser.avatar._id){
-					this.setState({avatarEmptyErrorMessage: ['头像不能为空']});
+				var newData = this.props.userEntry;
+				if(!newData.avatar._id){
+					this.setState({imageEmptyMessage: ['头像不能为空']});
 				}else{
-					this.setState({avatarEmptyErrorMessage: []});
-					this.props.onCreate(newUser);
+					this.setState({imageEmptyMessage: []});
+					this.props.onCreate(newData);
 				}
 			}
 		};
 		this.props.validate(onValidate);
 	}
 
-	componentDidMount(){
-
-	}
-	onCrop(){
-		return this.props.addOverlay('image-crop', (
-			<Modal onClose={::this.closeCrop}>
-				<MediaSelectorContainer />
-			</Modal>
-		));
-	}
-	closeCrop(){
-		this.props.closeOverlay('image-crop');
-	}
 	render() {
 
 		return (
@@ -147,12 +124,6 @@ class User extends Component {
 	renderBasic() {
 		return (
 			<div>
-				<div className="row">
-					<div className="col-lg-12">
-						<h1>添加用户</h1>
-						<hr/>
-					</div>
-				</div>
 				<div className="row">
 					<div className="col-lg-3"></div>
 					<div className="col-lg-6">
@@ -169,7 +140,7 @@ class User extends Component {
 														 borderRadiusStyle={{borderRadius: '50%'}}
 														 onChange={::this.onImageChange}
 											/>
-											{this.renderHelpText(this.state.avatarEmptyErrorMessage)}
+											{this.renderHelpText(this.state.imageEmptyMessage)}
 										</div>
 									</div>
 									<div className="form-group">
@@ -308,4 +279,4 @@ class User extends Component {
 	}
 
 }
-export default validation(strategy)(User);
+export default validation(validateStrategy)(User);

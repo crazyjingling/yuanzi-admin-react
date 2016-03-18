@@ -27,7 +27,7 @@ export default class LabelPickerContainer extends Component {
 	static propTypes = {
 		option: PropTypes.object.isRequired,
 		value: PropTypes.string.isRequired,
-		className: PropTypes.string.isRequired,
+		className: PropTypes.string,
 		labelsType: PropTypes.array.isRequired,
 		onChange: PropTypes.func.isRequired,
 		labelsPicker: PropTypes.array.isRequired,
@@ -52,9 +52,7 @@ export default class LabelPickerContainer extends Component {
 					}
 				}
 			})).done();
-
 		}
-
 	}
 
 	render() {

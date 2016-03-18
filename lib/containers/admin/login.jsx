@@ -17,7 +17,7 @@ export default class LoginContainer extends Component {
   }
 
   onSubmit (event) {
-    event.preventDefault();
+	  event&&event.preventDefault();
     const {username, password} = this.state;
 
     request

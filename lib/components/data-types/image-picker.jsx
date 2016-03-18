@@ -7,6 +7,7 @@ export default class ImagePicker extends Component {
 	static fragments = MediaItem.fragments
 
 	static propTypes = {
+		neededRemove: React.PropTypes.boolean,
 		width: React.PropTypes.any,
 		height: React.PropTypes.number,
 		calcWidth: React.PropTypes.number,
@@ -71,7 +72,7 @@ export default class ImagePicker extends Component {
 	}
 
 	renderUnselect() {
-		if (this.props.value && this.props.value !== '') {
+		if (this.props.value && this.props.value !== '' && this.props.neededRemove) {
 			return (
 				<div
 					className='button button-faded-grey full vmargined'

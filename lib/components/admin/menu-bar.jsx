@@ -50,7 +50,7 @@ export default class MenuBar extends Component {
 					},
 					{
 						type: 'strategy',
-						link: '/admin/strategies/54f5568fde28abe97682b06c',
+						link: '/admin/strategies/new',
 						label: '添加妙招'
 					}
 				]
@@ -67,7 +67,7 @@ export default class MenuBar extends Component {
 					},
 					{
 						type: 'topic',
-						link: '/admin/topic/new',
+						link: '/admin/topics/new',
 						label: '添加攻略'
 					}
 				]
@@ -239,7 +239,6 @@ export default class MenuBar extends Component {
     }
 
     renderLink(link) {
-		// todo
 		let linkTypes = [link.type];
 		if(link.links){
 			linkTypes = concat(linkTypes,pluck(link.links, 'type'));

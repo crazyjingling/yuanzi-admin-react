@@ -8,5 +8,7 @@
  * 						title: { value: '宝宝', type: 'text'},
  * 					    owner: { value: '56aa49208527d1bd35a958ba', type: 'select'} //这里的 type
  *				   }
+ *
+ * npm install 时 sharp 模块报错, http://sharp.dimens.io/en/stable/install/    主要是升级gcc,升级后更新动态库 http://itbilu.com/linux/management/NymXRUieg.html
  * tnpm cnpm
  * */

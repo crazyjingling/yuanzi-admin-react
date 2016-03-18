@@ -41,7 +41,6 @@ export default class TopicsContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeTopic: PropTypes.func.isRequired,
-		addTopic: PropTypes.func.isRequired,
 		updateTopic: PropTypes.func.isRequired,
 		recommendTopic: PropTypes.func.isRequired
 	}
@@ -49,7 +48,6 @@ export default class TopicsContainer extends Component {
 	getInitState() {
 		return {
 			searchValues: topicConfig.searchValues || {},
-			lightbox: false,
 			removing: false,
 			recommending: false,
 			previewing: false,
@@ -161,10 +159,7 @@ export default class TopicsContainer extends Component {
 
 	onEdit(data, event) {
 		event.preventDefault();
-		this.setState({
-			editting: true,
-			editData: data
-		});
+		this.props.history.pushState({}, `/admin/topics/${data._id}`);
 	}
 
 	onRecommend(topic, event) {
@@ -201,21 +196,6 @@ export default class TopicsContainer extends Component {
 
 	}
 
-	onAddNew(newTopic) {
-		this.props
-			.addTopic({topic: Topics.fragments.topics}, newTopic)
-			.then(() => {
-				this.onCloseLightbox();
-			});
-	}
-
-	onAddNewClick(event) {
-		event.preventDefault();
-		this.setState({
-			lightbox: true
-		});
-	}
-
 	onCloseLightbox() {
 		this.setState({
 			lightbox: false
@@ -235,8 +215,6 @@ export default class TopicsContainer extends Component {
 					{...this.props}
 					{...this.state}
 					onCloseLightbox={::this.onCloseLightbox}
-					onAddNew={::this.onAddNew}
-					onAddNewClick={::this.onAddNewClick}
 					onViewCommentReport={::this.onViewCommentReport}
 					onViewPhotoReport={::this.onViewPhotoReport}
 					onViewReport={::this.onViewReport}
@@ -250,7 +228,6 @@ export default class TopicsContainer extends Component {
 				{this.renderViewReport()}
 				{this.renderPreviewing()}
 				{this.renderRemoving()}
-				{this.renderEditing()}
 				{this.renderRecommending()}
 
 			</div>
@@ -405,24 +382,7 @@ export default class TopicsContainer extends Component {
 		}
 	}
 
-	renderEditing() {
-		if (this.state.removing) {
-			const label = `您是否确定删除当前数据?`;
-			const label1 = '删除后将无法恢复';
-			return (
-				<Lightbox className='small' header={false}>
-					<div className='big centered'>{label}</div>
-					<div className='medium centered'>{label1}</div>
-					<div className='centered space-above'>
-						<a className='button button-grey margined' href='#'
-						   onClick={this.cancelRemove.bind(this)}>取消</a>
-						<a className='button button-primary margined' href='#'
-						   onClick={this.confirmRemove.bind(this)}>确定</a>
-					</div>
-				</Lightbox>
-			);
-		}
-	}
+
 
 	renderRecommending() {
 		if (this.state.recommending) {

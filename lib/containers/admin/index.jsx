@@ -250,14 +250,6 @@ export default class AdminContainer extends Component {
 					}
 				};
 				break;
-			case 'userEdit':
-				vars.user = {
-					username: {
-						value: props.params && props.params.username,
-						type: 'String!'
-					}
-				};
-				break;
 			default:
 		}
 		return buildQueryAndVariables(

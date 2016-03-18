@@ -2,11 +2,11 @@ import cx from 'classnames';
 import moment from 'moment';
 import React from 'react';
 import {Component} from 'relax-framework';
+import {findDOMNode} from 'react-dom';
 import pluck from 'lodash.pluck';
 
 import A from '../../../a';
 import Animate from '../../../animate';
-import Breadcrumbs from '../../../breadcrumbs';
 import NotFound from '../not-found';
 import Spinner from '../../../spinner';
 import TitleSlug from '../../../title-slug';
@@ -15,71 +15,40 @@ import OwnerPick from '../../../../containers/data-types/owner-picker';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
 import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
+import Joi from 'joi';
+import validation from 'react-validation-mixin'; //import the mixin
+import validateStrategy from 'joi-validation-strategy'; //choose a validation topic
+import ImagePicker from '../../../../containers/data-types/image-picker'
+import StrategySearch from '../../../../containers/data-types/strategy-search';
 
 
-export default class Topic extends Component {
-	static fragments = {
-		topic: {
-			_id: 1,
-			title: 1,
-			isRecommended: {
-				stateType: 1,
-				recommendAt: 1
-			},
-			steps: 1,
-			soundStoryLength: 1,
-			soundStory: 1,
-			description: 1,
-			subTitle: 1,
-			content: 1,
-			labels: {
-				_id: 1,
-				title: 1
-			},
-			owner: {
-				_id: 1,
-				nickname: 1
-			},
-			cover: 1,
-			topicNo: 1
+class Topic extends Component {
+
+	validatorTypes() {
+		return {
+			title: Joi.string().required().label('标题')
 		}
-	};
-	//static validatorSchema = {
-	//	title: Joi.string().min(3).required().label('标题')
-	//};
-	//
-	//validatorTypes() {
-	//	return {
-	//		title: Joi.string().required().label('标题')
-	//	}
-	//}
-	//
-	//getValidatorData() {
-	//	return {
-	//		title: findDOMNode(this.refs.title).value
-	//	};
-	//}
+	}
+
+	getValidatorData() {
+		return {
+			title: findDOMNode(this.refs.title).value
+		};
+	}
+
 	static propTypes = {
-		topic: React.PropTypes.object,
-		user: React.PropTypes.object,
-		breadcrumbs: React.PropTypes.array,
-		isNew: React.PropTypes.bool,
-		errors: React.PropTypes.any,
-		isSlugValid: React.PropTypes.bool,
-		validateSlug: React.PropTypes.func,
-		onChange: React.PropTypes.func,
-		saving: React.PropTypes.bool,
-		onUpdate: React.PropTypes.func,
-		onCreate: React.PropTypes.func,
-		onRevisions: React.PropTypes.func,
-		error: React.PropTypes.bool,
-		success: React.PropTypes.bool
+		topic: React.PropTypes.object.isRequired,
+		user: React.PropTypes.object.isRequired,
+		isNew: React.PropTypes.bool.isRequired,
+		onChange: React.PropTypes.func.isRequired,
+		onCreate: React.PropTypes.func.isRequired,
 	}
 
 	getInitState() {
 		return {
-			template: 0,
-			labelsSelectting: false
+			imageEmptyMessage: [],
+			ownerEmptyMessage: [],
+			labelsSelectting: false,
 		};
 	}
 
@@ -93,200 +62,162 @@ export default class Topic extends Component {
 				};
 				this.props.onChange(id, value);
 				break;
-			case 'template':
-				this.setState({template: value});
-				break;
 			default:
 				this.props.onChange(id, value);
 		}
 
 	}
-	onSelectLabels(){
+
+	// cover
+	onImageChange(mediaItem) {
+		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
+	}
+
+	onSelectLabels() {
 		this.setState({labelsSelectting: true});
 	}
-	cancelSelectLabels(){
-		this.setState({labelsSelectting: false});
-	}
-	confirmSelectLabels(selectedLabels){
+
+	confirmSelectLabels(selectedLabels) {
 		this.setState({labelsSelectting: false});
 		this.props.onChange('labels', selectedLabels);
 	}
+
+	closeLightbox() {
+		this.setState({
+			labelsSelectting: false
+		});
+	}
+
+	onSave() {
+		event.preventDefault();
+		const onValidate = (error) => {
+			if (!error) {
+				var newData = this.props.topic;
+				if (!newData.owner._id) {
+					this.setState({ownerEmptyMessage: ['作者不能为空']});
+				} else if (!newData.cover._id) {
+					this.setState({imageEmptyMessage: ['封面不能为空']});
+				} else {
+					this.props.onCreate(newData);
+				}
+
+			}
+		};
+		this.props.validate(onValidate);
+	}
+
 	render() {
-		const {isNew} = this.props;
-		let result;
-		if (!isNew && this.props.errors) {
-			result = <NotFound />;
-		} else {
-			const createdUser = isNew ? this.props.user : this.props.topic.owner;
-			const breadcrumbs = this.props.breadcrumbs.slice();
-			breadcrumbs.push({
-				label: this.props.topic.title
-			});
-
-			result = (
-				<div className='content'>
-					{this.renderBasic()}
-					{!this.props.isNew && this.renderNext()}
-					{this.renderLabelPickerByType()}
+		return (
+			<div>
+				<div>
+					<div className="row">
+						<div className="col-lg-12">
+							<h1>添加攻略</h1>
+							<hr/>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-lg-3"></div>
+						<div className="col-lg-6">
+							<div className='admin-scrollable'>
+								<div className='white-options list'>
+									<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
+										<div>
+											<input type='text' hidden/>
+										</div>
+										{this.renderBasic()}
+										<div className="text-center">
+											<a className='button button-primary' href='#'
+											   onClick={this.onSave.bind(this)}>保存</a>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="col-lg-3"></div>
 				</div>
-			);
-		}
-
-		return result;
+				{this.renderLabelPickerByType()}
+			</div>
+		);
 	}
 
 	renderBasic() {
-		return (<div>
-			<div className="row">
-				<div className="col-lg-12">
-					<h1>添加妙招</h1>
-					<hr/>
+		return (
+			<div>
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='title'>作者</label>
+					<div className="col-lg-10">
+						<OwnerPick user={this.props.user}
+								   option={{id: 'owner', isNullShow: true}}
+								   value={this.props.topic.owner._id}
+								   otherValues={{label: this.props.topic.owner.nickname, value: this.props.topic.owner._id}}
+								   onChange={::this.onChange}
+						/>
+						{this.renderHelpText(this.state.ownerEmptyMessage)}
+					</div>
 				</div>
-			</div>
-			<div className="row">
-				<div className="col-lg-3"></div>
-				<div className="col-lg-6">
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='title'>标题</label>
+					<div className="col-lg-10">
+						<input ref='title' type='text' className='form-control'
+							   onChange={this.onChange.bind(this,'title')}
+							   value={this.props.topic.title}/>
+						{this.renderHelpText(this.props.getValidationMessages('title'))}
+					</div>
+				</div>
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='subTitle'>副标题</label>
+					<div className="col-lg-10">
+						<input ref='subTitle' type='text' className='form-control'
+							   onChange={this.onChange.bind(this,'subTitle')}
+							   value={this.props.topic.subTitle}/>
+					</div>
+				</div>
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
+					<div className="col-lg-10">
+						<div className="col-lg-11">
+							<input ref='labels' type='text' className='form-control'
+								   value={pluck(this.props.topic.labels, 'title')}/>
+						</div>
+						<div className="col-lg-1">
 
-					<div className='admin-scrollable'>
-						<div className='white-options list'>
-							<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>作者</label>
-									<div className="col-lg-10">
-										<OwnerPick user={this.props.user}
-												   option={{id: 'owner'}}
-												   value={this.props.topic.owner._id}
-												   otherValues={{label: this.props.topic.owner.nickname, value: this.props.topic.owner._id}}
-												   onChange={::this.onChange}
-										/>
-									</div>
-								</div>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>标题</label>
-									<div className="col-lg-10">
-										<input ref='title' type='text' className='form-control'
-											   onChange={this.onChange.bind(this,'title')}
-											   value={this.props.topic.title}/>
-									</div>
-								</div>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='subTitle'>副标题</label>
-									<div className="col-lg-10">
-										<input ref='subTitle' type='text' className='form-control'
-											   onChange={this.onChange.bind(this,'subTitle')}
-											   value={this.props.topic.subTitle}/>
-									</div>
-								</div>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='template'>模板</label>
-									<div className="col-lg-10">
-										<Combobox onChange={::this.onChange}
-												  value={this.state.template}
-												  option={{
-														id: 'template'
-												  }}
-												  labels={['动手妙招', '经验妙招']}
-												  values={[0, 1]}
-										/>
-									</div>
-								</div>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
-									<div className="col-lg-10">
-										<div className="col-lg-11">
-											<input ref='labels' type='text' className='form-control'
-												   value={pluck(this.props.topic.labels, 'title')}/>
-										</div>
-										<div className="col-lg-1">
-
-											<button className="btn btn-primary btn-circle" type="button" onClick={::this.onSelectLabels}>
-												<i className="fa fa-plus"></i>
-											</button>
-										</div>
-									</div>
-								</div>
-								<div>
-									<input type='text' hidden/>
-								</div>
-								<div className="text-center">
-									<a className='button button-primary' href='#'
-									   onClick={this.props.onCreate.bind(this)}>保存</a>
-								</div>
-							</form>
+							<button className="btn btn-primary btn-circle" type="button"
+									onClick={::this.onSelectLabels}>
+								<i className="fa fa-plus"></i>
+							</button>
 						</div>
 					</div>
 				</div>
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
+					<div className="col-lg-10">
+						<ImagePicker ref="cover" value={this.props.topic.cover._id}
+									 width={140} height={140}
+									 widthAndHeightStyle={{width: '140px', height: '140px'}}
+									 onChange={::this.onImageChange}
+						/>
+						{this.renderHelpText(this.state.imageEmptyMessage)}
+					</div>
+				</div>
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='strategies'>添加妙招</label>
+					<div className="col-lg-10">
+						<StrategySearch selectedStrategies={this.props.topic.strategies}
+										onChange={this.props.onChange}
+						/>
+					</div>
+				</div>
 			</div>
-			<div className="col-lg-3"></div>
-		</div>)
+		)
 	}
 
-	renderNext() {
-		let result;
-		if (this.props.saving) {
-			result = (
-				<Animate transition='slideDownIn' key='saving'>
-					<div className='saving'>
-						<Spinner />
-						<span>{this.props.savingLabel}</span>
-					</div>
-				</Animate>
-			);
-		} else if (this.props.errors) {
-			result = (
-				<Animate transition='slideDownIn' key='error'>
-					<div className='error' ref='success'>
-						<i className='material-icons'>error_outline</i>
-						<span>Something went bad!</span>
-					</div>
-				</Animate>
-			);
-		} else if (this.props.success) {
-			result = (
-				<Animate transition='slideDownIn' key='success'>
-					<div className='success' ref='success'>
-						<i className='material-icons'>check</i>
-						<span>All good!</span>
-					</div>
-				</Animate>
-			);
-		}
-		return result;
-	}
 
-	renderSaving() {
-		let result;
-		if (this.props.saving) {
-			result = (
-				<Animate transition='slideDownIn' key='saving'>
-					<div className='saving'>
-						<Spinner />
-						<span>{this.props.savingLabel}</span>
-					</div>
-				</Animate>
-			);
-		} else if (this.props.errors) {
-			result = (
-				<Animate transition='slideDownIn' key='error'>
-					<div className='error' ref='success'>
-						<i className='material-icons'>error_outline</i>
-						<span>Something went bad!</span>
-					</div>
-				</Animate>
-			);
-		} else if (this.props.success) {
-			result = (
-				<Animate transition='slideDownIn' key='success'>
-					<div className='success' ref='success'>
-						<i className='material-icons'>check</i>
-						<span>All good!</span>
-					</div>
-				</Animate>
-			);
-		}
-		return result;
-	}
-
+	// 验证出错时显示错误信息
 	renderHelpText(messages) {
 		return (
 			<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
@@ -300,21 +231,24 @@ export default class Topic extends Component {
 		);
 	}
 
-	renderLabelPickerByType(){
-		if(this.state.labelsSelectting){
+	// 标签选择
+	renderLabelPickerByType() {
+		if (this.state.labelsSelectting) {
 			return (
 				<Lightbox className='small' header={false} headerWithoutBorder={true}
-						  onClose={this.cancelSelectLabels.bind(this)}>
+						  onClose={this.closeLightbox.bind(this)}>
 					<div className='centered'>
 						<LabelPickerByType
+							labelsType='classify'
 							selectedLabels={this.props.topic.labels}
 							onConfirm={::this.confirmSelectLabels}
 						/>
-
 					</div>
 				</Lightbox>
 			);
 		}
 
 	}
+
 }
+export default validation(validateStrategy)(Topic);

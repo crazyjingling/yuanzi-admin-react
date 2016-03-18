@@ -1,13 +1,14 @@
-import * as dndActions from '../../client/actions/dnd';
 import * as topicActions from '../../client/actions/topic';
 
 import cloneDeep from 'lodash.clonedeep';
+import concat from 'lodash.concat';
 import Velocity from 'velocity-animate';
 import React, {PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component} from 'relax-framework';
+import Lightbox from '../../components/lightbox';
 
 import Topic from '../../components/admin/panels/topic';
 @connect(
@@ -20,8 +21,6 @@ import Topic from '../../components/admin/panels/topic';
 	})
 )
 export default class TopicContainer extends Component {
-	static fragments = Topic.fragments;
-
 	static panelSettings = {
 		activePanelType: 'topic',
 		breadcrumbs: [
@@ -30,17 +29,45 @@ export default class TopicContainer extends Component {
 			}
 		]
 	}
+	static fragments = {
+		topic: {
+			_id: 1,
+			title: 1,
+			subTitle: 1,
+			labels: {
+				_id: 1,
+				title: 1
+			},
+			owner: {
+				_id: 1,
+				nickname: 1
+			},
+			cover: {
+				ossUrl: 1,
+				_id: 1
+			},
+			strategies: {
+				_id: 1,
+				title: 1,
+				cover: 1
+			}
+		}
+	};
+
 
 	static propTypes = {
 		topic: PropTypes.object,
 		errors: PropTypes.any,
-		breadcrumbs: PropTypes.array,
 		slug: PropTypes.string,
 		changeTopicToDefault: PropTypes.func,
 		changeTopicValue: PropTypes.func.isRequired,
-		addTopic: PropTypes.func,
-		updateTopic: PropTypes.func,
+		addTopic: PropTypes.func.isRequired,
+		updateTopic: PropTypes.func.isRequired,
 		history: PropTypes.object.isRequired
+	}
+	getInitState(){
+		//todo: 所有操作完成之后怎么清除state中的topic
+		//this.props.changeTopicToDefault();
 	}
 
 	componentWillReceiveProps (nextProps) {
@@ -60,7 +87,7 @@ export default class TopicContainer extends Component {
 			clearTimeout(this.successTimeout);
 		}
 
-		const submitTopic = cloneDeep(topicProps);
+		const submitTopic = topicProps;
 
 		let action;
 		const isNew = this.isNew();
@@ -77,7 +104,7 @@ export default class TopicContainer extends Component {
 			resultTopic = await action(this.constructor.fragments, submitTopic);
 		} catch (ex) {
 			hasErrors = true;
-			console.error(ex);
+			console.log(ex);
 		}
 
 		if (hasErrors === false) {
@@ -88,7 +115,7 @@ export default class TopicContainer extends Component {
 				new: false
 			});
 			if (isNew) {
-				this.props.history.pushState({}, `/admin/topics/${resultTopic._id}`);
+				this.props.history.pushState({}, `/admin/topics/${resultTopic.addTopic._id}`);
 			}
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
@@ -131,7 +158,7 @@ export default class TopicContainer extends Component {
 			savingLabel: 'Creating topic'
 		});
 
-		this.onSubmit(cloneDeep(this.props.topic));
+		this.onSubmit(this.props.topic);
 	}
 
 	onChange (id, value) {
