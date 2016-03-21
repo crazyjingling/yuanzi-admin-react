@@ -188,6 +188,7 @@ export default class AdminContainer extends Component {
 				break;
 			case 'schema':
 			case 'page':
+			case 'user':
 			case 'menu':
 			case 'topic':
 			case 'activity':
