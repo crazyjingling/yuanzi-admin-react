@@ -10,11 +10,9 @@ import {bindActionCreators} from 'redux';
 import {Component} from 'relax-framework';
 import Lightbox from '../../components/lightbox';
 
-
 import User from '../../components/admin/panels/user';
 @connect(
 	(state) => ({
-		session: state.session.data,
 		userEntry: state.userEntry.data,
 		errors: state.userEntry.errors
 	}),
@@ -32,17 +30,10 @@ export default class UserContainer extends Component {
 		]
 	}
 
-	static propTypes = {
-		session: PropTypes.object.isRequired,
-		breadcrumbs: PropTypes.array,
-		addUser: PropTypes.func.isRequired,
-		changeUserEntryValue: PropTypes.func.isRequired,
-		history: PropTypes.object.isRequired,
-		errors: PropTypes.any
-	}
 	// 注意redux中的默认state结构最好跟这里的fragments一致
 	static fragments = {
 		user: {
+			_id: 1,
 			avatar: {
 				_id: 1,
 				ossUrl: 1
@@ -62,10 +53,16 @@ export default class UserContainer extends Component {
 				_id: 1,
 				title: 1
 			},
-			description: 1,
-			password: 1
+			description: 1
 		}
 	};
+	static propTypes = {
+		userEntry: PropTypes.object.isRequired,
+		addUser: PropTypes.func.isRequired,
+		changeUserEntryValue: PropTypes.func.isRequired,
+		history: PropTypes.object.isRequired,
+		errors: PropTypes.any
+	}
 	getInitState(){
 		return {
 			errorShowing: false,
@@ -86,7 +83,7 @@ export default class UserContainer extends Component {
 		try {
 			await action(this.constructor.fragments, submitUser);
 		} catch (ex) {
-			this.setState({errors: this.state.errors.push(ex)});
+			this.setState({errors: [ex]});
 		}
 		if ((this.state.errors&&this.state.errors.length) || (this.props.errors&&this.props.errors.length)) {
 			this.setState({errorShowing: true});
@@ -103,6 +100,7 @@ export default class UserContainer extends Component {
                     ref='user'
                     {...this.props}
                     {...this.state}
+					userEntry={this.props.userEntry}
                     onCreate={::this.onSubmit}
                     changeUserEntryValue={::this.props.changeUserEntryValue}
                 />

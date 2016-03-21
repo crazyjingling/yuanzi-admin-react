@@ -25,6 +25,7 @@ export default class Users extends Component {
 		count: PropTypes.number,
 		onEdit: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
+		onPasswordReset: PropTypes.func.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
@@ -40,6 +41,7 @@ export default class Users extends Component {
 							showFields={this.props.showFields}
 							onEdit={this.props.onEdit}
 							onRemove={this.props.onRemove}
+							onPasswordReset={this.props.onPasswordReset}
 						/>
 						<Pagination
 							url='/admin/users'

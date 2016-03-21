@@ -188,6 +188,7 @@ export default class AdminContainer extends Component {
 				break;
 			case 'schema':
 			case 'page':
+			case 'user':
 			case 'menu':
 			case 'topic':
 			case 'activity':
@@ -246,14 +247,6 @@ export default class AdminContainer extends Component {
 				vars.label = {
 					title: {
 						value: props.params && props.params.strategyname,
-						type: 'String!'
-					}
-				};
-				break;
-			case 'userEdit':
-				vars.user = {
-					username: {
-						value: props.params && props.params.username,
 						type: 'String!'
 					}
 				};

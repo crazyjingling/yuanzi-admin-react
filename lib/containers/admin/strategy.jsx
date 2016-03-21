@@ -1,13 +1,14 @@
-import * as dndActions from '../../client/actions/dnd';
 import * as strategyActions from '../../client/actions/strategy';
 
 import cloneDeep from 'lodash.clonedeep';
+import concat from 'lodash.concat';
 import Velocity from 'velocity-animate';
 import React, {PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component} from 'relax-framework';
+import Lightbox from '../../components/lightbox';
 
 import Strategy from '../../components/admin/panels/strategy';
 @connect(
@@ -20,8 +21,6 @@ import Strategy from '../../components/admin/panels/strategy';
 	})
 )
 export default class StrategyContainer extends Component {
-	static fragments = Strategy.fragments;
-
 	static panelSettings = {
 		activePanelType: 'strategy',
 		breadcrumbs: [
@@ -30,17 +29,63 @@ export default class StrategyContainer extends Component {
 			}
 		]
 	}
+	static fragments = {
+		strategy: {
+			_id: 1,
+			title: 1,
+			subTitle: 1,
+			labels: {
+				_id: 1,
+				title: 1
+			},
+			type: 1,
+			scope: 1,
+			owner: {
+				_id: 1,
+				nickname: 1
+			},
+			cover: {
+				ossUrl: 1,
+				_id: 1
+			},
+			materials: {
+				_id: 1,
+				title: 1,
+				amount: 1
+			},
+			tools: {
+				_id: 1,
+				title: 1,
+				amount: 1
+			},
+			steps: {
+				imgUrl: {
+					_id: 1,
+					ossUrl: 1
+				},
+				description: 1
+			},
+			degree: 1,
+			consumingTime: 1,
+			soundStory: 1,
+			soundStoryLength: 1
+		}
+	};
+
 
 	static propTypes = {
 		strategy: PropTypes.object,
 		errors: PropTypes.any,
-		breadcrumbs: PropTypes.array,
 		slug: PropTypes.string,
 		changeStrategyToDefault: PropTypes.func,
 		changeStrategyValue: PropTypes.func.isRequired,
-		addStrategy: PropTypes.func,
-		updateStrategy: PropTypes.func,
+		addStrategy: PropTypes.func.isRequired,
+		updateStrategy: PropTypes.func.isRequired,
 		history: PropTypes.object.isRequired
+	}
+	getInitState(){
+		//todo: 所有操作完成之后怎么清除state中的strategy
+		//this.props.changeStrategyToDefault();
 	}
 
 	componentWillReceiveProps (nextProps) {
@@ -60,7 +105,7 @@ export default class StrategyContainer extends Component {
 			clearTimeout(this.successTimeout);
 		}
 
-		const submitStrategy = cloneDeep(strategyProps);
+		const submitStrategy = strategyProps;
 
 		let action;
 		const isNew = this.isNew();
@@ -77,7 +122,7 @@ export default class StrategyContainer extends Component {
 			resultStrategy = await action(this.constructor.fragments, submitStrategy);
 		} catch (ex) {
 			hasErrors = true;
-			console.error(ex);
+			console.log(ex);
 		}
 
 		if (hasErrors === false) {
@@ -88,7 +133,7 @@ export default class StrategyContainer extends Component {
 				new: false
 			});
 			if (isNew) {
-				this.props.history.pushState({}, `/admin/strategys/${resultStrategy._id}`);
+				this.props.history.pushState({}, `/admin/strategies/${resultStrategy.addStrategy._id}`);
 			}
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
@@ -131,7 +176,7 @@ export default class StrategyContainer extends Component {
 			savingLabel: 'Creating strategy'
 		});
 
-		this.onSubmit(cloneDeep(this.props.strategy));
+		this.onSubmit(this.props.strategy);
 	}
 
 	onChange (id, value) {

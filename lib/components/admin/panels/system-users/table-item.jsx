@@ -12,9 +12,9 @@ export default class TableItem extends Component {
 		showFields: PropTypes.array.isRequired,
 		fragment: PropTypes.object.isRequired,
 		listSchema: PropTypes.string.isRequired,
-		onCheck: PropTypes.func.isRequired,
-		onDel: PropTypes.func.isRequired,
-		onEditLabels: PropTypes.func.isRequired
+		onEdit: PropTypes.func.isRequired,
+		onRemove: PropTypes.func.isRequired,
+		onPasswordReset: PropTypes.func.isRequired
 	}
 
 	render() {

@@ -1,6 +1,7 @@
 import * as adminActions from '../../client/actions/admin';
 
-import forEach from 'lodash.foreach';
+import {forEach,indexOf,concat} from 'lodash';
+import pluck from 'lodash.pluck';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -51,18 +52,27 @@ export default class OwnerPickerContainer extends Component {
 	}
 
 	render() {
-		const owners = [];
-		const values = [];
+		let owners = [];
+		let values = [];
+		let pickerOwners = pluck(this.props.ownerPicker, 'nickname');
+		let pickerValues = pluck(this.props.ownerPicker, '_id');
+		//将当前登录用户加入
+		if(this.props.user && indexOf(pickerValues,this.props.user._id) === -1){
+			owners.push(this.props.user.nickname);
+			values.push(this.props.user._id);
+		}
 		//如果当前作者不在作者列表中,就将他加入
-		if(this.props.otherValues && this.props.otherValues.value){
+		if(this.props.otherValues &&
+			this.props.otherValues.value &&
+			indexOf(pickerValues,this.props.otherValues.value) === -1 &&
+			indexOf(values,this.props.otherValues.value) === -1
+		){
 			owners.push(this.props.otherValues.label);
 			values.push(this.props.otherValues.value);
 		}
-		forEach(this.props.ownerPicker, (owner) => {
-			owners.push(owner.nickname);
-			values.push(owner._id);
-		});
 
+		owners = concat(owners, pickerOwners);
+		values = concat(values, pickerValues);
 		return (
 			<Combobox
 				option={this.props.option}

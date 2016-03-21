@@ -26,9 +26,6 @@ export default class Strategies extends Component {
         count: PropTypes.number,
         lightbox: PropTypes.boolean,
         removeStrategy: PropTypes.func.isRequired,
-        onAddNew: PropTypes.func.isRequired,
-        onAddNewClick: PropTypes.func.isRequired,
-        onCloseLightbox: PropTypes.func.isRequired,
 		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
 		onViewReport: PropTypes.func.isRequired,
@@ -65,21 +62,10 @@ export default class Strategies extends Component {
                         />
                     </div>
                 </div>
-                {this.renderLightbox()}
-
             </div>
         );
     }
 
-    renderLightbox() {
-        if (this.props.lightbox) {
-            return (
-                <Lightbox className='small' title='Add strategy' onClose={this.props.onCloseLightbox}>
-                    <New onSubmit={this.props.onAddNew}/>
-                </Lightbox>
-            );
-        }
-    }
 	renderSearch() {
 		if (this.props.searchFields.length) {
 			return (

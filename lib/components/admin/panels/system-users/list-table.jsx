@@ -13,7 +13,8 @@ export default class ListTable extends Component {
         showFields: PropTypes.array.isRequired,
 		listSchema: PropTypes.string.isRequired,
 		onEdit: PropTypes.func.isRequired,
-		onRemove: PropTypes.func.isRequired
+		onRemove: PropTypes.func.isRequired,
+		onPasswordReset: PropTypes.func.isRequired
     }
 
     render() {
@@ -46,6 +47,7 @@ export default class ListTable extends Component {
 					   showFields={this.props.showFields}
 					   onEdit={this.props.onEdit}
 					   onRemove={this.props.onRemove}
+					   onPasswordReset={this.props.onPasswordReset}
 			/>
         );
     }

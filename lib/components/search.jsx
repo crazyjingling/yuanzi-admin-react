@@ -75,14 +75,12 @@ export default class Search extends Component {
 				return <option value={item.value}>{item.name}</option>;
 			});
 			formItem = <select {...searchField}
-				key={searchField.key}
 				defaultValue={defaultValue}
 				onChange={this.searchChange.bind(this, searchField.key)}
 				className="select2_demo_1 form-control">{options}</select>;
 		} else {
 			formItem = <input
 				{...searchField}
-				key={searchField.key}
 				className="form-control"
 				onChange={this.searchChange.bind(this, searchField.key)}
 				value={this.state.search[searchField.key].value}/>

@@ -26,9 +26,6 @@ export default class Topics extends Component {
         count: PropTypes.number,
         lightbox: PropTypes.boolean,
         removeTopic: PropTypes.func.isRequired,
-        onAddNew: PropTypes.func.isRequired,
-        onAddNewClick: PropTypes.func.isRequired,
-        onCloseLightbox: PropTypes.func.isRequired,
 		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
 		onViewReport: PropTypes.func.isRequired,
@@ -65,21 +62,11 @@ export default class Topics extends Component {
                         />
                     </div>
                 </div>
-                {this.renderLightbox()}
 
             </div>
         );
     }
 
-    renderLightbox() {
-        if (this.props.lightbox) {
-            return (
-                <Lightbox className='small' title='Add topic' onClose={this.props.onCloseLightbox}>
-                    <New onSubmit={this.props.onAddNew}/>
-                </Lightbox>
-            );
-        }
-    }
 	renderSearch() {
 		if (this.props.searchFields.length) {
 			return (

@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import pluck from 'lodash.pluck';
 import {Component} from 'relax-framework';
-import moment from 'moment';
 import A from '../../../a.jsx';
 import Lightbox from '../../../lightbox';
 import Utils from '../../../../helpers/utils';

@@ -32,6 +32,7 @@ export default class StrategiesContainer extends Component {
 	static panelSettings = strategyConfig;
 
 	static propTypes = {
+		history: PropTypes.object.isRequired,
 		breadcrumbs: PropTypes.array.isRequired,
 		strategies: PropTypes.array,
 		showFields: PropTypes.array,
@@ -41,7 +42,6 @@ export default class StrategiesContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeStrategy: PropTypes.func.isRequired,
-		addStrategy: PropTypes.func.isRequired,
 		updateStrategy: PropTypes.func.isRequired,
 		recommendStrategy: PropTypes.func.isRequired
 	}
@@ -49,7 +49,6 @@ export default class StrategiesContainer extends Component {
 	getInitState() {
 		return {
 			searchValues: strategyConfig.searchValues || {},
-			lightbox: false,
 			removing: false,
 			recommending: false,
 			previewing: false,
@@ -161,10 +160,7 @@ export default class StrategiesContainer extends Component {
 
 	onEdit(data, event) {
 		event.preventDefault();
-		this.setState({
-			editting: true,
-			editData: data
-		});
+		this.props.history.pushState({}, `/admin/strategies/${data._id}`);
 	}
 
 	onRecommend(strategy, event) {
@@ -201,20 +197,6 @@ export default class StrategiesContainer extends Component {
 
 	}
 
-	onAddNew(newStrategy) {
-		this.props
-			.addStrategy({strategy: Strategies.fragments.strategies}, newStrategy)
-			.then(() => {
-				this.onCloseLightbox();
-			});
-	}
-
-	onAddNewClick(event) {
-		event.preventDefault();
-		this.setState({
-			lightbox: true
-		});
-	}
 
 	onCloseLightbox() {
 		this.setState({
@@ -235,8 +217,6 @@ export default class StrategiesContainer extends Component {
 					{...this.props}
 					{...this.state}
 					onCloseLightbox={::this.onCloseLightbox}
-					onAddNew={::this.onAddNew}
-					onAddNewClick={::this.onAddNewClick}
 					onViewCommentReport={::this.onViewCommentReport}
 					onViewPhotoReport={::this.onViewPhotoReport}
 					onViewReport={::this.onViewReport}
@@ -250,7 +230,6 @@ export default class StrategiesContainer extends Component {
 				{this.renderViewReport()}
 				{this.renderPreviewing()}
 				{this.renderRemoving()}
-				{this.renderEditing()}
 				{this.renderRecommending()}
 
 			</div>
@@ -398,25 +377,6 @@ export default class StrategiesContainer extends Component {
 						<a className='button button-grey margined' href='#'
 						   onClick={this.cancelRemove.bind(this)}>取消</a>
 						<a className='button button-alert margined' href='#'
-						   onClick={this.confirmRemove.bind(this)}>确定</a>
-					</div>
-				</Lightbox>
-			);
-		}
-	}
-
-	renderEditing() {
-		if (this.state.removing) {
-			const label = `您是否确定删除当前数据?`;
-			const label1 = '删除后将无法恢复';
-			return (
-				<Lightbox className='small' header={false}>
-					<div className='big centered'>{label}</div>
-					<div className='medium centered'>{label1}</div>
-					<div className='centered space-above'>
-						<a className='button button-grey margined' href='#'
-						   onClick={this.cancelRemove.bind(this)}>取消</a>
-						<a className='button button-primary margined' href='#'
 						   onClick={this.confirmRemove.bind(this)}>确定</a>
 					</div>
 				</Lightbox>
