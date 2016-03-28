@@ -142,8 +142,6 @@ class User extends Component {
 											/>
 											{this.renderHelpText(this.state.imageEmptyMessage)}
 										</div>
-									</div>
-									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='account.username'>手机号</label>
 										<div className="col-lg-10">
 											<input ref='account.username' type='text' className='form-control'
