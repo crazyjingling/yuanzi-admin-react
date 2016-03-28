@@ -11,7 +11,7 @@ config = {
 	devPort: 3020,
 	monPort: 3001,
 	db: [
-		'mongodb://127.0.0.1:27017/yuanzi'
+		'mongodb://101.251.204.42:27117/yuanzi'
 	],
 	uploadDir: './upload',
 	uploadSize: '1000mb',
@@ -96,7 +96,7 @@ config = {
 	},
 	redis: {
 		port: '6379',
-		ip: '127.0.0.1'
+		ip: '101.251.204.42'
 
 	},
 	avos: {
