@@ -5,12 +5,6 @@ import {Component} from 'relax-framework';
 import {findDOMNode} from 'react-dom';
 import pluck from 'lodash.pluck';
 
-import A from '../../../a';
-import Animate from '../../../animate';
-import NotFound from '../not-found';
-import Spinner from '../../../spinner';
-import TitleSlug from '../../../title-slug';
-import Utils from '../../../../helpers/utils';
 import OwnerPick from '../../../../containers/data-types/owner-picker';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
 import Combobox from '../../../../components/data-types/combobox';
@@ -144,15 +138,8 @@ class Strategy extends Component {
 				<div>
 					<div className="row">
 						<div className="col-lg-12">
-							<h1>添加妙招</h1>
-							<hr/>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-lg-3"></div>
-						<div className="col-lg-6">
-							<div className='admin-scrollable'>
-								<div className='white-options list'>
+							<div className='admin-scrollable ibox float-e-margins'>
+								<div className='white-options list ibox-content'>
 									<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
 										<div>
 											<input type='text' hidden/>
@@ -169,7 +156,6 @@ class Strategy extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="col-lg-3"></div>
 				</div>
 				{this.renderLabelPickerByType()}
 			</div>
@@ -184,6 +170,7 @@ class Strategy extends Component {
 						<label className="col-lg-2 control-label" htmlFor='title'>作者</label>
 						<div className="col-lg-10">
 							<OwnerPick user={this.props.user}
+							           className='select2_demo_1 form-control'
 									   option={{id: 'owner', isNullShow: true}}
 									   value={this.props.strategy.owner._id}
 									   otherValues={{label: this.props.strategy.owner.nickname, value: this.props.strategy.owner._id}}
@@ -192,6 +179,7 @@ class Strategy extends Component {
 							{this.renderHelpText(this.state.ownerEmptyMessage)}
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='title'>标题</label>
 						<div className="col-lg-10">
@@ -201,6 +189,7 @@ class Strategy extends Component {
 							{this.renderHelpText(this.props.getValidationMessages('title'))}
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='subTitle'>副标题</label>
 						<div className="col-lg-10">
@@ -209,6 +198,7 @@ class Strategy extends Component {
 								   value={this.props.strategy.subTitle}/>
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='type'>模板</label>
 						<div className="col-lg-10">
@@ -222,22 +212,24 @@ class Strategy extends Component {
 							/>
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
 						<div className="col-lg-10">
-							<div className="col-lg-11">
+							<div className="input-group">
 								<input ref='labels' type='text' className='form-control'
-									   value={pluck(this.props.strategy.labels, 'title')}/>
-							</div>
-							<div className="col-lg-1">
+								       value={pluck(this.props.strategy.labels, 'title')}/>
+											<span className="input-group-btn">
 
-								<button className="btn btn-primary btn-circle" type="button"
-										onClick={::this.onSelectLabels}>
-									<i className="fa fa-plus"></i>
-								</button>
+												<button className="btn btn-primary" type="button"
+												        onClick={::this.onSelectLabels}>
+													+
+												</button>
+											</span>
 							</div>
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 						<div className="col-lg-10">
@@ -249,6 +241,7 @@ class Strategy extends Component {
 							{this.renderHelpText(this.state.imageEmptyMessage)}
 						</div>
 					</div>
+					<div className="hr-line-dashed"></div>
 				</div>
 			)
 		}
@@ -337,7 +330,7 @@ class Strategy extends Component {
 					<label className="col-lg-2 control-label" htmlFor='tools'>选择工具</label>
 					<div className="col-lg-10">
 						<Tools type="tools" onChange={this.props.onChange}
-										 existsTools={this.props.strategy.tools}/>
+										 existsTools={this.props.strategy.tools} className="row"/>
 					</div>
 				</div>
 			);
@@ -349,14 +342,13 @@ class Strategy extends Component {
 		if (this.props.strategy.type === '动手妙招') {
 
 			return (
-				<div className="form-group">
-					<label className="col-lg-2 control-label" htmlFor='info'>妙招信息</label>
-					<div className="col-lg-10">
-						<div>
-							<label className="control-label">难度系数</label>
-							<select className='select2_demo_1'
-									value={this.props.strategy.degree}
-									onChange={this.onChange.bind(this,'degree')}>
+				<div>
+					<div className="form-group">
+						<label className="col-lg-2 control-label" htmlFor='info'>难度系数</label>
+						<div className="col-lg-10">
+							<select className='select2_demo_1 form-control m-b'
+							        value={this.props.strategy.degree}
+							        onChange={this.onChange.bind(this,'degree')}>
 								<option value='1'>一级</option>
 								<option value='2'>二级</option>
 								<option value='3'>三级</option>
@@ -364,11 +356,13 @@ class Strategy extends Component {
 								<option value='5'>五级</option>
 							</select>
 						</div>
-						<div>
-							<label className="control-label">所需时间</label>
-							<select className='select2_demo_1'
-									value={this.props.strategy.consumingTime}
-									onChange={this.onChange.bind(this,'consumingTime')}>
+					</div>
+					<div className="form-group">
+						<label className="col-lg-2 control-label" htmlFor='info'>所需时间</label>
+						<div className="col-lg-10">
+							<select className='select2_demo_1 form-control m-b'
+							        value={this.props.strategy.consumingTime}
+							        onChange={this.onChange.bind(this,'consumingTime')}>
 								<option value='小于30分钟'>小于30分钟</option>
 								<option value='小于60分钟'>小于60分钟</option>
 								<option value='小于90分钟'>小于90分钟</option>

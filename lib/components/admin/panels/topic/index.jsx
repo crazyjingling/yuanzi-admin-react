@@ -1,19 +1,10 @@
-import cx from 'classnames';
-import moment from 'moment';
 import React from 'react';
 import {Component} from 'relax-framework';
 import {findDOMNode} from 'react-dom';
 import pluck from 'lodash.pluck';
 
-import A from '../../../a';
-import Animate from '../../../animate';
-import NotFound from '../not-found';
-import Spinner from '../../../spinner';
-import TitleSlug from '../../../title-slug';
-import Utils from '../../../../helpers/utils';
 import OwnerPick from '../../../../containers/data-types/owner-picker';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
-import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
@@ -115,15 +106,8 @@ class Topic extends Component {
 				<div>
 					<div className="row">
 						<div className="col-lg-12">
-							<h1>添加攻略</h1>
-							<hr/>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-lg-3"></div>
-						<div className="col-lg-6">
-							<div className='admin-scrollable'>
-								<div className='white-options list'>
+							<div className='admin-scrollable ibox float-e-margins'>
+								<div className='white-options list ibox-content'>
 									<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
 										<div>
 											<input type='text' hidden/>
@@ -138,7 +122,6 @@ class Topic extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="col-lg-3"></div>
 				</div>
 				{this.renderLabelPickerByType()}
 			</div>
@@ -160,6 +143,7 @@ class Topic extends Component {
 						{this.renderHelpText(this.state.ownerEmptyMessage)}
 					</div>
 				</div>
+				<div className="hr-line-dashed"></div>
 				<div className="form-group">
 					<label className="col-lg-2 control-label" htmlFor='title'>标题</label>
 					<div className="col-lg-10">
@@ -169,6 +153,7 @@ class Topic extends Component {
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 				</div>
+				<div className="hr-line-dashed"></div>
 				<div className="form-group">
 					<label className="col-lg-2 control-label" htmlFor='subTitle'>副标题</label>
 					<div className="col-lg-10">
@@ -177,22 +162,24 @@ class Topic extends Component {
 							   value={this.props.topic.subTitle}/>
 					</div>
 				</div>
+				<div className="hr-line-dashed"></div>
 				<div className="form-group">
 					<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
 					<div className="col-lg-10">
-						<div className="col-lg-11">
+						<div className="input-group">
 							<input ref='labels' type='text' className='form-control'
-								   value={pluck(this.props.topic.labels, 'title')}/>
-						</div>
-						<div className="col-lg-1">
+							       value={pluck(this.props.topic.labels, 'title')}/>
+											<span className="input-group-btn">
 
-							<button className="btn btn-primary btn-circle" type="button"
-									onClick={::this.onSelectLabels}>
-								<i className="fa fa-plus"></i>
-							</button>
+												<button className="btn btn-primary" type="button"
+												        onClick={::this.onSelectLabels}>
+													+
+												</button>
+											</span>
 						</div>
 					</div>
 				</div>
+				<div className="hr-line-dashed"></div>
 				<div className="form-group">
 					<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 					<div className="col-lg-10">
@@ -204,6 +191,7 @@ class Topic extends Component {
 						{this.renderHelpText(this.state.imageEmptyMessage)}
 					</div>
 				</div>
+				<div className="hr-line-dashed"></div>
 				<div className="form-group">
 					<label className="col-lg-2 control-label" htmlFor='strategies'>添加妙招</label>
 					<div className="col-lg-10">

@@ -51,8 +51,8 @@ export default class TableItem extends Component {
 				inner = <Avatar avatar={field} userId={data.owner._id}/>;
 				break;
 			case 'image':
-				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
-					<img style={{ maxWidth: '40px' }}/>;
+				inner = field !== '无' ? <img src={field} style={{ maxWidth: '50px',width: 50, height: 50, objectFit: 'cover' }}/> :
+					<img style={{ maxWidth: '50px', width: 50, height: 50, objectFit: 'cover' }}/>;
 				break;
 			case 'image.circle':
 				inner = field !== '无' ? <img className="img-circle" src={field} style={{ maxWidth: '40px' }}/> :

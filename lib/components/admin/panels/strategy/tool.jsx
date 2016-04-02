@@ -23,12 +23,18 @@ export default class Tool extends Component {
 
 	render() {
 		return (
-		<div key={this.props.index}>
-			<label className="control-label">{`工具${this.props.index+1}`}</label>
-			<input value={this.props.tool.title} onChange={this.onChange.bind(this,'title')}
-				   placeholder="名称"/>
-			<input value={this.props.tool.amount} onChange={this.onChange.bind(this,'amount')}
-				   placeholder="数量"/>
+			<div key={this.props.index} className="row">
+				<div className="col-md-5">
+					<input value={this.props.tool.title} onChange={this.onChange.bind(this,'title')}
+					       placeholder="名称"
+					       className="form-control"/>
+				</div>
+				<div className="col-md-5">
+					<input value={this.props.tool.amount} onChange={this.onChange.bind(this,'amount')}
+					       placeholder="数量"
+					       className="form-control"/>
+				</div>
+			
 		</div>
 		);
 	}

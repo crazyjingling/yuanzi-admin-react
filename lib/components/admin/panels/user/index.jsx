@@ -1,18 +1,9 @@
-import cx from 'classnames';
 import moment from 'moment';
 import React from 'react';
 import {Component} from 'relax-framework';
 import {findDOMNode} from 'react-dom';
 import pluck from 'lodash.pluck';
-
-import A from '../../../a';
-import Animate from '../../../animate';
-import NotFound from '../not-found';
-import Spinner from '../../../spinner';
-import TitleSlug from '../../../title-slug';
-import Utils from '../../../../helpers/utils';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
-import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
@@ -124,12 +115,12 @@ class User extends Component {
 	renderBasic() {
 		return (
 			<div>
-				<div className="row">
-					<div className="col-lg-3"></div>
-					<div className="col-lg-6">
 
-						<div className='admin-scrollable'>
-							<div className='white-options list'>
+				<div className="row">
+					<div className="col-lg-12">
+
+						<div className='admin-scrollable ibox float-e-margins'>
+							<div className='white-options list ibox-content'>
 								<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='avatar'>头像</label>
@@ -151,6 +142,7 @@ class User extends Component {
 
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='nickname'>昵称</label>
 										<div className="col-lg-10">
@@ -172,6 +164,7 @@ class User extends Component {
 											</select>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='baby.gender'>宝宝性别</label>
 										<div className="col-lg-10">
@@ -183,6 +176,7 @@ class User extends Component {
 											</select>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='baby.birth'>宝宝生日</label>
 										<div className="col-lg-10">
@@ -194,22 +188,24 @@ class User extends Component {
 											/>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
 										<div className="col-lg-10">
-											<div className="col-lg-11">
+											<div className="input-group">
 												<input ref='labels' type='text' className='form-control'
-													   value={pluck(this.props.userEntry.labels, 'title')}/>
-											</div>
-											<div className="col-lg-1">
+												       value={pluck(this.props.userEntry.labels, 'title')}/>
+											<span className="input-group-btn">
 
-												<button className="btn btn-primary btn-circle" type="button"
-														onClick={::this.onSelectLabels}>
-													<i className="fa fa-plus"></i>
+												<button className="btn btn-primary" type="button"
+												        onClick={::this.onSelectLabels}>
+													+
 												</button>
+											</span>
 											</div>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='description'>简介</label>
 										<div className="col-lg-10">
@@ -219,6 +215,7 @@ class User extends Component {
 											/>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div className="form-group">
 										<label className="col-lg-2 control-label" htmlFor='account.password'>设置密码</label>
 										<div className="col-lg-10">
@@ -227,6 +224,7 @@ class User extends Component {
 												   value={this.props.userEntry.account.password}/>
 										</div>
 									</div>
+									<div className="hr-line-dashed"></div>
 									<div>
 										<input type='text' hidden/>
 									</div>
@@ -239,7 +237,6 @@ class User extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="col-lg-3"></div>
 			</div>)
 	}
 

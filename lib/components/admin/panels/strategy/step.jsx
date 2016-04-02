@@ -28,17 +28,21 @@ export default class Step extends Component {
 
 	render() {
 		return (
-				<div class="col-lg-4">
+			<div className="row">
+				<div className="col-lg-2">
 					<ImagePicker neededRemove={false}
-						value={this.props.step? this.props.step.imgUrl._id : ''}
-								 width={140} height={140}
-								 widthAndHeightStyle={{width: '140px', height: '140px'}}
-								 onChange={::this.onImageChange}
+					             value={this.props.step? this.props.step.imgUrl._id : ''}
+					             width={140} height={140}
+					             widthAndHeightStyle={{width: '140px', height: '140px'}}
+					             onChange={::this.onImageChange}
 					/>
-					<input value={this.props.step? this.props.step.description : ''}
-						   onChange={this.onDescChange.bind(this)}
-						   placeholder="描述"/>
 				</div>
+				<div className="col-lg-10">
+									<textarea className="note-codable form-control" value={this.props.step? this.props.step.description : ''}
+									          onChange={this.onDescChange.bind(this)}
+									          placeholder="描述"/>
+				</div>
+			</div>
 		);
 	}
 }
