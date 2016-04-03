@@ -83,6 +83,7 @@
     "react-dropzone": "^3.2.2",
     "react-gemini-scrollbar": "^2.0.1",
     "react-google-maps": "^4.6.0",
+    "react-quill": "^0.4.1",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.2",
     "react-tether": "^0.3.3",

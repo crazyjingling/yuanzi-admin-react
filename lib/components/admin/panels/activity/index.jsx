@@ -1,49 +1,17 @@
-import cx from 'classnames';
 import moment from 'moment';
 import React from 'react';
 import {Component} from 'relax-framework';
-import pluck from 'lodash.pluck';
-
-import A from '../../../a';
 import Animate from '../../../animate';
-import Breadcrumbs from '../../../breadcrumbs';
 import NotFound from '../not-found';
 import Spinner from '../../../spinner';
-import TitleSlug from '../../../title-slug';
-import Utils from '../../../../helpers/utils';
-import OwnerPick from '../../../../containers/data-types/owner-picker';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
-import Combobox from '../../../../components/data-types/combobox';
 import Lightbox from '../../../lightbox';
+import DatePicker from '../../../data-types/date-picker';
+import OwnerPick from '../../../../containers/data-types/owner-picker';
+var ReactQuill = require('react-quill');
+import ImagePicker from '../../../../containers/data-types/image-picker'
+export default class Activity extends Component {
 
-
-export default class Strategy extends Component {
-	static fragments = {
-		strategy: {
-			_id: 1,
-			title: 1,
-			isRecommended: {
-				stateType: 1,
-				recommendAt: 1
-			},
-			steps: 1,
-			soundStoryLength: 1,
-			soundStory: 1,
-			description: 1,
-			subTitle: 1,
-			content: 1,
-			labels: {
-				_id: 1,
-				title: 1
-			},
-			owner: {
-				_id: 1,
-				nickname: 1
-			},
-			cover: 1,
-			strategyNo: 1
-		}
-	};
 	//static validatorSchema = {
 	//	title: Joi.string().min(3).required().label('标题')
 	//};
@@ -60,8 +28,8 @@ export default class Strategy extends Component {
 	//	};
 	//}
 	static propTypes = {
-		strategy: React.PropTypes.object,
-		user: React.PropTypes.object,
+		activity: React.PropTypes.object,
+		user: React.PropTypes.object.isRequired,
 		breadcrumbs: React.PropTypes.array,
 		isNew: React.PropTypes.bool,
 		errors: React.PropTypes.any,
@@ -73,7 +41,8 @@ export default class Strategy extends Component {
 		onCreate: React.PropTypes.func,
 		onRevisions: React.PropTypes.func,
 		error: React.PropTypes.bool,
-		success: React.PropTypes.bool
+		success: React.PropTypes.bool,
+
 	}
 
 	getInitState() {
@@ -111,6 +80,15 @@ export default class Strategy extends Component {
 		this.setState({labelsSelectting: false});
 		this.props.onChange('labels', selectedLabels);
 	}
+	onDateChange(id, value) {
+		this.props.onChange(id, value);
+	}
+	onImageChange(mediaItem) {
+		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
+	}
 	render() {
 		const {isNew} = this.props;
 		let result;
@@ -120,14 +98,13 @@ export default class Strategy extends Component {
 			const createdUser = isNew ? this.props.user : this.props.strategy.owner;
 			const breadcrumbs = this.props.breadcrumbs.slice();
 			breadcrumbs.push({
-				label: this.props.strategy.title
+				label: ''
 			});
 
 			result = (
 				<div className='content'>
 					{this.renderBasic()}
 					{!this.props.isNew && this.renderNext()}
-					{this.renderLabelPickerByType()}
 				</div>
 			);
 		}
@@ -136,69 +113,115 @@ export default class Strategy extends Component {
 	}
 
 	renderBasic() {
+		console.log(this.props)
 		return (<div>
 			<div className="row">
-				<div className="col-lg-3"></div>
-				<div className="col-lg-6">
+				<div className="col-lg-12">
 
-					<div className='admin-scrollable'>
-						<div className='white-options list'>
+					<div className='admin-scrollable ibox float-e-margins'>
+						<div className='white-options list ibox-content'>
 							<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
 								<div className="form-group">
 									<label className="col-lg-2 control-label" htmlFor='title'>作者</label>
 									<div className="col-lg-10">
 										<OwnerPick user={this.props.user}
-												   option={{id: 'owner'}}
-												   value={this.props.strategy.owner._id}
-												   otherValues={{label: this.props.strategy.owner.nickname, value: this.props.strategy.owner._id}}
-												   onChange={::this.onChange}
+										           className='select2_demo_1 form-control'
+										           option={{id: 'owner', isNullShow: true}}
+										           value={this.props.activity.owner._id}
+										           otherValues={{label: this.props.activity.owner.nickname, value: this.props.activity.owner._id}}
+										           onChange={::this.onChange}
 										/>
 									</div>
 								</div>
+								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>标题</label>
+
+									<label className="col-lg-2 control-label" htmlFor='title'>活动标题</label>
 									<div className="col-lg-10">
 										<input ref='title' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'title')}
-											   value={this.props.strategy.title}/>
+											   value={this.props.activity.title}/>
 									</div>
 								</div>
+								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='subTitle'>副标题</label>
+									<label className="col-lg-2 control-label" htmlFor='title'>活动费用</label>
 									<div className="col-lg-10">
-										<input ref='subTitle' type='text' className='form-control'
-											   onChange={this.onChange.bind(this,'subTitle')}
-											   value={this.props.strategy.subTitle}/>
+										<div className="input-group m-b">
+											<span className="input-group-addon">$</span>
+											<input ref='title' type='text' className='form-control'
+											       onChange={this.onChange.bind(this,'title')}
+											       value={this.props.activity.price}/>
+										</div>
 									</div>
 								</div>
+								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='template'>模板</label>
+									<label className="col-lg-2 control-label" htmlFor='title'>人数限制</label>
 									<div className="col-lg-10">
-										<Combobox onChange={::this.onChange}
-												  value={this.state.template}
-												  option={{
-														id: 'template'
-												  }}
-												  labels={['动手妙招', '经验妙招']}
-												  values={[0, 1]}
+										<input ref='title' type='text' className='form-control'
+										       onChange={this.onChange.bind(this,'title')}
+										       value={this.props.activity.number}/>
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='title'>开始时间</label>
+									<div className="col-lg-10">
+										<DatePicker id='startDate'
+										            dateFormat="YYYY-MM-DD"
+										            selected={this.props.activity.startDate}
+										            maxDate={moment()}
+										            onChange={::this.onDateChange}
 										/>
 									</div>
 								</div>
+								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
+									<label className="col-lg-2 control-label" htmlFor='title'>结束时间</label>
 									<div className="col-lg-10">
-										<div className="col-lg-11">
-											<input ref='labels' type='text' className='form-control'
-												   value={pluck(this.props.strategy.labels, 'title')}/>
-										</div>
-										<div className="col-lg-1">
-
-											<button className="btn btn-primary btn-circle" type="button" onClick={::this.onSelectLabels}>
-												<i className="fa fa-plus"></i>
-											</button>
-										</div>
+										<DatePicker id='endDate'
+										            dateFormat="YYYY-MM-DD"
+										            minDate={moment()}
+										            selected={this.props.activity.endDate}
+										            onChange={::this.onDateChange}
+										/>
 									</div>
 								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+
+									<label className="col-lg-2 control-label" htmlFor='title'>活动位置</label>
+									<div className="col-lg-10">
+										<input ref='title' type='text' className='form-control'
+										       onChange={this.onChange.bind(this,'location')}
+										       value={this.props.activity.location}/>
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
+									<div className="col-lg-10">
+										<ImagePicker ref="cover" value={this.props.activity.cover._id}
+										             width={140} height={140}
+										             widthAndHeightStyle={{width: '140px', height: '140px'}}
+										             onChange={::this.onImageChange}
+										/>
+										{this.renderHelpText(this.state.imageEmptyMessage)}
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='title'>活动详情</label>
+									<div className="col-lg-10" >
+										<ReactQuill style={{ border: '1px solid #e5e6e7'}}
+											theme="snow"
+										            value={this.props.activity.content}
+										            onChange={this.onChange.bind(this,'content')} />
+
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
 								<div>
 									<input type='text' hidden/>
 								</div>
@@ -211,7 +234,6 @@ export default class Strategy extends Component {
 					</div>
 				</div>
 			</div>
-			<div className="col-lg-3"></div>
 		</div>)
 	}
 
@@ -282,9 +304,9 @@ export default class Strategy extends Component {
 	}
 
 	renderHelpText(messages) {
-		return (
-			<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
-		);
+		// return (
+		// 	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
+		// );
 	}
 
 	renderMessage(message) {
@@ -292,24 +314,5 @@ export default class Strategy extends Component {
 		return (
 			<span className="help-block has-error" key={i++}>{message}</span>
 		);
-	}
-
-	renderLabelPickerByType(){
-		if(this.state.labelsSelectting){
-			return (
-				<Lightbox className='small' header={false} headerWithoutBorder={true}
-						  onClose={this.cancelSelectLabels.bind(this)}>
-					<div className='centered'>
-						<LabelPickerByType
-							labelsType='classify'
-							selectedLabels={this.props.strategy.labels}
-							onConfirm={::this.confirmSelectLabels}
-						/>
-
-					</div>
-				</Lightbox>
-			);
-		}
-
 	}
 }

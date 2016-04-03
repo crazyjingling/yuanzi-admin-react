@@ -11,7 +11,7 @@ config = {
 	devPort: 3020,
 	monPort: 3001,
 	db: [
-		'mongodb://yuanzi:yuanzi@101.251.204.42:27017/yuanzi'
+		'mongodb://127.0.0.1:27017/yuanzi'
 	],
 	uploadDir: './upload',
 	uploadSize: '1000mb',

@@ -84,7 +84,7 @@ export default class MenuBar extends Component {
 					},
 					{
 						type: 'activity',
-						link: '/admin/activity/new',
+						link: '/admin/activities/new',
 						label: '添加活动'
 					}
 				]

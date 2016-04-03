@@ -29,6 +29,7 @@ var webpackConfig = module.exports = {
     new optimize.CommonsChunkPlugin('common.js', ['admin', 'auth', 'public'])
   ],
   module: {
+	  noParse: /node_modules\/quill\/dist/,
     loaders: [
       {
         test: /\.(js|jsx)$/,
