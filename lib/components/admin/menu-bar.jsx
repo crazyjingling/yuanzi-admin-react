@@ -103,7 +103,7 @@ export default class MenuBar extends Component {
 			},
 			{
 				type: 'banners',
-				link: '#',
+				link: '/admin/banners/index',
 				label: 'Banner 管理',
 				links:[
 					{
@@ -184,36 +184,36 @@ export default class MenuBar extends Component {
 				link: '/admin/profile',
 				label: '个人设置'
 			},
-			{
-				type: 'pages',
-				link: '/admin',
-				label: 'Pages'
-			},
-            {
-                type: 'schemas',
-                link: '/admin/schemas',
-                label: 'Schemas'
-            },
-            {
-                type: 'menus',
-                link: '/admin/menus',
-                label: 'Menus'
-            },
-            {
-                type: 'media',
-                link: '/admin/media',
-                label: 'Media'
-            },
-            {
-                type: 'fonts',
-                link: '/admin/fonts',
-                label: 'Fonts'
-            },
-            {
-                type: 'colors',
-                link: '/admin/colors',
-                label: 'Colors'
-            }
+            // {
+				// type: 'pages',
+				// link: '/admin',
+				// label: 'Pages'
+            // },
+            // {
+            //     type: 'schemas',
+            //     link: '/admin/schemas',
+            //     label: 'Schemas'
+            // },
+            // {
+            //     type: 'menus',
+            //     link: '/admin/menus',
+            //     label: 'Menus'
+            // },
+            // {
+            //     type: 'media',
+            //     link: '/admin/media',
+            //     label: 'Media'
+            // },
+            // {
+            //     type: 'fonts',
+            //     link: '/admin/fonts',
+            //     label: 'Fonts'
+            // },
+            // {
+            //     type: 'colors',
+            //     link: '/admin/colors',
+            //     label: 'Colors'
+            // }
         ];
         return (
             <nav className="navbar-default navbar-static-side" role="navigation">

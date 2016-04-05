@@ -23,12 +23,18 @@ export default class Material extends Component {
 
 	render() {
 		return (
-		<div key={this.props.index}>
-			<label className="control-label">{`工具${this.props.index+1}`}</label>
-			<input value={this.props.material.title} onChange={this.onChange.bind(this,'title')}
-				   placeholder="名称"/>
-			<input value={this.props.material.amount} onChange={this.onChange.bind(this,'amount')}
-				   placeholder="数量"/>
+		<div key={this.props.index} className="row">
+			<div className="col-md-5">
+				<input className="form-control"
+					value={this.props.material.title}
+				       onChange={this.onChange.bind(this,'title')}
+				       placeholder="名称"/>
+			</div>
+			<div className="col-md-5">
+				<input className="form-control"
+					value={this.props.material.amount} onChange={this.onChange.bind(this,'amount')}
+				       placeholder="数量"/>
+			</div>
 		</div>
 		);
 	}

@@ -37,10 +37,17 @@ export default class Tools extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.existsTools.map((item,index)=><Tool key={index} index={index} onChange={::this.onChange} tool={item}/>)}
+				{this.props.existsTools.map((item,index)=>{
+					return (
+						<div>
+							<Tool key={index} index={index} onChange={::this.onChange} tool={item}/>
+							<div className="hr-line-dashed"></div>
+						</div>
+					)
+				})}
 				<button className="btn btn-primary btn-circle" type="button"
 						onClick={::this.onAdd}>
-					<i className="fa fa-plus"></i>
+					<i className="fa fa-plus"/>
 				</button>
 			</div>
 		);

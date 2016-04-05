@@ -138,12 +138,6 @@ export default class Strategy extends Component {
 	renderBasic() {
 		return (<div>
 			<div className="row">
-				<div className="col-lg-12">
-					<h1>添加妙招</h1>
-					<hr/>
-				</div>
-			</div>
-			<div className="row">
 				<div className="col-lg-3"></div>
 				<div className="col-lg-6">
 

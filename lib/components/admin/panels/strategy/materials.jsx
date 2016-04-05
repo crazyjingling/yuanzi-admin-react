@@ -33,10 +33,17 @@ export default class Materials extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.existsMaterials.map((item,index)=><Material key={index} index={index} onChange={::this.onChange} material={item}/>)}
+				{this.props.existsMaterials.map((item,index)=>{
+					return (
+						<div>
+							<Material key={index} index={index} onChange={::this.onChange} material={item}/>
+							<div className="hr-line-dashed"></div>
+						</div>
+					)
+				})}
 				<button className="btn btn-primary btn-circle" type="button"
 						onClick={::this.onAdd}>
-					<i className="fa fa-plus"></i>
+					<i className="fa fa-plus" />
 				</button>
 			</div>
 		);

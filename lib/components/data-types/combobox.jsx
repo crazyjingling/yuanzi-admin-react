@@ -17,7 +17,7 @@ export default class Combobox extends Component {
 	render () {
 		return (
 
-			<div className="form-group">
+			<div>
 				{this.props.option.label && <label htmlFor={this.props.option.id}>{this.props.option.label}</label>}
 
 				<select name={this.props.option.id} ref={this.props.option.id} className={cx(this.props.className,"select2_demo_1 form-control")}

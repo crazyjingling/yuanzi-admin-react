@@ -35,11 +35,27 @@ export default class Admin extends Component {
   }
 
   render () {
+	  console.log(this.props.breadcrumbs)
     return (
     <div id="wrapper" className={cx('blurr', this.props.blurred && 'blurred', !this.props.editing && 'previewing', this.props.linkingData && 'pb-linking-data')}>
       {this.props.activePanelType !== 'pageBuild' && <MenuBar user={this.props.user} activePanelType={this.props.activePanelType} breadcrumbs={this.props.breadcrumbs} />}
 
       <div id="page-wrapper" className="gray-bg dashbard-1">
+	      <div className="row wrapper border-bottom white-bg page-heading">
+		      <div className="col-lg-10">
+			      <h2>{this.props.activePanelType}</h2>
+			      <ol className="breadcrumb">
+				      {this.props.breadcrumbs.map((item, index) => {
+					      return (
+						      <li>
+							      <a href="#">{item.label}</a>
+						      </li>
+					      );
+				      })}
+
+			      </ol>
+		      </div>
+	      </div>
         <div className="wrapper wrapper-content animated fadeIn">
           <div>
             <div className="row">
@@ -55,4 +71,4 @@ export default class Admin extends Component {
     </div>
     );
   }
-}
+};

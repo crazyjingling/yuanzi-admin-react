@@ -29,13 +29,21 @@ export default class Steps extends Component {
 		steps.push(this.constructor.step);
 		this.props.onChange('steps',steps);
 	}
+
 	render() {
 		return (
 			<div>
-				{this.props.existsSteps.map((step,index)=><Step key={index} index={index} onChange={::this.onChange} step={step}/>)}
+				{this.props.existsSteps.map((step,index)=>{
+					return (
+						<div>
+							<Step key={index} index={index} onChange={::this.onChange} step={step}/>
+							<div className="hr-line-dashed"></div>
+						</div>
+					)
+				})}
 				<button className="btn btn-primary btn-circle" type="button"
 						onClick={::this.onAdd}>
-					<i className="fa fa-plus"></i>
+					<i className="fa fa-plus"/>
 				</button>
 			</div>
 		);
