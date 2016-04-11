@@ -20,7 +20,8 @@ export default class LabelPickerContainer extends Component {
 	static fragments = {
 		labelsPicker: {
 			_id: 1,
-			title: 1
+			title: 1,
+			type: 1
 		}
 	};
 

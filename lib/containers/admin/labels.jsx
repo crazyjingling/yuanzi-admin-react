@@ -22,7 +22,7 @@ import QRCode from 'qrcode.react';
 )
 @queryProps({
 	page: 1,
-	limit: 10,
+	limit: 20,
 	sort: 'createdAt',
 	order: 'desc'
 })

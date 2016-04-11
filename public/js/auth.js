@@ -8,7 +8,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 29:
+/***/ 31:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55,7 +55,7 @@ webpackJsonp([2],{
 			value: function render() {
 				return _react2['default'].createElement(
 					'div',
-					{ className: 'form-group' },
+					null,
 					this.props.option.label && _react2['default'].createElement(
 						'label',
 						{ htmlFor: this.props.option.id },
@@ -128,8 +128,8 @@ webpackJsonp([2],{
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 	var baseGet = __webpack_require__(153),
-	    toPath = __webpack_require__(132),
-	    isArray = __webpack_require__(28),
+	    toPath = __webpack_require__(131),
+	    isArray = __webpack_require__(27),
 	    map = __webpack_require__(317);
 	
 	/** Used to match property names within property paths. */
@@ -556,11 +556,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _animate = __webpack_require__(25);
+	var _animate = __webpack_require__(30);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
-	var _spinner = __webpack_require__(60);
+	var _spinner = __webpack_require__(76);
 	
 	var _spinner2 = _interopRequireDefault(_spinner);
 	
@@ -688,7 +688,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _lodashMerge = __webpack_require__(98);
+	var _lodashMerge = __webpack_require__(96);
 	
 	var _lodashMerge2 = _interopRequireDefault(_lodashMerge);
 	
@@ -698,7 +698,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _dataTypesOptionsMap = __webpack_require__(124);
+	var _dataTypesOptionsMap = __webpack_require__(123);
 	
 	var OptionsList = (function (_Component) {
 	  _inherits(OptionsList, _Component);
@@ -979,56 +979,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 60:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _get = __webpack_require__(6)['default'];
-	
-	var _inherits = __webpack_require__(7)['default'];
-	
-	var _createClass = __webpack_require__(5)['default'];
-	
-	var _classCallCheck = __webpack_require__(4)['default'];
-	
-	var _interopRequireDefault = __webpack_require__(1)['default'];
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _relaxFramework = __webpack_require__(3);
-	
-	var Spinner = (function (_Component) {
-	  _inherits(Spinner, _Component);
-	
-	  function Spinner() {
-	    _classCallCheck(this, Spinner);
-	
-	    _get(Object.getPrototypeOf(Spinner.prototype), 'constructor', this).apply(this, arguments);
-	  }
-	
-	  _createClass(Spinner, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2['default'].createElement('div', { className: 'spinner' });
-	    }
-	  }]);
-	
-	  return Spinner;
-	})(_relaxFramework.Component);
-	
-	exports['default'] = Spinner;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 67:
+/***/ 66:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1236,7 +1187,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 68:
+/***/ 67:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1379,7 +1330,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 80:
+/***/ 76:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1404,11 +1355,60 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _portal = __webpack_require__(89);
+	var Spinner = (function (_Component) {
+	  _inherits(Spinner, _Component);
+	
+	  function Spinner() {
+	    _classCallCheck(this, Spinner);
+	
+	    _get(Object.getPrototypeOf(Spinner.prototype), 'constructor', this).apply(this, arguments);
+	  }
+	
+	  _createClass(Spinner, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement('div', { className: 'spinner' });
+	    }
+	  }]);
+	
+	  return Spinner;
+	})(_relaxFramework.Component);
+	
+	exports['default'] = Spinner;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 79:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _get = __webpack_require__(6)['default'];
+	
+	var _inherits = __webpack_require__(7)['default'];
+	
+	var _createClass = __webpack_require__(5)['default'];
+	
+	var _classCallCheck = __webpack_require__(4)['default'];
+	
+	var _interopRequireDefault = __webpack_require__(1)['default'];
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _relaxFramework = __webpack_require__(3);
+	
+	var _portal = __webpack_require__(87);
 	
 	var _portal2 = _interopRequireDefault(_portal);
 	
-	var _stick = __webpack_require__(103);
+	var _stick = __webpack_require__(101);
 	
 	var _stick2 = _interopRequireDefault(_stick);
 	
@@ -1460,7 +1460,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 97:
+/***/ 95:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1472,7 +1472,7 @@ webpackJsonp([2],{
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 	var baseClone = __webpack_require__(314),
-	    bindCallback = __webpack_require__(96),
+	    bindCallback = __webpack_require__(94),
 	    isIterateeCall = __webpack_require__(154);
 	
 	/**
@@ -1545,7 +1545,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 99:
+/***/ 97:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -16622,11 +16622,11 @@ webpackJsonp([2],{
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(119)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(118)(module), (function() { return this; }())))
 
 /***/ },
 
-/***/ 103:
+/***/ 101:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16655,7 +16655,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _animate = __webpack_require__(25);
+	var _animate = __webpack_require__(30);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
@@ -16833,7 +16833,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 104:
+/***/ 103:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17014,7 +17014,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 105:
+/***/ 104:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17037,7 +17037,7 @@ webpackJsonp([2],{
 		value: true
 	});
 	
-	var _clientActionsMedia = __webpack_require__(121);
+	var _clientActionsMedia = __webpack_require__(120);
 	
 	var mediaActions = _interopRequireWildcard(_clientActionsMedia);
 	
@@ -17051,7 +17051,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -17178,7 +17178,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 106:
+/***/ 105:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17203,7 +17203,7 @@ webpackJsonp([2],{
 	
 	var adminActions = _interopRequireWildcard(_clientActionsAdmin);
 	
-	var _lodash = __webpack_require__(99);
+	var _lodash = __webpack_require__(97);
 	
 	var _lodashPluck = __webpack_require__(39);
 	
@@ -17215,11 +17215,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -17318,7 +17318,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 121:
+/***/ 120:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17341,7 +17341,7 @@ webpackJsonp([2],{
 	
 	var _types2 = _interopRequireDefault(_types);
 	
-	var _helpersRequest = __webpack_require__(24);
+	var _helpersRequest = __webpack_require__(23);
 	
 	var _helpersRequest2 = _interopRequireDefault(_helpersRequest);
 	
@@ -17419,7 +17419,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 122:
+/***/ 121:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17456,11 +17456,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -17554,7 +17554,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 124:
+/***/ 123:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17593,7 +17593,7 @@ webpackJsonp([2],{
 	
 	var _componentsDataTypesColumnsManager2 = _interopRequireDefault(_componentsDataTypesColumnsManager);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -17617,7 +17617,7 @@ webpackJsonp([2],{
 	
 	var _containersDataTypesIconPicker2 = _interopRequireDefault(_containersDataTypesIconPicker);
 	
-	var _containersDataTypesImagePicker = __webpack_require__(105);
+	var _containersDataTypesImagePicker = __webpack_require__(104);
 	
 	var _containersDataTypesImagePicker2 = _interopRequireDefault(_containersDataTypesImagePicker);
 	
@@ -17629,7 +17629,7 @@ webpackJsonp([2],{
 	
 	var _containersDataTypesMenuPicker2 = _interopRequireDefault(_containersDataTypesMenuPicker);
 	
-	var _componentsDataTypesNumberInput = __webpack_require__(67);
+	var _componentsDataTypesNumberInput = __webpack_require__(66);
 	
 	var _componentsDataTypesNumberInput2 = _interopRequireDefault(_componentsDataTypesNumberInput);
 	
@@ -17641,11 +17641,11 @@ webpackJsonp([2],{
 	
 	var _containersDataTypesPagePicker2 = _interopRequireDefault(_containersDataTypesPagePicker);
 	
-	var _containersDataTypesLabelPicker = __webpack_require__(122);
+	var _containersDataTypesLabelPicker = __webpack_require__(121);
 	
 	var _containersDataTypesLabelPicker2 = _interopRequireDefault(_containersDataTypesLabelPicker);
 	
-	var _containersDataTypesOwnerPicker = __webpack_require__(106);
+	var _containersDataTypesOwnerPicker = __webpack_require__(105);
 	
 	var _containersDataTypesOwnerPicker2 = _interopRequireDefault(_containersDataTypesOwnerPicker);
 	
@@ -17743,7 +17743,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 126:
+/***/ 125:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17776,7 +17776,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 132:
+/***/ 131:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17787,7 +17787,7 @@ webpackJsonp([2],{
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArray = __webpack_require__(28);
+	var isArray = __webpack_require__(27);
 	
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -17933,7 +17933,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _animate = __webpack_require__(25);
+	var _animate = __webpack_require__(30);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
@@ -18032,7 +18032,7 @@ webpackJsonp([2],{
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
-	var _lodashSortby = __webpack_require__(113);
+	var _lodashSortby = __webpack_require__(112);
 	
 	var _lodashSortby2 = _interopRequireDefault(_lodashSortby);
 	
@@ -18042,7 +18042,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -18050,7 +18050,7 @@ webpackJsonp([2],{
 	
 	var _componentsDataTypesColorPalettePicker2 = _interopRequireDefault(_componentsDataTypesColorPalettePicker);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var INPUT_TYPES = ['hex', 'rgba', 'hsva'];
 	
@@ -18671,7 +18671,7 @@ webpackJsonp([2],{
 	
 	var _types2 = _interopRequireDefault(_types);
 	
-	var _helpersRequest = __webpack_require__(24);
+	var _helpersRequest = __webpack_require__(23);
 	
 	var _helpersRequest2 = _interopRequireDefault(_helpersRequest);
 	
@@ -18735,7 +18735,7 @@ webpackJsonp([2],{
 	
 	var _types2 = _interopRequireDefault(_types);
 	
-	var _helpersRequest = __webpack_require__(24);
+	var _helpersRequest = __webpack_require__(23);
 	
 	var _helpersRequest2 = _interopRequireDefault(_helpersRequest);
 	
@@ -18870,7 +18870,7 @@ webpackJsonp([2],{
 	
 	var adminActions = _interopRequireWildcard(_clientActionsAdmin);
 	
-	var _lodash = __webpack_require__(99);
+	var _lodash = __webpack_require__(97);
 	
 	var _lodashPluck = __webpack_require__(39);
 	
@@ -18882,7 +18882,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -18968,7 +18968,7 @@ webpackJsonp([2],{
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(301);
-	var Iterators = __webpack_require__(109);
+	var Iterators = __webpack_require__(108);
 	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
 
 /***/ },
@@ -19021,7 +19021,7 @@ webpackJsonp([2],{
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(71);
+	var getNative = __webpack_require__(70);
 	
 	/** Used as the `TypeError` message for "Functions" methods. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -19297,7 +19297,7 @@ webpackJsonp([2],{
 	
 	var _containersDataTypesColorPalettePicker2 = _interopRequireDefault(_containersDataTypesColorPalettePicker);
 	
-	var _numberInput = __webpack_require__(67);
+	var _numberInput = __webpack_require__(66);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
@@ -19594,7 +19594,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _lodashClonedeep = __webpack_require__(27);
+	var _lodashClonedeep = __webpack_require__(26);
 	
 	var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 	
@@ -19742,7 +19742,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _balloon = __webpack_require__(80);
+	var _balloon = __webpack_require__(79);
 	
 	var _balloon2 = _interopRequireDefault(_balloon);
 	
@@ -19750,7 +19750,7 @@ webpackJsonp([2],{
 	
 	var _edit2 = _interopRequireDefault(_edit);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var Shadow = (function (_Component) {
 	  _inherits(Shadow, _Component);
@@ -20019,11 +20019,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _portal = __webpack_require__(89);
+	var _portal = __webpack_require__(87);
 	
 	var _portal2 = _interopRequireDefault(_portal);
 	
-	var _stick = __webpack_require__(103);
+	var _stick = __webpack_require__(101);
 	
 	var _stick2 = _interopRequireDefault(_stick);
 	
@@ -20526,11 +20526,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var GradientPoints = (function (_Component) {
 	  _inherits(GradientPoints, _Component);
@@ -20697,7 +20697,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -20822,15 +20822,15 @@ webpackJsonp([2],{
 	
 	var _edit2 = _interopRequireDefault(_edit);
 	
-	var _portal = __webpack_require__(89);
+	var _portal = __webpack_require__(87);
 	
 	var _portal2 = _interopRequireDefault(_portal);
 	
-	var _stick = __webpack_require__(103);
+	var _stick = __webpack_require__(101);
 	
 	var _stick2 = _interopRequireDefault(_stick);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var ColorPicker = (function (_Component) {
 	  _inherits(ColorPicker, _Component);
@@ -21061,7 +21061,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -21069,7 +21069,7 @@ webpackJsonp([2],{
 	
 	var _input2 = _interopRequireDefault(_input);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var Inputs = (function (_Component) {
 	  _inherits(Inputs, _Component);
@@ -21234,7 +21234,7 @@ webpackJsonp([2],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _lodashSortby = __webpack_require__(113);
+	var _lodashSortby = __webpack_require__(112);
 	
 	var _lodashSortby2 = _interopRequireDefault(_lodashSortby);
 	
@@ -21244,11 +21244,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var LinearGradient = (function (_Component) {
 	  _inherits(LinearGradient, _Component);
@@ -21568,7 +21568,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -21691,7 +21691,7 @@ webpackJsonp([2],{
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
-	var _lodashSortby = __webpack_require__(113);
+	var _lodashSortby = __webpack_require__(112);
 	
 	var _lodashSortby2 = _interopRequireDefault(_lodashSortby);
 	
@@ -21701,11 +21701,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var size = 316;
 	
@@ -22212,7 +22212,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _colr = __webpack_require__(81);
+	var _colr = __webpack_require__(80);
 	
 	var _colr2 = _interopRequireDefault(_colr);
 	
@@ -22224,7 +22224,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -22411,7 +22411,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _lodashClonedeep = __webpack_require__(27);
+	var _lodashClonedeep = __webpack_require__(26);
 	
 	var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 	
@@ -22425,7 +22425,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -22647,7 +22647,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _numberInput = __webpack_require__(67);
+	var _numberInput = __webpack_require__(66);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
@@ -22841,7 +22841,7 @@ webpackJsonp([2],{
 	
 	var _helpersSchemaFilterDefaultOptions2 = _interopRequireDefault(_helpersSchemaFilterDefaultOptions);
 	
-	var _combobox = __webpack_require__(29);
+	var _combobox = __webpack_require__(31);
 	
 	var _combobox2 = _interopRequireDefault(_combobox);
 	
@@ -22849,7 +22849,7 @@ webpackJsonp([2],{
 	
 	var _input2 = _interopRequireDefault(_input);
 	
-	var _numberInput = __webpack_require__(67);
+	var _numberInput = __webpack_require__(66);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
@@ -23095,7 +23095,7 @@ webpackJsonp([2],{
 	
 	var _helpersSchemaFilterDefaultOptions2 = _interopRequireDefault(_helpersSchemaFilterDefaultOptions);
 	
-	var _balloon = __webpack_require__(80);
+	var _balloon = __webpack_require__(79);
 	
 	var _balloon2 = _interopRequireDefault(_balloon);
 	
@@ -23597,7 +23597,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _lodashClone = __webpack_require__(97);
+	var _lodashClone = __webpack_require__(95);
 	
 	var _lodashClone2 = _interopRequireDefault(_lodashClone);
 	
@@ -23619,7 +23619,7 @@ webpackJsonp([2],{
 	
 	var _font2 = _interopRequireDefault(_font);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -24182,7 +24182,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _mediaItem = __webpack_require__(68);
+	var _mediaItem = __webpack_require__(67);
 	
 	var _mediaItem2 = _interopRequireDefault(_mediaItem);
 	
@@ -24337,15 +24337,15 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _animate = __webpack_require__(25);
+	var _animate = __webpack_require__(30);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
-	var _mediaItem = __webpack_require__(68);
+	var _mediaItem = __webpack_require__(67);
 	
 	var _mediaItem2 = _interopRequireDefault(_mediaItem);
 	
-	var _upload = __webpack_require__(104);
+	var _upload = __webpack_require__(103);
 	
 	var _upload2 = _interopRequireDefault(_upload);
 	
@@ -24509,7 +24509,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _combobox = __webpack_require__(29);
+	var _combobox = __webpack_require__(31);
 	
 	var _combobox2 = _interopRequireDefault(_combobox);
 	
@@ -24728,7 +24728,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _upload = __webpack_require__(104);
+	var _upload = __webpack_require__(103);
 	
 	var _upload2 = _interopRequireDefault(_upload);
 	
@@ -24845,7 +24845,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _mediaItem = __webpack_require__(68);
+	var _mediaItem = __webpack_require__(67);
 	
 	var _mediaItem2 = _interopRequireDefault(_mediaItem);
 	
@@ -24979,11 +24979,11 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _animate = __webpack_require__(25);
+	var _animate = __webpack_require__(30);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
-	var _mediaItem = __webpack_require__(68);
+	var _mediaItem = __webpack_require__(67);
 	
 	var _mediaItem2 = _interopRequireDefault(_mediaItem);
 	
@@ -25363,7 +25363,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _combobox = __webpack_require__(29);
+	var _combobox = __webpack_require__(31);
 	
 	var _combobox2 = _interopRequireDefault(_combobox);
 	
@@ -25613,7 +25613,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _balloon = __webpack_require__(80);
+	var _balloon = __webpack_require__(79);
 	
 	var _balloon2 = _interopRequireDefault(_balloon);
 	
@@ -25885,7 +25885,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _numberInput = __webpack_require__(67);
+	var _numberInput = __webpack_require__(66);
 	
 	var _numberInput2 = _interopRequireDefault(_numberInput);
 	
@@ -26200,7 +26200,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _lodash = __webpack_require__(99);
+	var _lodash = __webpack_require__(97);
 	
 	var Strategy = (function (_Component) {
 		_inherits(Strategy, _Component);
@@ -26372,7 +26372,7 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _lodashClonedeep = __webpack_require__(27);
+	var _lodashClonedeep = __webpack_require__(26);
 	
 	var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 	
@@ -26518,7 +26518,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _balloon = __webpack_require__(80);
+	var _balloon = __webpack_require__(79);
 	
 	var _balloon2 = _interopRequireDefault(_balloon);
 	
@@ -26526,7 +26526,7 @@ webpackJsonp([2],{
 	
 	var _edit2 = _interopRequireDefault(_edit);
 	
-	var _helpersColors = __webpack_require__(26);
+	var _helpersColors = __webpack_require__(25);
 	
 	var Shadow = (function (_Component) {
 	  _inherits(Shadow, _Component);
@@ -26640,7 +26640,7 @@ webpackJsonp([2],{
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersUtils = __webpack_require__(14);
+	var _helpersUtils = __webpack_require__(15);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -26722,11 +26722,11 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _clientActionsElements = __webpack_require__(120);
+	var _clientActionsElements = __webpack_require__(119);
 	
 	var elementsActions = _interopRequireWildcard(_clientActionsElements);
 	
-	var _lodashClonedeep = __webpack_require__(27);
+	var _lodashClonedeep = __webpack_require__(26);
 	
 	var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 	
@@ -26740,11 +26740,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersSchemaStaticProperties = __webpack_require__(126);
+	var _helpersSchemaStaticProperties = __webpack_require__(125);
 	
 	var _helpersSchemaStaticProperties2 = _interopRequireDefault(_helpersSchemaStaticProperties);
 	
@@ -26980,7 +26980,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -27089,7 +27089,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -27306,7 +27306,7 @@ webpackJsonp([2],{
 	
 	var adminActions = _interopRequireWildcard(_clientActionsAdmin);
 	
-	var _clientActionsMedia = __webpack_require__(121);
+	var _clientActionsMedia = __webpack_require__(120);
 	
 	var mediaActions = _interopRequireWildcard(_clientActionsMedia);
 	
@@ -27320,7 +27320,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -27617,11 +27617,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -27728,11 +27728,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -27839,11 +27839,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _componentsDataTypesCombobox = __webpack_require__(29);
+	var _componentsDataTypesCombobox = __webpack_require__(31);
 	
 	var _componentsDataTypesCombobox2 = _interopRequireDefault(_componentsDataTypesCombobox);
 	
@@ -27942,11 +27942,11 @@ webpackJsonp([2],{
 	  value: true
 	});
 	
-	var _clientActionsElements = __webpack_require__(120);
+	var _clientActionsElements = __webpack_require__(119);
 	
 	var elementsActions = _interopRequireWildcard(_clientActionsElements);
 	
-	var _lodashClonedeep = __webpack_require__(27);
+	var _lodashClonedeep = __webpack_require__(26);
 	
 	var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 	
@@ -27960,11 +27960,11 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
-	var _helpersSchemaStaticProperties = __webpack_require__(126);
+	var _helpersSchemaStaticProperties = __webpack_require__(125);
 	
 	var _helpersSchemaStaticProperties2 = _interopRequireDefault(_helpersSchemaStaticProperties);
 	
@@ -28860,7 +28860,7 @@ webpackJsonp([2],{
 	// object, this seems to be the most reliable technique that does not
 	// use indirect eval (which violates Content Security Policy).
 	typeof global === "object" ? global : typeof window === "object" ? window : typeof self === "object" ? self : undefined);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(100)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(98)))
 
 /***/ },
 
@@ -28894,7 +28894,7 @@ webpackJsonp([2],{
 /***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(128)
+	var isObject = __webpack_require__(127)
 	  , document = __webpack_require__(49).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
@@ -28927,10 +28927,10 @@ webpackJsonp([2],{
 /***/ 277:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ctx         = __webpack_require__(82)
+	var ctx         = __webpack_require__(81)
 	  , call        = __webpack_require__(284)
 	  , isArrayIter = __webpack_require__(282)
-	  , anObject    = __webpack_require__(70)
+	  , anObject    = __webpack_require__(69)
 	  , toLength    = __webpack_require__(298)
 	  , getIterFn   = __webpack_require__(173);
 	module.exports = function(iterable, entries, fn, that){
@@ -28953,7 +28953,7 @@ webpackJsonp([2],{
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(84)
+	var toIObject = __webpack_require__(83)
 	  , getNames  = __webpack_require__(38).getNames
 	  , toString  = {}.toString;
 	
@@ -29008,7 +29008,7 @@ webpackJsonp([2],{
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(93);
+	var cof = __webpack_require__(91);
 	module.exports = Array.isArray || function(arg){
 	  return cof(arg) == 'Array';
 	};
@@ -29028,7 +29028,7 @@ webpackJsonp([2],{
 /***/ function(module, exports, __webpack_require__) {
 
 	var $         = __webpack_require__(38)
-	  , toIObject = __webpack_require__(84);
+	  , toIObject = __webpack_require__(83);
 	module.exports = function(object, el){
 	  var O      = toIObject(object)
 	    , keys   = $.getKeys(O)
@@ -29048,7 +29048,7 @@ webpackJsonp([2],{
 	  , Observer  = global.MutationObserver || global.WebKitMutationObserver
 	  , process   = global.process
 	  , Promise   = global.Promise
-	  , isNode    = __webpack_require__(93)(process) == 'process'
+	  , isNode    = __webpack_require__(91)(process) == 'process'
 	  , head, last, notify;
 	
 	var flush = function(){
@@ -29137,7 +29137,7 @@ webpackJsonp([2],{
 	'use strict';
 	var core        = __webpack_require__(46)
 	  , $           = __webpack_require__(38)
-	  , DESCRIPTORS = __webpack_require__(108)
+	  , DESCRIPTORS = __webpack_require__(107)
 	  , SPECIES     = __webpack_require__(50)('species');
 	
 	module.exports = function(KEY){
@@ -29154,7 +29154,7 @@ webpackJsonp([2],{
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.3.20 SpeciesConstructor(O, defaultConstructor)
-	var anObject  = __webpack_require__(70)
+	var anObject  = __webpack_require__(69)
 	  , aFunction = __webpack_require__(145)
 	  , SPECIES   = __webpack_require__(50)('species');
 	module.exports = function(O, D){
@@ -29177,7 +29177,7 @@ webpackJsonp([2],{
 /***/ 297:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ctx                = __webpack_require__(82)
+	var ctx                = __webpack_require__(81)
 	  , invoke             = __webpack_require__(281)
 	  , html               = __webpack_require__(280)
 	  , cel                = __webpack_require__(275)
@@ -29216,7 +29216,7 @@ webpackJsonp([2],{
 	    delete queue[id];
 	  };
 	  // Node.js 0.8-
-	  if(__webpack_require__(93)(process) == 'process'){
+	  if(__webpack_require__(91)(process) == 'process'){
 	    defer = function(id){
 	      process.nextTick(ctx(run, id, 1));
 	    };
@@ -29261,8 +29261,8 @@ webpackJsonp([2],{
 	'use strict';
 	var addToUnscopables = __webpack_require__(272)
 	  , step             = __webpack_require__(287)
-	  , Iterators        = __webpack_require__(109)
-	  , toIObject        = __webpack_require__(84);
+	  , Iterators        = __webpack_require__(108)
+	  , toIObject        = __webpack_require__(83);
 	
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
@@ -29302,11 +29302,11 @@ webpackJsonp([2],{
 	var $          = __webpack_require__(38)
 	  , LIBRARY    = __webpack_require__(147)
 	  , global     = __webpack_require__(49)
-	  , ctx        = __webpack_require__(82)
+	  , ctx        = __webpack_require__(81)
 	  , classof    = __webpack_require__(273)
-	  , $export    = __webpack_require__(83)
-	  , isObject   = __webpack_require__(128)
-	  , anObject   = __webpack_require__(70)
+	  , $export    = __webpack_require__(82)
+	  , isObject   = __webpack_require__(127)
+	  , anObject   = __webpack_require__(69)
 	  , aFunction  = __webpack_require__(145)
 	  , strictNew  = __webpack_require__(296)
 	  , forOf      = __webpack_require__(277)
@@ -29343,7 +29343,7 @@ webpackJsonp([2],{
 	      works = false;
 	    }
 	    // actual V8 bug, https://code.google.com/p/v8/issues/detail?id=4162
-	    if(works && __webpack_require__(108)){
+	    if(works && __webpack_require__(107)){
 	      var thenableThenGotten = false;
 	      P.resolve($.setDesc({}, 'then', {
 	        get: function(){ thenableThenGotten = true; }
@@ -29520,7 +29520,7 @@ webpackJsonp([2],{
 	}
 	
 	$export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
-	__webpack_require__(129)(P, PROMISE);
+	__webpack_require__(128)(P, PROMISE);
 	__webpack_require__(293)(PROMISE);
 	Wrapper = __webpack_require__(46)[PROMISE];
 	
@@ -29598,20 +29598,20 @@ webpackJsonp([2],{
 	var $              = __webpack_require__(38)
 	  , global         = __webpack_require__(49)
 	  , has            = __webpack_require__(171)
-	  , DESCRIPTORS    = __webpack_require__(108)
-	  , $export        = __webpack_require__(83)
+	  , DESCRIPTORS    = __webpack_require__(107)
+	  , $export        = __webpack_require__(82)
 	  , redefine       = __webpack_require__(148)
 	  , $fails         = __webpack_require__(146)
 	  , shared         = __webpack_require__(294)
-	  , setToStringTag = __webpack_require__(129)
+	  , setToStringTag = __webpack_require__(128)
 	  , uid            = __webpack_require__(300)
 	  , wks            = __webpack_require__(50)
 	  , keyOf          = __webpack_require__(288)
 	  , $names         = __webpack_require__(278)
 	  , enumKeys       = __webpack_require__(276)
 	  , isArray        = __webpack_require__(283)
-	  , anObject       = __webpack_require__(70)
-	  , toIObject      = __webpack_require__(84)
+	  , anObject       = __webpack_require__(69)
+	  , toIObject      = __webpack_require__(83)
 	  , createDesc     = __webpack_require__(172)
 	  , getDesc        = $.getDesc
 	  , setDesc        = $.setDesc
@@ -31904,9 +31904,9 @@ webpackJsonp([2],{
 	 * Available under MIT license <https://lodash.com/license>
 	 */
 	var arrayMap = __webpack_require__(180),
-	    baseCallback = __webpack_require__(131),
-	    baseEach = __webpack_require__(95),
-	    isArray = __webpack_require__(28);
+	    baseCallback = __webpack_require__(130),
+	    baseEach = __webpack_require__(93),
+	    isArray = __webpack_require__(27);
 	
 	/**
 	 * Used as the [maximum length](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
@@ -32703,7 +32703,7 @@ webpackJsonp([2],{
 	
 	var _reactRedux = __webpack_require__(16);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(14);
 	
 	var _relaxFramework = __webpack_require__(3);
 	
@@ -32905,7 +32905,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(115);
+	var _reactRouter = __webpack_require__(114);
 	
 	var _clientHelpersGaSend = __webpack_require__(198);
 	

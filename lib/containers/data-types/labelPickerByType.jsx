@@ -25,7 +25,8 @@ export default class LabelPickerByType extends Component {
 	static fragments = {
 		labelPickerByType: {
 			_id: 1,
-			title: 1
+			title: 1,
+			type: 1
 		}
 	};
 	static propTypes = {
@@ -40,21 +41,8 @@ export default class LabelPickerByType extends Component {
 
 	getInitState() {
 		return {
-			selectedLabels: this.props.selectedLabels,
-			currentSelectLabelId: '563888c06cb6778c13db680c' // 默认手工
+			selectedLabels: this.props.selectedLabels
 		};
-	}
-
-	onChange(id, event) {
-		this.setState({currentSelectLabelId: event.target.value});
-		this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
-			labelPickerByType: {
-				_id: {
-					value: event ? event.target.value : this.props.labelsPicker[0]._id,
-					type: 'ID!'
-				}
-			}
-		})).done();
 	}
 
 	onLabelItemClick(label) {
@@ -74,7 +62,14 @@ export default class LabelPickerByType extends Component {
 	}
 
 	componentDidMount() {
-
+		this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
+			labelPickerByType: {
+				type: {
+					value: 'classify',
+					type: 'String!'
+				}
+			}
+		})).done();
 		if (this.props.labelsType === 'userAssortment') {
 			const labelPickerByType = {
 				type: {
@@ -94,19 +89,7 @@ export default class LabelPickerByType extends Component {
 			<div className='admin-scrollable'>
 				<div className='white-options list'>
 					<form className="form-horizontal">
-						{this.props.labelsType !== "userAssortment" && <div className="form-group">
-							<label className="col-lg-3 control-label" htmlFor='title'>分类</label>
-							<div className="col-lg-9">
-								<LabelPicker ref="labelType" onChange={::this.onChange}
-											 className="labelType"
-											 labelsType={[this.props.labelsType]}
-											 value={this.state.currentSelectLabelId}
-											 option={{
-												id: 'labelType'
-											}}
-								/>
-							</div>
-						</div>}
+
 						<div className="form-group">
 							<label className="col-lg-3 control-label" htmlFor='labels'>标签集</label>
 							<div className="col-lg-9 text-left">
