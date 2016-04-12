@@ -11,6 +11,7 @@ import classnames from 'classnames';
 import keys from 'lodash.keys';
 import LabelPicker from '../../../../containers/data-types/label-picker';
 import Combobox from '../../../../components/data-types/combobox';
+import ImagePicker from '../../../../containers/data-types/image-picker'
 
 export class EditLabel extends Component {
 	static validatorSchema = {
@@ -40,14 +41,23 @@ export class EditLabel extends Component {
 
 	getInitState() {
 		return {
-			editingLabel: this.props.editingLabel || {
+			editingLabel:  {
 				title: '',
 				type: 'cardTopicAssortment',
 				ownedType: 'all',
 				display: false,
-				color: '#FC6e51'
-			}
+				color: '#FC6e51',
+				cover:''
+			},
+			imageEmptyMessage: []
 		};
+	}
+	// cover
+	onImageChange(mediaItem) {
+		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
 	}
 
 	renderHelpText(messages) {
@@ -122,22 +132,22 @@ export class EditLabel extends Component {
 						<select ref='type' className='select2_demo_1 form-control'
 								value={this.props.editingLabel.type}
 								onChange={this.onChange.bind(this,'type')}>
-							<option value='cardTopicAssortment'>妙招&话题标签</option>
+							<option value='classify'>攻略妙招标签</option>
 							<option value='userAssortment'>达人标签</option>
+							<option value='userAssortment'>关键字</option>
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>
-					<div>
-						<LabelPicker onChange={::this.onChange}
-									 value={this.state.editingLabel.ownedType ? this.state.editingLabel.ownedType._id : 'all'}
-									 labelsType={['classify']}
-									 option={{
-										id: 'ownedType',
-										label: '所属标签分类',
-										isAllShow: true
-									}}
-						/>
-						{this.renderHelpText(this.props.getValidationMessages('ownedType'))}
+					<div className="form-group">
+						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
+						<div className="col-lg-10">
+							<ImagePicker ref="cover" value={this.props.label.cover._id}
+										 width={140} height={140}
+										 widthAndHeightStyle={{width: '140px', height: '140px'}}
+										 onChange={::this.onImageChange}
+							/>
+							{this.renderHelpText(this.state.imageEmptyMessage)}
+						</div>
 					</div>
 					<div>
 						<Combobox onChange={::this.onChange}
