@@ -44,10 +44,10 @@ export class EditLabel extends Component {
 		return {
 			editingLabel:  {
 				title: '',
-				type: 'cardTopicAssortment',
-				ownedType: 'all',
+				type: 'classify',
 				display: false,
-				color: '#FC6e51'
+				color: '#FC6e51',
+				cover:''
 			},
 			imageEmptyMessage: []
 		};
@@ -70,14 +70,10 @@ export class EditLabel extends Component {
 	}
 
 	onChange(id, event) {
-		if(id === 'cover'){
-			this.props.onChange(id, value);
-		}
 		event && event.preventDefault();
 		const editingLabel = this.state.editingLabel;
 		switch (id) {
 			case 'cover':
-				console.log("=====cover======");
 				this.props.onChange(id, value);
 				break;
 			default:
@@ -150,7 +146,7 @@ export class EditLabel extends Component {
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 						<div className="col-lg-10">
-							<ImagePicker ref="cover" value=''
+							<ImagePicker ref="cover" value={this.props.editingLabel.cover._id}
 										 width={140} height={140}
 										 widthAndHeightStyle={{width: '140px', height: '140px'}}
 										 onChange={::this.onImageChange}
