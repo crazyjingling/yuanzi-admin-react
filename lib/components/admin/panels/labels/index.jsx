@@ -36,7 +36,8 @@ export default class Labels extends Component {
 		onEditClose: PropTypes.func.isRequired,
 		edit: PropTypes.boolean,
 		editingColor: PropTypes.boolean,
-		history: PropTypes.object.isRequired
+		history: PropTypes.object.isRequired,
+		onChange: React.PropTypes.func.isRequired
 	}
 
 
@@ -80,7 +81,9 @@ export default class Labels extends Component {
 					  onEditClose={this.props.onEditClose}
 					  addLabel={this.props.addLabel}
 					  updateLabel={this.props.updateLabel}
-					  fragment={labelConfig.fragments} />
+					  fragment={labelConfig.fragments}
+					  onChange = {this.props.onChange}
+				/>
 
 			);
 		}

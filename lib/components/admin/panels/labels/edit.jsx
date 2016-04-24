@@ -36,7 +36,8 @@ export class EditLabel extends Component {
 		onEditClose: React.PropTypes.func.isRequired,
 		addLabel: React.PropTypes.func.isRequired,
 		updateLabel: React.PropTypes.func.isRequired,
-		fragment: React.PropTypes.object.isRequired
+		fragment: React.PropTypes.object.isRequired,
+		onChange: React.PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -46,20 +47,11 @@ export class EditLabel extends Component {
 				type: 'cardTopicAssortment',
 				ownedType: 'all',
 				display: false,
-				color: '#FC6e51',
-				cover:''
+				color: '#FC6e51'
 			},
 			imageEmptyMessage: []
 		};
 	}
-	// cover
-	onImageChange(mediaItem) {
-		this.props.onChange('cover', {
-			_id: mediaItem._id,
-			ossUrl: mediaItem.ossUrl
-		});
-	}
-
 	renderHelpText(messages) {
 		return (
 			<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
@@ -78,21 +70,38 @@ export class EditLabel extends Component {
 	}
 
 	onChange(id, event) {
+		if(id === 'cover'){
+			this.props.onChange(id, value);
+		}
 		event && event.preventDefault();
 		const editingLabel = this.state.editingLabel;
-		if (id.label) {
-			editingLabel[id.id || id] = {};
-			editingLabel[id.id || id]._id = id.value;
-			editingLabel[id.id || id].title = id.label;
-		} else {
-			editingLabel[id.id || id] = id.value || event.target.value;
+		switch (id) {
+			case 'cover':
+				console.log("=====cover======");
+				this.props.onChange(id, value);
+				break;
+			default:
+				if (id.label) {
+					editingLabel[id.id || id] = {};
+					editingLabel[id.id || id]._id = id.value;
+					editingLabel[id.id || id].title = id.label;
+				} else {
+					editingLabel[id.id || id] = id.value || event.target.value;
 
+				}
+				this.setState({
+					editingLabel: editingLabel
+				});
 		}
-		this.setState({
-			editingLabel: editingLabel
+
+	}
+// cover
+	onImageChange(mediaItem) {
+		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
 		});
 	}
-
 
 	onSubmit() {
 		event.preventDefault();
@@ -141,7 +150,7 @@ export class EditLabel extends Component {
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 						<div className="col-lg-10">
-							<ImagePicker ref="cover" value={this.props.label.cover._id}
+							<ImagePicker ref="cover" value=''
 										 width={140} height={140}
 										 widthAndHeightStyle={{width: '140px', height: '140px'}}
 										 onChange={::this.onImageChange}

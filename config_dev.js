@@ -27,15 +27,6 @@ config = {
 	// pageMaxAge: 3 * 24 * 60 * 60 * 1000, // 静态页面过期时间
 	pageMaxAge: 0,
 	// 静态页面过期时间
-	platform: {
-		weibo: 'weibo',
-		qq: 'qq',
-		mobile: 'mobile',
-		mail: 'mail',
-		local: 'local',
-		weixin: 'weixin'
-
-	},
 	weibo: {
 		appKey: '2114675498',
 		appSecret: 'e9f661eb7844cff78f31e1871f9f48e7',

@@ -37,6 +37,7 @@ export default class Activity extends Component {
 		validateSlug: React.PropTypes.func,
 		onChange: React.PropTypes.func,
 		saving: React.PropTypes.bool,
+		addActivity: React.PropTypes.func,
 		onUpdate: React.PropTypes.func,
 		onCreate: React.PropTypes.func,
 		onRevisions: React.PropTypes.func,
@@ -80,11 +81,23 @@ export default class Activity extends Component {
 		this.setState({labelsSelectting: false});
 		this.props.onChange('labels', selectedLabels);
 	}
+
+	onTextChange(value){
+		console.log(value);
+		this.props.onChange('content', value);
+	}
+
 	onDateChange(id, value) {
 		this.props.onChange(id, value);
 	}
 	onImageChange(mediaItem) {
 		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
+	}
+	onBannerImageChange(mediaItem) {
+		this.props.onChange('bannerImg', {
 			_id: mediaItem._id,
 			ossUrl: mediaItem.ossUrl
 		});
@@ -113,7 +126,6 @@ export default class Activity extends Component {
 	}
 
 	renderBasic() {
-		console.log(this.props)
 		return (<div>
 			<div className="row">
 				<div className="col-lg-12">
@@ -122,7 +134,7 @@ export default class Activity extends Component {
 						<div className='white-options list ibox-content'>
 							<form className="form-horizontal" onSubmit={this.props.onCreate.bind(this)}>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>作者</label>
+									<label className="col-lg-2 control-label" htmlFor='owner'>作者</label>
 									<div className="col-lg-10">
 										<OwnerPick user={this.props.user}
 										           className='select2_demo_1 form-control'
@@ -145,28 +157,28 @@ export default class Activity extends Component {
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>活动费用</label>
+									<label className="col-lg-2 control-label" htmlFor='price'>活动费用</label>
 									<div className="col-lg-10">
 										<div className="input-group m-b">
 											<span className="input-group-addon">$</span>
 											<input ref='title' type='text' className='form-control'
-											       onChange={this.onChange.bind(this,'title')}
+											       onChange={this.onChange.bind(this,'price')}
 											       value={this.props.activity.price}/>
 										</div>
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>人数限制</label>
+									<label className="col-lg-2 control-label" htmlFor='number'>人数限制</label>
 									<div className="col-lg-10">
 										<input ref='title' type='text' className='form-control'
-										       onChange={this.onChange.bind(this,'title')}
+										       onChange={this.onChange.bind(this,'number')}
 										       value={this.props.activity.number}/>
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>开始时间</label>
+									<label className="col-lg-2 control-label" htmlFor='startDate'>开始时间</label>
 									<div className="col-lg-10">
 										<DatePicker id='startDate'
 										            dateFormat="YYYY-MM-DD"
@@ -178,7 +190,7 @@ export default class Activity extends Component {
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='title'>结束时间</label>
+									<label className="col-lg-2 control-label" htmlFor='endDate'>结束时间</label>
 									<div className="col-lg-10">
 										<DatePicker id='endDate'
 										            dateFormat="YYYY-MM-DD"
@@ -212,12 +224,24 @@ export default class Activity extends Component {
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='cover'>banner封面</label>
+									<div className="col-lg-10">
+										<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
+										             width={140} height={140}
+										             widthAndHeightStyle={{width: '140px', height: '140px'}}
+										             onChange={::this.onBannerImageChange}
+										/>
+										{this.renderHelpText(this.state.imageEmptyMessage)}
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
 									<label className="col-lg-2 control-label" htmlFor='title'>活动详情</label>
 									<div className="col-lg-10" >
-										<ReactQuill style={{ border: '1px solid #e5e6e7'}}
+										<ReactQuill ref='content' style={{ border: '1px solid #e5e6e7'}}
 											theme="snow"
 										            value={this.props.activity.content}
-										            onChange={this.onChange.bind(this,'content')} />
+													onChange={::this.onTextChange} />
 
 									</div>
 								</div>
@@ -304,9 +328,9 @@ export default class Activity extends Component {
 	}
 
 	renderHelpText(messages) {
-		// return (
-		// 	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
-		// );
+		 //return (
+		 //	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
+		 //);
 	}
 
 	renderMessage(message) {
