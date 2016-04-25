@@ -9,26 +9,25 @@ import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
 import classnames from 'classnames';
 import keys from 'lodash.keys';
-import LabelPicker from '../../../../containers/data-types/label-picker';
 import Combobox from '../../../../components/data-types/combobox';
 import ImagePicker from '../../../../containers/data-types/image-picker'
 
 export class EditLabel extends Component {
-	static validatorSchema = {
-		title: Joi.string().min(3).required().label('标题')
-	};
-
-	validatorTypes() {
-		return {
-			title: Joi.string().required().label('标题')
-		}
-	}
-
-	getValidatorData() {
-		return {
-			title: findDOMNode(this.refs.title).value
-		};
-	}
+	//static validatorSchema = {
+	//	title: Joi.string().min(3).required().label('标题')
+	//};
+    //
+	//validatorTypes() {
+	//	return {
+	//		title: Joi.string().required().label('标题')
+	//	}
+	//}
+    //
+	//getValidatorData() {
+	//	return {
+	//		title: findDOMNode(this.refs.title).value
+	//	};
+	//}
 
 	static propTypes = {
 		editingLabel: React.PropTypes.object.isRequired,
@@ -42,14 +41,7 @@ export class EditLabel extends Component {
 
 	getInitState() {
 		return {
-			editingLabel:  {
-				title: '',
-				type: 'classify',
-				display: false,
-				color: '#FC6e51',
-				cover:''
-			},
-			imageEmptyMessage: []
+			template: 0
 		};
 	}
 	renderHelpText(messages) {
@@ -71,23 +63,13 @@ export class EditLabel extends Component {
 
 	onChange(id, event) {
 		event && event.preventDefault();
-		const editingLabel = this.state.editingLabel;
+		let value = event.target.value;
 		switch (id) {
-			case 'cover':
-				this.props.onChange(id, value);
+			case 'template':
+				this.setState({template: value});
 				break;
 			default:
-				if (id.label) {
-					editingLabel[id.id || id] = {};
-					editingLabel[id.id || id]._id = id.value;
-					editingLabel[id.id || id].title = id.label;
-				} else {
-					editingLabel[id.id || id] = id.value || event.target.value;
-
-				}
-				this.setState({
-					editingLabel: editingLabel
-				});
+				this.props.onChange(id, value);
 		}
 
 	}
@@ -104,7 +86,7 @@ export class EditLabel extends Component {
 		const onValidate = (error) => {
 			if (!error) {
 
-				let editingLabel = this.state.editingLabel;
+				let editingLabel = this.props.editingLabel;
 				if (editingLabel._id) {
 					this.props.updateLabel(this.props.fragment, editingLabel).then(() => this.closeEdit());
 				} else {
@@ -119,7 +101,7 @@ export class EditLabel extends Component {
 
 	render() {
 		var isNew = this.props.editingLabel ? false : true;
-		var title = isNew ? '添加标签' : '编辑 ' + this.state.editingLabel.title;
+		var title = isNew ? '添加标签' : '编辑 ' + this.props.editingLabel.title;
 		var btn = isNew ? '添加' : '保存';
 
 		return (
@@ -129,7 +111,7 @@ export class EditLabel extends Component {
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
-							   value={this.state.editingLabel.title}/>
+							   value={this.props.editingLabel.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 					<div>
@@ -151,12 +133,12 @@ export class EditLabel extends Component {
 										 widthAndHeightStyle={{width: '140px', height: '140px'}}
 										 onChange={::this.onImageChange}
 							/>
-							{this.renderHelpText(this.state.imageEmptyMessage)}
+							{this.renderHelpText(this.props.imageEmptyMessage)}
 						</div>
 					</div>
 					<div>
 						<Combobox onChange={::this.onChange}
-								  value={this.state.editingLabel.display}
+								  value={this.props.editingLabel.display}
 								  option={{
 								  		id: 'display',
 								  		label: '是否显示',

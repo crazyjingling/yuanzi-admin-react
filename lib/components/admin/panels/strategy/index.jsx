@@ -363,9 +363,9 @@ class Strategy extends Component {
 							<select className='select2_demo_1 form-control m-b'
 							        value={this.props.strategy.consumingTime}
 							        onChange={this.onChange.bind(this,'consumingTime')}>
-								<option value='小于30分钟'>小于30分钟</option>
-								<option value='小于60分钟'>小于60分钟</option>
-								<option value='小于90分钟'>小于90分钟</option>
+								<option value='1'>小于30分钟</option>
+								<option value='2'>小于60分钟</option>
+								<option value='3'>小于90分钟</option>
 							</select>
 						</div>
 					</div>
