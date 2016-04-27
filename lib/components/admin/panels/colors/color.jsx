@@ -3,7 +3,7 @@ import React from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import Lightbox from '../../../lightbox';
 
-export default class Color extends Component {
+export default class  Color extends Component {
   static fragments = {
     color: {
       _id: 1,

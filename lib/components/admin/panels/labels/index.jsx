@@ -31,7 +31,7 @@ export default class Labels extends Component {
 		updateLabel: PropTypes.func.isRequired,
 		onAddNew: PropTypes.func.isRequired,
 		onRemove: PropTypes.func.isRequired,
-		editingLabel: PropTypes.object.isRequired,
+		label: PropTypes.object.isRequired,
 		onEdit: PropTypes.func.isRequired,
 		onEditClose: PropTypes.func.isRequired,
 		edit: PropTypes.boolean,
@@ -76,7 +76,7 @@ export default class Labels extends Component {
 	renderEdit () {
 		if (this.props.edit) {
 			return (
-				<Edit editingLabel={this.props.editingLabel}
+				<Edit label={this.props.editingLabel}
 					  options={options}
 					  onEditClose={this.props.onEditClose}
 					  addLabel={this.props.addLabel}

@@ -7,47 +7,72 @@ import OptionsList from '../../../options-list';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
+import * as labelActions from '../../../../client/actions/label';
 import classnames from 'classnames';
 import keys from 'lodash.keys';
+import {connect} from 'react-redux';
 import Combobox from '../../../../components/data-types/combobox';
 import ImagePicker from '../../../../containers/data-types/image-picker'
+import { labelConfig } from '../../../../containers/admin/containerInitConfig';
 
 export class EditLabel extends Component {
-	//static validatorSchema = {
-	//	title: Joi.string().min(3).required().label('标题')
-	//};
-    //
-	//validatorTypes() {
-	//	return {
-	//		title: Joi.string().required().label('标题')
-	//	}
-	//}
-    //
-	//getValidatorData() {
-	//	return {
-	//		title: findDOMNode(this.refs.title).value
-	//	};
-	//}
+@connect(
+	(state) => ({
+		label: state.label.data,
+		errors: state.label.errors,
+	}),
+	(dispatch) => ({
+		...bindActionCreators(labelActions, dispatch),
+	})
+)
+	static validatorSchema = {
+		title: Joi.string().min(3).required().label('标题')
+	};
 
+	validatorTypes() {
+		return {
+			title: Joi.string().required().label('标题')
+		}
+	}
+
+	getValidatorData() {
+		return {
+			title: findDOMNode(this.refs.title).value
+		};
+	}
+	static fragments = {
+	label: labelConfig.fragments.label
+	}
 	static propTypes = {
-		editingLabel: React.PropTypes.object.isRequired,
+		label: React.PropTypes.object,
 		options: React.PropTypes.array,
 		onEditClose: React.PropTypes.func.isRequired,
 		addLabel: React.PropTypes.func.isRequired,
 		updateLabel: React.PropTypes.func.isRequired,
-		fragment: React.PropTypes.object.isRequired,
 		onChange: React.PropTypes.func.isRequired
+	}
+	static panelSettings = {
+		activePanelType: 'label',
+		breadcrumbs: [
+			{
+				link: '/admin/labels'
+			}
+		]
 	}
 
 	getInitState() {
 		return {
-			template: 0
+			label: this.props.value || {
+				title: '',
+				color: '#ffffff',
+				cover:{_id: ''},
+			}
 		};
 	}
 	renderHelpText(messages) {
-		return (
-			<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
-		);
+		//return (
+		//	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
+		//);
 	}
 
 	renderMessage(message) {
@@ -86,11 +111,11 @@ export class EditLabel extends Component {
 		const onValidate = (error) => {
 			if (!error) {
 
-				let editingLabel = this.props.editingLabel;
-				if (editingLabel._id) {
-					this.props.updateLabel(this.props.fragment, editingLabel).then(() => this.closeEdit());
+				let label = this.props.label;
+				if (label._id) {
+					this.props.updateLabel(this.constructor.fragment, label).then(() => this.closeEdit());
 				} else {
-					this.props.addLabel(this.props.fragment, editingLabel).then(() => this.closeEdit());
+					this.props.addLabel(this.constructor.fragment, label).then(() => this.closeEdit());
 				}
 				this.closeEdit();
 
@@ -100,10 +125,9 @@ export class EditLabel extends Component {
 	}
 
 	render() {
-		var isNew = this.props.editingLabel ? false : true;
-		var title = isNew ? '添加标签' : '编辑 ' + this.props.editingLabel.title;
+		var isNew = this.props.label ? false : true;
+		var title = isNew ? '添加标签' : '编辑 ' + this.props.label.title;
 		var btn = isNew ? '添加' : '保存';
-
 		return (
 			<Lightbox className='small' onClose={this.props.onEditClose} title={title}>
 				<form onSubmit={this.onSubmit.bind(this)}>
@@ -111,13 +135,13 @@ export class EditLabel extends Component {
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
-							   value={this.props.editingLabel.title}/>
+							   value={this.props.label.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 					<div>
 						<label htmlFor='type'>分类</label>
 						<select ref='type' className='select2_demo_1 form-control'
-								value={this.props.editingLabel.type}
+								value={this.props.label.type}
 								onChange={this.onChange.bind(this,'type')}>
 							<option value='classify'>攻略妙招标签</option>
 							<option value='userAssortment'>达人标签</option>
@@ -128,7 +152,7 @@ export class EditLabel extends Component {
 					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 						<div className="col-lg-10">
-							<ImagePicker ref="cover" value={this.props.editingLabel.cover._id}
+							<ImagePicker ref="cover" value={this.props.label.cover._id}
 										 width={140} height={140}
 										 widthAndHeightStyle={{width: '140px', height: '140px'}}
 										 onChange={::this.onImageChange}
@@ -138,7 +162,7 @@ export class EditLabel extends Component {
 					</div>
 					<div>
 						<Combobox onChange={::this.onChange}
-								  value={this.props.editingLabel.display}
+								  value={this.props.label.display}
 								  option={{
 								  		id: 'display',
 								  		label: '是否显示',
