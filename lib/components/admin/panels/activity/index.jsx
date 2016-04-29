@@ -83,7 +83,6 @@ export default class Activity extends Component {
 	}
 
 	onTextChange(value){
-		console.log(value);
 		this.props.onChange('content', value);
 	}
 

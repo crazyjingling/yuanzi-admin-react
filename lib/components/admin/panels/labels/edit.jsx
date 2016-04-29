@@ -7,24 +7,11 @@ import OptionsList from '../../../options-list';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
-import * as labelActions from '../../../../client/actions/label';
-import classnames from 'classnames';
 import keys from 'lodash.keys';
 import {connect} from 'react-redux';
-import Combobox from '../../../../components/data-types/combobox';
 import ImagePicker from '../../../../containers/data-types/image-picker'
-import { labelConfig } from '../../../../containers/admin/containerInitConfig';
 
 export class EditLabel extends Component {
-@connect(
-	(state) => ({
-		label: state.label.data,
-		errors: state.label.errors,
-	}),
-	(dispatch) => ({
-		...bindActionCreators(labelActions, dispatch),
-	})
-)
 	static validatorSchema = {
 		title: Joi.string().min(3).required().label('标题')
 	};
@@ -40,29 +27,20 @@ export class EditLabel extends Component {
 			title: findDOMNode(this.refs.title).value
 		};
 	}
-	static fragments = {
-	label: labelConfig.fragments.label
-	}
+
 	static propTypes = {
 		label: React.PropTypes.object,
+		fragment: React.PropTypes.object,
 		options: React.PropTypes.array,
 		onEditClose: React.PropTypes.func.isRequired,
 		addLabel: React.PropTypes.func.isRequired,
 		updateLabel: React.PropTypes.func.isRequired,
 		onChange: React.PropTypes.func.isRequired
 	}
-	static panelSettings = {
-		activePanelType: 'label',
-		breadcrumbs: [
-			{
-				link: '/admin/labels'
-			}
-		]
-	}
 
 	getInitState() {
 		return {
-			label: this.props.value || {
+			label: this.props.label || {
 				title: '',
 				color: '#ffffff',
 				cover:{_id: ''},
@@ -87,16 +65,9 @@ export class EditLabel extends Component {
 	}
 
 	onChange(id, event) {
-		event && event.preventDefault();
 		let value = event.target.value;
-		switch (id) {
-			case 'template':
-				this.setState({template: value});
-				break;
-			default:
-				this.props.onChange(id, value);
-		}
-
+		alert(id+value);
+		this.props.onChange(id, value);
 	}
 // cover
 	onImageChange(mediaItem) {
@@ -107,15 +78,16 @@ export class EditLabel extends Component {
 	}
 
 	onSubmit() {
+		alert(this.props.label.title)
 		event.preventDefault();
 		const onValidate = (error) => {
 			if (!error) {
 
 				let label = this.props.label;
 				if (label._id) {
-					this.props.updateLabel(this.constructor.fragment, label).then(() => this.closeEdit());
+					this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
 				} else {
-					this.props.addLabel(this.constructor.fragment, label).then(() => this.closeEdit());
+					this.props.addLabel(this.props.fragment, label).then(() => this.closeEdit());
 				}
 				this.closeEdit();
 
@@ -143,9 +115,10 @@ export class EditLabel extends Component {
 						<select ref='type' className='select2_demo_1 form-control'
 								value={this.props.label.type}
 								onChange={this.onChange.bind(this,'type')}>
-							<option value='classify'>攻略妙招标签</option>
-							<option value='userAssortment'>达人标签</option>
-							<option value='userAssortment'>关键字</option>
+							<option value='classify'>最新标签库</option>
+							<option value='cardTopicAssortment'>原标签</option>
+							<option value='userAssortment'>用户标签</option>
+							<option value='searchKeyword'>关键字</option>
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>
@@ -161,18 +134,13 @@ export class EditLabel extends Component {
 						</div>
 					</div>
 					<div>
-						<Combobox onChange={::this.onChange}
-								  value={this.props.label.display}
-								  option={{
-								  		id: 'display',
-								  		label: '是否显示',
-								  }}
-								  labels={['不显示', '显示']}
-						/>
+						<select ref='display' className='select2_demo_1 form-control'
+								value={this.props.label.display}
+								onChange={this.onChange.bind(this,'display')}>
+								<option value='true' >显示</option>
+								<option value='false' >不显示</option>
+						</select>
 						{this.renderHelpText(this.props.getValidationMessages('display'))}
-					</div>
-					<div>
-						<input type='text' hidden/>
 					</div>
 					<a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
 				</form>
