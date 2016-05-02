@@ -65,7 +65,7 @@ export function getQueryVariables (query) {
 
 const _defaultQuery = {
   page: 1,
-  limit: 10
+  limit: 20
 };
 
 export default function queryProps (defaultQuery = _defaultQuery) {

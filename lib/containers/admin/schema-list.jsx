@@ -18,7 +18,7 @@ import SchemaList from '../../components/admin/panels/schema-list';
 )
 @queryProps({
   page: 1,
-  limit: 10,
+  limit: 20,
   sort: '_id',
   order: 'desc'
 })

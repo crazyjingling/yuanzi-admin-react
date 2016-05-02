@@ -19,7 +19,30 @@ import Activity from '../../components/admin/panels/activity';
 	})
 )
 export default class ActivityContainer extends Component {
-	static fragments = Activity.fragments;
+	static fragments = {
+		activity: {
+			_id: 1,
+			owner: {
+				_id: 1,
+				nickname: 1
+			},
+			cover: {
+				ossUrl: 1,
+				_id: 1
+			},
+			title: 1,
+			price: 1,
+			number: 1,
+			location: 1,
+			content: 1,
+			startDate: 1,
+			endDate: 1,
+			bannerImg: {
+				ossUrl: 1,
+				_id: 1
+			}
+		}
+	};
 
 	static panelSettings = {
 		activePanelType: 'activity',
@@ -86,8 +109,8 @@ export default class ActivityContainer extends Component {
 				error: false,
 				new: false
 			});
-			if (isNew) {
-				this.props.history.pushState({}, `/admin/activitys/${resultActivity._id}`);
+			if (!isNew) {
+				this.props.history.pushState({}, `/admin/activitys/${resultActivity.addActivity._id}`);
 			}
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {

@@ -214,6 +214,19 @@ class Strategy extends Component {
 					</div>
 					<div className="hr-line-dashed"></div>
 					<div className="form-group">
+						<label className="col-lg-2 control-label" htmlFor='info'>适用年龄</label>
+						<div className="col-lg-10">
+							<select className='select2_demo_1 form-control m-b'
+									value={this.props.strategy.scope}
+									onChange={this.onChange.bind(this,'scope')}>
+								<option value='1'>1-2岁</option>
+								<option value='2'>3-4岁</option>
+								<option value='3'>5岁以上</option>
+							</select>
+						</div>
+					</div>
+					<div className="hr-line-dashed"></div>
+					<div className="form-group">
 						<label className="col-lg-2 control-label" htmlFor='labels'>标签</label>
 						<div className="col-lg-10">
 							<div className="input-group">
@@ -363,9 +376,9 @@ class Strategy extends Component {
 							<select className='select2_demo_1 form-control m-b'
 							        value={this.props.strategy.consumingTime}
 							        onChange={this.onChange.bind(this,'consumingTime')}>
-								<option value='小于30分钟'>小于30分钟</option>
-								<option value='小于60分钟'>小于60分钟</option>
-								<option value='小于90分钟'>小于90分钟</option>
+								<option value='1'>小于30分钟</option>
+								<option value='2'>小于60分钟</option>
+								<option value='3'>小于90分钟</option>
 							</select>
 						</div>
 					</div>

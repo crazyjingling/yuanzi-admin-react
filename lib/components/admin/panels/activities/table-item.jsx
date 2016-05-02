@@ -80,12 +80,12 @@ export default class TableItem extends Component {
 				inner = field;
 		}
 
-		if (showField.key.indexOf('commentReportCount') !== -1 && data.commentReportRelated.commentReportCount) {
-			inner =
-				<a href='#' onClick={this.props.onViewCommentReport.bind(this, data.commentReportRelated)}>
-					<span>{data.commentReportRelated.commentReportCount}</span>
-				</a>
-		}
+		//if (showField.key.indexOf('commentReportCount') !== -1 && data.commentReportRelated.commentReportCount) {
+		//	inner =
+		//		<a href='#' onClick={this.props.onViewCommentReport.bind(this, data.commentReportRelated)}>
+		//			<span>{data.commentReportRelated.commentReportCount}</span>
+		//		</a>
+		//}
 		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;
 
 	}

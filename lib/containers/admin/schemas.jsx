@@ -17,7 +17,7 @@ import Schemas from '../../components/admin/panels/schemas';
 )
 @queryProps({
   page: 1,
-  limit: 10,
+  limit: 20,
   sort: '_id',
   order: 'desc'
 })

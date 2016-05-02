@@ -13,8 +13,8 @@ export default class DateRangePicker extends Component {
 	}
 	getInitState(){
 		return {
-			startDate: this.props.selected['$gte'] ? moment(this.props.selected['$gte']) : moment(),
-			endDate: this.props.selected['$lte'] ? moment(this.props.selected['$gte']) : moment(),
+			startDate: this.props.selected['$gte'] ? moment(this.props.selected['$gte']) : "",
+			endDate: this.props.selected['$lte'] ? moment(this.props.selected['$gte']) : "",
 			selected: this.props.selected,
 			dateFormat: this.props.dateFormat || 'YYYY-MM-DD HH:mm:ss'
 		};

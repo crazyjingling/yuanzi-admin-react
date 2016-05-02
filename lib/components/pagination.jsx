@@ -15,7 +15,7 @@ export default class Pagination extends Component {
   static defaultProps = {
     query: {
       page: 1,
-      limit: 10
+      limit: 20
     },
     count: 0
   }

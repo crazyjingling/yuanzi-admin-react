@@ -7,10 +7,9 @@ import OptionsList from '../../../options-list';
 import Joi from 'joi';
 import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
-import classnames from 'classnames';
 import keys from 'lodash.keys';
-import LabelPicker from '../../../../containers/data-types/label-picker';
-import Combobox from '../../../../components/data-types/combobox';
+import {connect} from 'react-redux';
+import ImagePicker from '../../../../containers/data-types/image-picker'
 
 export class EditLabel extends Component {
 	static validatorSchema = {
@@ -30,30 +29,28 @@ export class EditLabel extends Component {
 	}
 
 	static propTypes = {
-		editingLabel: React.PropTypes.object.isRequired,
+		label: React.PropTypes.object,
+		fragment: React.PropTypes.object,
 		options: React.PropTypes.array,
 		onEditClose: React.PropTypes.func.isRequired,
 		addLabel: React.PropTypes.func.isRequired,
 		updateLabel: React.PropTypes.func.isRequired,
-		fragment: React.PropTypes.object.isRequired
+		onChange: React.PropTypes.func.isRequired
 	}
 
 	getInitState() {
 		return {
-			editingLabel: this.props.editingLabel || {
+			label: this.props.label || {
 				title: '',
-				type: 'cardTopicAssortment',
-				ownedType: 'all',
-				display: false,
-				color: '#FC6e51'
+				color: '#ffffff',
+				cover:{_id: ''},
 			}
 		};
 	}
-
 	renderHelpText(messages) {
-		return (
-			<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
-		);
+		//return (
+		//	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
+		//);
 	}
 
 	renderMessage(message) {
@@ -68,32 +65,29 @@ export class EditLabel extends Component {
 	}
 
 	onChange(id, event) {
-		event && event.preventDefault();
-		const editingLabel = this.state.editingLabel;
-		if (id.label) {
-			editingLabel[id.id || id] = {};
-			editingLabel[id.id || id]._id = id.value;
-			editingLabel[id.id || id].title = id.label;
-		} else {
-			editingLabel[id.id || id] = id.value || event.target.value;
-
-		}
-		this.setState({
-			editingLabel: editingLabel
+		let value = event.target.value;
+		alert(id+value);
+		this.props.onChange(id, value);
+	}
+// cover
+	onImageChange(mediaItem) {
+		this.props.onChange('cover', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
 		});
 	}
 
-
 	onSubmit() {
+		alert(this.props.label.title)
 		event.preventDefault();
 		const onValidate = (error) => {
 			if (!error) {
 
-				let editingLabel = this.state.editingLabel;
-				if (editingLabel._id) {
-					this.props.updateLabel(this.props.fragment, editingLabel).then(() => this.closeEdit());
+				let label = this.props.label;
+				if (label._id) {
+					this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
 				} else {
-					this.props.addLabel(this.props.fragment, editingLabel).then(() => this.closeEdit());
+					this.props.addLabel(this.props.fragment, label).then(() => this.closeEdit());
 				}
 				this.closeEdit();
 
@@ -103,10 +97,9 @@ export class EditLabel extends Component {
 	}
 
 	render() {
-		var isNew = this.props.editingLabel ? false : true;
-		var title = isNew ? '添加标签' : '编辑 ' + this.state.editingLabel.title;
+		var isNew = this.props.label ? false : true;
+		var title = isNew ? '添加标签' : '编辑 ' + this.props.label.title;
 		var btn = isNew ? '添加' : '保存';
-
 		return (
 			<Lightbox className='small' onClose={this.props.onEditClose} title={title}>
 				<form onSubmit={this.onSubmit.bind(this)}>
@@ -114,44 +107,40 @@ export class EditLabel extends Component {
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
-							   value={this.state.editingLabel.title}/>
+							   value={this.props.label.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 					<div>
 						<label htmlFor='type'>分类</label>
 						<select ref='type' className='select2_demo_1 form-control'
-								value={this.props.editingLabel.type}
+								value={this.props.label.type}
 								onChange={this.onChange.bind(this,'type')}>
-							<option value='cardTopicAssortment'>妙招&话题标签</option>
-							<option value='userAssortment'>达人标签</option>
+							<option value='classify'>最新标签库</option>
+							<option value='cardTopicAssortment'>原标签</option>
+							<option value='userAssortment'>用户标签</option>
+							<option value='searchKeyword'>关键字</option>
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>
-					<div>
-						<LabelPicker onChange={::this.onChange}
-									 value={this.state.editingLabel.ownedType ? this.state.editingLabel.ownedType._id : 'all'}
-									 labelsType={['classify']}
-									 option={{
-										id: 'ownedType',
-										label: '所属标签分类',
-										isAllShow: true
-									}}
-						/>
-						{this.renderHelpText(this.props.getValidationMessages('ownedType'))}
+					<div className="form-group">
+						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
+						<div className="col-lg-10">
+							<ImagePicker ref="cover" value={this.props.label.cover._id}
+										 width={140} height={140}
+										 widthAndHeightStyle={{width: '140px', height: '140px'}}
+										 onChange={::this.onImageChange}
+							/>
+							{this.renderHelpText(this.props.imageEmptyMessage)}
+						</div>
 					</div>
 					<div>
-						<Combobox onChange={::this.onChange}
-								  value={this.state.editingLabel.display}
-								  option={{
-								  		id: 'display',
-								  		label: '是否显示',
-								  }}
-								  labels={['不显示', '显示']}
-						/>
+						<select ref='display' className='select2_demo_1 form-control'
+								value={this.props.label.display}
+								onChange={this.onChange.bind(this,'display')}>
+								<option value='true' >显示</option>
+								<option value='false' >不显示</option>
+						</select>
 						{this.renderHelpText(this.props.getValidationMessages('display'))}
-					</div>
-					<div>
-						<input type='text' hidden/>
 					</div>
 					<a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
 				</form>

@@ -7,7 +7,7 @@ import Container from './container';
 
 export default class DynamicList extends Component {
   static defaultProps = {
-    limit: 10,
+    limit: 20,
     columns: 2,
     verticalGutter: '10px',
     horizontalGutter: '10px'

@@ -20,7 +20,7 @@ import filter from 'lodash.filter';
 )
 @queryProps({
 	page: 1,
-	limit: 10,
+	limit: 20,
 	sort: 'createdAt',
 	order: 'desc',
 	search: JSON.stringify(systemUserConfig.defaultRequiredSearch)

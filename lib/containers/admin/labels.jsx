@@ -22,7 +22,7 @@ import QRCode from 'qrcode.react';
 )
 @queryProps({
 	page: 1,
-	limit: 10,
+	limit: 20,
 	sort: 'createdAt',
 	order: 'desc'
 })
@@ -43,6 +43,7 @@ export default class LabelsContainer extends Component {
 		updateLabel: PropTypes.func.isRequired,
 		removeLabel: PropTypes.func.isRequired,
 		addLabel: PropTypes.func.isRequired,
+		changeLabelFields: PropTypes.func.isRequired
 	}
 	getInitState() {
 		return {
@@ -102,7 +103,9 @@ export default class LabelsContainer extends Component {
 		});
 	}
 
-
+	onChange (id, value) {
+		this.props.changeLabelFields(id, value);
+	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
@@ -129,6 +132,7 @@ export default class LabelsContainer extends Component {
 					onRemove={::this.onRemove}
 					onEdit={::this.onEdit}
 					onEditClose={::this.onEditClose}
+					onChange={::this.onChange}
 				/>
 				{this.renderRemoving()}
 			</div>
