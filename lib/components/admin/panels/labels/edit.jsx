@@ -38,15 +38,15 @@ export class EditLabel extends Component {
 		onChange: React.PropTypes.func.isRequired
 	}
 
-	getInitState() {
-		return {
-			label: this.props.label || {
-				title: '',
-				color: '#ffffff',
-				cover:{_id: ''},
-			}
-		};
-	}
+	//getInitState() {
+	//	return {
+	//		label: this.props.label || {
+	//			title: '',
+	//			color: '#ffffff',
+	//			cover:{_id: ''},
+	//		}
+	//	};
+	//}
 	renderHelpText(messages) {
 		//return (
 		//	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
@@ -66,7 +66,7 @@ export class EditLabel extends Component {
 
 	onChange(id, event) {
 		let value = event.target.value;
-		alert(id+value);
+		alert(value);
 		this.props.onChange(id, value);
 	}
 // cover
@@ -78,7 +78,6 @@ export class EditLabel extends Component {
 	}
 
 	onSubmit() {
-		alert(this.props.label.title)
 		event.preventDefault();
 		const onValidate = (error) => {
 			if (!error) {
