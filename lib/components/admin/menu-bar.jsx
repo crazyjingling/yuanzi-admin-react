@@ -114,7 +114,7 @@ export default class MenuBar extends Component {
 					{
 						type: 'banneredit',
 						link: '/admin/banners/activity',
-						label: '活动Banner'
+						label: '活动 Banner'
 					}
 				]
 			},

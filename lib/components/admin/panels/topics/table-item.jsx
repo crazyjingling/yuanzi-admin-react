@@ -51,13 +51,25 @@ export default class TableItem extends Component {
 				inner = <Avatar avatar={field} userId={data.owner._id}/>;
 				break;
 			case 'image':
-				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
-					<img style={{ maxWidth: '40px' }}/>;
+				inner = field !== '无' ? <img src={field} style={{ width: '75px', height: '45px', objectFit: 'cover' }}/> :
+					<img style={{  width: '75px', height: '45px', objectFit:'cover' }}/>;
 				break;
 			case 'image.circle':
 				inner = field !== '无' ? <img className="img-circle" src={field} style={{ maxWidth: '40px' }}/> :
 					<img className="img-circle" style={{ maxWidth: '40px' }}/>;
 				break;
+			case 'tag':
+			{
+
+				inner = (
+					<ul className="tag-list" style={{ padding: 0 }}>
+						{field.split(',').map((f) => {
+							return f? <li><a><i className="fa fa-tag" />{f}</a></li>: ''
+						})}
+					</ul>
+				);
+				break;
+			}
 			case 'text':
 				inner = field || '无';
 				break;

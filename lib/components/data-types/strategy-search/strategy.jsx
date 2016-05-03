@@ -24,10 +24,20 @@ export default class Strategy extends Component {
 	render() {
 		let checked = filter(this.props.selectedStrategies, (o) => o._id == this.props.strategy._id).length;
 		return (
-			<div className="col-lg-4">
-				<img src={this.props.strategy.cover} width="140px" height="140px"/>
-				<input value={this.props.strategy.title}/>
-				<input type="checkbox" value="1" checked={checked} onChange={this.onChange.bind(this,this.props.strategy)}/>
+			<div className="col-lg-3">
+				<div className="ibox">
+					<div className="ibox-content product-box">
+						<div className="product-imitation" style={{ padding: 0 }}>
+							<img src={this.props.strategy.cover} width="140px" height="140px"/>
+						</div>
+						<div className="product-desc">
+							<div className="product-name">{this.props.strategy.title}</div>
+							<small>by {this.props.strategy.owner.nickname}</small>
+						</div>
+					</div>
+					<input type="checkbox" value="1" checked={checked} onChange={this.onChange.bind(this,this.props.strategy)}/>
+				</div>
+
 			</div>
 		);
 	}

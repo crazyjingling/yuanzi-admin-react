@@ -58,6 +58,18 @@ export default class TableItem extends Component {
 				inner = field !== '无' ? <img className="img-circle" src={field} style={{ maxWidth: '40px' }}/> :
 					<img className="img-circle" style={{ maxWidth: '40px' }}/>;
 				break;
+			case 'tag':
+			{
+
+				inner = (
+					<ul className="tag-list" style={{ padding: 0 }}>
+						{field.split(',').map((f) => {
+							return f? <li><a><i className="fa fa-tag" />{f}</a></li>: ''
+						})}
+					</ul>
+				);
+				break;
+			}
 			case 'text':
 				inner = field || '无';
 				break;
@@ -97,7 +109,7 @@ export default class TableItem extends Component {
 					<span>{data.commentReportRelated.commentReportCount}</span>
 				</a>
 		}
-		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;
+		return <td key={showField.key} style={{ overflow: 'auto', maxWidth: '200px' }}>{inner}</td>;
 
 	}
 

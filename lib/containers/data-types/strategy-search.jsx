@@ -19,7 +19,10 @@ export default class StrategySearchContainer extends Component {
 		strategySearch: {
 			_id: 1,
 			title: 1,
-			cover: 1
+			cover: 1,
+			owner: {
+				nickname: 1
+			}
 		}
 	}
 

@@ -56,17 +56,22 @@ export default class Admin extends Component {
 			      </ol>
 		      </div>
 	      </div>
-        <div className="wrapper wrapper-content animated fadeIn">
-          <div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="ibox">
-                  {this.props.children}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+	      <div className="wrapper wrapper-content animated fadeIn">
+		      <div>
+			      <div className="row">
+				      <div className="col-lg-12">
+					      <div className="ibox">
+						      {this.props.children}
+					      </div>
+				      </div>
+			      </div>
+		      </div>
+	      </div>
+	      <div className="footer">
+		      <div>
+			      <strong>Copyright</strong> 北京千鱼教育科技服务有限公司 © 2014-2015
+		      </div>
+	      </div>
       </div>
     </div>
     );

@@ -41,7 +41,6 @@ export default class Html extends React.Component {
 			<script src="/js/plugins/sparkline/jquery.sparkline.min.js"></script>
 			<script src="/js/demo/sparkline-demo.js"></script>
 			<script src="/js/plugins/chartJs/Chart.min.js"></script>
-			<script src="/js/plugins/toastr/toastr.min.js"></script>
 			<script src="/js/site.js"></script>
 			<script dangerouslySetInnerHTML={{__html: `window.__initialState = ${this.props.props};`}}/>
 			{this.renderFooter()}

@@ -28,21 +28,24 @@ export default class StrategySearch extends Component {
 	render() {
 		return (
 			<div>
-				<div>
+				<div className="input-group">
 					<input className="form-control" value={this.state.searchValue}
 						   onChange={this.onSearchChange.bind(this)}
 						   placeholder="描述"/>
-					<a className='button button-primary' href='#'
-					   onClick={this.onSearch.bind(this)}>搜索</a>
+					<span className="input-group-btn">
+						<button className='btn btn-primary' href='#'
+						   onClick={this.onSearch.bind(this)}>搜索</button>
+					</span>
 
+				</div>
+				<div className="row">
+					<h5>已选妙招</h5>
+					{this.props.selectedStrategies.map((item)=><Strategy strategy={item} selectedStrategies={this.props.selectedStrategies} onChange={this.props.onChange}/>)}
 				</div>
 				<div>
 					{this.props.strategies.map((item)=><Strategy strategy={item} selectedStrategies={this.props.selectedStrategies} onChange={this.props.onChange}/>)}
 				</div>
-				<div>
-					<div>已选妙招</div>
-					{this.props.selectedStrategies.map((item)=><Strategy strategy={item} selectedStrategies={this.props.selectedStrategies} onChange={this.props.onChange}/>)}
-				</div>
+
 			</div>
 		);
 	}

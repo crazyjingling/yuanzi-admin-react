@@ -228,9 +228,11 @@ class User extends Component {
 									<div>
 										<input type='text' hidden/>
 									</div>
-									<div className="text-center">
-										<a className='button button-primary' href='#'
-										   onClick={this.onSave.bind(this)}>保存</a>
+									<div className="form-group">
+										<div className="col-sm-4 col-sm-offset-2">
+											<a className='button button-primary' href='#'
+											   onClick={this.onSave.bind(this)}>保存</a>
+										</div>
 									</div>
 								</form>
 							</div>

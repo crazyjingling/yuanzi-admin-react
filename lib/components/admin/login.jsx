@@ -25,8 +25,6 @@ export default class Login extends Component {
 						<img src='/img/logo-100.png' width='150' style={{borderRadius:'10px'}}/>
 					</div>
 					<h3>Welcome to 元子育儿</h3>
-					<p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.</p>
-					<p>Login in. To see it in action.</p>
 					<form className="m-t" role="form" onSubmit={this.onSubmit.bind(this)}>
 						<div className="form-group">
 							<input type='text' name='username' className="form-control" required="" placeholder='Username' value={this.props.username} onChange={this.onChange.bind(this, 'username')} />

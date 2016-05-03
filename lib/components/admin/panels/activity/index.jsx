@@ -223,7 +223,7 @@ export default class Activity extends Component {
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='cover'>banner封面</label>
+									<label className="col-lg-2 control-label" htmlFor='cover'>banner 封面</label>
 									<div className="col-lg-10">
 										<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
 										             width={140} height={140}
@@ -248,9 +248,12 @@ export default class Activity extends Component {
 								<div>
 									<input type='text' hidden/>
 								</div>
-								<div className="text-center">
-									<a className='button button-primary' href='#'
-									   onClick={this.props.onCreate.bind(this)}>保存</a>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<div className="col-sm-4 col-sm-offset-2">
+										<a className='btn btn-primary' href='#'
+										   onClick={this.props.onCreate.bind(this)}>保存</a>
+									</div>
 								</div>
 							</form>
 						</div>

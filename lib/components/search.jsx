@@ -89,20 +89,23 @@ export default class Search extends Component {
 
 		if (type === 'labelPicker') {
 			return (
-				<LabelPicker onChange={::this.searchChange}
-							 key={searchField.key}
-							 value={this.state.search[searchField.key].value || 'all'}
-							 labelsType={searchField.labelsType}
-							 option={{
+				<div className="form-group" key={searchField.key} style={{ margin: '0 10px' }}>
+					<LabelPicker onChange={::this.searchChange}
+					             key={searchField.key}
+					             value={this.state.search[searchField.key].value || 'all'}
+					             labelsType={searchField.labelsType}
+					             option={{
 										id: 'labels',
 										label: '标签',
 										isAllShow: true
 									}}
-				/>
+					/>
+				</div>
+
 			)
 		} else if (type === 'dateRangePicker') {
 			return (
-				<div className="form-group" key={searchField.key}>
+				<div className="form-group" key={searchField.key} style={{ margin: '0 10px' }}>
 					<label className="control-label">{searchField.label}</label>
 					<DateRangePicker onChange={::this.onDateRangeChange}
 									 id={searchField.key}

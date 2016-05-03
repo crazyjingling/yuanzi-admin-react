@@ -113,9 +113,13 @@ class Topic extends Component {
 											<input type='text' hidden/>
 										</div>
 										{this.renderBasic()}
-										<div className="text-center">
-											<a className='button button-primary' href='#'
-											   onClick={this.onSave.bind(this)}>保存</a>
+										<div className="hr-line-dashed"></div>
+										<div className="form-group">
+
+											<div className="col-sm-4 col-sm-offset-2">
+												<a className='btn btn-primary' href='#'
+												   onClick={this.onSave.bind(this)}>保存</a>
+											</div>
 										</div>
 									</form>
 								</div>

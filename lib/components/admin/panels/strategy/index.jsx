@@ -146,11 +146,14 @@ class Strategy extends Component {
 										</div>
 										{this.renderBasic()}
 										{this.renderNext()}
-										<div className="text-center">
-											{this.renderReturnBtn()}
-											<a className='button button-primary' href='#'
-											   onClick={this.onSave.bind(this)}>{(this.props.isNew || this.state.isNextShow) ? '保存' : '下一步'}</a>
+
+										<div className="form-group">
+											<div className="col-sm-4 col-sm-offset-2">
+												<a className='btn btn-primary' href='#'
+												   onClick={this.onSave.bind(this)}>{(this.props.isNew || this.state.isNextShow) ? '保存' : '下一步'}</a>
+											</div>
 										</div>
+										
 									</form>
 								</div>
 							</div>
