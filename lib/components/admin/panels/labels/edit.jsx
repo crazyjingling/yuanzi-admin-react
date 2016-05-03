@@ -38,15 +38,23 @@ export class EditLabel extends Component {
 		onChange: React.PropTypes.func.isRequired
 	}
 
-	//getInitState() {
-	//	return {
-	//		label: this.props.label || {
-	//			title: '',
-	//			color: '#ffffff',
-	//			cover:{_id: ''},
-	//		}
-	//	};
-	//}
+	getInitState() {
+		console.log(this.props)
+		return {
+			label: this.props.label || {
+				title: '',
+				color: '#ffffff',
+				cover:{_id: ''},
+			}
+		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.label != this.state.label) {
+			this.setState({ label: nextProps.label })
+		}
+	}
+
 	renderHelpText(messages) {
 		//return (
 		//	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
@@ -66,8 +74,18 @@ export class EditLabel extends Component {
 
 	onChange(id, event) {
 		let value = event.target.value;
-		alert(value);
-		this.props.onChange(id, value);
+		switch (id) {
+			case 'title':{
+				let label = this.state.label;
+				label.title = value;
+				this.setState({ label: label });
+				this.props.onChange(id, value);
+				break;
+			}
+			default:
+				break;
+
+		}
 	}
 // cover
 	onImageChange(mediaItem) {
@@ -82,7 +100,8 @@ export class EditLabel extends Component {
 		const onValidate = (error) => {
 			if (!error) {
 
-				let label = this.props.label;
+				let label = this.state.label;
+				console.log(label)
 				if (label._id) {
 					this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
 				} else {
@@ -106,7 +125,7 @@ export class EditLabel extends Component {
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
-							   value={this.props.label.title}/>
+							   value={this.state.label.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 					<div>
@@ -141,7 +160,7 @@ export class EditLabel extends Component {
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('display'))}
 					</div>
-					<a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
+					<a className='btn btn-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
 				</form>
 			</Lightbox>
 		);
