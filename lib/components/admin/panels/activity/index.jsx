@@ -10,23 +10,25 @@ import DatePicker from '../../../data-types/date-picker';
 import OwnerPick from '../../../../containers/data-types/owner-picker';
 var ReactQuill = require('react-quill');
 import ImagePicker from '../../../../containers/data-types/image-picker'
+import Joi from 'joi';
+
 export default class Activity extends Component {
 
-	//static validatorSchema = {
-	//	title: Joi.string().min(3).required().label('标题')
-	//};
-	//
-	//validatorTypes() {
-	//	return {
-	//		title: Joi.string().required().label('标题')
-	//	}
-	//}
-	//
-	//getValidatorData() {
-	//	return {
-	//		title: findDOMNode(this.refs.title).value
-	//	};
-	//}
+	static validatorSchema = {
+		title: Joi.string().min(3).required().label('标题')
+	};
+
+	validatorTypes() {
+		return {
+			title: Joi.string().required().label('标题')
+		}
+	}
+
+	getValidatorData() {
+		return {
+			title: findDOMNode(this.refs.title).value
+		};
+	}
 	static propTypes = {
 		activity: React.PropTypes.object,
 		user: React.PropTypes.object.isRequired,
@@ -107,7 +109,7 @@ export default class Activity extends Component {
 		if (!isNew && this.props.errors) {
 			result = <NotFound />;
 		} else {
-			const createdUser = isNew ? this.props.user : this.props.strategy.owner;
+			const createdUser = isNew ? this.props.user : this.props.activity.owner;
 			const breadcrumbs = this.props.breadcrumbs.slice();
 			breadcrumbs.push({
 				label: ''
