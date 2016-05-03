@@ -9,8 +9,19 @@ import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
 import keys from 'lodash.keys';
 import {connect} from 'react-redux';
-import ImagePicker from '../../../../containers/data-types/image-picker'
+import * as labelsActions from '../../../../client/actions/label';
+import {bindActionCreators} from 'redux';
 
+import ImagePicker from '../../../../containers/data-types/image-picker'
+@connect(
+	(state) => ({
+		label: state.label.data,
+		errors: state.label.errors,
+	}),
+	(dispatch) => ({
+		...bindActionCreators(labelsActions, dispatch),
+	})
+)
 export class EditLabel extends Component {
 	static validatorSchema = {
 		title: Joi.string().min(3).required().label('标题')
@@ -39,12 +50,12 @@ export class EditLabel extends Component {
 	}
 
 	getInitState() {
-		console.log(this.props)
 		return {
-			label: this.props.label || {
+			label: {
 				title: '',
-				color: '#ffffff',
-				cover:{_id: ''},
+				type: 'classify',
+				cover:{ossUrl: '',
+					_id: ''}
 			}
 		};
 	}
@@ -79,10 +90,10 @@ export class EditLabel extends Component {
 				let label = this.state.label;
 				label.title = value;
 				this.setState({ label: label });
-				this.props.onChange(id, value);
 				break;
 			}
 			default:
+				this.props.onChange(id, value);
 				break;
 
 		}
