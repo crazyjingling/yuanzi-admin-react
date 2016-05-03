@@ -1,4 +1,4 @@
-import * as labelsActions from '../../client/actions/labels';
+import * as labelsActions from '../../client/actions/label';
 
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';

@@ -19,7 +19,7 @@ export default class DatePicker extends Component {
 
 	render() {
 		let selected = this.props.selected;
-		selected = this.props.selected ? moment(selected) : moment();
+		selected = this.props.selected ? moment(selected) : "";
 		return (
 			<ReactDatePicker ref={this.props.id}
 						dateFormat={this.state.dateFormat}
