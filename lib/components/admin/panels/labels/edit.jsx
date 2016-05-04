@@ -23,6 +23,14 @@ import ImagePicker from '../../../../containers/data-types/image-picker'
 	})
 )
 export class EditLabel extends Component {
+	static panelSettings = {
+		activePanelType: 'labels',
+		breadcrumbs: [
+			{
+				link: '/admin/labels'
+			}
+		]
+	}
 	static validatorSchema = {
 		title: Joi.string().min(3).required().label('标题')
 	};
@@ -51,12 +59,7 @@ export class EditLabel extends Component {
 
 	getInitState() {
 		return {
-			label: {
-				title: '',
-				type: 'classify',
-				cover:{ossUrl: '',
-					_id: ''}
-			}
+			label: this.props.editingLabel
 		};
 	}
 
@@ -108,8 +111,8 @@ export class EditLabel extends Component {
 
 	onSubmit() {
 		event.preventDefault();
-		const onValidate = (error) => {
-			if (!error) {
+		//const onValidate = (error) => {
+		//	if (!error) {
 
 				let label = this.state.label;
 				console.log(label)
@@ -120,9 +123,9 @@ export class EditLabel extends Component {
 				}
 				this.closeEdit();
 
-			}
-		};
-		this.props.validate(onValidate);
+			//}
+		//};
+		//this.props.validate(onValidate);
 	}
 
 	render() {
