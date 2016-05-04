@@ -9,9 +9,28 @@ import validation from 'react-validation-mixin'; //import the mixin
 import strategy from 'joi-validation-strategy'; //choose a validation strategy
 import keys from 'lodash.keys';
 import {connect} from 'react-redux';
-import ImagePicker from '../../../../containers/data-types/image-picker'
+import * as labelsActions from '../../../../client/actions/label';
+import {bindActionCreators} from 'redux';
 
+import ImagePicker from '../../../../containers/data-types/image-picker'
+@connect(
+	(state) => ({
+		label: state.label.data,
+		errors: state.label.errors,
+	}),
+	(dispatch) => ({
+		...bindActionCreators(labelsActions, dispatch),
+	})
+)
 export class EditLabel extends Component {
+	static panelSettings = {
+		activePanelType: 'labels',
+		breadcrumbs: [
+			{
+				link: '/admin/labels'
+			}
+		]
+	}
 	static validatorSchema = {
 		title: Joi.string().min(3).required().label('标题')
 	};
@@ -40,13 +59,16 @@ export class EditLabel extends Component {
 
 	getInitState() {
 		return {
-			label: this.props.label || {
-				title: '',
-				color: '#ffffff',
-				cover:{_id: ''},
-			}
+			label: this.props.editingLabel
 		};
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if(nextProps.label != this.state.label) {
+			this.setState({ label: nextProps.label })
+		}
+	}
+
 	renderHelpText(messages) {
 		//return (
 		//	<span className="help-block has-error">{messages.map(this.renderMessage, this)}</span>
@@ -66,8 +88,18 @@ export class EditLabel extends Component {
 
 	onChange(id, event) {
 		let value = event.target.value;
-		alert(id+value);
-		this.props.onChange(id, value);
+		switch (id) {
+			case 'title':{
+				let label = this.state.label;
+				label.title = value;
+				this.setState({ label: label });
+				break;
+			}
+			default:
+				this.props.onChange(id, value);
+				break;
+
+		}
 	}
 // cover
 	onImageChange(mediaItem) {
@@ -78,12 +110,12 @@ export class EditLabel extends Component {
 	}
 
 	onSubmit() {
-		alert(this.props.label.title)
 		event.preventDefault();
-		const onValidate = (error) => {
-			if (!error) {
+		//const onValidate = (error) => {
+		//	if (!error) {
 
-				let label = this.props.label;
+				let label = this.state.label;
+				console.log(label)
 				if (label._id) {
 					this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
 				} else {
@@ -91,9 +123,9 @@ export class EditLabel extends Component {
 				}
 				this.closeEdit();
 
-			}
-		};
-		this.props.validate(onValidate);
+			//}
+		//};
+		//this.props.validate(onValidate);
 	}
 
 	render() {
@@ -107,7 +139,7 @@ export class EditLabel extends Component {
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
-							   value={this.props.label.title}/>
+							   value={this.state.label.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
 					<div>
@@ -142,7 +174,7 @@ export class EditLabel extends Component {
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('display'))}
 					</div>
-					<a className='button button-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
+					<a className='btn btn-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
 				</form>
 			</Lightbox>
 		);

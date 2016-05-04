@@ -161,10 +161,8 @@ export default class ActivitiesContainer extends Component {
 
 	onEdit(data, event) {
 		event.preventDefault();
-		this.setState({
-			editting: true,
-			editData: data
-		});
+		this.props.history.pushState({}, `/admin/activities/${data._id}`);
+
 	}
 
 	onRecommend(data, event) {
@@ -250,7 +248,6 @@ export default class ActivitiesContainer extends Component {
 				{this.renderViewReport()}
 				{this.renderPreviewing()}
 				{this.renderRemoving()}
-				{this.renderEditing()}
 				{this.renderRecommending()}
 
 			</div>
@@ -405,24 +402,6 @@ export default class ActivitiesContainer extends Component {
 		}
 	}
 
-	renderEditing() {
-		if (this.state.removing) {
-			const label = `您是否确定删除当前数据?`;
-			const label1 = '删除后将无法恢复';
-			return (
-				<Lightbox className='small' header={false}>
-					<div className='big centered'>{label}</div>
-					<div className='medium centered'>{label1}</div>
-					<div className='centered space-above'>
-						<a className='button button-grey margined' href='#'
-						   onClick={this.cancelRemove.bind(this)}>取消</a>
-						<a className='button button-primary margined' href='#'
-						   onClick={this.confirmRemove.bind(this)}>确定</a>
-					</div>
-				</Lightbox>
-			);
-		}
-	}
 
 	renderRecommending() {
 		if (this.state.recommending) {

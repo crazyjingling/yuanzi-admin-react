@@ -78,6 +78,7 @@ export default class Labels extends Component {
 			return (
 				<Edit label={this.props.editingLabel}
 					  options={options}
+					  editingLabel={this.props.editingLabel}
 					  onEditClose={this.props.onEditClose}
 					  addLabel={this.props.addLabel}
 					  updateLabel={this.props.updateLabel}
