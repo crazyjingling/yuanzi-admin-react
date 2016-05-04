@@ -35,7 +35,6 @@ export default class Admin extends Component {
   }
 
   render () {
-	  console.log(this.props.breadcrumbs)
     return (
     <div id="wrapper" className={cx('blurr', this.props.blurred && 'blurred', !this.props.editing && 'previewing', this.props.linkingData && 'pb-linking-data')}>
       {this.props.activePanelType !== 'pageBuild' && <MenuBar user={this.props.user} activePanelType={this.props.activePanelType} breadcrumbs={this.props.breadcrumbs} />}

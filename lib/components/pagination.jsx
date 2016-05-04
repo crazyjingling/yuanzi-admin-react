@@ -1,122 +1,53 @@
 import clone from 'lodash.clone';
 import React from 'react';
 import {Component} from 'relax-framework';
-
-import A from './a';
 import Utils from '../helpers/utils';
+import Pagination from 'react-bootstrap/lib/Pagination';
 
-export default class Pagination extends Component {
-  static propTypes = {
-    url: React.PropTypes.string.isRequired,
-    query: React.PropTypes.object,
-    count: React.PropTypes.number
-  }
+export default class P extends Component {
+	static propTypes = {
+		url: React.PropTypes.string.isRequired,
+		query: React.PropTypes.object,
+		count: React.PropTypes.number,
+	};
 
-  static defaultProps = {
-    query: {
-      page: 1,
-      limit: 20
-    },
-    count: 0
-  }
+	static contextTypes = {
+		location: React.PropTypes.object,
+		history: React.PropTypes.object,
+	};
 
-  render () {
-    return (
-      <div className='centered pagination'>
-		  <div>
-		  {this.props.query && this.renderButtons()}
-		  <span>总 {Math.ceil(this.props.count / this.props.query.limit)} 页</span>
-      </div>
-      </div>
-    );
-  }
+	static defaultProps = {
+		query: {
+			page: 1,
+			limit: 20
+		},
+		count: 0
+	};
+	handleSelect(eventKey) {
+		const query = clone(this.props.query);
+		query.page = eventKey;
+		const url = Utils.parseQueryUrl(this.props.url, query);
+		console.log(this.context)
+		this.context.history.pushState(null, url);
+	}
 
-  renderButtons () {
-    const numPages = Math.ceil(this.props.count / this.props.query.limit);
-    const buttons = [];
+	render () {
+		return (
+			<div className='pagination pull-right'>
+				<Pagination
+					bsSize="medium"
+					prev
+					next
+					first
+					last
+					ellipsis
+					boundaryLinks
+					items={Math.ceil(this.props.count / this.props.query.limit)}
+					activePage={this.props.query.page}
+					maxButtons={5}
+					onSelect={this.handleSelect.bind(this)}
+				/></div>
+		);
+	}
 
-    buttons.push(this.renderPreviousButton());
-  for (var i = ((this.props.query.page - 5 > 0) ? this.props.query.page - 5 : 1); i <= this.props.query.page + 5; i++) {
-	  if (i > numPages) {
-		  break;
-	  }
-		  buttons.push(this.renderButton(i));
-
-  }
-    buttons.push(this.renderNextButton(numPages));
-
-    return buttons;
-  }
-
-  renderButton (number) {
-    let result;
-
-    if (this.props.query.page !== number) {
-      const query = clone(this.props.query);
-      query.page = number;
-      const url = Utils.parseQueryUrl(this.props.url, query);
-
-      result = (
-        <A className='pagination-button to' query={query} href={url} key={number}>
-          {number}
-        </A>
-      );
-    } else {
-      result = (
-        <span className='pagination-button to' key={number}>
-          {number}
-        </span>
-      );
-    }
-
-    return result;
-  }
-
-  renderNextButton (numPages) {
-    let result;
-
-    if (this.props.query.page < numPages) {
-      const query = clone(this.props.query);
-      query.page ++;
-      const url = Utils.parseQueryUrl(this.props.url, query);
-
-      result = (
-        <A className='pagination-button next' href={url} key='next'>
-          <i className='material-icons'>navigate_next</i>
-        </A>
-      );
-    } else {
-      result = (
-        <span className='pagination-button next' key='next'>
-          <i className='material-icons'>navigate_next</i>
-        </span>
-      );
-    }
-
-    return result;
-  }
-
-  renderPreviousButton () {
-    let result;
-
-    if (this.props.query.page > 1) {
-      const query = clone(this.props.query);
-      query.page --;
-      const url = Utils.parseQueryUrl(this.props.url, query);
-
-      result = (
-        <A className='pagination-button previous' href={url} key='previous'>
-          <i className='material-icons'>navigate_before</i>
-        </A>
-      );
-    } else {
-      result = (
-        <span className='pagination-button previous' key='previous'>
-          <i className='material-icons'>navigate_before</i>
-        </span>
-      );
-    }
-
-    return result;
-  }
 }
