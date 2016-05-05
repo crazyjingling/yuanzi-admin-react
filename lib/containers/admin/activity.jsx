@@ -12,7 +12,7 @@ import Activity from '../../components/admin/panels/activity';
 @connect(
 	(state) => ({
 		activity: state.activity.data,
-		errors: state.activity.errors,
+		errors: state.activity.errors
 	}),
 	(dispatch) => ({
 		...bindActionCreators(activityActions, dispatch),
@@ -32,12 +32,17 @@ export default class ActivityContainer extends Component {
 			},
 			title: 1,
 			price: 1,
+			isBanner: 1,
 			number: 1,
 			location: 1,
 			content: 1,
 			startDate: 1,
 			endDate: 1,
 			bannerImg: {
+				ossUrl: 1,
+				_id: 1
+			},
+			tupian: {
 				ossUrl: 1,
 				_id: 1
 			}
@@ -96,7 +101,7 @@ export default class ActivityContainer extends Component {
 		let hasErrors = false;
 		let resultActivity;
 		try {
-			resultActivity = await action(this.constructor.fragments, submitActivity);
+			resultActivity = await action(this.props.fragments, submitActivity);
 		} catch (ex) {
 			hasErrors = true;
 			console.error(ex);
@@ -110,7 +115,7 @@ export default class ActivityContainer extends Component {
 				new: false
 			});
 			if (!isNew) {
-				this.props.history.pushState({}, `/admin/activitys/${resultActivity.addActivity._id}`);
+				this.props.history.pushState({}, `/admin/activities/${resultActivity.updateActivity._id}`);
 			}
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
@@ -153,7 +158,7 @@ export default class ActivityContainer extends Component {
 			savingLabel: 'Creating activity'
 		});
 
-		this.onSubmit(cloneDeep(this.props.activity));
+		this.onSubmit(this.props.activity);
 	}
 
 	onChange (id, value) {

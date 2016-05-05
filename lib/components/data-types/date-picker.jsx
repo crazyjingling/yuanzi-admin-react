@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
-import ReactDatePicker from 'react-datepicker';
+var DateTimeField = require('react-bootstrap-datetimepicker');
 import moment from 'moment';
 
 export default class DatePicker extends Component {
@@ -13,24 +13,23 @@ export default class DatePicker extends Component {
 	}
 	getInitState(){
 		return {
-			dateFormat: this.props.dateFormat || 'YYYY-MM-DD HH:mm:ss'
+			dateFormat: 'YYYY-MM-DD HH:mm:ss'
 		};
 	}
-
+	onChange(x) {
+		this.props.onChange(this.props.id, x);
+	}
 	render() {
 		let selected = this.props.selected;
-		selected = this.props.selected ? moment(selected) : "";
+		selected = this.props.selected || moment().format('YYYY-MM-DD HH:mm:ss');
 		return (
-			<ReactDatePicker ref={this.props.id}
-						dateFormat={this.state.dateFormat}
-						selected={selected}
-						maxDate={this.props.maxDate || moment()}
-						onChange={::this.onChange}
+			<DateTimeField ref={this.props.id}
+					inputFormat={this.state.dateFormat}
+				    maxDate={this.props.maxDate}
+					onChange={::this.onChange}
 			/>
 		);
 	}
 
-	onChange(date) {
-		this.props.onChange(this.props.id, date.format(this.state.dateFormat));
-	}
+
 }

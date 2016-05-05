@@ -78,6 +78,7 @@
     "rc": "^1.1.1",
     "react": "^0.14.7",
     "react-bootstrap": "^0.29.3",
+    "react-bootstrap-datetimepicker": "0.0.22",
     "react-colorpicker": "git://github.com/relax/react-colorpicker.git#relay",
     "react-counter": "git://github.com/relax/react-counter.git#relay",
     "react-date-range": "^0.2.3",
