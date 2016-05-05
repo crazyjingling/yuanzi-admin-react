@@ -43,33 +43,38 @@ export default class Labels extends Component {
 
 	render() {
 		return (
-			<div className="ibox-content">
-				<div className='table-responsive'>
-					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-						{this.renderSearch()}
-						<div>
-							<a href='#' className='button-clean' onClick={this.props.onAddNew}>
-								<i className='material-icons'>invert_colors</i>
-								<span>添加标签</span>
-							</a>
-						</div>
-						<ListTable
-							listSchema='label'
-							labels={this.props.labels}
-							removeLabel={this.props.removeLabel}
-							showFields={this.props.showFields}
-							onRemove={this.props.onRemove}
-							onEdit={this.props.onEdit}
-						/>
-						<Pagination
-							url='/admin/labels'
-							query={this.props.query}
-							count={this.props.count}
-						/>
-					</div>
+			<div>
+				<div className="ibox-content m-b-sm border-bottom">
+					{this.renderSearch()}
 				</div>
-				{this.renderEdit()}
+				<div className="ibox-content">
+					<div style={{ marginBottom: 10 }}>
+						<a href='#' className='btn btn-primary ' onClick={this.props.onAddNew}>
+							添加标签
+						</a>
+					</div>
+					<div className='table-responsive'>
+						<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
+
+							<ListTable
+								listSchema='label'
+								labels={this.props.labels}
+								removeLabel={this.props.removeLabel}
+								showFields={this.props.showFields}
+								onRemove={this.props.onRemove}
+								onEdit={this.props.onEdit}
+							/>
+							<Pagination
+								url='/admin/labels'
+								query={this.props.query}
+								count={this.props.count}
+							/>
+						</div>
+					</div>
+					{this.renderEdit()}
+				</div>
 			</div>
+
 		);
 	}
 

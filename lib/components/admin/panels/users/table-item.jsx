@@ -76,6 +76,30 @@ export default class TableItem extends Component {
 					}
 				});
 				break;
+			case 'gender': {
+				inner = field == '男'? <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className="fa fa-mars"/></span>
+					: <span className="btn btn-outline btn-danger btn-circle"><i style={{ fontSize:'16px' }} className="fa fa-venus"/></span>
+				break;
+			}
+			case 'label': {
+				let icon = '';
+				switch (field) {
+					case 'QQ':
+						icon = 'fa fa-qq';
+						break;
+					case '微信':
+						icon = 'fa fa-weixin';
+						break;
+					case '微博':
+						icon = 'fa fa-weibo';
+						break;
+					case '手机':
+						icon = 'fa fa-mobile';
+						break;
+				}
+				inner = <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className={icon}/></span>
+				break;
+			}
 			default:
 				inner = field;
 		}

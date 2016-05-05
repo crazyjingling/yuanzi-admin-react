@@ -43,13 +43,13 @@ export default class DateRangePicker extends Component {
 
 		return (
 			<div className="input-daterange input-group">
-				<span><ReactDatePicker
+				<ReactDatePicker
 					selected={this.state.startDate}
 					startDate={this.state.startDate}
 					endDate={this.state.endDate}
 					maxDate={this.props.maxDate || moment()}
 					dateFormat={this.state.dateFormat}
-					onChange={::this.handleChangeStart} /></span>
+					onChange={::this.handleChangeStart} />
 				<span className="input-group-addon">to</span><ReactDatePicker
 					selected={this.state.endDate}
 					startDate={this.state.startDate}

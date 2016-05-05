@@ -259,15 +259,16 @@ export default class MenuBar extends Component {
 
     renderNavHeader() {
 		//todo: getGravatarImage
+	    console.log(this.props.user)
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 
         return (
             <li className="nav-header">
-                <div className="dropdown profile-element" style={{textAlign: 'center'}}>
+                <div className="dropdown profile-element">
                   <span>
                     <Avatar avatar={url} user={this.props.user}/>
                     <span className="block m-t-xs">
-                        <strong className="font-bold">{this.props.user.name}</strong>
+                        <strong className="font-bold">{this.props.user.nickname}</strong>
                     </span>
                   </span>
                     <a data-toggle="dropdown" className="dropdown-toggle" href="#">

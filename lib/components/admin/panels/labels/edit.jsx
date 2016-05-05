@@ -148,9 +148,7 @@ export class EditLabel extends Component {
 								value={this.props.label.type}
 								onChange={this.onChange.bind(this,'type')}>
 							<option value='classify'>最新标签库</option>
-							<option value='cardTopicAssortment'>原标签</option>
 							<option value='userAssortment'>用户标签</option>
-							<option value='searchKeyword'>关键字</option>
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>

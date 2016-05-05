@@ -38,31 +38,37 @@ export default class Strategies extends Component {
 
     render() {
         return (
-            <div className="ibox-content">
-                <div className='table-responsive'>
-                    <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-						{this.renderSearch()}
-                        <ListTable
-							listSchema='strategy'
-                            strategies={this.props.strategies}
-                            removeStrategy={this.props.removeStrategy}
-                            showFields={this.props.showFields}
-							onViewCommentReport={this.props.onViewCommentReport}
-							onViewPhotoReport={this.props.onViewPhotoReport}
-							onViewReport={this.props.onViewReport}
-							onPreview={this.props.onPreview}
-							onRemove={this.props.onRemove}
-							onEdit={this.props.onEdit}
-							onRecommend={this.props.onRecommend}
-                        />
-                        <Pagination
-                            url='/admin/strategies'
-                            query={this.props.query}
-                            count={this.props.count}
-                        />
-                    </div>
-                </div>
-            </div>
+	        <div>
+		        <div className="ibox-content m-b-sm border-bottom">
+			        {this.renderSearch()}
+		        </div>
+		        <div className="ibox-content">
+			        <div className='table-responsive'>
+				        <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
+
+					        <ListTable
+						        listSchema='strategy'
+						        strategies={this.props.strategies}
+						        removeStrategy={this.props.removeStrategy}
+						        showFields={this.props.showFields}
+						        onViewCommentReport={this.props.onViewCommentReport}
+						        onViewPhotoReport={this.props.onViewPhotoReport}
+						        onViewReport={this.props.onViewReport}
+						        onPreview={this.props.onPreview}
+						        onRemove={this.props.onRemove}
+						        onEdit={this.props.onEdit}
+						        onRecommend={this.props.onRecommend}
+					        />
+					        <Pagination
+						        url='/admin/strategies'
+						        query={this.props.query}
+						        count={this.props.count}
+					        />
+				        </div>
+			        </div>
+		        </div>
+	        </div>
+
         );
     }
 

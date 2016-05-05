@@ -31,26 +31,31 @@ export default class Users extends Component {
 
 	render() {
 		return (
-			<div className="ibox-content">
-				<div className='table-responsive'>
-					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
-						{this.renderSearch()}
-						<ListTable
-							listSchema='user'
-							users={this.props.users}
-							showFields={this.props.showFields}
-							onCheck={this.props.onCheck}
-							onEditLabels={this.props.onEditLabels}
-							onDel={this.props.onDel}
-						/>
-						<Pagination
-							url='/admin/users'
-							query={this.props.query}
-							count={this.props.count}
-						/>
+			<div>
+				<div className="ibox-content m-b-sm border-bottom">
+					{this.renderSearch()}
+				</div>
+				<div className="ibox-content">
+					<div className='table-responsive'>
+						<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
+							<ListTable
+								listSchema='user'
+								users={this.props.users}
+								showFields={this.props.showFields}
+								onCheck={this.props.onCheck}
+								onEditLabels={this.props.onEditLabels}
+								onDel={this.props.onDel}
+							/>
+							<Pagination
+								url='/admin/users'
+								query={this.props.query}
+								count={this.props.count}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
+			
 		);
 	}
 	renderSearch() {

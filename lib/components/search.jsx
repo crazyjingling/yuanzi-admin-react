@@ -56,10 +56,17 @@ export default class Search extends Component {
 			<div id="DataTables_Table_0_filter" className="dataTables_filter">
 				<form role="search" autoComplete='on'>
 					<input type="text" style={{display:'none'}}/>
-					{this.props.searchFields && this.props.searchFields.map(this.renderFormItem, this)}
-					<button className="btn btn-sm btn-primary pull-right" type="button"
-							onClick={this.searchSubmit.bind(this)}>搜索
-					</button>
+					<div className="row">
+						{this.props.searchFields && this.props.searchFields.map(this.renderFormItem, this)}
+					</div>
+					<div className="row">
+						<div className="col-lg-4">
+							<button className="btn btn-sm btn-primary" type="button"
+							        onClick={this.searchSubmit.bind(this)}>搜索
+							</button>
+						</div>
+					</div>
+
 				</form>
 			</div>
 		);
@@ -77,50 +84,57 @@ export default class Search extends Component {
 			formItem = <select {...searchField}
 				defaultValue={defaultValue}
 				onChange={this.searchChange.bind(this, searchField.key)}
-				className="select2_demo_1 form-control">{options}</select>;
+				className="form-control" id={searchField.key}>{options}</select>;
 		} else {
 			formItem = <input
 				{...searchField}
 				className="form-control"
 				onChange={this.searchChange.bind(this, searchField.key)}
+				placeholder={"请输入"+searchField.label}
 				value={this.state.search[searchField.key].value}/>
 		}
 
 
 		if (type === 'labelPicker') {
 			return (
-				<div className="form-group" key={searchField.key} style={{ margin: '0 10px' }}>
-					<LabelPicker onChange={::this.searchChange}
-					             key={searchField.key}
-					             value={this.state.search[searchField.key].value || 'all'}
-					             labelsType={searchField.labelsType}
-					             option={{
+				<div className="col-lg-4">
+					<div className="form-group" key={searchField.key}>
+						<LabelPicker onChange={::this.searchChange}
+						             key={searchField.key}
+						             value={this.state.search[searchField.key].value || 'all'}
+						             labelsType={searchField.labelsType}
+						             option={{
 										id: 'labels',
 										label: '标签',
 										isAllShow: true
 									}}
-					/>
+						/>
+					</div>
 				</div>
 
 			)
 		} else if (type === 'dateRangePicker') {
 			return (
-				<div className="form-group" key={searchField.key} style={{ margin: '0 10px' }}>
-					<label className="control-label">{searchField.label}</label>
-					<DateRangePicker onChange={::this.onDateRangeChange}
-									 id={searchField.key}
-									 key={searchField.key}
-									 selected={this.state.search[searchField.key].value || {}}
-									 dateFormat={searchField.options.dateFormat}
-									 maxDate={searchField.options.maxDate}
-					/>
+				<div className="col-lg-4">
+					<div className="form-group" key={searchField.key}>
+						<label className="control-label">{searchField.label}</label>
+						<DateRangePicker onChange={::this.onDateRangeChange}
+						                 id={searchField.key}
+						                 key={searchField.key}
+						                 selected={this.state.search[searchField.key].value || {}}
+						                 dateFormat={searchField.options.dateFormat}
+						                 maxDate={searchField.options.maxDate}
+						/>
+					</div>
 				</div>
 			);
 		} else {
 			return (
-				<div className="form-group" key={searchField.key}>
-					<label className="control-label">{searchField.label}</label>
-					{formItem}
+				<div className="col-lg-4">
+					<div className="form-group" key={searchField.key}>
+						<label className="control-label" for={searchField.key}>{searchField.label}</label>
+						{formItem}
+					</div>
 				</div>
 			);
 		}

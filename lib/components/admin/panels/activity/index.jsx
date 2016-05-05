@@ -162,7 +162,7 @@ export default class Activity extends Component {
 									<div className="col-lg-10">
 										<div className="input-group m-b">
 											<span className="input-group-addon">$</span>
-											<input ref='title' type='text' className='form-control'
+											<input ref='title' type='number' className='form-control'
 											       onChange={this.onChange.bind(this,'price')}
 											       value={this.props.activity.price}/>
 										</div>
@@ -216,8 +216,7 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 									<div className="col-lg-10">
 										<ImagePicker ref="cover" value={this.props.activity.cover._id}
-										             width={140} height={140}
-										             widthAndHeightStyle={{width: '140px', height: '140px'}}
+										             widthAndHeightStyle={{width: '228px', height: '132px'}}
 										             onChange={::this.onImageChange}
 										/>
 										{this.renderHelpText(this.state.imageEmptyMessage)}
@@ -228,8 +227,7 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='cover'>banner 封面</label>
 									<div className="col-lg-10">
 										<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
-										             width={140} height={140}
-										             widthAndHeightStyle={{width: '140px', height: '140px'}}
+										             widthAndHeightStyle={{width: '375px', height: '150px'}}
 										             onChange={::this.onBannerImageChange}
 										/>
 										{this.renderHelpText(this.state.imageEmptyMessage)}

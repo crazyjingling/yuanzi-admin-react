@@ -9,11 +9,11 @@ import TopMenu from './top-menu';
 export default class Admin extends Component {
   static fragments = mergeFragments({
     session: {
-      _id: 1,
-      account: {
-		  username: 1
-	  },
-      nickname: 1
+	    _id: 1,
+	    account: {
+		    username: 1
+	    },
+	    nickname: 1,
     }
   }, TopMenu.fragments)
 

@@ -31,7 +31,7 @@ export default class Feedbacks extends Component {
 		return (
 			<div className="ibox-content">
 				<div className='table-responsive'>
-					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper form-inline dt-bootstrap">
+					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
 						{this.renderSearch()}
 						<ListTable
 							listSchema='feedback'

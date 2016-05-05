@@ -23,7 +23,7 @@ export default class ImagePicker extends Component {
 
 	static defaultProps = {
 		width: '100%',
-		height: 135
+		height: '100%'
 	}
 
 	componentDidMount() {
