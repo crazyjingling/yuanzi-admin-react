@@ -69,12 +69,13 @@ export default class TableItem extends Component {
 
 					}else{
 						return (
-							<a href='#' onClick={this.props[option.action].bind(this, data)}>
+							<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
 								<span>{option.name}</span>
-							</a>
+							</button>
 						)
 					}
 				});
+				inner = <div className="btn-group">{inner}</div>
 				break;
 			case 'gender': {
 				inner = field == '男'? <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className="fa fa-mars"/></span>

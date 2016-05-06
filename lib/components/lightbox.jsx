@@ -35,9 +35,9 @@ export default class Lightbox extends Component {
 				</Animate>
 				<Animate>
 					<div className='animation-holder'>
-						<div className='lightbox-wrapper' ref='wrapper'>
+						<div className='lightbox-wrapper ibox' ref='wrapper'>
 							{this.renderHeader()}
-							<div className='lightbox-content'>
+							<div className='lightbox-content ibox-content'>
 								{this.props.children}
 							</div>
 						</div>
@@ -51,19 +51,24 @@ export default class Lightbox extends Component {
 		if (this.props.header) {
 
 			return (
-				<div className='lightbox-header'>
-					<h3 className='lightbox-title'>{this.props.title}</h3>
-					<a href='#' onClick={this.close.bind(this)} className='lightbox-close'><i
-						className='fa fa-close'></i></a>
+				<div className='lightbox-header ibox-title'>
+					<div className="ibox-tools">
+						<h5>{this.props.title}</h5>
+						<a href='#' onClick={this.close.bind(this)} className='close-link'><i
+							className='fa fa-times'/></a>
+					</div>
 				</div>
 			);
 		}
 		if (this.props.headerWithoutBorder) {
 			return (
-				<div className='lightbox-header-without-border'>
-					<h3 className='lightbox-title'>{this.props.title}</h3>
-					<a href='#' onClick={this.close.bind(this)} className='lightbox-close'><i
-						className='fa fa-close'></i></a>
+				<div className='lightbox-header-without-border ibox-title'>
+					<div className="ibox-tools">
+						<h5>{this.props.title}</h5>
+						<a href='#' onClick={this.close.bind(this)} className='close-link'><i
+							className='fa fa-times'/></a>
+					</div>
+
 				</div>
 			);
 		}

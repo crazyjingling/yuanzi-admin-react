@@ -39,10 +39,10 @@ export default class StrategySearch extends Component {
 
 				</div>
 				<div className="row">
-					<h5>已选妙招</h5>
+					{this.props.selectedStrategies.length>0?<h5 style={{ marginLeft: 15 }}>已选妙招</h5>:''}
 					{this.props.selectedStrategies.map((item)=><Strategy strategy={item} selectedStrategies={this.props.selectedStrategies} onChange={this.props.onChange}/>)}
 				</div>
-				<div>
+				<div className="row">
 					{this.props.strategies.map((item)=><Strategy strategy={item} selectedStrategies={this.props.selectedStrategies} onChange={this.props.onChange}/>)}
 				</div>
 

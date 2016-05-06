@@ -44,7 +44,6 @@ export default class Strategies extends Component {
 		        </div>
 		        <div className="ibox-content">
 			        <div className='table-responsive'>
-				        <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
 
 					        <ListTable
 						        listSchema='strategy'
@@ -64,7 +63,6 @@ export default class Strategies extends Component {
 						        query={this.props.query}
 						        count={this.props.count}
 					        />
-				        </div>
 			        </div>
 		        </div>
 	        </div>

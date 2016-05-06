@@ -135,14 +135,14 @@ export class EditLabel extends Component {
 		return (
 			<Lightbox className='small' onClose={this.props.onEditClose} title={title}>
 				<form onSubmit={this.onSubmit.bind(this)}>
-					<div>
+					<div className="form-group">
 						<label htmlFor='title'>标题</label>
 						<input ref='title' type='text' className='form-control'
 							   onChange={this.onChange.bind(this,'title')}
 							   value={this.state.label.title}/>
 						{this.renderHelpText(this.props.getValidationMessages('title'))}
 					</div>
-					<div>
+					<div className="form-group">
 						<label htmlFor='type'>分类</label>
 						<select ref='type' className='select2_demo_1 form-control'
 								value={this.props.label.type}
@@ -153,17 +153,15 @@ export class EditLabel extends Component {
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>
 					<div className="form-group">
-						<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
-						<div className="col-lg-10">
+						<label className="control-label" htmlFor='cover'>封面</label>
 							<ImagePicker ref="cover" value={this.props.label.cover._id}
-										 width={140} height={140}
 										 widthAndHeightStyle={{width: '140px', height: '140px'}}
 										 onChange={::this.onImageChange}
 							/>
 							{this.renderHelpText(this.props.imageEmptyMessage)}
-						</div>
 					</div>
-					<div>
+					<div className="form-group">
+						<label className="control-label">是否显示</label>
 						<select ref='display' className='select2_demo_1 form-control'
 								value={this.props.label.display}
 								onChange={this.onChange.bind(this,'display')}>
