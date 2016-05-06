@@ -29,24 +29,30 @@ export default class Feedbacks extends Component {
 
 	render() {
 		return (
-			<div className="ibox-content">
-				<div className='table-responsive'>
-					<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
-						{this.renderSearch()}
-						<ListTable
-							listSchema='feedback'
-							feedbacks={this.props.feedbacks}
-							showFields={this.props.showFields}
-							onViewImages={this.props.onViewImages}
-						/>
-						<Pagination
-							url='/admin/feedbacks'
-							query={this.props.query}
-							count={this.props.count}
-						/>
+			<div>
+				<div className="ibox-content m-b-sm border-bottom">
+					{this.renderSearch()}
+				</div>
+				<div className="ibox-content">
+					<div className='table-responsive'>
+						<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
+
+							<ListTable
+								listSchema='feedback'
+								feedbacks={this.props.feedbacks}
+								showFields={this.props.showFields}
+								onViewImages={this.props.onViewImages}
+							/>
+							<Pagination
+								url='/admin/feedbacks'
+								query={this.props.query}
+								count={this.props.count}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
+
 		);
 	}
 

@@ -188,7 +188,6 @@ class Topic extends Component {
 					<label className="col-lg-2 control-label" htmlFor='cover'>封面</label>
 					<div className="col-lg-10">
 						<ImagePicker ref="cover" value={this.props.topic.cover._id}
-									 width={140} height={140}
 									 widthAndHeightStyle={{width: '140px', height: '140px'}}
 									 onChange={::this.onImageChange}
 						/>

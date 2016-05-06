@@ -24,7 +24,7 @@ export default class ListTable extends Component {
 
     render() {
         return (
-            <table className="table table-bordered table-hover dataTables-example dataTable" role="grid">
+            <table className="table table-bordered table-hover" role="grid">
                 <thead>
                 <tr>
                     {this.props.showFields.map(this.renderTh, this)}

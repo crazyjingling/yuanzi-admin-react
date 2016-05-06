@@ -82,11 +82,12 @@ export default class TableItem extends Component {
 						option.name = data.isRecommended.stateType === '未上线' ? '上线' : '下线';
 					}
 					return (
-						<a href='#' onClick={this.props[option.action].bind(this, data)}>
-							<span>{option.name}</span>
-						</a>
+						<button style={{ fontSize: 12 }}className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
+							{option.name}
+						</button>
 					)
 				});
+				inner = <div className="btn-group">{inner}</div>
 				break;
 			default:
 				inner = field;
@@ -109,7 +110,7 @@ export default class TableItem extends Component {
 					<span>{data.commentReportRelated.commentReportCount}</span>
 				</a>
 		}
-		return <td key={showField.key} style={{ overflow: 'auto', maxWidth: '200px' }}>{inner}</td>;
+		return <td key={showField.key} style={{ overflow: 'auto' }}>{inner}</td>;
 
 	}
 
