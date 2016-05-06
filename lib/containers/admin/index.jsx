@@ -105,6 +105,7 @@ export default class AdminContainer extends Component {
 			case 'pages':
 			case 'labels':
 			case 'topics':
+			case 'orders':
 			case 'feedbacks':
 			case 'activities':
 			case 'materials':
