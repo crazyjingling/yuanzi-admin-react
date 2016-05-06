@@ -103,6 +103,12 @@ export default class Activity extends Component {
 			ossUrl: mediaItem.ossUrl
 		});
 	}
+	onAutoImageChange(mediaItem) {
+		this.props.onChange('tupian', {
+			_id: mediaItem._id,
+			ossUrl: mediaItem.ossUrl
+		});
+	}
 	render() {
 		const {isNew} = this.props;
 		let result;
@@ -182,10 +188,10 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='startDate'>开始时间</label>
 									<div className="col-lg-10">
 										<DatePicker id='startDate'
-										            dateFormat="YYYY-MM-DD"
-										            selected={this.props.activity.startDate}
-										            maxDate={moment()}
-										            onChange={::this.onDateChange}
+													dateFormat="YYYY-MM-DD HH:mm:ss"
+													selected={this.props.activity.startDate}
+													maxDate={moment()}
+													onChange={::this.onDateChange}
 										/>
 									</div>
 								</div>
@@ -194,11 +200,23 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='endDate'>结束时间</label>
 									<div className="col-lg-10">
 										<DatePicker id='endDate'
-										            dateFormat="YYYY-MM-DD"
-										            minDate={moment()}
-										            selected={this.props.activity.endDate}
-										            onChange={::this.onDateChange}
+													dateFormat="YYYY-MM-DD HH:mm:ss"
+													minDate={moment()}
+													selected={this.props.activity.endDate}
+													onChange={::this.onDateChange}
 										/>
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='isBanner'>Banner位置显示</label>
+									<div className="col-lg-10">
+										<select ref='isBanner' className='form-control'
+												value={this.props.activity.isBanner}
+												onChange={this.onChange.bind(this,'isBanner')}>
+											<option value='false'>false</option>
+											<option value='true'>true</option>
+										</select>
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
@@ -207,8 +225,8 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='title'>活动位置</label>
 									<div className="col-lg-10">
 										<input ref='title' type='text' className='form-control'
-										       onChange={this.onChange.bind(this,'location')}
-										       value={this.props.activity.location}/>
+											   onChange={this.onChange.bind(this,'location')}
+											   value={this.props.activity.location}/>
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
@@ -227,10 +245,29 @@ export default class Activity extends Component {
 									<label className="col-lg-2 control-label" htmlFor='cover'>banner 封面</label>
 									<div className="col-lg-10">
 										<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
-										             widthAndHeightStyle={{width: '375px', height: '150px'}}
-										             onChange={::this.onBannerImageChange}
+													 width={750} height={300}
+													 widthAndHeightStyle={{width: '750px', height: '300px'}}
+													 onChange={::this.onBannerImageChange}
 										/>
 										{this.renderHelpText(this.state.imageEmptyMessage)}
+									</div>
+								</div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='cover'>图片</label>
+									<div className="col-lg-10">
+										<ImagePicker ref="tupian" value={this.props.activity.tupian._id}
+													 width={710} height={710}
+													 widthAndHeightStyle={{width: '710px', height: '710px'}}
+													 onChange={::this.onAutoImageChange}
+										/>
+										{this.renderHelpText(this.state.imageEmptyMessage)}
+									</div>
+								</div>
+								<div className="hr-line-dashed"></div>
+								<div className="form-group">
+									<label className="col-lg-2 control-label" htmlFor='cover'>内容图片 URL</label>
+									<div className="col-lg-10" >
+									<input type = 'text' className='form-control' value = {this.props.activity.tupian.ossUrl} />
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>

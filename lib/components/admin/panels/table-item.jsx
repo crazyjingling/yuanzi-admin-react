@@ -1,21 +1,20 @@
 import React, {PropTypes} from 'react';
 import pluck from 'lodash.pluck';
 import {Component} from 'relax-framework';
-import A from '../../../a.jsx';
-import Lightbox from '../../../lightbox';
-import Utils from '../../../../helpers/utils';
+import moment from 'moment';
+import A from '../../a.jsx';
+import Lightbox from '../../lightbox';
+import Utils from '../../../helpers/utils';
 export default class TableItem extends Component {
 
 	static propTypes = {
 		itemData: PropTypes.object,
+		onEdit: PropTypes.func,
+		onRecommend: PropTypes.func,
 		showFields: PropTypes.array.isRequired,
 		fragment: PropTypes.object.isRequired,
-		listSchema: PropTypes.string.isRequired,
-		onCheck: PropTypes.func.isRequired,
-		onDel: PropTypes.func.isRequired,
-		onEditLabels: PropTypes.func.isRequired
+		listSchema: PropTypes.string.isRequired
 	}
-
 	render() {
 		return (
 			<tr>
@@ -43,7 +42,7 @@ export default class TableItem extends Component {
 		let inner;
 		switch (type) {
 			case 'avatar':
-				inner = <Avatar avatar={field} userId={data._id}/>;
+				inner = <Avatar avatar={field} userId={data.owner._id}/>;
 				break;
 			case 'image':
 				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
@@ -61,49 +60,19 @@ export default class TableItem extends Component {
 				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {
-					if(option.value === 'isDel'){
-						option.name = data.isDel === '正常' ? '封号' : '解封';
+					if(option.value === 'recommend'){
+						option.name = data.isRecommended.stateType === '未上线' ? '上线' : '下线';
 					}
-					if(showField.key === 'talentInfo' && data.talentStatus !== 'waitting'){
-						return '无';
-
-					}else{
-						return (
-							<a href='#' onClick={this.props[option.action].bind(this, data)}>
-								<span>{option.name}</span>
-							</a>
-						)
-					}
+					return (
+						<a href='#' onClick={this.props[option.action].bind(this, data)}>
+							<span>{option.name}</span>
+						</a>
+					)
 				});
 				break;
-			case 'gender': {
-				inner = field == '男'? <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className="fa fa-mars"/></span>
-					: <span className="btn btn-outline btn-danger btn-circle"><i style={{ fontSize:'16px' }} className="fa fa-venus"/></span>
-				break;
-			}
-			case 'label': {
-				let icon = '';
-				switch (field) {
-					case 'QQ':
-						icon = 'fa fa-qq';
-						break;
-					case '微信':
-						icon = 'fa fa-weixin';
-						break;
-					case '微博':
-						icon = 'fa fa-weibo';
-						break;
-					case '手机':
-						icon = 'fa fa-mobile';
-						break;
-				}
-				inner = <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className={icon}/></span>
-				break;
-			}
 			default:
 				inner = field;
 		}
-
 		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;
 
 	}
