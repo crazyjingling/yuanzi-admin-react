@@ -9,18 +9,12 @@ export default class TableItem extends Component {
 
 	static propTypes = {
 		itemData: PropTypes.object,
-		onViewCommentReport: PropTypes.func.isRequired,
-		onViewPhotoReport: PropTypes.func.isRequired,
-		onViewReport: PropTypes.func.isRequired,
-		onPreview: PropTypes.func,
-		onRemove: PropTypes.func,
 		onEdit: PropTypes.func,
 		onRecommend: PropTypes.func,
 		showFields: PropTypes.array.isRequired,
 		fragment: PropTypes.object.isRequired,
 		listSchema: PropTypes.string.isRequired
 	}
-
 	render() {
 		return (
 			<tr>
@@ -79,13 +73,6 @@ export default class TableItem extends Component {
 			default:
 				inner = field;
 		}
-
-		//if (showField.key.indexOf('commentReportCount') !== -1 && data.commentReportRelated.commentReportCount) {
-		//	inner =
-		//		<a href='#' onClick={this.props.onViewCommentReport.bind(this, data.commentReportRelated)}>
-		//			<span>{data.commentReportRelated.commentReportCount}</span>
-		//		</a>
-		//}
 		return <td key={showField.key} style={{ maxWidth: '100px', overflow: 'auto'}}>{inner}</td>;
 
 	}

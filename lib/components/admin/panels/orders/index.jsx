@@ -7,22 +7,31 @@ import ListTable from './list-table.jsx';
 import Search from '../../../search';
 import Pagination from '../../../pagination';
 export default class Orders extends Component {
-	static fragments = mergeFragments({
-		ordersCount: {
-			count: 1
-		}
-	}, ListTable.fragments)
+
+	static propTypes = {
+		orders: PropTypes.array,
+		showFields: PropTypes.array.isRequired,
+		onRemove: PropTypes.func.isRequired,
+		onEdit: PropTypes.func.isRequired,
+		history: PropTypes.object.isRequired,
+		searchFields: PropTypes.array.isRequired,
+		searchValues: PropTypes.object.isRequired,
+		query: PropTypes.object,
+		count: PropTypes.number,
+
+	}
 
 	render() {
 		return (
 			<div className="ibox-content">
-
 				<div className='table-responsive'>
 					{this.renderSearch()}
 						<ListTable
 							listSchema='order'
 							orders={this.props.orders}
 							showFields={this.props.showFields}
+							onRemove={this.props.onRemove}
+							onEdit={this.props.onEdit}
 						/>
 					<Pagination
 						url='/admin/orders'

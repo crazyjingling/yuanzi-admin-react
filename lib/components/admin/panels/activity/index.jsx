@@ -209,7 +209,7 @@ export default class Activity extends Component {
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='isBanner'>活动显示位置</label>
+									<label className="col-lg-2 control-label" htmlFor='isBanner'>Banner位置显示</label>
 									<div className="col-lg-10">
 										<select ref='isBanner' className='form-control'
 												value={this.props.activity.isBanner}

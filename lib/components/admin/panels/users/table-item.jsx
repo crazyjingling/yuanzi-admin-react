@@ -43,7 +43,7 @@ export default class TableItem extends Component {
 		let inner;
 		switch (type) {
 			case 'avatar':
-				inner = <Avatar avatar={field} userId={data.owner._id}/>;
+				inner = <Avatar avatar={field} userId={data._id}/>;
 				break;
 			case 'image':
 				inner = field !== '无' ? <img src={field} style={{ maxWidth: '40px' }}/> :
