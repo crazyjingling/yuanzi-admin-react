@@ -8,13 +8,13 @@ import { orderConfig } from '../../../../containers/admin/containerInitConfig';
 
 export default class ListTable extends Component {
 
-	static propTypes = {
-		orders: PropTypes.array,
-		showFields: PropTypes.array.isRequired,
-		listSchema: PropTypes.string.isRequired,
-		onRemove: PropTypes.func.isRequired,
-		onEdit: PropTypes.func.isRequired
-	}
+	//static propTypes = {
+	//	orders: PropTypes.array,
+	//	showFields: PropTypes.array.isRequired,
+	//	listSchema: PropTypes.string.isRequired,
+	//	onRemove: PropTypes.func.isRequired,
+	//	onEdit: PropTypes.func.isRequired
+	//}
 
 	render() {
 		return (
@@ -44,8 +44,8 @@ export default class ListTable extends Component {
 					   key={order._id}
 					   itemData={order}
 					   showFields={this.props.showFields}
-					   onRemove={this.props.onRemove}
-					   onEdit={this.props.onEdit}
+					   passedRefund={this.props.passedRefund}
+					   rejectRefund={this.props.rejectRefund}
 				       listSchema={this.props.listSchema}
 			/>
 		);

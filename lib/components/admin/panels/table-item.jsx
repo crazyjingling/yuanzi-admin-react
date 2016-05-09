@@ -7,13 +7,10 @@ import Lightbox from '../../lightbox';
 import Utils from '../../../helpers/utils';
 export default class TableItem extends Component {
 
-	static propTypes = {
-		itemData: PropTypes.object,
-		onEdit: PropTypes.func,
-		onRecommend: PropTypes.func,
-		showFields: PropTypes.array.isRequired,
-		fragment: PropTypes.object.isRequired,
-		listSchema: PropTypes.string.isRequired
+
+	constructor(props) {
+		super(props);
+		// Operations usually carried out in componentWillMount go here
 	}
 	render() {
 		return (
@@ -22,7 +19,6 @@ export default class TableItem extends Component {
 			</tr>
 		);
 	}
-
 	renderItem(showField) {
 		var data = this.props.itemData;
 		var field = data;
@@ -60,9 +56,6 @@ export default class TableItem extends Component {
 				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {
-					if(option.value === 'recommend'){
-						option.name = data.isRecommended.stateType === '未上线' ? '上线' : '下线';
-					}
 					return (
 						<a href='#' onClick={this.props[option.action].bind(this, data)}>
 							<span>{option.name}</span>

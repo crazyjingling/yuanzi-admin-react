@@ -38,6 +38,23 @@ export default class MenuBar extends Component {
 					}
 				]
             },
+			{
+				type: 'banners',
+				link: '/admin/banners/index',
+				label: 'Banner 管理',
+				links:[
+					{
+						type: 'bannerlist',
+						link: '/admin/banners/index',
+						label: '首页 Banner'
+					},
+					{
+						type: 'banneredit',
+						link: '/admin/banners/activity',
+						label: '活动 Banner'
+					}
+				]
+			},
             {
                 type: 'strategies',
                 link: '#',
@@ -102,21 +119,14 @@ export default class MenuBar extends Component {
 				]
 			},
 			{
-				type: 'banners',
-				link: '/admin/banners/index',
-				label: 'Banner 管理',
-				links:[
-					{
-						type: 'bannerlist',
-						link: '/admin/banners/index',
-						label: '首页 Banner'
-					},
-					{
-						type: 'banneredit',
-						link: '/admin/banners/activity',
-						label: '活动 Banner'
-					}
-				]
+				type: 'comments',
+				link: '/admin/comments',
+				label: '评论管理'
+			},
+			{
+				type: 'orders',
+				link: '/admin/orders',
+				label: '订单管理'
 			},
 			{
 				type: 'materials',
@@ -134,11 +144,6 @@ export default class MenuBar extends Component {
 						label: '上传页面'
 					}
 				]
-			},
-			{
-				type: 'orders',
-				link: '/admin/orders',
-				label: '订单管理'
 			},
 			{
 				type: 'feedbacks',

@@ -75,6 +75,16 @@ export default class UsersContainer extends Component {
 			.done();
 
 	}
+	passedCheck(){
+		this.setState({
+			checking: false
+		});
+		let checkUser = this.state.checkUser;
+		checkUser.talentStatus = 'done';
+		this.props.updateUser(userConfig.fragments, this.state.checkUser)
+			.done();
+
+	}
 	onEditLabels(data){
 		this.setState({
 			labelsSelectting: true,
@@ -140,6 +150,8 @@ export default class UsersContainer extends Component {
 						<div className="text-left">微信: {this.state.checkUser.talentInfo.wechat}</div>
 						<div className="text-left">擅长领域: {this.state.checkUser.talentInfo.goodAt}</div>
 						<div className="text-left">其他: {this.state.checkUser.talentInfo.goodAtOther}</div>
+						<a className='button button-alert vmargined' href='#'
+						   onClick={this.passedCheck.bind(this)}>通过</a>
 						<a className='button button-alert margined' href='#'
 						   onClick={this.refuseCheck.bind(this)}>拒绝</a>
 					</div>

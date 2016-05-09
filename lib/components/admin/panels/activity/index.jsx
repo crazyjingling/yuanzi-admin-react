@@ -222,7 +222,7 @@ export default class Activity extends Component {
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
 
-									<label className="col-lg-2 control-label" htmlFor='title'>活动位置</label>
+									<label className="col-lg-2 control-label" htmlFor='title'>活动地址</label>
 									<div className="col-lg-10">
 										<input ref='title' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'location')}
