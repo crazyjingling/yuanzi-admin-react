@@ -69,7 +69,7 @@ export default class UsersContainer extends Component {
 			checking: false
 		});
 		let checkUser = this.state.checkUser;
-		checkUser.talentStatus = 'undone';
+		checkUser.talentStatus = 'rejected';
 		checkUser.talentInfo = {};
 		this.props.updateUser(userConfig.fragments, this.state.checkUser)
 			.done();

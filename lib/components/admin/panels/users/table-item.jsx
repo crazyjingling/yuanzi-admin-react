@@ -64,15 +64,15 @@ export default class TableItem extends Component {
 					if(option.value === 'isDel'){
 						option.name = data.isDel === '正常' ? '封号' : '解封';
 					}
-					//if(showField.key === 'talentInfo' && data.talentStatus !== '等待审核'){
-					//	return <span className="label label-primary">{data.talentStatus}</span>;
-					//}else{
+					if(showField.key === 'talentInfo' && data.talentStatus === '未提申请'){
+						return <span className="label label-primary">{data.talentStatus}</span>;
+					}else{
 						return (
 							<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
 								<span>{option.name}</span>
 							</button>
-						)
-					//}
+						);
+					}
 				});
 				inner = <div className="btn-group">{inner}</div>
 				break;
