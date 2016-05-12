@@ -16,6 +16,7 @@ import QRCode from 'qrcode.react';
 @connect(
 	(state) => ({
 		labels: state.labels.data.items,
+		label: state.label.data,
 		count: state.labels.data.count
 	}),
 	(dispatch) => bindActionCreators(labelsActions, dispatch)
@@ -91,6 +92,7 @@ export default class LabelsContainer extends Component {
 	}
 	//编辑
 	onEdit (label) {
+		console.log("onedit",label);
 		this.setState({
 			edit: true,
 			editingLabel: label

@@ -3,7 +3,7 @@ import * as usersActions from '../../client/actions/users';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Component, buildQueryAndVariables} from 'relax-framework';
+import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
@@ -28,7 +28,11 @@ import countBy from 'lodash.countby';
 	search: JSON.stringify(userConfig.searchValues || {})
 })
 export default class UsersContainer extends Component {
-	static fragments = Users.fragments
+	static fragments = mergeFragments({
+		usersCount: {
+			count: 1
+		}
+	}, {users: userConfig.fragments.user});
 	static defaultRequiredSearch = userConfig.defaultRequiredSearch;
 
 	static panelSettings = userConfig;

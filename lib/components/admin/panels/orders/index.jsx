@@ -3,7 +3,7 @@
  */
 import React, {PropTypes} from 'react';
 import {Component, mergeFragments} from 'relax-framework';
-import ListTable from '../table';
+import ListTable from '../../elements/table';
 import Search from '../../../search';
 import Pagination from '../../../pagination';
 import { orderConfig } from '../../../../containers/admin/containerInitConfig';
@@ -19,9 +19,9 @@ export default class Orders extends Component {
 		searchFields: PropTypes.array.isRequired,
 		searchValues: PropTypes.object.isRequired,
 		query: PropTypes.object,
-		count: PropTypes.number,
+		count: PropTypes.number
 
-	}
+	};
 
 	render() {
 		return (

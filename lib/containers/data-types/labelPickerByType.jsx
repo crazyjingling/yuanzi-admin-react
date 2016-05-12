@@ -62,14 +62,6 @@ export default class LabelPickerByType extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
-			labelPickerByType: {
-				type: {
-					value: 'classify',
-					type: 'String!'
-				}
-			}
-		})).done();
 		if (this.props.labelsType === 'userAssortment') {
 			const labelPickerByType = {
 				type: {
@@ -77,9 +69,17 @@ export default class LabelPickerByType extends Component {
 					type: 'String!'
 				}
 			};
-
 			this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
 				labelPickerByType: labelPickerByType
+			})).done();
+		}else{
+			this.props.getAdmin(buildQueryAndVariables(this.constructor.fragments, {
+				labelPickerByType: {
+					type: {
+						value: 'classify',
+						type: 'String!'
+					}
+				}
 			})).done();
 		}
 	}

@@ -7,14 +7,9 @@ import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 
 export default class Activities extends Component {
-    static fragments = mergeFragments({
-        activitiesCount: {
-            count: 1
-        }
-    }, ListTable.fragments)
 
     static propTypes = {
         breadcrumbs: PropTypes.array.isRequired,
@@ -50,7 +45,7 @@ export default class Activities extends Component {
 				        <div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
 					        <ListTable
 						        listSchema='activity'
-						        activities={this.props.activities}
+								renderEntries={this.props.activities}
 						        removeActivity={this.props.removeActivity}
 						        showFields={this.props.showFields}
 						        onViewCommentReport={this.props.onViewCommentReport}

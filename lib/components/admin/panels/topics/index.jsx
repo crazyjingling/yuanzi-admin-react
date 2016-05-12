@@ -7,14 +7,10 @@ import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 
 export default class Topics extends Component {
-    static fragments = mergeFragments({
-        topicsCount: {
-            count: 1
-        }
-    }, ListTable.fragments)
+
 
     static propTypes = {
         breadcrumbs: PropTypes.array.isRequired,
@@ -48,7 +44,7 @@ export default class Topics extends Component {
 
 					        <ListTable
 						        listSchema='topic'
-						        topics={this.props.topics}
+								renderEntries={this.props.topics}
 						        removeTopic={this.props.removeTopic}
 						        showFields={this.props.showFields}
 						        onViewCommentReport={this.props.onViewCommentReport}
@@ -58,6 +54,7 @@ export default class Topics extends Component {
 						        onRemove={this.props.onRemove}
 						        onEdit={this.props.onEdit}
 						        onRecommend={this.props.onRecommend}
+								{...this.props}
 					        />
 					        <Pagination
 						        url='/admin/topics'
