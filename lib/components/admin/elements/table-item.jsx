@@ -64,15 +64,18 @@ export default class TableItem extends Component {
 								<span className="label label-primary">{data.talentStatus}</span>
 							</button>
 						);
-					}else if(showField.key === 'talentInfo' && data.talentStatus === '未提申请'){
-						return <span className="label label-default">{data.talentStatus}</span>;
-					}else{
-						return (
-							<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
-								<span>{option.name}</span>
-							</button>
-						);
 					}
+					if(showField.key === 'talentInfo' && data.talentStatus === '未提申请'){
+						return <span className="label label-default">{data.talentStatus}</span>;
+					}
+					if(showField.key === 'isPassed' && !data.isPassed){
+						return <span className="label label-default">已屏蔽</span>;
+					}
+					return (
+						<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
+							<span>{option.name}</span>
+						</button>
+					);
 				});
 				inner = <div className="btn-group">{inner}</div>
 				break;
