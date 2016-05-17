@@ -106,6 +106,12 @@ export default class TableItem extends Component {
 				inner = <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className={icon}/></span>
 				break;
 			}
+			case 'workImage': {
+				let image = field[0].img
+				inner = field !== '无' ? <img src={image} style={{ maxWidth: '40px' }}/> :
+					<img style={{ maxWidth: '40px' }}/>;
+				break;
+			}
 			default:
 				inner = field;
 		}
