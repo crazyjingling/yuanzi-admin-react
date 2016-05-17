@@ -44,7 +44,6 @@ export default class ActivitiesContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeActivity: PropTypes.func.isRequired,
-		addActivity: PropTypes.func.isRequired,
 		updateActivity: PropTypes.func.isRequired,
 		recommendActivity: PropTypes.func.isRequired
 	}

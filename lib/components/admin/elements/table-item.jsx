@@ -53,6 +53,9 @@ export default class TableItem extends Component {
 			case 'number':
 				inner = field ? field : 0;
 				break;
+			case 'status':
+				inner = field ? <span className="label label-default">Failure</span> : <span className="label label-primary">Success</span> ;
+				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {
 					if(option.value === 'isDel'){
@@ -68,7 +71,7 @@ export default class TableItem extends Component {
 					if(showField.key === 'talentInfo' && data.talentStatus === '未提申请'){
 						return <span className="label label-default">{data.talentStatus}</span>;
 					}
-					if(showField.key === 'isPassed' && !data.isPassed){
+					if(showField.key === 'isPassed' && !data.isPassed || showField.key === 'isDelStatus' && data.isDel){
 						return <span className="label label-default">已屏蔽</span>;
 					}
 					return (

@@ -107,6 +107,11 @@ export default class MenuBar extends Component {
 				]
 			},
 			{
+				type: 'works',
+				link: '/admin/works',
+				label: '作品管理'
+			},
+			{
 				type: 'labels',
 				link: '#',
 				label: '标签管理',
