@@ -15,7 +15,6 @@ export default class Strategies extends Component {
         searchValues: PropTypes.object.isRequired,
         query: PropTypes.object,
         count: PropTypes.number,
-        lightbox: PropTypes.boolean,
         removeStrategy: PropTypes.func.isRequired,
 		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,

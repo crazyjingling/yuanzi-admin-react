@@ -30,7 +30,7 @@ export default class Step extends Component {
 		return (
 			<div className="row">
 				<div className="col-lg-2">
-					<ImagePicker neededRemove={false}
+					<ImagePicker
 					             value={this.props.step? this.props.step.imgUrl._id : ''}
 					             width={140} height={140}
 					             widthAndHeightStyle={{width: '140px', height: '140px'}}

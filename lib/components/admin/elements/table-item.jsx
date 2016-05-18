@@ -74,6 +74,23 @@ export default class TableItem extends Component {
 					if(showField.key === 'isPassed' && !data.isPassed || showField.key === 'isDelStatus' && data.isDel){
 						return <span className="label label-default">已屏蔽</span>;
 					}
+					if(option.value === 'recommend'){
+						if(data.isRecommended.stateType === '未上线'){
+							return (
+								<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
+									<span className="label label-primary">上线</span>
+								</button>
+							);
+						}else{
+							return (
+								<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
+									<span className="label label-default">下线</span>
+								</button>
+							);
+
+						}
+
+					}
 					return (
 						<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
 							<span>{option.name}</span>

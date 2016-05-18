@@ -23,7 +23,6 @@ export default class ImagePickerContainer extends Component {
 	static fragments = ImagePicker.fragments
 
 	static propTypes = {
-		neededRemove: PropTypes.boolean,
 		value: PropTypes.string.isRequired,
 		width: PropTypes.number,
 		height: PropTypes.number,

@@ -7,7 +7,7 @@ export default class DatePicker extends Component {
 	static propTypes = {
 		id: PropTypes.string.isRequired,
 		dateFormat: PropTypes.string,
-		selected: PropTypes.any.isRequired,
+		//selected: PropTypes.any.isRequired,
 		maxDate: PropTypes.object,
 		onChange: PropTypes.func.isRequired
 	}
@@ -20,8 +20,8 @@ export default class DatePicker extends Component {
 		this.props.onChange(this.props.id, x);
 	}
 	render() {
-		let selected = this.props.selected;
-		selected = this.props.selected || moment().format('YYYY-MM-DD HH:mm:ss');
+		//let selected = this.props.selected;
+		//selected = this.props.selected || moment().format('YYYY-MM-DD HH:mm:ss');
 		return (
 			<DateTimeField ref={this.props.id}
 					inputFormat={this.state.dateFormat}

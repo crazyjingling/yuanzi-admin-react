@@ -219,7 +219,6 @@ export default class StrategiesContainer extends Component {
 				<Strategies
 					{...this.props}
 					{...this.state}
-					onCloseLightbox={::this.onCloseLightbox}
 					onViewCommentReport={::this.onViewCommentReport}
 					onViewPhotoReport={::this.onViewPhotoReport}
 					onViewReport={::this.onViewReport}
