@@ -56,6 +56,7 @@
     "lodash.sortby": "^3.1.5",
     "lodash.sum": "^4.0.2",
     "lodash.sumby": "^4.2.0",
+    "marked": "^0.3.5",
     "medium-editor": "git://github.com/relax/medium-editor.git",
     "mkdirp": "^0.5.1",
     "moment": "^2.12.0",
