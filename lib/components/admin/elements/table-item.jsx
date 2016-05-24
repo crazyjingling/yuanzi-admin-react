@@ -50,11 +50,24 @@ export default class TableItem extends Component {
 			case 'text':
 				inner = field || '无';
 				break;
+			case 'labelType':
+				if(field==='classify'){
+					inner = '妙招攻略分类';
+				}if(field==='searchKeyword'){
+					inner = '关键字';
+				}if(field==='cardTopicAssortment'){
+					inner = '分类集';
+				}if(field==='userAssortment'){
+					inner = '用户分类';
+				}if(field==='alternativeSort'){
+					inner = '隐性分类';
+				}
+				break;
 			case 'number':
 				inner = field ? field : 0;
 				break;
 			case 'status':
-				inner = field ? <span className="label label-default">Failure</span> : <span className="label label-primary">Success</span> ;
+				inner = field ? <span className="label label-primary">Success</span> :  <span className="label label-default">Failure</span>;
 				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {

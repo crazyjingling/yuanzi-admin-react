@@ -35,8 +35,8 @@ export default class Labels extends Component {
 		onEdit: PropTypes.func.isRequired,
 		onEditClose: PropTypes.func.isRequired,
 		edit: PropTypes.boolean,
-		editingLabel: PropTypes.object,
-		editingColor: PropTypes.boolean,
+		editingLabel: PropTypes.any,
+		//editingColor: PropTypes.func,
 		history: PropTypes.object.isRequired,
 		onChange: React.PropTypes.func.isRequired
 	}

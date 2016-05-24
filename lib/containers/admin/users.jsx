@@ -47,7 +47,7 @@ export default class UsersContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeUser: PropTypes.func.isRequired,
-		updateUser: PropTypes.func.isRequired,
+		updateUser: PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -75,7 +75,7 @@ export default class UsersContainer extends Component {
 		let checkUser = this.state.checkUser;
 		checkUser.talentStatus = 'rejected';
 		checkUser.talentInfo = {};
-		this.props.updateUser(userConfig.fragments, this.state.checkUser)
+		this.props.updateUser(userConfig.fragments, checkUser)
 			.done();
 
 	}
@@ -84,8 +84,9 @@ export default class UsersContainer extends Component {
 			checking: false
 		});
 		let checkUser = this.state.checkUser;
+		console.log("===============",checkUser);
 		checkUser.talentStatus = 'done';
-		this.props.updateUser(userConfig.fragments, this.state.checkUser)
+		this.props.updateUser(userConfig.fragments, checkUser)
 			.done();
 
 	}
@@ -106,12 +107,10 @@ export default class UsersContainer extends Component {
 	}
 
 	onDel(data){
-		this.props.updateUser({user: {_id: 1,isDel: 1}}, {
-			_id: data._id,
-			isDel: data.isDel === '封号' ? false: true,
-			labels: data.labels //这里加labels是因为graphql的updateUser中的labels的type是GraphQLList,默认是空数组,会覆盖labels数据
-		}).done();
+		data.isDel = data.isDel  === '封号' ? false: true;
+		this.props.updateUser(userConfig.fragments, data).done()
 	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
