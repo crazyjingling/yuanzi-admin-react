@@ -67,7 +67,7 @@ export default class TableItem extends Component {
 				inner = field ? field : 0;
 				break;
 			case 'status':
-				inner = field ? <span className="label label-primary">Success</span> :  <span className="label label-default">Failure</span>;
+				inner = field ? <span className="label label-primary">是</span> :  <span className="label label-default">否</span>;
 				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {

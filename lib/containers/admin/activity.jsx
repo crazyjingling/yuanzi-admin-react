@@ -1,5 +1,5 @@
 import * as dndActions from '../../client/actions/dnd';
-import * as activityActions from '../../client/actions/activity';
+import * as activityActions from '../../client/actions/activities';
 
 import cloneDeep from 'lodash.clonedeep';
 import Velocity from 'velocity-animate';
@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component} from 'relax-framework';
 import Activity from '../../components/admin/panels/activity';
+import activityConfig from './containerInitConfig/activity';
 @connect(
 	(state) => ({
 		activity: state.activity.data,
@@ -19,35 +20,7 @@ import Activity from '../../components/admin/panels/activity';
 	})
 )
 export default class ActivityContainer extends Component {
-	static fragments = {
-		activity: {
-			_id: 1,
-			owner: {
-				_id: 1,
-				nickname: 1
-			},
-			cover: {
-				ossUrl: 1,
-				_id: 1
-			},
-			title: 1,
-			price: 1,
-			isBanner: 1,
-			number: 1,
-			location: 1,
-			content: 1,
-			startDate: 1,
-			endDate: 1,
-			bannerImg: {
-				ossUrl: 1,
-				_id: 1
-			},
-			tupian: {
-				ossUrl: 1,
-				_id: 1
-			}
-		}
-	};
+	static fragments = activityConfig.fragments;
 
 	static panelSettings = {
 		activePanelType: 'activity',
@@ -56,7 +29,7 @@ export default class ActivityContainer extends Component {
 				link: '/admin/activities'
 			}
 		]
-	}
+	};
 
 	static propTypes = {
 		activity: PropTypes.object,
@@ -68,7 +41,7 @@ export default class ActivityContainer extends Component {
 		addActivity: PropTypes.func,
 		updateActivity: PropTypes.func,
 		history: PropTypes.object.isRequired
-	}
+	};
 
 	componentWillReceiveProps (nextProps) {
 		if (this.props.slug !== 'new' && nextProps.slug === 'new') {

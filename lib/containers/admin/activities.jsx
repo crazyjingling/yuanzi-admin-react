@@ -41,6 +41,7 @@ export default class ActivitiesContainer extends Component {
 		searchFields: PropTypes.array,
 		query: PropTypes.object,
 		count: PropTypes.number,
+		lightbox: PropTypes.any,
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeActivity: PropTypes.func.isRequired,

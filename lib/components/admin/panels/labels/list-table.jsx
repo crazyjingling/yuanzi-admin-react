@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
-import TableItem from '../../elements/table-item';
+import Table_Item from '../../elements/table-item';
 import { labelConfig } from '../../../../containers/admin/containerInitConfig';
 
 
@@ -42,7 +42,7 @@ export default class ListTable extends Component {
 
 	renderEntry(label) {
 		return (
-			<TableItem listSchema={this.props.listSchema}
+			<Table_Item listSchema={this.props.listSchema}
 					   fragment={labelConfig.fragments}
 					   key={label._id}
 					   itemData={label}

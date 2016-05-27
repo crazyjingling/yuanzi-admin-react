@@ -189,7 +189,7 @@ export default class Activity extends Component {
 									<div className="col-lg-10">
 										<DatePicker id='startDate'
 													dateFormat="YYYY-MM-DD HH:mm:ss"
-													selected={this.props.activity.startDate}
+													defaultValue={this.props.activity.startDate}
 													maxDate={moment()}
 													onChange={::this.onDateChange}
 										/>
@@ -202,7 +202,7 @@ export default class Activity extends Component {
 										<DatePicker id='endDate'
 													dateFormat="YYYY-MM-DD HH:mm:ss"
 													minDate={moment()}
-													selected={this.props.activity.endDate}
+													defaultValue={this.props.activity.endDate}
 													onChange={::this.onDateChange}
 										/>
 									</div>
@@ -214,8 +214,8 @@ export default class Activity extends Component {
 										<select ref='isBanner' className='form-control'
 												value={this.props.activity.isBanner}
 												onChange={this.onChange.bind(this,'isBanner')}>
-											<option value='false'>false</option>
-											<option value='true'>true</option>
+											<option value='false'>否</option>
+											<option value='true'>是</option>
 										</select>
 									</div>
 								</div>
