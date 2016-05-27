@@ -3,23 +3,25 @@
  */
 import React, {PropTypes} from 'react';
 import {Component, mergeFragments} from 'relax-framework';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 import Search from '../../../search';
 import Pagination from '../../../pagination';
+import { orderConfig } from '../../../../containers/admin/containerInitConfig';
+
 export default class Orders extends Component {
 
 	static propTypes = {
 		orders: PropTypes.array,
 		showFields: PropTypes.array.isRequired,
-		onRemove: PropTypes.func.isRequired,
-		onEdit: PropTypes.func.isRequired,
+		passedRefund: PropTypes.func.isRequired,
+		rejectRefund: PropTypes.func.isRequired,
 		history: PropTypes.object.isRequired,
 		searchFields: PropTypes.array.isRequired,
 		searchValues: PropTypes.object.isRequired,
 		query: PropTypes.object,
-		count: PropTypes.number,
+		count: PropTypes.number
 
-	}
+	};
 
 	render() {
 		return (
@@ -28,10 +30,11 @@ export default class Orders extends Component {
 					{this.renderSearch()}
 						<ListTable
 							listSchema='order'
-							orders={this.props.orders}
+							renderEntries={this.props.orders}
 							showFields={this.props.showFields}
-							onRemove={this.props.onRemove}
-							onEdit={this.props.onEdit}
+							passedRefund={this.props.passedRefund}
+							rejectRefund={this.props.rejectRefund}
+							fragment={orderConfig.fragments}
 						/>
 					<Pagination
 						url='/admin/orders'

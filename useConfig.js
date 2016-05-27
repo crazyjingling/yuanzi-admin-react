@@ -7,5 +7,5 @@ if (processEnv !== 'production') {
 else {
 	//todo: oneapm
 	//require('oneapm');
-	module.exports = configDev;
+	module.exports = config;
 }

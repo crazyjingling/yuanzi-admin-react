@@ -3,7 +3,7 @@ import * as strategiesActions from '../../client/actions/strategies';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Component, buildQueryAndVariables} from 'relax-framework';
+import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
@@ -27,8 +27,11 @@ import countBy from 'lodash.countby';
 	order: 'desc'
 })
 export default class StrategiesContainer extends Component {
-	static fragments = Strategies.fragments;
-
+	static fragments = mergeFragments({
+		strategiesCount: {
+			count: 1
+		}
+	}, {strategies: strategyConfig.fragments.strategy})
 	static panelSettings = strategyConfig;
 
 	static propTypes = {
@@ -216,7 +219,6 @@ export default class StrategiesContainer extends Component {
 				<Strategies
 					{...this.props}
 					{...this.state}
-					onCloseLightbox={::this.onCloseLightbox}
 					onViewCommentReport={::this.onViewCommentReport}
 					onViewPhotoReport={::this.onViewPhotoReport}
 					onViewReport={::this.onViewReport}

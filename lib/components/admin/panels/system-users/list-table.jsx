@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Component} from 'relax-framework';
-import TableItem from './table-item';
+import Table_Item from './table-item';
 import { systemUserConfig } from '../../../../containers/admin/containerInitConfig';
 
 export default class ListTable extends Component {
@@ -40,7 +40,7 @@ export default class ListTable extends Component {
     }
     renderEntry (user) {
         return (
-            <TableItem listSchema={this.props.listSchema}
+            <Table_Item listSchema={this.props.listSchema}
 					   fragment={systemUserConfig.fragments}
 					   key={user._id}
 					   itemData={user}

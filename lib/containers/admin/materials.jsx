@@ -3,7 +3,7 @@ import * as materialsActions from '../../client/actions/materials';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Component, buildQueryAndVariables} from 'relax-framework';
+import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
@@ -27,7 +27,11 @@ import countBy from 'lodash.countby';
 	order: 'desc'
 })
 export default class MaterialsContainer extends Component {
-	static fragments = Materials.fragments;
+	static fragments = mergeFragments({
+		materialsCount: {
+			count: 1
+		}
+	}, {materials: materialConfig.fragments.material});
 
 	static panelSettings = materialConfig;
 

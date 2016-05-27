@@ -40,6 +40,18 @@ export default class Admin extends Component {
       {this.props.activePanelType !== 'pageBuild' && <MenuBar user={this.props.user} activePanelType={this.props.activePanelType} breadcrumbs={this.props.breadcrumbs} />}
 
       <div id="page-wrapper" className="gray-bg dashbard-1">
+	      <div className="row border-bottom">
+		      <div className="navbar navbar-static-top" style={{marginBottom: 0}}>
+			      <ul className="nav navbar-top-links navbar-right">
+				      <li className="dropdown count-info">
+					      <a href="/changelog" target="_blank" className="dropdown-toggle">
+						      <i className="fa fa-envelope"/>
+						      <span className="label label-warning">N</span>
+					      </a>
+				      </li>
+			      </ul>
+		      </div>
+	      </div>
 	      <div className="row wrapper border-bottom white-bg page-heading">
 		      <div className="col-lg-10">
 			      <h2>{this.props.activePanelType}</h2>

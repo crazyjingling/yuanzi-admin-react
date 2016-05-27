@@ -6,14 +6,10 @@ import Filter from '../../../filter';
 import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 
 export default class Feedbacks extends Component {
-	static fragments = mergeFragments({
-		feedbacksCount: {
-			count: 1
-		}
-	}, ListTable.fragments)
+
 
 	static propTypes = {
 		breadcrumbs: PropTypes.array.isRequired,
@@ -39,7 +35,7 @@ export default class Feedbacks extends Component {
 
 							<ListTable
 								listSchema='feedback'
-								feedbacks={this.props.feedbacks}
+								renderEntries={this.props.feedbacks}
 								showFields={this.props.showFields}
 								onViewImages={this.props.onViewImages}
 							/>

@@ -3,14 +3,9 @@ import {Component, mergeFragments} from 'relax-framework';
 
 import Search from '../../../search';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 
 export default class Strategies extends Component {
-    static fragments = mergeFragments({
-        strategiesCount: {
-            count: 1
-        }
-    }, ListTable.fragments)
 
     static propTypes = {
         breadcrumbs: PropTypes.array.isRequired,
@@ -20,7 +15,6 @@ export default class Strategies extends Component {
         searchValues: PropTypes.object.isRequired,
         query: PropTypes.object,
         count: PropTypes.number,
-        lightbox: PropTypes.boolean,
         removeStrategy: PropTypes.func.isRequired,
 		onViewCommentReport: PropTypes.func.isRequired,
 		onViewPhotoReport: PropTypes.func.isRequired,
@@ -43,7 +37,7 @@ export default class Strategies extends Component {
 
 					        <ListTable
 						        listSchema='strategy'
-						        strategies={this.props.strategies}
+								renderEntries={this.props.strategies}
 						        removeStrategy={this.props.removeStrategy}
 						        showFields={this.props.showFields}
 						        onViewCommentReport={this.props.onViewCommentReport}

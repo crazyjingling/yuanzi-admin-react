@@ -27,6 +27,12 @@ export default class Search extends Component {
 	searchChange = (id, event) => {
 		event.preventDefault();
 		const search = this.state.search;
+		if(id === 'event'){
+
+		}
+		if(event.target.value.length !== 24){
+			search[id].value = 'q6fa33dae800b2ecad532372'
+		}
 		search[id].value = event.target.value;
 		this.setState({search: search});
 	}

@@ -16,7 +16,7 @@ import ImagePicker from '../../../../containers/data-types/image-picker'
 @connect(
 	(state) => ({
 		label: state.label.data,
-		errors: state.label.errors,
+		errors: state.label.errors
 	}),
 	(dispatch) => ({
 		...bindActionCreators(labelsActions, dispatch),
@@ -59,7 +59,12 @@ export class EditLabel extends Component {
 
 	getInitState() {
 		return {
-			label: this.props.editingLabel
+			label: this.props.editingLabel ? this.props.editingLabel:{
+				'cover':{
+					_id:'',
+					ossUrl:''
+				}
+			}
 		};
 	}
 
@@ -88,17 +93,27 @@ export class EditLabel extends Component {
 
 	onChange(id, event) {
 		let value = event.target.value;
+		let label = this.state.label;
+
 		switch (id) {
 			case 'title':{
-				let label = this.state.label;
 				label.title = value;
+				this.setState({ label: label });
+				break;
+			}
+			case 'type':{
+				label.type = value;
+				this.setState({ label: label });
+				break;
+			}
+			case 'display':{
+				label.display = value;
 				this.setState({ label: label });
 				break;
 			}
 			default:
 				this.props.onChange(id, value);
 				break;
-
 		}
 	}
 // cover
@@ -111,26 +126,17 @@ export class EditLabel extends Component {
 
 	onSubmit() {
 		event.preventDefault();
-		//const onValidate = (error) => {
-		//	if (!error) {
-
-				let label = this.state.label;
-				console.log(label)
-				if (label._id) {
-					this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
-				} else {
-					this.props.addLabel(this.props.fragment, label).then(() => this.closeEdit());
-				}
-				this.closeEdit();
-
-			//}
-		//};
-		//this.props.validate(onValidate);
+		let label = this.state.label;
+		if (label._id) {
+			this.props.updateLabel(this.props.fragment, label).then(() => this.closeEdit());
+		} else {
+			this.props.addLabel(this.props.fragment, label).then(() => this.closeEdit());
+		}
 	}
 
 	render() {
-		var isNew = this.props.label ? false : true;
-		var title = isNew ? '添加标签' : '编辑 ' + this.props.label.title;
+		var isNew = this.state.label._id ? false : true;
+		var title = isNew ? '添加标签' : '编辑 ' + this.state.label.title;
 		var btn = isNew ? '添加' : '保存';
 		return (
 			<Lightbox className='small' onClose={this.props.onEditClose} title={title}>
@@ -145,17 +151,17 @@ export class EditLabel extends Component {
 					<div className="form-group">
 						<label htmlFor='type'>分类</label>
 						<select ref='type' className='select2_demo_1 form-control'
-								value={this.props.label.type}
+								value={this.state.label.type}
 								onChange={this.onChange.bind(this,'type')}>
-							<option value='classify'>最新标签库</option>
-							<option value='userAssortment'>用户标签</option>
+							<option value='classify'>妙招攻略分类</option>
+							<option value='userAssortment'>用户分类</option>
 						</select>
 						{this.renderHelpText(this.props.getValidationMessages('type'))}
 					</div>
 					<div className="form-group">
 						<label className="control-label" htmlFor='cover'>封面</label>
-							<ImagePicker ref="cover" value={this.props.label.cover._id}
-										 widthAndHeightStyle={{width: '140px', height: '140px'}}
+							<ImagePicker ref="cover" value={this.state.label.cover._id||""}
+										 widthAndHeightStyle={{width: '140', height: '140'}}
 										 onChange={::this.onImageChange}
 							/>
 							{this.renderHelpText(this.props.imageEmptyMessage)}
@@ -163,12 +169,11 @@ export class EditLabel extends Component {
 					<div className="form-group">
 						<label className="control-label">是否显示</label>
 						<select ref='display' className='select2_demo_1 form-control'
-								value={this.props.label.display}
+								value={this.state.label.display}
 								onChange={this.onChange.bind(this,'display')}>
 								<option value='true' >显示</option>
 								<option value='false' >不显示</option>
 						</select>
-						{this.renderHelpText(this.props.getValidationMessages('display'))}
 					</div>
 					<a className='btn btn-primary' href='#' onClick={this.onSubmit.bind(this)}>{btn}</a>
 				</form>

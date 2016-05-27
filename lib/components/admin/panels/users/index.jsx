@@ -6,14 +6,9 @@ import Filter from '../../../filter';
 import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
-
+import ListTable from '../../elements/table';
 export default class Users extends Component {
-	static fragments = mergeFragments({
-		usersCount: {
-			count: 1
-		}
-	}, ListTable.fragments)
+
 
 	static propTypes = {
 		breadcrumbs: PropTypes.array.isRequired,
@@ -27,7 +22,7 @@ export default class Users extends Component {
 		onEditLabels: PropTypes.func.isRequired,
 		onDel: PropTypes.func.isRequired,
 		history: PropTypes.object.isRequired
-	}
+	};
 
 	render() {
 		return (
@@ -40,11 +35,13 @@ export default class Users extends Component {
 						<div id="DataTables_Table_0_wrapper" className="dataTables_wrapper dt-bootstrap">
 							<ListTable
 								listSchema='user'
-								users={this.props.users}
+								renderEntries={this.props.users}
 								showFields={this.props.showFields}
 								onCheck={this.props.onCheck}
 								onEditLabels={this.props.onEditLabels}
 								onDel={this.props.onDel}
+								onCheck={this.props.onCheck}
+								{...this.props}
 							/>
 							<Pagination
 								url='/admin/users'
@@ -55,7 +52,7 @@ export default class Users extends Component {
 					</div>
 				</div>
 			</div>
-			
+
 		);
 	}
 	renderSearch() {

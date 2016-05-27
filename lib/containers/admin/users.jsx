@@ -3,7 +3,7 @@ import * as usersActions from '../../client/actions/users';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Component, buildQueryAndVariables} from 'relax-framework';
+import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
@@ -28,7 +28,11 @@ import countBy from 'lodash.countby';
 	search: JSON.stringify(userConfig.searchValues || {})
 })
 export default class UsersContainer extends Component {
-	static fragments = Users.fragments
+	static fragments = mergeFragments({
+		usersCount: {
+			count: 1
+		}
+	}, {users: userConfig.fragments.user});
 	static defaultRequiredSearch = userConfig.defaultRequiredSearch;
 
 	static panelSettings = userConfig;
@@ -43,7 +47,7 @@ export default class UsersContainer extends Component {
 		hasQueryChanged: PropTypes.bool.isRequired,
 		queryVariables: PropTypes.object.isRequired,
 		removeUser: PropTypes.func.isRequired,
-		updateUser: PropTypes.func.isRequired,
+		updateUser: PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -69,9 +73,20 @@ export default class UsersContainer extends Component {
 			checking: false
 		});
 		let checkUser = this.state.checkUser;
-		checkUser.talentStatus = 'undone';
+		checkUser.talentStatus = 'rejected';
 		checkUser.talentInfo = {};
-		this.props.updateUser(userConfig.fragments, this.state.checkUser)
+		this.props.updateUser(userConfig.fragments, checkUser)
+			.done();
+
+	}
+	passedCheck(){
+		this.setState({
+			checking: false
+		});
+		let checkUser = this.state.checkUser;
+		console.log("===============",checkUser);
+		checkUser.talentStatus = 'done';
+		this.props.updateUser(userConfig.fragments, checkUser)
 			.done();
 
 	}
@@ -92,12 +107,10 @@ export default class UsersContainer extends Component {
 	}
 
 	onDel(data){
-		this.props.updateUser({user: {_id: 1,isDel: 1}}, {
-			_id: data._id,
-			isDel: data.isDel === '封号' ? false: true,
-			labels: data.labels //这里加labels是因为graphql的updateUser中的labels的type是GraphQLList,默认是空数组,会覆盖labels数据
-		}).done();
+		data.isDel = data.isDel  === '封号' ? false: true;
+		this.props.updateUser(userConfig.fragments, data).done()
 	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.hasQueryChanged) {
 			const vars = {
@@ -140,6 +153,8 @@ export default class UsersContainer extends Component {
 						<div className="text-left">微信: {this.state.checkUser.talentInfo.wechat}</div>
 						<div className="text-left">擅长领域: {this.state.checkUser.talentInfo.goodAt}</div>
 						<div className="text-left">其他: {this.state.checkUser.talentInfo.goodAtOther}</div>
+						<a className='button button-alert vmargined' href='#'
+						   onClick={this.passedCheck.bind(this)}>通过</a>
 						<a className='button button-alert margined' href='#'
 						   onClick={this.refuseCheck.bind(this)}>拒绝</a>
 					</div>

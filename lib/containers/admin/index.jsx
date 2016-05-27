@@ -110,6 +110,7 @@ export default class AdminContainer extends Component {
 			case 'activities':
 			case 'materials':
 			case 'strategies':
+			case 'comments':
 			case 'systemUsers':
 			case 'users':
 				vars[activePanelType === 'systemUsers' ? 'users' : activePanelType] = {

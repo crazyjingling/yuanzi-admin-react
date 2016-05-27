@@ -73,16 +73,6 @@ export default class Activity extends Component {
 		}
 
 	}
-	onSelectLabels(){
-		this.setState({labelsSelectting: true});
-	}
-	cancelSelectLabels(){
-		this.setState({labelsSelectting: false});
-	}
-	confirmSelectLabels(selectedLabels){
-		this.setState({labelsSelectting: false});
-		this.props.onChange('labels', selectedLabels);
-	}
 
 	onTextChange(value){
 		this.props.onChange('content', value);
@@ -189,7 +179,7 @@ export default class Activity extends Component {
 									<div className="col-lg-10">
 										<DatePicker id='startDate'
 													dateFormat="YYYY-MM-DD HH:mm:ss"
-													selected={this.props.activity.startDate}
+													defaultValue={this.props.activity.startDate}
 													maxDate={moment()}
 													onChange={::this.onDateChange}
 										/>
@@ -202,7 +192,7 @@ export default class Activity extends Component {
 										<DatePicker id='endDate'
 													dateFormat="YYYY-MM-DD HH:mm:ss"
 													minDate={moment()}
-													selected={this.props.activity.endDate}
+													defaultValue={this.props.activity.endDate}
 													onChange={::this.onDateChange}
 										/>
 									</div>
@@ -214,17 +204,17 @@ export default class Activity extends Component {
 										<select ref='isBanner' className='form-control'
 												value={this.props.activity.isBanner}
 												onChange={this.onChange.bind(this,'isBanner')}>
-											<option value='false'>false</option>
-											<option value='true'>true</option>
+											<option value='false'>否</option>
+											<option value='true'>是</option>
 										</select>
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
 
-									<label className="col-lg-2 control-label" htmlFor='title'>活动位置</label>
+									<label className="col-lg-2 control-label" htmlFor='location'>活动地址</label>
 									<div className="col-lg-10">
-										<input ref='title' type='text' className='form-control'
+										<input ref='location' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'location')}
 											   value={this.props.activity.location}/>
 									</div>

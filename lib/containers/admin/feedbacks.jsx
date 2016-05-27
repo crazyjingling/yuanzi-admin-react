@@ -3,7 +3,7 @@ import * as adminActions from '../../client/actions/admin';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Component, buildQueryAndVariables} from 'relax-framework';
+import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
 
 import queryProps from '../../decorators/query-props';
@@ -27,8 +27,11 @@ import countBy from 'lodash.countby';
 	order: 'desc'
 })
 export default class FeedbacksContainer extends Component {
-	static fragments = Feedbacks.fragments;
-
+	static fragments = mergeFragments({
+		feedbacksCount: {
+			count: 1
+		}
+	}, {feedbacks: feedbackConfig.fragments.feedback})
 	static panelSettings = feedbackConfig;
 
 	static propTypes = {

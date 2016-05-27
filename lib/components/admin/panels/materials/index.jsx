@@ -7,14 +7,9 @@ import Search from '../../../search';
 import Lightbox from '../../../lightbox';
 import New from './new';
 import Pagination from '../../../pagination';
-import ListTable from './list-table.jsx';
+import ListTable from '../../elements/table';
 
 export default class Materials extends Component {
-	static fragments = mergeFragments({
-		materialsCount: {
-			count: 1
-		}
-	}, ListTable.fragments)
 
 	static propTypes = {
 		breadcrumbs: PropTypes.array.isRequired,
@@ -37,7 +32,7 @@ export default class Materials extends Component {
 						{this.renderSearch()}
 						<ListTable
 							listSchema='material'
-							materials={this.props.materials}
+							renderEntries={this.props.materials}
 							removeMaterial={this.props.removeMaterial}
 							showFields={this.props.showFields}
 							onRemove={this.props.onRemove}

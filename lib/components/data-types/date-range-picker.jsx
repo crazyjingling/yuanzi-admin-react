@@ -7,16 +7,16 @@ export default class DateRangePicker extends Component {
 	static propTypes = {
 		id: PropTypes.string.isRequired,
 		dateFormat: PropTypes.string,
-		selected: PropTypes.any.isRequired,
+		selected: PropTypes.object.isRequired,
 		maxDate: PropTypes.object,
 		onChange: PropTypes.func.isRequired
 	}
 	getInitState(){
 		return {
 			startDate: this.props.selected['$gte'] ? moment(this.props.selected['$gte']) : "",
-			endDate: this.props.selected['$lte'] ? moment(this.props.selected['$gte']) : "",
+			endDate: this.props.selected['$lte'] ? moment(this.props.selected['$lte']) : "",
 			selected: this.props.selected,
-			dateFormat: this.props.dateFormat || 'YYYY-MM-DD HH:mm:ss'
+			dateFormat: 'YYYY-MM-DD'
 		};
 	}
 	handleChangeStart(startDate){
@@ -50,7 +50,8 @@ export default class DateRangePicker extends Component {
 					maxDate={this.props.maxDate || moment()}
 					dateFormat={this.state.dateFormat}
 					onChange={::this.handleChangeStart} />
-				<span className="input-group-addon">to</span><ReactDatePicker
+				<span className="input-group-addon">to</span>
+				<ReactDatePicker
 					selected={this.state.endDate}
 					startDate={this.state.startDate}
 					endDate={this.state.endDate}
