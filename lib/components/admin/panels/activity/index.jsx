@@ -73,16 +73,6 @@ export default class Activity extends Component {
 		}
 
 	}
-	onSelectLabels(){
-		this.setState({labelsSelectting: true});
-	}
-	cancelSelectLabels(){
-		this.setState({labelsSelectting: false});
-	}
-	confirmSelectLabels(selectedLabels){
-		this.setState({labelsSelectting: false});
-		this.props.onChange('labels', selectedLabels);
-	}
 
 	onTextChange(value){
 		this.props.onChange('content', value);
@@ -222,9 +212,9 @@ export default class Activity extends Component {
 								<div className="hr-line-dashed"></div>
 								<div className="form-group">
 
-									<label className="col-lg-2 control-label" htmlFor='title'>活动地址</label>
+									<label className="col-lg-2 control-label" htmlFor='location'>活动地址</label>
 									<div className="col-lg-10">
-										<input ref='title' type='text' className='form-control'
+										<input ref='location' type='text' className='form-control'
 											   onChange={this.onChange.bind(this,'location')}
 											   value={this.props.activity.location}/>
 									</div>

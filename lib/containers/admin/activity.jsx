@@ -59,18 +59,15 @@ export default class ActivityContainer extends Component {
 		if (this.successTimeout) {
 			clearTimeout(this.successTimeout);
 		}
-
+		activityProps.isBanner = activityProps.isBanner === 'false'? false: true;
 		const submitActivity = cloneDeep(activityProps);
-
 		let action;
 		const isNew = this.isNew();
-
 		if (isNew) {
 			action = ::this.props.addActivity;
 		} else {
 			action = ::this.props.updateActivity;
 		}
-
 		let hasErrors = false;
 		let resultActivity;
 		try {
