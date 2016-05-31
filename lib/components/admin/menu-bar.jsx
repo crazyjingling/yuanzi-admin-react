@@ -113,7 +113,9 @@ export default class MenuBar extends Component {
 			},
 			{
 				type: 'podcasts',
-				link: [
+				link: '#',
+				label: '微课管理',
+				links: [
 					{
 						type: 'podcasts',
 						link: '/admin/podcasts',
@@ -124,8 +126,7 @@ export default class MenuBar extends Component {
 						link: '/admin/podcasts/new',
 						label: '添加微课'
 					}
-				],
-				label: '微课管理'
+				]
 			},
 			{
 				type: 'labels',
@@ -285,7 +286,6 @@ export default class MenuBar extends Component {
 
     renderNavHeader() {
 		//todo: getGravatarImage
-	    console.log(this.props.user)
         var url = Utils.getGravatarImage(this.props.user.email, 25) || '/img/default-avatar.png';
 
         return (
