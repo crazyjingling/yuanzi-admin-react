@@ -112,6 +112,22 @@ export default class MenuBar extends Component {
 				label: '作品管理'
 			},
 			{
+				type: 'podcasts',
+				link: [
+					{
+						type: 'podcasts',
+						link: '/admin/podcasts',
+						label: '微课列表'
+					},
+					{
+						type: 'podcast',
+						link: '/admin/podcasts/new',
+						label: '添加微课'
+					}
+				],
+				label: '微课管理'
+			},
+			{
 				type: 'labels',
 				link: '#',
 				label: '标签管理',
