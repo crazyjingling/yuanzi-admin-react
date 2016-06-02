@@ -3,12 +3,12 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(600);
+	module.exports = __webpack_require__(616);
 
 
 /***/ },
 
-/***/ 142:
+/***/ 141:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22,11 +22,11 @@ webpackJsonp([3],{
 	});
 	exports['default'] = getElementProps;
 	
-	var _lodashForeach = __webpack_require__(13);
+	var _lodashForeach = __webpack_require__(14);
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
-	var _displays = __webpack_require__(105);
+	var _displays = __webpack_require__(107);
 	
 	var _displays2 = _interopRequireDefault(_displays);
 	
@@ -52,7 +52,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 170:
+/***/ 172:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66,11 +66,11 @@ webpackJsonp([3],{
 	});
 	exports['default'] = getElementStyleValues;
 	
-	var _lodashForeach = __webpack_require__(13);
+	var _lodashForeach = __webpack_require__(14);
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
-	var _displays = __webpack_require__(105);
+	var _displays = __webpack_require__(107);
 	
 	var _displays2 = _interopRequireDefault(_displays);
 	
@@ -91,16 +91,16 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 265:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = __webpack_require__(5)['default'];
+	var _createClass = __webpack_require__(4)['default'];
 	
-	var _classCallCheck = __webpack_require__(4)['default'];
+	var _classCallCheck = __webpack_require__(3)['default'];
 	
-	var _defineProperty = __webpack_require__(21)['default'];
+	var _defineProperty = __webpack_require__(22)['default'];
 	
 	var _Object$assign2 = __webpack_require__(10)['default'];
 	
@@ -114,13 +114,13 @@ webpackJsonp([3],{
 	
 	var _lodashFind2 = _interopRequireDefault(_lodashFind);
 	
-	var _lodashForeach = __webpack_require__(13);
+	var _lodashForeach = __webpack_require__(14);
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
-	var _relaxJss = __webpack_require__(135);
+	var _relaxJss = __webpack_require__(134);
 	
-	var _getElementStyleValues = __webpack_require__(170);
+	var _getElementStyleValues = __webpack_require__(172);
 	
 	var _getElementStyleValues2 = _interopRequireDefault(_getElementStyleValues);
 	
@@ -211,20 +211,20 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 600:
+/***/ 616:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 	
-	__webpack_require__(949);
+	__webpack_require__(954);
 	
-	var _helpersRenderRoutes = __webpack_require__(200);
+	var _helpersRenderRoutes = __webpack_require__(203);
 	
 	var _helpersRenderRoutes2 = _interopRequireDefault(_helpersRenderRoutes);
 	
-	var _routersPublic = __webpack_require__(915);
+	var _routersPublic = __webpack_require__(923);
 	
 	var _routersPublic2 = _interopRequireDefault(_routersPublic);
 	
@@ -232,18 +232,18 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 823:
+/***/ 827:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _get = __webpack_require__(6)['default'];
+	var _get = __webpack_require__(7)['default'];
 	
-	var _inherits = __webpack_require__(7)['default'];
+	var _inherits = __webpack_require__(5)['default'];
 	
-	var _createClass = __webpack_require__(5)['default'];
+	var _createClass = __webpack_require__(4)['default'];
 	
-	var _classCallCheck = __webpack_require__(4)['default'];
+	var _classCallCheck = __webpack_require__(3)['default'];
 	
 	var _extends = __webpack_require__(11)['default'];
 	
@@ -253,7 +253,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _lodashForeach = __webpack_require__(13);
+	var _lodashForeach = __webpack_require__(14);
 	
 	var _lodashForeach2 = _interopRequireDefault(_lodashForeach);
 	
@@ -261,27 +261,27 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _relaxFramework = __webpack_require__(3);
+	var _relaxFramework = __webpack_require__(6);
 	
-	var _relaxJss = __webpack_require__(135);
+	var _relaxJss = __webpack_require__(134);
 	
-	var _helpersDisplays = __webpack_require__(105);
+	var _helpersDisplays = __webpack_require__(107);
 	
 	var _helpersDisplays2 = _interopRequireDefault(_helpersDisplays);
 	
-	var _helpersGetElementProps = __webpack_require__(142);
+	var _helpersGetElementProps = __webpack_require__(141);
 	
 	var _helpersGetElementProps2 = _interopRequireDefault(_helpersGetElementProps);
 	
-	var _helpersStylesheet = __webpack_require__(60);
+	var _helpersStylesheet = __webpack_require__(58);
 	
 	var _helpersStylesheet2 = _interopRequireDefault(_helpersStylesheet);
 	
-	var _helpersStylesManager = __webpack_require__(265);
+	var _helpersStylesManager = __webpack_require__(268);
 	
 	var _helpersStylesManager2 = _interopRequireDefault(_helpersStylesManager);
 	
-	var _helpersUtils = __webpack_require__(16);
+	var _helpersUtils = __webpack_require__(17);
 	
 	var _helpersUtils2 = _interopRequireDefault(_helpersUtils);
 	
@@ -423,22 +423,22 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 847:
+/***/ 852:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _get = __webpack_require__(6)['default'];
+	var _get = __webpack_require__(7)['default'];
 	
-	var _inherits = __webpack_require__(7)['default'];
+	var _inherits = __webpack_require__(5)['default'];
 	
-	var _createClass = __webpack_require__(5)['default'];
+	var _createClass = __webpack_require__(4)['default'];
 	
-	var _classCallCheck = __webpack_require__(4)['default'];
+	var _classCallCheck = __webpack_require__(3)['default'];
 	
 	var _extends = __webpack_require__(11)['default'];
 	
-	var _interopRequireWildcard = __webpack_require__(17)['default'];
+	var _interopRequireWildcard = __webpack_require__(16)['default'];
 	
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 	
@@ -454,21 +454,21 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRedux = __webpack_require__(14);
+	var _reactRedux = __webpack_require__(15);
 	
-	var _redux = __webpack_require__(15);
+	var _redux = __webpack_require__(13);
 	
-	var _relaxFramework = __webpack_require__(3);
+	var _relaxFramework = __webpack_require__(6);
 	
-	var _componentsElements = __webpack_require__(138);
+	var _componentsElements = __webpack_require__(137);
 	
 	var _componentsElements2 = _interopRequireDefault(_componentsElements);
 	
-	var _componentsPage = __webpack_require__(823);
+	var _componentsPage = __webpack_require__(827);
 	
 	var _componentsPage2 = _interopRequireDefault(_componentsPage);
 	
-	var _helpersColors = __webpack_require__(25);
+	var _helpersColors = __webpack_require__(24);
 	
 	var PublicPageContainer = (function (_Component) {
 	  _inherits(PublicPageContainer, _Component);
@@ -597,7 +597,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 915:
+/***/ 923:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -612,13 +612,13 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactRouter = __webpack_require__(113);
+	var _reactRouter = __webpack_require__(114);
 	
-	var _clientHelpersGaSend = __webpack_require__(199);
+	var _clientHelpersGaSend = __webpack_require__(202);
 	
 	var _clientHelpersGaSend2 = _interopRequireDefault(_clientHelpersGaSend);
 	
-	var _containersPublicPage = __webpack_require__(847);
+	var _containersPublicPage = __webpack_require__(852);
 	
 	var _containersPublicPage2 = _interopRequireDefault(_containersPublicPage);
 	
@@ -627,7 +627,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 949:
+/***/ 954:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
