@@ -153,7 +153,7 @@ class Strategy extends Component {
 												   onClick={this.onSave.bind(this)}>{(this.props.isNew || this.state.isNextShow) ? '保存' : '下一步'}</a>
 											</div>
 										</div>
-										
+
 									</form>
 								</div>
 							</div>

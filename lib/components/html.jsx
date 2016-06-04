@@ -17,8 +17,11 @@ export default class Html extends React.Component {
 				<link href="/css/bootstrap.min.css" rel="stylesheet"/>
 				<link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
 				<link href="/css/animate.css" rel="stylesheet"/>
+				<link href="/css/plugins/iCheck/custom.css" rel="stylesheet"/>
 				<link href="/css/style.css" rel="stylesheet"/>
+				<link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
 				<link href="/css/react-datepicker.min.css" rel="stylesheet"/>
+				<link href="/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"/>
 				<link rel="stylesheet" href="/css/quill.snow.css"/>
 			</head>
 			<body className="pace-done fixed-sidebar">
@@ -42,6 +45,7 @@ export default class Html extends React.Component {
 			<script src="/js/demo/sparkline-demo.js"></script>
 			<script src="/js/plugins/chartJs/Chart.min.js"></script>
 			<script src="/js/site.js"></script>
+			<script src="js/plugins/iCheck/icheck.min.js"></script>
 			<script dangerouslySetInnerHTML={{__html: `window.__initialState = ${this.props.props};`}}/>
 			{this.renderFooter()}
 			</body>
