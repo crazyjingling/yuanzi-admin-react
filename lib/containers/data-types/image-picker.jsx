@@ -24,8 +24,8 @@ export default class ImagePickerContainer extends Component {
 
 	static propTypes = {
 		value: PropTypes.string.isRequired,
-		width: PropTypes.string,
-		height: PropTypes.string,
+		width: PropTypes.number,
+		height: PropTypes.number,
 		widthAndHeightStyle: PropTypes.object,
 		borderRadiusStyle: PropTypes.object,
 		onChange: PropTypes.func.isRequired,
@@ -62,7 +62,7 @@ export default class ImagePickerContainer extends Component {
 	openSelector() {
 		this.props.addOverlay('media-selector', (
 			<Modal onClose={::this.closeSelector}>
-				<MediaSelectorContainer onChange={this.props.onChange} selected={this.props.value}
+				<MediaSelectorContainer onChange={this.props.onChange} value={this.props.value}
 										onClose={::this.closeSelector} type={this.props.type}/>
 			</Modal>
 		));
@@ -71,7 +71,9 @@ export default class ImagePickerContainer extends Component {
 	closeSelector() {
 		this.props.closeOverlay('media-selector');
 	}
-
+	neededRemove() {
+		this.props.closeOverlay('media-selector');
+	}
 	onMount(width) {
 		this.setState({
 			mounted: true,
@@ -90,6 +92,7 @@ export default class ImagePickerContainer extends Component {
 				widthAndHeightStyle={this.props.widthAndHeightStyle}
 				openSelector={::this.openSelector}
 				onMount={::this.onMount}
+				neededRemove={::this.neededRemove}
 				mediaItem={mediaItem}
 			/>
 		);
