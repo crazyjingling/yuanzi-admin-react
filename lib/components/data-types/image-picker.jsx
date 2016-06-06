@@ -7,7 +7,7 @@ export default class ImagePicker extends Component {
 	static fragments = MediaItem.fragments
 
 	static propTypes = {
-		neededRemove: React.PropTypes.boolean,
+		neededRemove: React.PropTypes.func,
 		width: React.PropTypes.any,
 		height: React.PropTypes.number,
 		calcWidth: React.PropTypes.number,
