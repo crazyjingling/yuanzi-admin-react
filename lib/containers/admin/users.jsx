@@ -147,15 +147,27 @@ export default class UsersContainer extends Component {
 		if(this.state.checking){
 			return (
 				<Lightbox className='xs' header={true} title="申请资料" onClose={this.cancelCheck.bind(this)}>
-					<div className='centered'>
-						<div className="text-left">姓名: {this.state.checkUser.talentInfo.name}</div>
-						<div className="text-left">手机: {this.state.checkUser.talentInfo.mobile}</div>
-						<div className="text-left">微信: {this.state.checkUser.talentInfo.wechat}</div>
-						<div className="text-left">擅长领域: {this.state.checkUser.talentInfo.goodAt}</div>
-						<div className="text-left">其他: {this.state.checkUser.talentInfo.goodAtOther}</div>
-						<a className='button button-alert vmargined' href='#'
+					<ul className="list-group">
+						<li className="list-group-item">
+							姓名: {this.state.checkUser.talentInfo.name}
+						</li>
+						<li className="list-group-item">
+							手机: {this.state.checkUser.talentInfo.mobile}
+						</li>
+						<li className="list-group-item">
+							微信: {this.state.checkUser.talentInfo.wechat}
+						</li>
+						<li className="list-group-item">
+							擅长领域: {this.state.checkUser.talentInfo.goodAt}
+						</li>
+						<li className="list-group-item">
+							其他: {this.state.checkUser.talentInfo.goodAtOther}
+						</li>
+					</ul>
+					<div className="btn-group">
+						<a className='btn btn-primary vmargined' href='#'
 						   onClick={this.passedCheck.bind(this)}>通过</a>
-						<a className='button button-alert margined' href='#'
+						<a className='btn btn-white margined' href='#'
 						   onClick={this.refuseCheck.bind(this)}>拒绝</a>
 					</div>
 				</Lightbox>

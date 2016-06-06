@@ -67,7 +67,7 @@ export default class TableItem extends Component {
 				inner = field ? field : 0;
 				break;
 			case 'status':
-				inner = field ? <span className="label label-primary">是</span> :  <span className="label label-default">否</span>;
+				inner = field ? <span className="label label-primary">是</span> :  <span className="label">否</span>;
 				break;
 			case 'array.button':
 				inner = showField.options.map((option) => {
@@ -76,13 +76,11 @@ export default class TableItem extends Component {
 					}
 					if(showField.key === 'talentInfo' && data.talentStatus !== '未提申请'){
 						return (
-							<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
-								<span className="label label-primary">{data.talentStatus}</span>
-							</button>
+							<span style={{ cursor: 'pointer' }} onClick={this.props[option.action].bind(this, data)}className="label label-primary">{data.talentStatus}</span>
 						);
 					}
 					if(showField.key === 'talentInfo' && data.talentStatus === '未提申请'){
-						return <span className="label label-default">{data.talentStatus}</span>;
+						return '';
 					}
 					if(showField.key === 'isPassed' && !data.isPassed || showField.key === 'isDelStatus' && data.isDel){
 						return <span className="label label-default">已屏蔽</span>;
@@ -91,13 +89,13 @@ export default class TableItem extends Component {
 						if(data.isRecommended.stateType === '未上线'){
 							return (
 								<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
-									<span className="label label-primary">上线</span>
+									上线
 								</button>
 							);
 						}else{
 							return (
-								<button style={{ fontSize: 12 }} className="btn-white btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
-									<span className="label label-default">下线</span>
+								<button style={{ fontSize: 12 }} className="btn-danger btn btn-xs" href='#' onClick={this.props[option.action].bind(this, data)}>
+									下线
 								</button>
 							);
 
@@ -132,6 +130,9 @@ export default class TableItem extends Component {
 					case '手机':
 						icon = 'fa fa-mobile';
 						break;
+					case '后台':
+						icon = 'fa fa-desktop';
+						break
 				}
 				inner = <span className="btn btn-outline btn-primary btn-circle"><i style={{ fontSize:'16px' }} className={icon}/></span>
 				break;

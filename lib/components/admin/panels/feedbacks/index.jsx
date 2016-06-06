@@ -1,10 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Component, mergeFragments} from 'relax-framework';
-
-import Breadcrumbs from '../../../breadcrumbs';
-import Filter from '../../../filter';
 import Search from '../../../search';
-import Lightbox from '../../../lightbox';
 import Pagination from '../../../pagination';
 import ListTable from '../../elements/table';
 

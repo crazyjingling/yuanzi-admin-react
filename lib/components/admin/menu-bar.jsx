@@ -42,18 +42,6 @@ export default class MenuBar extends Component {
 				type: 'banners',
 				link: '/admin/banners/index',
 				label: 'Banner 管理',
-				links:[
-					{
-						type: 'bannerlist',
-						link: '/admin/banners/index',
-						label: '首页 Banner'
-					},
-					{
-						type: 'banneredit',
-						link: '/admin/banners/activity',
-						label: '活动 Banner'
-					}
-				]
 			},
             {
                 type: 'strategies',

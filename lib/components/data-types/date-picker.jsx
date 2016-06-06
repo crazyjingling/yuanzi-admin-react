@@ -24,9 +24,11 @@ export default class DatePicker extends Component {
 		//selected = this.props.selected || moment().format('YYYY-MM-DD HH:mm:ss');
 		return (
 			<DateTimeField ref={this.props.id}
+			        defaultText={this.props.defaultValue}
 					inputFormat={this.state.dateFormat}
 				    maxDate={this.props.maxDate}
 					onChange={::this.onChange}
+
 			/>
 		);
 	}
