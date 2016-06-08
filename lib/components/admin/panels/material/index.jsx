@@ -40,8 +40,7 @@ export default class Strategy extends Component {
 				_id: 1,
 				nickname: 1
 			},
-			cover: 1,
-			strategyNo: 1
+			cover: 1
 		}
 	};
 	//static validatorSchema = {
