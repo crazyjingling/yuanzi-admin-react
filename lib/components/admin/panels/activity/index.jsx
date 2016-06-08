@@ -285,7 +285,6 @@ export default class Activity extends Component {
 		</div>)
 	}
 	renderBannerImg() {
-		console.log(this.state.isBanner);
 		if(this.state.isBanner){
 			return (
 				<div className="form-group">
