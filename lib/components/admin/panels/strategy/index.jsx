@@ -189,7 +189,6 @@ class Strategy extends Component {
 							<input ref='title' type='text' className='form-control'
 								   onChange={this.onChange.bind(this,'title')}
 								   value={this.props.strategy.title}/>
-							{this.renderHelpText(this.props.getValidationMessages('title'))}
 						</div>
 					</div>
 					<div className="hr-line-dashed"></div>

@@ -51,7 +51,8 @@ export default class Activity extends Component {
 	getInitState() {
 		return {
 			template: 0,
-			labelsSelectting: false
+			labelsSelectting: false,
+			isBanner: false
 		};
 	}
 
@@ -63,6 +64,10 @@ export default class Activity extends Component {
 					_id: event.target.value,
 					nickname: event.target.selectedOptions[0].label
 				};
+				this.props.onChange(id, value);
+				break;
+			case 'isBanner':
+				this.setState({isBanner: value});
 				this.props.onChange(id, value);
 				break;
 			case 'template':
@@ -231,17 +236,7 @@ export default class Activity extends Component {
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>
-								<div className="form-group">
-									<label className="col-lg-2 control-label" htmlFor='cover'>banner 封面</label>
-									<div className="col-lg-10">
-										<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
-													 width={750} height={300}
-													 widthAndHeightStyle={{width: '750px', height: '300px'}}
-													 onChange={::this.onBannerImageChange}
-										/>
-										{this.renderHelpText(this.state.imageEmptyMessage)}
-									</div>
-								</div>
+								{this.renderBannerImg()}
 								<div className="form-group">
 									<label className="col-lg-2 control-label" htmlFor='cover'>图片</label>
 									<div className="col-lg-10">
@@ -289,7 +284,25 @@ export default class Activity extends Component {
 			</div>
 		</div>)
 	}
-
+	renderBannerImg() {
+		if(this.state.isBanner){
+			return (
+				<div className="form-group">
+					<label className="col-lg-2 control-label" htmlFor='cover'>banner 封面</label>
+					<div className="col-lg-10">
+						<ImagePicker ref="bannerImg" value={this.props.activity.bannerImg._id}
+									 width={750} height={300}
+									 widthAndHeightStyle={{width: '750px', height: '300px'}}
+									 onChange={::this.onBannerImageChange}
+						/>
+						{this.renderHelpText(this.state.imageEmptyMessage)}
+					</div>
+				</div>
+			);
+		}else{
+			return '';
+		}
+	};
 	renderNext() {
 		let result;
 		if (this.props.saving) {

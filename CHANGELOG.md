@@ -1,8 +1,16 @@
 # Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
-##[4.3.0] - 2016-06-05
+
+##[4.3.1] - 2016-06-08
+### Fixed
+- 修改妙招编辑,可删除step
+
+##[4.3.1] - 2016-06-06
+### Fixed
+- 修改活动编辑,图片/banner图片可选填
+- 修复达人标签添加
+
+##[4.3.1] - 2016-06-05
 ### Fixed
 - 后台账户没有图标
 - 修复审核提交的按钮错误
@@ -12,7 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - 修复申请达人显示 bug
 - 修复当需修改活动时，每次修改完成后，活动开始时间和结束时间变成了一样
 
-##[4.3.0] - 2016-05-26
+##[4.3.1] - 2016-05-26
+>>>>>>> 09f7d7c4eaa8ebffa792dd76c42692f29979cbc8
 ### Fixed
 - 修复活动banner编辑操作
 - 修复作品根据用户编号搜索

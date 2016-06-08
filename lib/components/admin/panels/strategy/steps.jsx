@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'relax-framework';
 import Step from './step';
+import  _  from 'lodash';
 
 
 export default class Steps extends Component {
@@ -24,6 +25,11 @@ export default class Steps extends Component {
 		steps[index] = step;
 		this.props.onChange('steps',steps);
 	}
+	onDel(index, step){
+		let steps = this.props.existsSteps;
+		steps = _.pullAt(steps, [index+1])
+		this.props.onChange('steps',steps);
+	}
 	onAdd(){
 		let steps = this.props.existsSteps;
 		steps.push(this.constructor.step);
@@ -36,7 +42,8 @@ export default class Steps extends Component {
 				{this.props.existsSteps.map((step,index)=>{
 					return (
 						<div>
-							<Step key={index} index={index} onChange={::this.onChange} step={step}/>
+							<Step key={index} index={index} onChange={::this.onChange} onDel={::this.onDel} step={step}/>
+
 							<div className="hr-line-dashed"></div>
 						</div>
 					)
@@ -45,6 +52,7 @@ export default class Steps extends Component {
 						onClick={::this.onAdd}>
 					<i className="fa fa-plus"/>
 				</button>
+
 			</div>
 		);
 	}
