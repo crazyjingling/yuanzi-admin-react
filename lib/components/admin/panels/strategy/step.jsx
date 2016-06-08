@@ -7,7 +7,8 @@ export default class Step extends Component {
 	static propTypes = {
 		index: React.PropTypes.number.isRequired,
 		step: React.PropTypes.object,
-		onChange: React.PropTypes.func.isRequired
+		onChange: React.PropTypes.func.isRequired,
+		onDel: React.PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -23,6 +24,10 @@ export default class Step extends Component {
 	}
 	onDescChange(event) {
 		this.props.onChange(this.props.index, Object.assign({},this.props.step,{description: event.target.value}));
+
+	}
+	onDel(event) {
+		this.props.onDel(this.props.index, Object.assign({},this.props.step,{description: event.target.value}));
 
 	}
 
@@ -41,6 +46,13 @@ export default class Step extends Component {
 									<textarea className="note-codable form-control" value={this.props.step? this.props.step.description : ''}
 									          onChange={this.onDescChange.bind(this)}
 									          placeholder="描述"/>
+				</div>
+				<div className="hr-line-dashed"></div>
+				<div className="col-lg-10">
+					<button className="btn btn-primary btn-circle" type="button"
+							onClick={::this.onDel}>
+						<i className="fa fa-minus"/>
+					</button>
 				</div>
 			</div>
 		);

@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+##[4.3.1] - 2016-06-08
+### Fixed
+- 修改妙招编辑,可删除step
+
 ##[4.3.1] - 2016-06-06
 ### Fixed
 - 修改活动编辑,图片/banner图片可选填
