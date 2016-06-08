@@ -132,9 +132,7 @@ export default class StrategyContainer extends Component {
 				error: false,
 				new: false
 			});
-			if (isNew) {
-				this.props.history.pushState({}, `/admin/strategies/${resultStrategy.addStrategy._id}`);
-			}
+			this.props.history.pushState({}, `/admin/strategies`);
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
 			this.setState({
