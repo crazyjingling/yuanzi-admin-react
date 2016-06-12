@@ -86,6 +86,10 @@ export default class StrategyContainer extends Component {
 	getInitState(){
 		//todo: 所有操作完成之后怎么清除state中的strategy
 		//this.props.changeStrategyToDefault();
+		if (this.props.id === 'new') {
+			this.props.changeStrategyToDefault();
+		}
+		return {};
 	}
 
 	componentWillReceiveProps (nextProps) {

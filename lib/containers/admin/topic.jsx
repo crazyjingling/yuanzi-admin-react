@@ -66,8 +66,10 @@ export default class TopicContainer extends Component {
 		history: PropTypes.object.isRequired
 	}
 	getInitState(){
-		//todo: 所有操作完成之后怎么清除state中的topic
-		//this.props.changeTopicToDefault();
+		if (this.props.id === 'new') {
+			this.props.changeTopicToDefault();
+		}
+		return {};
 	}
 
 	componentWillReceiveProps (nextProps) {
