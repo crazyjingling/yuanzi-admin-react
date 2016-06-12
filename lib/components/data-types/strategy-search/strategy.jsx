@@ -23,6 +23,7 @@ export default class Strategy extends Component {
 
 	render() {
 		let checked = filter(this.props.selectedStrategies, (o) => o._id == this.props.strategy._id).length;
+		console.log(this.props)
 		return (
 			<div className="col-lg-3">
 				<div className="ibox">
@@ -32,7 +33,7 @@ export default class Strategy extends Component {
 						</div>
 						<div className="product-desc">
 							<div className="product-name">{this.props.strategy.title}</div>
-							<small>by {this.props.strategy.owner.nickname}</small>
+							<small>by {this.props.strategy.owner? this.props.strategy.owner.nickname: ''}</small>
 						</div>
 					</div>
 					<input type="checkbox" value="1" checked={checked} onChange={this.onChange.bind(this,this.props.strategy)}/>

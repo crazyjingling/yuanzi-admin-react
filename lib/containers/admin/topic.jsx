@@ -115,7 +115,7 @@ export default class TopicContainer extends Component {
 				new: false
 			});
 			if (isNew) {
-				this.props.history.pushState({}, `/admin/topics/${resultTopic.addTopic._id}`);
+				this.props.history.pushState({}, `/admin/topics`);
 			}
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
