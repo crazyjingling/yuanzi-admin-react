@@ -27,7 +27,7 @@ export default class Steps extends Component {
 	}
 	onDel(index, step){
 		let steps = this.props.existsSteps;
-		steps = _.pullAt(steps, [index+1])
+		steps = _.pullAt(steps, [index + 1])
 		this.props.onChange('steps',steps);
 	}
 	onAdd(){
@@ -43,7 +43,6 @@ export default class Steps extends Component {
 					return (
 						<div>
 							<Step key={index} index={index} onChange={::this.onChange} onDel={::this.onDel} step={step}/>
-
 							<div className="hr-line-dashed"></div>
 						</div>
 					)

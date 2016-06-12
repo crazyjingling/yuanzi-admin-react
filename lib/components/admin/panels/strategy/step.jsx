@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'relax-framework';
 import ImagePicker from '../../../../containers/data-types/image-picker'
-
+var ReactQuill = require('react-quill');
 
 export default class Step extends Component {
 	static propTypes = {
@@ -23,11 +23,12 @@ export default class Step extends Component {
 			}}));
 	}
 	onDescChange(event) {
-		this.props.onChange(this.props.index, Object.assign({},this.props.step,{description: event.target.value}));
+		this.props.onChange(this.props.index, Object.assign({},this.props.step,{description: event}));
 
 	}
 	onDel(event) {
-		this.props.onDel(this.props.index, Object.assign({},this.props.step,{description: event.target.value}));
+		console.log('delete')
+		this.props.onDel(this.props.index, Object.assign({},this.props.step,{description: event}));
 
 	}
 
@@ -36,16 +37,18 @@ export default class Step extends Component {
 			<div className="row">
 				<div className="col-lg-2">
 					<ImagePicker
-					             value={this.props.step? this.props.step.imgUrl._id : ''}
+					             value={this.props.step && this.props.step.imgUrl? this.props.step.imgUrl._id : ''}
 					             width={140} height={140}
 					             widthAndHeightStyle={{width: '140px', height: '140px'}}
 					             onChange={::this.onImageChange}
 					/>
 				</div>
 				<div className="col-lg-10">
-									<textarea className="note-codable form-control" value={this.props.step? this.props.step.description : ''}
-									          onChange={this.onDescChange.bind(this)}
-									          placeholder="描述"/>
+
+					<ReactQuill style={{ border: '1px solid #e5e6e7'}}
+					            theme="snow"
+					            value={this.props.step? this.props.step.description : ''}
+					            onChange={::this.onDescChange} />
 				</div>
 				<div className="hr-line-dashed"></div>
 				<div className="col-lg-10">
