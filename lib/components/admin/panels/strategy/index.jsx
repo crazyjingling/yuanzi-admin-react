@@ -37,7 +37,7 @@ class Strategy extends Component {
 		user: React.PropTypes.object.isRequired,
 		isNew: React.PropTypes.bool.isRequired,
 		onChange: React.PropTypes.func.isRequired,
-		onCreate: React.PropTypes.func.isRequired,
+		onCreate: React.PropTypes.func.isRequired
 	}
 
 	getInitState() {
@@ -101,29 +101,18 @@ class Strategy extends Component {
 
 	onSave(event) {
 		event.preventDefault();
-		if (this.props.isNew) {
-			const onValidate = (error) => {
-				if (!error) {
-					var newData = this.props.strategy;
-					if (!newData.owner._id) {
-						this.setState({ownerEmptyMessage: ['作者不能为空']});
-					} else if (!newData.cover._id) {
-						this.setState({imageEmptyMessage: ['封面不能为空']});
-					} else {
-						this.props.onCreate(newData);
-					}
+		var newData = this.props.strategy;
+		if (!newData.owner._id) {
+			this.setState({ownerEmptyMessage: ['作者不能为空']});
+		} else if (!newData.cover._id) {
+			this.setState({imageEmptyMessage: ['封面不能为空']});
+		}
+		if (this.state.isNextShow) {
+			this.props.onCreate(this.props.strategy);
+			this.setState({isNextShow: false});
 
-				}
-			};
-			this.props.validate(onValidate);
 		} else {
-			if (this.state.isNextShow) {
-				this.props.onCreate(this.props.strategy);
-				this.setState({isNextShow: false});
-
-			} else {
-				this.setState({isNextShow: true});
-			}
+			this.setState({isNextShow: true});
 		}
 	}
 
@@ -150,7 +139,7 @@ class Strategy extends Component {
 										<div className="form-group">
 											<div className="col-sm-4 col-sm-offset-2">
 												<a className='btn btn-primary' href='#'
-												   onClick={this.onSave.bind(this)}>{(this.props.isNew || this.state.isNextShow) ? '保存' : '下一步'}</a>
+												   onClick={this.onSave.bind(this)}>{(this.state.isNextShow) ? '保存' : '下一步'}</a>
 											</div>
 										</div>
 
@@ -216,11 +205,11 @@ class Strategy extends Component {
 					</div>
 					<div className="hr-line-dashed"></div>
 					<div className="form-group">
-						<label className="col-lg-2 control-label" htmlFor='info'>适用年龄</label>
+						<label className="col-lg-2 control-label" htmlFor='scope'>适用年龄</label>
 						<div className="col-lg-10">
-							<select className='select2_demo_1 form-control m-b'
+							<select ref = 'scope' className='select2_demo_1 form-control m-b'
 									value={this.props.strategy.scope}
-									onChange={this.onChange.bind(this,'scope')}>
+									onChange={::this.onChange}>
 								<option value='1'>1-2岁</option>
 								<option value='2'>3-4岁</option>
 								<option value='3'>5岁以上</option>

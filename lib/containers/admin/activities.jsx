@@ -1,5 +1,5 @@
 import * as activitiesActions from '../../client/actions/activities';
-
+import moment from 'moment';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -11,7 +11,7 @@ import Activities from '../../components/admin/panels/activities';
 import {activityConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
 import QRCode from 'qrcode.react';
-import { Calendar } from 'react-date-range';
+import DatePicker from '../../components/data-types/date-picker';
 import countBy from 'lodash.countby';
 @connect(
 	(state) => ({
@@ -223,7 +223,7 @@ export default class ActivitiesContainer extends Component {
 		});
 	}
 
-	handleDateSelect(date) {
+	handleDateSelect(id, date) {
 		this.setState({
 			recommendAt: date
 		});
@@ -414,10 +414,12 @@ export default class ActivitiesContainer extends Component {
 				return (
 					<Lightbox className='calendar' header={false} headerWithoutBorder={true}
 							  onClose={this.cancelRecommend.bind(this)}>
+
 						<div className='centered'>
-							<Calendar
-								onInit={this.handleDateSelect.bind(this)}
-								onChange={this.handleDateSelect.bind(this)}
+							<DatePicker
+										dateFormat="YYYY-MM-DD HH:mm:ss"
+										maxDate={moment()}
+										onChange={this.handleDateSelect.bind(this)}
 							/>
 							<a className='button button-alert margined' href='#'
 							   onClick={this.confirmRecommend.bind(this)}>确定</a>

@@ -7,7 +7,6 @@ export default class DatePicker extends Component {
 	static propTypes = {
 		id: PropTypes.string.isRequired,
 		dateFormat: PropTypes.string,
-		//selected: PropTypes.any.isRequired,
 		maxDate: PropTypes.object,
 		onChange: PropTypes.func.isRequired
 	}

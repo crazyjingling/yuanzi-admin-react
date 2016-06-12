@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
-
+import DatePicker from '../../components/data-types/date-picker';
+import moment from 'moment';
 import queryProps from '../../decorators/query-props';
 import Strategies from '../../components/admin/panels/strategies';
 import {strategyConfig} from './containerInitConfig';
@@ -184,6 +185,7 @@ export default class StrategiesContainer extends Component {
 	confirmRecommend(event) {
 		event && event.preventDefault();
 		const recommendAt = this.state.recommendAt;
+		console.log(recommendAt);
 		this.props.recommendStrategy({
 				strategy: {
 					_id: 1,
@@ -206,13 +208,12 @@ export default class StrategiesContainer extends Component {
 			lightbox: false
 		});
 	}
-
-	handleDateSelect(date) {
+	onDateChange(id, value) {
+		console.log(value);
 		this.setState({
-			recommendAt: date
+			recommendAt: value
 		});
 	}
-
 	render() {
 		return (
 			<div>
@@ -395,9 +396,10 @@ export default class StrategiesContainer extends Component {
 					<Lightbox className='calendar' header={false} headerWithoutBorder={true}
 							  onClose={this.cancelRecommend.bind(this)}>
 						<div className='centered'>
-							<Calendar
-								onInit={this.handleDateSelect.bind(this)}
-								onChange={this.handleDateSelect.bind(this)}
+							<DatePicker
+								dateFormat="YYYY-MM-DD HH:mm:ss"
+								maxDate={moment()}
+								onChange={::this.onDateChange}
 							/>
 							<a className='button button-alert margined' href='#'
 							   onClick={this.confirmRecommend.bind(this)}>确定</a>
