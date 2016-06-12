@@ -66,6 +66,23 @@ export default class TableItem extends Component {
 			case 'number':
 				inner = field ? field : 0;
 				break;
+			case 'scope':
+				switch (field){
+					case 0:
+					case 1:
+						inner = "1~2岁";
+						break;
+					case 2:
+						inner = "3~4岁";
+						break;
+					case 3:
+						inner = "5岁以上";
+						break;
+					default:
+						inner = "1~2岁";
+						break;
+				}
+				break;
 			case 'status':
 				inner = field ? <span className="label label-primary">是</span> :  <span className="label">否</span>;
 				break;
