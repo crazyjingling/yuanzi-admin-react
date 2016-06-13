@@ -1,11 +1,11 @@
 import * as topicsActions from '../../client/actions/topics';
-
+import moment from 'moment';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
-
+import DatePicker from '../../components/data-types/date-picker';
 import queryProps from '../../decorators/query-props';
 import Topics from '../../components/admin/panels/topics';
 import {topicConfig} from './containerInitConfig';
@@ -205,7 +205,7 @@ export default class TopicsContainer extends Component {
 		});
 	}
 
-	handleDateSelect(date) {
+	handleDateSelect(id, date) {
 		this.setState({
 			recommendAt: date
 		});
@@ -396,9 +396,10 @@ export default class TopicsContainer extends Component {
 					<Lightbox className='calendar' header={false} headerWithoutBorder={true}
 							  onClose={this.cancelRecommend.bind(this)}>
 						<div className='centered'>
-							<Calendar
-								onInit={this.handleDateSelect.bind(this)}
-								onChange={this.handleDateSelect.bind(this)}
+							<DatePicker
+								dateFormat="YYYY-MM-DD HH:mm:ss"
+								maxDate={moment()}
+								onChange={::this.handleDateSelect}
 							/>
 							<a className='button button-alert margined' href='#'
 							   onClick={this.confirmRecommend.bind(this)}>确定</a>

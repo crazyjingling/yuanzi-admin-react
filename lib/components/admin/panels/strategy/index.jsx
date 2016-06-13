@@ -209,7 +209,7 @@ class Strategy extends Component {
 						<div className="col-lg-10">
 							<select ref = 'scope' className='select2_demo_1 form-control m-b'
 									value={this.props.strategy.scope}
-									onChange={::this.onChange}>
+									onChange={this.onChange.bind(this,'scope')}>
 								<option value='1'>1-2岁</option>
 								<option value='2'>3-4岁</option>
 								<option value='3'>5岁以上</option>

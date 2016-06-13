@@ -12,7 +12,6 @@ import Strategies from '../../components/admin/panels/strategies';
 import {strategyConfig} from './containerInitConfig';
 import Lightbox from '../../components/lightbox';
 import QRCode from 'qrcode.react';
-import { Calendar } from 'react-date-range';
 import countBy from 'lodash.countby';
 @connect(
 	(state) => ({
@@ -201,15 +200,12 @@ export default class StrategiesContainer extends Component {
 		});
 
 	}
-
-
 	onCloseLightbox() {
 		this.setState({
 			lightbox: false
 		});
 	}
 	onDateChange(id, value) {
-		console.log(value);
 		this.setState({
 			recommendAt: value
 		});
