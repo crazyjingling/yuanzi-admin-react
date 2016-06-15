@@ -99,7 +99,7 @@ export default class Activity extends Component {
 		});
 	}
 	onAutoImageChange(mediaItem) {
-		this.props.onChange('tupian', {
+		this.props.onChange('pictureContent', {
 			_id: mediaItem._id,
 			ossUrl: mediaItem.ossUrl
 		});
@@ -240,7 +240,7 @@ export default class Activity extends Component {
 								<div className="form-group">
 									<label className="col-lg-2 control-label" htmlFor='cover'>图片</label>
 									<div className="col-lg-10">
-										<ImagePicker ref="tupian" value={this.props.activity.tupian._id}
+										<ImagePicker ref="pictureContent" value={this.props.activity.pictureContent._id}
 													 width={710} height={710}
 													 widthAndHeightStyle={{width: '710px', height: '710px'}}
 													 onChange={::this.onAutoImageChange}
@@ -252,7 +252,7 @@ export default class Activity extends Component {
 								<div className="form-group">
 									<label className="col-lg-2 control-label" htmlFor='cover'>内容图片 URL</label>
 									<div className="col-lg-10" >
-									<input type = 'text' className='form-control' value = {this.props.activity.tupian.ossUrl} />
+									<input type = 'text' className='form-control' value = {this.props.activity.pictureContent.ossUrl} />
 									</div>
 								</div>
 								<div className="hr-line-dashed"></div>

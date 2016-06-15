@@ -20,7 +20,6 @@ import activityConfig from './containerInitConfig/activity';
 	})
 )
 export default class ActivityContainer extends Component {
-	static fragments = activityConfig.fragments;
 
 	static panelSettings = {
 		activePanelType: 'activity',
@@ -70,8 +69,9 @@ export default class ActivityContainer extends Component {
 		}
 		let hasErrors = false;
 		let resultActivity;
+		console.log('=====', submitActivity);
 		try {
-			resultActivity = await action(this.props.fragments, submitActivity);
+			resultActivity = await action(activityConfig.fragments, submitActivity);
 		} catch (ex) {
 			hasErrors = true;
 			console.error(ex);
@@ -84,9 +84,7 @@ export default class ActivityContainer extends Component {
 				error: false,
 				new: false
 			});
-			if (!isNew) {
-				this.props.history.pushState({}, `/admin/activities/${resultActivity.updateActivity._id}`);
-			}
+			this.props.history.pushState({}, `/admin/activities`);
 			this.successTimeout = setTimeout(::this.onSuccessOut, 3000);
 		} else {
 			this.setState({

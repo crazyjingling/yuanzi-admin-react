@@ -40,10 +40,31 @@ export default class MenuBar extends Component {
             },
 			{
 				type: 'banners',
-				link: '/admin/banners/index',
-				label: 'Banner 管理',
+				link: '/admin/banners',
+				label: 'Banner 管理'
 			},
             {
+                type: 'circles',
+                link: '#',
+                label: '圈子管理',
+				links: [
+					{
+						type: 'circles',
+						link: '/admin/circles',
+						label: '圈子列表'
+					},
+					{
+						type: 'circle',
+						link: '/admin/circles/new',
+						label: '添加圈子'
+					},
+					{
+						type: 'articles',
+						link: '/admin/circles/new',
+						label: '帖子列表'
+					}
+				]
+            },{
                 type: 'strategies',
                 link: '#',
                 label: '妙招管理',
