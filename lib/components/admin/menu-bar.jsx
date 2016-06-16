@@ -60,7 +60,7 @@ export default class MenuBar extends Component {
 					},
 					{
 						type: 'articles',
-						link: '/admin/circles/new',
+						link: '/admin/articles',
 						label: '帖子列表'
 					}
 				]

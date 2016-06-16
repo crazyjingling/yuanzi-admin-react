@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Component, buildQueryAndVariables, mergeFragments} from 'relax-framework';
 import Utils from '../../helpers/utils';
-
 import queryProps from '../../decorators/query-props';
 import Activities from '../../components/admin/panels/activities';
 import {activityConfig} from './containerInitConfig';
