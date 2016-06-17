@@ -4,7 +4,6 @@ import React from 'react';
 import {Component} from 'relax-framework';
 import {findDOMNode} from 'react-dom';
 import pluck from 'lodash.pluck';
-
 import OwnerPick from '../../../../containers/data-types/owner-picker';
 import LabelPickerByType from '../../../../containers/data-types/labelPickerByType';
 import Combobox from '../../../../components/data-types/combobox';
@@ -16,7 +15,6 @@ import ImagePicker from '../../../../containers/data-types/image-picker'
 import Steps from './steps';
 import Tools from './tools';
 import Materials from './materials';
-
 
 class Strategy extends Component {
 

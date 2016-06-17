@@ -69,7 +69,6 @@ export default class ActivityContainer extends Component {
 		}
 		let hasErrors = false;
 		let resultActivity;
-		console.log('=====', submitActivity);
 		try {
 			resultActivity = await action(activityConfig.fragments, submitActivity);
 		} catch (ex) {

@@ -47,7 +47,7 @@ export default class DateRangePicker extends Component {
 					selected={this.state.startDate}
 					startDate={this.state.startDate}
 					endDate={this.state.endDate}
-					maxDate={this.props.maxDate || moment()}
+					//maxDate={this.props.maxDate || moment()}
 					dateFormat={this.state.dateFormat}
 					onChange={::this.handleChangeStart} />
 				<span className="input-group-addon">to</span>
@@ -55,7 +55,7 @@ export default class DateRangePicker extends Component {
 					selected={this.state.endDate}
 					startDate={this.state.startDate}
 					endDate={this.state.endDate}
-					maxDate={this.props.maxDate || moment()}
+					//maxDate={this.props.maxDate || moment()}
 					dateFormat={this.state.dateFormat}
 					onChange={::this.handleChangeEnd} />
 			</div>
